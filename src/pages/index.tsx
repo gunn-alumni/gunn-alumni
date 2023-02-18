@@ -1,6 +1,46 @@
+// React Components
 import Head from "next/head";
-import Image from "next/image";
-import dylan from "../../public/images/dylan.png";
+
+// Custom Components
+import EventCard from "@/components/home/EventCard.tsx";
+import NewsCard from "@/components/home/NewsCard";
+import NewsLandingCard from "@/components/home/NewsLandingCard";
+import dylan from "@/../public/images/dylan.png";
+
+const dummyNewsData = [
+  {
+    title: "Gunn Bat Cave Destroyed",
+    date: new Date("Feburary 15, 2023"),
+    description:
+      "The Bat cave was destroyed! Oh no! That's so sad I'm gonna cry",
+    imageURL: "",
+  },
+  {
+    title: "Dylan is actually really cool",
+    date: new Date("Feburary 15, 2023"),
+    description:
+      "Could this actaully be possible? Despite popular opinion, Dylan is ACTUALLY realy cool.",
+    imageURL: "",
+  },
+];
+
+const dummyProgramData = [
+  {
+    title: "Big Reunion",
+    date: new Date("Feburary 15, 2023"),
+    url: "",
+  },
+  {
+    title: "Basketball Game",
+    date: new Date("Feburary 18, 2023"),
+    url: "",
+  },
+  {
+    title: "Homecoming",
+    date: new Date("Feburary 18, 2023"),
+    url: "",
+  },
+];
 
 export default function Home() {
   return (
@@ -12,31 +52,55 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-screen px-5 py-10">
-        <div className="rounded-xl w-full md:flex">
-          <div className="relative w-full h-[40vh] md:h-[80vh]">
-            <Image
-              src={dylan}
-              alt="dylan"
-              className="object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
-              fill
-            />
-          </div>
-          <div className="bg-primary text-white flex flex-col items-center p-8 rounded-b-lg md:rounded-none md:rounded-r-lg">
-            <div className="font-bold text-xl text-center mb-5">
-              Gunn Grad Dylan Cures Cancer with HTML
+        <NewsLandingCard
+          title="Gunn Grad Dylan cures cancer with HTML"
+          description="No one knows how he did it"
+          articleURL=""
+          image={dylan}
+        />
+        <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
+          <div className="xl:flex-1">
+            <div className="text-5xl font-bold text-center">
+              {"What's New?"}
             </div>
-            <div className="mb-5 flex-1">No one knows how he did it</div>
-            <div className="flex justify-around w-full h-12 space-x-3">
-              <button className="rounded-lg text-sm bg-black text-white font-bold flex-1">
-                Read More
-              </button>
-              <button className="rounded-lg text-sm outline outline-2 outline-white text-white font-bold flex-1">
-                Explore News
-              </button>
+            <div className="mt-16 space-y-8">
+              {dummyNewsData.map((data, i) => (
+                <NewsCard
+                  key={i}
+                  title={data.title}
+                  description={data.description}
+                  date={data.date}
+                  imageURL={data.imageURL}
+                />
+              ))}
+            </div>
+            <button className="text-lg font-bold mt-4">See More...</button>
+          </div>
+          <div className="flex-1 mt-16 xl:mt-0">
+            <div className="text-5xl font-bold text-center">
+              {"Programs & Events"}
+            </div>
+            <div className="mt-16 space-y-8 flex flex-col items-start">
+              {dummyProgramData.map((data, i) => (
+                <EventCard
+                  key={i}
+                  title={data.title}
+                  date={data.date}
+                  url={data.url}
+                />
+              ))}
             </div>
           </div>
         </div>
-        <div></div>
+        <div className="flex flex-col justify-center items-center space-y-8">
+          <div className="text-xl font-bold">Give back to your community!</div>
+          <button className="p-3 text-white font-bold bg-primary rounded-lg">
+            Donate Now
+          </button>
+        </div>
+      </div>
+      <div className="bg-gray-600 h-64 flex justify-center items-center mt-8">
+        <div className="text-white font-bold">Footer TODO:</div>
       </div>
     </>
   );
