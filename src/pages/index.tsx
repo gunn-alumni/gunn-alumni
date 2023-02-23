@@ -6,6 +6,7 @@ import EventCard from "@/components/home/EventCard.tsx";
 import NewsCard from "@/components/home/NewsCard";
 import NewsLandingCard from "@/components/home/NewsLandingCard";
 import dylan from "@/../public/images/dylan.png";
+import { StandardButton } from "@/components/shared/Button";
 
 const dummyNewsData = [
   {
@@ -51,7 +52,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen px-5 py-10">
+      <div className="w-screen px-5 py-10 sm:px-16 lg:px-24">
         <NewsLandingCard
           title="Gunn Grad Dylan cures cancer with HTML"
           description="No one knows how he did it"
@@ -93,10 +94,10 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center space-y-8">
-          <div className="text-xl font-bold">Give back to your community!</div>
-          <button className="p-3 text-white font-bold bg-primary rounded-lg">
+          <div className="text-3xl font-bold">Give back to your community!</div>
+          <StandardButton color="primary" className="py-5 px-16 text-xl">
             Donate Now
-          </button>
+          </StandardButton>
         </div>
       </div>
       <div className="bg-gray-600 h-64 flex justify-center items-center mt-8">
