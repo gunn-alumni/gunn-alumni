@@ -52,13 +52,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen px-5 py-10 sm:px-16 lg:px-24">
-        <NewsLandingCard
-          title="Gunn Grad Dylan cures cancer with HTML"
-          description="No one knows how he did it"
-          articleURL=""
-          image={dylan}
-        />
+      <div className="w-screen px-8 py-10 sm:px-16 lg:px-28">
+        <div>
+          <NewsLandingCard
+            title="Gunn Grad Dylan cures cancer with HTML"
+            description="After several years of intense research, recent Gunn graduate Dylan Lu figures out the ultimate cure to cancer: HTML. No one knows how he did it. 💀"
+            articleURL=""
+            image={dylan}
+          />
+        </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
           <div className="xl:flex-1">
             <div className="text-5xl font-bold text-center">

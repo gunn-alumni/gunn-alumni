@@ -24,12 +24,19 @@ const NewsLandingCard = ({
           fill
         />
       </div>
-      <div className="bg-primary text-white flex flex-col items-center p-8 rounded-b-lg md:rounded-none md:rounded-r-lg">
-        <div className="font-bold text-2xl text-center mb-5">{title} </div>
-        <div className="mb-5 flex-1 text-lg">{description}</div>
-        <div className="flex justify-around w-full h-12 space-x-3">
-          <StandardButton color="black">Read More</StandardButton>
-          <StandardButton variant="secondary">Explore News</StandardButton>
+      <div className="bg-primary text-white flex flex-col items-center p-8 rounded-b-lg md:rounded-none md:rounded-r-lg md:w-2/5">
+        <div className="font-bold text-2xl text-center md:text-left md:text-3xl mb-5">
+          {title}
+        </div>
+        <div className="text-lg text-left line-clamp-6 w-full">
+          {description}
+        </div>
+        <div className="flex-1" />
+        <div className="flex justify-around w-full space-x-3">
+          <StandardButton color="bg-black">Read More</StandardButton>
+          <StandardButton variant="secondary" color="bg-transparent">
+            Explore News
+          </StandardButton>
         </div>
       </div>
     </div>
