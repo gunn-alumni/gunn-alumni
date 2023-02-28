@@ -1,4 +1,6 @@
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
+
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -9,6 +11,7 @@ export default function Document() {
         <Navbar />
         <Main />
         <NextScript />
+        <Footer />
       </body>
     </Html>
   );

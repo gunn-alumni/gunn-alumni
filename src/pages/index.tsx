@@ -99,9 +99,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="bg-gray-600 h-64 flex justify-center items-center mt-8">
-        <div className="text-white font-bold">Footer TODO:</div>
-      </div>
     </>
   );
 }
