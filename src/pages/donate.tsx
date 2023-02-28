@@ -1,6 +1,6 @@
 import Head from "next/head";
 import ImgButton from "@/components/donate/ImageButton/ImgButton";
-import FormInput from "@/components/donate/ImageButton/FormInput";
+import FormInput from "@/components/donate/ImageButton/Forms/FormInput";
 
 /* TODO:
 * Page Structure:
