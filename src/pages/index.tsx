@@ -52,7 +52,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen px-8 py-10 sm:px-16 lg:px-28">
+      <div className="px-8 py-10 sm:px-16 lg:px-28">
         <div>
           <NewsLandingCard
             title="Gunn Grad Dylan cures cancer with HTML"
