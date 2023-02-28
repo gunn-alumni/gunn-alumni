@@ -32,6 +32,21 @@ const formSettings = [
     },
 ];
 
+const donationOptionSettings = [
+    {
+        text: "Donation Option 1",
+        imageURL: "bg-[url('/images/dylan.png')]",
+    },
+    {
+        text: "Donation Option 2",
+        imageURL: "bg-[url('/images/dylan.png')]",
+    },
+    {
+        text: "Donation Option 3",
+        imageURL: "bg-[url('/images/dylan.png')]",
+    },
+];
+
 export default function Donate() {
     return (
         <>
@@ -42,26 +57,21 @@ export default function Donate() {
                 <link rel="icon" href="/images/dylan.png"/>
             </Head>
             <div className="w-screen box-border px-10 py-10 flex flex-col gap-y-4"> {/*Wrapper*/}
-                <div className="flex flex-col grow rounded-xl h-[40vh] max-w-full">
+                <div className="flex flex-col w-full box-border rounded-xl h-[40vh]">
                     <h1 className="font-bold text-xl">Donation Options</h1>
-                    <div className="w-full grow flex items-stretch gap-2">
-                        <ImgButton
-                            text="Donation Option 1"
-                            imageURL="bg-[url('/images/dylan.png')]"
-                        />
-                        <ImgButton
-                            text="Donation Option 2"
-                            imageURL="bg-[url('/images/dylan.png')]"
-                        />
-                        <ImgButton
-                            text="Donation Option 3"
-                            imageURL="bg-[url('/images/dylan.png')]"
-                        />
+                    <div className="w-full box-border grow flex items-stretch gap-2">
+                        {donationOptionSettings.map((data, i) => (
+                            <ImgButton
+                                key={i}
+                                text={data.text}
+                                imageURL={data.imageURL}
+                            />
+                        ))}
                     </div>
                 </div>
-                <div className="flex flex-col rounded-xl grow gap-y-2 h-[50vh]">
+                <div className="flex flex-col box-border rounded-xl grow gap-y-2 h-[50vh]">
                     <form>
-                        <div className="w-full flex flex-col gap-y-4">
+                        <div className="w-full box-border flex flex-col gap-y-4">
                             <h1 className="font-bold text-xl">Your Information</h1>
                             <div className="w-full grid grid-cols-2 gap-x-4 gap-y-2">
                                 {formSettings.map((data, i) => (
@@ -73,12 +83,11 @@ export default function Donate() {
                                     />
                                 ))}
                             </div>
-                            <input type="submit" className="bg-primary"></input>
+                            <div className="flex justify-center">
+                                <input type="submit" className="bg-primary font-bold text-white w-fit h-fit px-10 py-5 rounded-lg cursor-pointer"></input>
+                            </div>
                         </div>
                     </form>
-                </div>
-                <div> {/*Method*/}
-
                 </div>
             </div>
         </>

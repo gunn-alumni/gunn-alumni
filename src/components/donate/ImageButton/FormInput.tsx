@@ -11,7 +11,7 @@ const FormInput = ({
     type,
     tailwindCSS,
 }: FormInputProps) => {
-    const [value, setValue] = useState({text: 'placeholder',});
+    const [value, setValue] = useState({text: '',});
 
     const handleInputChange  = (event: { persist: () => void; target: { value: any; }; }) => {
         setValue((value) => ({
