@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="w-screen p-4 md:px-16 md:py-3 bg-primary text-white font-sans font-bold">
+    <div className="w-screen p-4 md:px-16 md:py-3 bg-primary text-white font-sans font-bold z-50 relative">
       <div className="hidden md:flex items-center">
         <Link className="flex items-center space-x-2 mr-16" href="/">
           <Image src={titanIcon} alt="icon" />
