@@ -23,11 +23,8 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "@tailwindcss/line-clamp": "^0.4.2",
     "autoprefixer": "^10.4.13",
->>>>>>> origin/dev
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }
