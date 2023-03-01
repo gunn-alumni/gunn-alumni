@@ -6,6 +6,7 @@ import EventCard from "@/components/home/EventCard.tsx";
 import NewsCard from "@/components/home/NewsCard";
 import NewsLandingCard from "@/components/home/NewsLandingCard";
 import dylan from "@/../public/images/dylan.png";
+import { StandardButton } from "@/components/shared/Button";
 
 const dummyNewsData = [
   {
@@ -51,13 +52,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen px-5 py-10">
-        <NewsLandingCard
-          title="Gunn Grad Dylan cures cancer with HTML"
-          description="No one knows how he did it"
-          articleURL=""
-          image={dylan}
-        />
+      <div className="px-8 py-10 sm:px-16 lg:px-28">
+        <div>
+          <NewsLandingCard
+            title="Gunn Grad Dylan cures cancer with HTML"
+            description="After several years of intense research, recent Gunn graduate Dylan Lu figures out the ultimate cure to cancer: HTML. No one knows how he did it. 💀"
+            articleURL=""
+            image={dylan}
+          />
+        </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
           <div className="xl:flex-1">
             <div className="text-5xl font-bold text-center">
@@ -93,10 +96,10 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center space-y-8">
-          <div className="text-xl font-bold">Give back to your community!</div>
-          <button className="p-3 text-white font-bold bg-primary rounded-lg">
+          <div className="text-3xl font-bold">Give back to your community!</div>
+          <StandardButton color="primary" className="py-5 px-16 text-xl">
             Donate Now
-          </button>
+          </StandardButton>
         </div>
       </div>
       <div className="bg-gray-600 h-64 flex justify-center items-center mt-8">
