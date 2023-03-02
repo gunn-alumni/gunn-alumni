@@ -26,7 +26,9 @@ const Navbar = () => {
         <Link className="hover:underline" href="/donate">
           Donate
         </Link>
-        <button className="">Login</button>
+        <Link className="hover:underline" href="/login">
+          Login
+        </Link>
       </div>
       <div className="flex items-center"></div>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import titanIcon from "@/../public/images/titanIcon.png";
+import Link from "next/link";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,12 +12,12 @@ const LoginPage = () => {
   return (
     <section className="bg-gray-50">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-        <a href="#" className="flex items-center mb-6 text-gray-900 rounded-lg">
+        <div className="flex items-center mb-6 text-gray-900 rounded-lg">
           <div className="bg-primary mr-2 py-2 px-4 rounded-lg">
             <Image src={titanIcon} alt="logo" width={30} height={30} />
           </div>
           <div className="text-xl font-semibold">Gunn High School | Alumni</div>
-        </a>
+        </div>
         <div className="w-full bg-white rounded-lg shadow sm:max-w-md">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
@@ -70,12 +71,12 @@ const LoginPage = () => {
                     </label>
                   </div>
                 </div>
-                <a
+                <Link
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <button
                 type="submit"
@@ -84,7 +85,7 @@ const LoginPage = () => {
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{" "}
+                {"Don't have an account yet?"}
                 <a
                   href="#"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
