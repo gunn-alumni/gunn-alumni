@@ -7,7 +7,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body className="relative min-h-screen">
         <Navbar />
         <Main />
         <NextScript />
