@@ -20,7 +20,7 @@ const Footer = () => {
         </li>
         <li>
           <Link href="#" className="mr-4 hover:underline md:mr-6">
-            Licensing
+            Open Source Licenses
           </Link>
         </li>
         <li>
