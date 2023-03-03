@@ -1,6 +1,16 @@
 ## Gunn Alumni Project
 This is a student-led project to create an alumni site for Gunn High School, something that suprisingly does not exist yet
 
+## Prerequisites
+git: [https://git-scm.com/downloads](https://git-scm.com/downloads)
+
+node (v18): [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+pnpm (run command below after installing node):
+```bash
+corepack enable
+```
+
 ## Setup Instructions For Website
 Clone the repo and install dependencies
 
