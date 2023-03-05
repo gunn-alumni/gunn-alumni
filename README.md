@@ -27,3 +27,5 @@ pnpm run dev
 
 ## Read more information on our blog
 [https://blog.gunnhigh.school](https://blog.gunnhigh.school)
+
+1
