@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {};
 
   return (
-    <section className="bg-gray-50">
+    <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
         <div className="flex items-center mb-6 text-gray-900 rounded-lg">
           <div className="bg-primary mr-2 py-2 px-4 rounded-lg">
