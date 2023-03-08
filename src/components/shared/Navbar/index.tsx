@@ -14,8 +14,8 @@ const Navbar = () => {
       </div>
 
       <div className="flex justify-center flex-wrap flex-1 items-center space-x-4 text-sm m-2">
-        <Link className="hover:underline" href="/about">
-          About
+        <Link className="hover:underline" href="/team">
+          Team
         </Link>
         <Link className="hover:underline" href="/classmates">
           Classmates
