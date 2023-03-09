@@ -5,30 +5,30 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="w-screen p-4 md:px-16 md:py-3 bg-primary text-white font-sans font-bold z-50 relative">
-      <div className="hidden md:flex items-center">
-        <Link className="flex items-center space-x-2 mr-16" href="/">
-          <Image src={titanIcon} alt="icon" />
+    <div className="flex justify-center flex-wrap p-4 bg-primary md:px-64 text-white font-sans font-bold">
+      <div className="md:flex">
+        <Link className="flex items-center space-x-2 px-5" href="/">
+          <Image src={titanIcon} alt="icon" width={30} height={30} />
           <div>Gunn High School | Alumni</div>
         </Link>
-        <div className="flex flex-1 items-center space-x-8 text-sm">
-          <Link href="/about">About</Link>
-          <Link href="/classmates">Classmates</Link>
-          <Link href="/travel">Travel</Link>
-          <Link href="/donate">Donate</Link>
-        </div>
-        <div className="flex items-center">
-          <button>Login</button>
-        </div>
       </div>
-      <div className="flex md:hidden justify-between">
-        <Link className="flex items-center space-x-3" href="/">
-          <Image src={titanIcon} alt="icon" />
-          <div className="text-sm">Gunn High School | Alumni</div>
+
+      <div className="flex justify-center flex-wrap flex-1 items-center space-x-4 text-sm m-2">
+        <Link className="hover:underline" href="/about">
+          About
         </Link>
-        <button>
-          <GiHamburgerMenu />
-        </button>
+        <Link className="hover:underline" href="/classmates">
+          Classmates
+        </Link>
+        <Link className="hover:underline" href="/travel">
+          Travel
+        </Link>
+        <Link className="hover:underline" href="/donate">
+          Donate
+        </Link>
+        <Link className="hover:underline" href="/login">
+          Login
+        </Link>
       </div>
     </div>
   );
