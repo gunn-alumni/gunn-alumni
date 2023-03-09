@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-center flex-wrap p-4 bg-primary md:px-64 text-white font-sans font-bold">
+    <div className="z-10 flex justify-center flex-wrap p-4 bg-primary md:px-64 text-white font-sans font-bold">
       <div className="md:flex">
         <Link className="flex items-center space-x-2 px-5" href="/">
           <Image src={titanIcon} alt="icon" width={30} height={30} />

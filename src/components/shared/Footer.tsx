@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="w-full p-4 bg-gray-800 shadow md:flex md:items-center md:justify-between md:p-6">
+    <footer className="z-10 w-full p-4 bg-gray-800 shadow md:flex md:items-center md:justify-between md:p-6">
       <span className="text-sm text-gray-400 sm:text-center">
         © 2023 Gunn Capstone. All Rights Reserved.
       </span>
