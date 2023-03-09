@@ -3,6 +3,10 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import { useRef, useState, useEffect } from 'react';
 
+//React-Icons Import
+import { GoTriangleRight } from 'react-icons/go';
+import { FaSortAmountDown } from 'react-icons/fa';
+
 // User Proile Images Import
 import defaultPfp from "@/../public/images/userIconx96.png";
 import dylan from "@/../public/images/dylan.png";
@@ -26,19 +30,18 @@ export default function Class() {
 
     //HELPFUL FUNCTION: document Stuff to react using useRef (how to use in element: ref={(e) => addToRefs(e, groupRefs.current)})
     // const addToRefs = (elm: HTMLHeadingElement | null, refCurrentList: any[]) => {
-    //     console.log("Testing.: ",filterGroupsRef.current.children);
+    //     // console.log("Testing.: ",filterGroupsRef.current.children);
 
     //     if(elm && !refCurrentList.includes(elm)){
     //         refCurrentList.push(elm);
     //     }
-    //     console.log("HURRAH!!!: ",refCurrentList);
+    //     // console.log("HURRAH!!!: ",refCurrentList);
     // }
 
 
 
     //////////////////////////COMPONENTS INITIAL DATA
-    const dummyFilterTagsData = ["2024", "2023", "2022", "2021"];
-    const dummyUserCardData2 = [
+    const dummyUserCardData = [
         {
         "2024": [
             {
@@ -270,8 +273,273 @@ export default function Class() {
               userPfp: defaultPfp,
               userName: "Ruparel"
             }
+        ]},
+        {
+        "2020": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2019": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2018": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2017": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2016": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2015": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2014": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+        "2013": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+            "2012": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+            "2011": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
+        ]},
+        {
+            "2010": [
+            {
+                uniId: "user1",
+                userPfp: defaultPfp,
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: defaultPfp,
+                userName: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: dylan,
+                userName: "Dylan Lu"
+            },
+            {
+                uniId: "user4",
+                userPfp: defaultPfp,
+                userName: "Ruparel"
+            }
         ]}
     ];
+    const dummyFilterTagsData = [];
+    for(let i=0; i < dummyUserCardData.length; i++){
+        var dataDictKeys = Object.keys(dummyUserCardData[i]);
+        for(let k=0; k < dataDictKeys.length; k++){
+            dummyFilterTagsData.push(dataDictKeys[k]);
+        }
+    }
+    // // console.log("DummyDataCheck = ",dummyFilterTagsData);
+
+
+    //Old Data Structures
+    const dummyFilterTagsDataOg = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010"];
     const dummyUserCardDataOg = [
         {
           uniId: "user1",
@@ -296,13 +564,13 @@ export default function Class() {
     ];
 
     //Way #1:
-    let groupsElements: JSX.Element[] = [];
-    dummyUserCardData2.forEach((item,index)=>{
+    const groupsElements: JSX.Element[] = [];
+    dummyUserCardData.forEach((item,index)=>{
         const groupTagName = Object.keys(item)[0];
         groupsElements.push(
             <>
-                <h2 className={`my-[0.83em] font-bold mt-[${index < 1 ? "50px" : "75px"}]`} id={"group_label"}>{groupTagName}</h2>
-                <div id={groupTagName} className="grid grid-cols-[repeat(6,auto)] gap-x-[0px] gap-y-[25px] flex-wrap overflow-x-hidden break-all">
+                <h2 key={index} className={`my-[0.83em] font-bold ${index < 1 ? "mt-[50px]" : "mt-[75px]"}`} id={"group_label"}>{groupTagName}</h2>
+                <div key={groupTagName} id={"group_content"} className="flex flex-row gap-x-[75px] gap-y-[25px] flex-wrap overflow-x-hidden break-all">
                     {item[groupTagName].map((data, i) => (
                         <UserCard
                             key={i}
@@ -317,7 +585,7 @@ export default function Class() {
     });
     
     // Way #2
-    // const groupsElements2 = dummyUserCardData2.map((tagName, tagIndex) =>
+    // const groupsElements2 = dummyUserCardData.map((tagName, tagIndex) =>
     //     <>
     //         <h2 className="my-[0.83em] font-bold mt-[50px]" id={"group"+tagIndex}>{Object.keys(tagName)[0]}</h2>
     //         <div id={Object.keys(tagName)[0]} className="flex flex-row gap-x-[50px] gap-y-[25px] flex-wrap overflow-x-hidden break-all">
@@ -349,43 +617,17 @@ export default function Class() {
     // const testing = groupTagsClick(indicatorRef);
 
     // useEffect(() => {
-    //     console.log("Ref is passed and returned");
-    //     console.log(indicatorRef);
+    //     // console.log("Ref is passed and returned");
+    //     // console.log(indicatorRef);
     // }, []);
-
-
-    //Js Initialization Variables
-    var previousDirectionScroll: string;
-    var endScrollFlag: boolean;
-    // Other Declarations
-    var group_tags: any[] | NodeListOf<Element>;
-    var stopIndicatorMoveFlag: boolean;
-    var keepGroupHeight: number;
-    var fullHeight: number;
-    var directionScroll: string;
-    var allGroupContent: string | any[] | NodeListOf<Element>;
-    var allGroupLabel: any[];
-    var allGroupLabelName: string[];
-    var nextScrollGroupLabel: Element | null;
-
-    //Window On Load Stuff
-    useEffect(() => {
-        // This code will run only once when the component mounts
-        console.log("Component mounted");
-    
-        // document.getElementById("group_indicator").style.display = "none";
-    
-        //Define Variables
-        declareVariables();
-    }, []);
 
     //Toggle Filter by either clicking on image or document
     const [filterShowCss, setFilterShowCss] = useState("hidden");
 
     const toggleFilter = (elm: EventTarget) => {
-        console.log("LOOKIE: ", elm.id);
+        // // console.log("LOOKIE: ", elm.id);
         if(elm.id == "filterSortIcon"){
-            console.log("YAAAAY");
+            // // console.log("YAAAAY");
             if(filterShowCss == "hidden"){
                 setFilterShowCss("block");
             }
@@ -398,51 +640,16 @@ export default function Class() {
         }
     }
 
-
-    //////////////////// Tag Click + Scroll Event Functions ////////////////////////////////////////
-
-    //Declarations 
-    function declareVariables(){
-        console.log("Declaring...............");
-        previousDirectionScroll = "";
-        endScrollFlag = false;
-        // Other Declarations
-        group_tags = filterGroupsRef.current.children;
-        console.log(group_tags);
-        stopIndicatorMoveFlag = false;
-        keepGroupHeight = 0;
-        fullHeight = document.body.offsetHeight;
-        console.log("Full-Height = ", fullHeight);
-        directionScroll = "down";
-        allGroupContent = groupWrapperRef.current.children;
-        allGroupLabelName = [];
-        allGroupLabel = [];
-        for(let i=0; i < allGroupContent.length; i++){
-            if(allGroupContent[i].id == "group_label"){
-                allGroupLabel.push(allGroupContent[i]);
-                allGroupLabelName.push(allGroupContent[i].innerHTML);
-            }
+    ///////////////////////////////// Tag Clicked Logic ////////////////////////////////////////
+    const groupTagsClick = (elm) => {
+        // // console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
+        // // console.log(elm, elm.innerHTML);
+        if(elm.id == "group_tags"){
+            // // console.log("YOU SHALL PASSSSSS");
+            showGroup(elm);
         }
-        nextScrollGroupLabel = allGroupLabel[0];
-    
-        //console checks
-        console.log(allGroupLabel);
-        console.log("I AM HERE IN THE CODE!!!!   ", allGroupLabelName);
-        console.log(nextScrollGroupLabel);
-    }
-    function scrollPosOfElement(elm){
-        var posValue = 0;
-        var style = elm.currentStyle || window.getComputedStyle(elm);
-        posValue = elm.offsetTop - (parseInt(style.marginTop)/2);
-        console.log("ScrollPosOfElement = ", posValue);
-        return posValue;
-    }
-    function moveIndicator(moveToPos){
-        var group_indicator = indicatorRef;
-        console.log(group_indicator);
-        group_indicator.style.display = "block";
-        group_indicator.style.marginTop = moveToPos+"px";
-    }
+    };
+
     function showGroup(group){
         var group_tag_clicked = group;
         var group_labels = allGroupLabel;
@@ -457,230 +664,286 @@ export default function Class() {
                 break;
             }     
         } 
-        //Special Case #2: Set new nextGroupLabel
-        nextScrollGroupLabel = group_label_clicked;
+        //Special Case #1: Set new currentGroupLabel
+        // // console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
+        currentGroupLabel = group_label_clicked;
+        setCurrentGroupLabel(group_label_clicked);
         //Way #1:
         window.scrollTo(0, scrollLabelYPos);
         //alt way **
         // group_label_clicked.scrollIntoView();
         //scroll indicator to tag clicked
-        var moveTagYPos = group_tag_clicked.offsetTop;
-        moveIndicator(moveTagYPos);
-      }
+        // var moveTagYPos = group_tag_clicked.offsetTop;
+        var moveToElm = group_tag_clicked;
+        moveIndicator(moveToElm);
+    }
 
-    // When Group Tag Clicked Event
-    //React Way:
-    const groupTagsClick = (elm) => {
-        console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
-        console.log(elm, elm.innerHTML);
-        // showGroup(elm);
-    };
+    //////////////////////////////////////// Scroll Logic //////////////////////////////////////////////////////
+    //Global Variables
+    const [scrollDir, setScrollDir] = useState<string | null>(null);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const indicatorBorderSize = 28.8;
 
-      // JS WAY:
-      // document.getElementById("filter_groups").addEventListener('click', (e)=> {
-      //     // check what was clicked
-      //     if(e.target.matches(".group_tags")){
-      //         showGroup(e.target);    
-      //     }
-      //     else{
-      //         return;
-      //     }
-      // });
-   
-        //React Scroll Direction Function: 
-        // function scrollDirection() {
-        //   const [scrollDir, setScrollDir] = useState("down");
-        //   const [prevScrollPos, setPrevScrollPos] = useState(0);
+    var [group_tags, setGroup_tags] = useState([]);
+    var [fullHeight, setFullHeight] = useState(0);
+    var [allGroupContent, setAllGroupContent] = useState([]);
+    var [allGroupLabel, setAllGroupLabel] = useState([]);
+    var [currentGroupLabel, setCurrentGroupLabel] = useState(null);
+
+    //Change indicator Global Vars
+    var [changeIndicatorFlag, setChangeIndicatorFlag] = useState(false);
+    const changeScreenWidth = 1286;
+    var [tagText, setTagText] = useState("");
+    
+    //////////////////////////Better JS LOGIC
+    //Window On Load Stuff
+    useEffect(() => {
+        // This code will run only once when the component mounts
+        // // console.log("Component mounted");
+
+        //Define Variables
+        declareVariables();
+    }, []);
+
+    function declareVariables(){
+        // // console.log("declaring...");
+        // // console.log(changeScreenWidth);
+        changeIndicator();
         
-        //     const currentScrollPos = window.pageYOffset;
-        
-        //     if (prevScrollPos > currentScrollPos) {
-        //       setScrollDir("up");
-        //     } else if (prevScrollPos < currentScrollPos) {
-        //       setScrollDir("down");
-        //     }
-    
-        //     setPrevScrollPos(currentScrollPos);
-        
-        //   return scrollDir;
-        // }
-    
-    
-    
-        // function scrollDirection(){
-        //     var direction = this.oldScroll > this.scrollY;
-        //     this.oldScroll = this.scrollY;
-        //     return direction;
-        // } 
-    
-        function setNextGroupLabel(currentGroup, direction){
-          console.log("SetNextGroupLabel Funct:::::::: ", allGroupLabelName);
-            var currentIndex;  
-            currentIndex = allGroupLabelName.indexOf(currentGroup.innerHTML);
-            if(direction == "down"){
-                var nextIndex = currentIndex + 1;
-                if(nextIndex < 0 || nextIndex > allGroupLabel.length - 1){
-                    endScrollFlag = true;
-                    stopIndicatorMoveFlag = true;
-                    keepGroupHeight = fullHeight;
-                    nextScrollGroupLabel = allGroupLabel[currentIndex];
-                }
-                else{
-                    nextScrollGroupLabel = allGroupLabel[nextIndex];    
-                }
+        group_tags = filterGroupsRef.current.children;
+        setGroup_tags(filterGroupsRef.current.children);
+        // // console.log(group_tags);
+        fullHeight = window.document.body.offsetHeight;
+        setFullHeight(window.document.body.offsetHeight);
+        // // console.log("FullLLLLLL-Height = ", fullHeight);
+        // allGroupContent = groupWrapperRef.current.children;
+        var allGroupContentHelper = groupWrapperRef.current.children;
+        allGroupContent = allGroupContentHelper; 
+        setAllGroupContent(allGroupContentHelper);
+        // // console.log("AllGroupContent: ",allGroupContent, allGroupContent.length);
+        var allGroupLabelHelper = [];
+        for(let i=0; i < allGroupContent.length; i++){
+            if(allGroupContent[i].id == "group_label"){
+                allGroupLabelHelper.push(allGroupContent[i]);
             }
-            else{
-              var nextIndex;
-              nextIndex = currentIndex - 1;
-                if(nextIndex < 0 || nextIndex > allGroupLabel.length){
-                    endScrollFlag = true;
-                    stopIndicatorMoveFlag = true;
-                    keepGroupHeight = 0;
-                    nextScrollGroupLabel = allGroupLabel[currentIndex];
-                }
-                else{
-                    nextScrollGroupLabel = allGroupLabel[nextIndex];    
+        }
+        allGroupLabel = allGroupLabelHelper;
+        setAllGroupLabel(allGroupLabelHelper);
+
+        //console checks
+        // // console.log(allGroupLabel);
+        // // console.log("group_tags: ", group_tags);
+        
+    }
+
+
+    function moveIndicator(moveToElm){
+        //additional logic to align the middle of indicator and tag
+        //hard coded values!!
+        var borderSize_group_indicator = indicatorBorderSize;
+        var group_indicator = indicatorRef.current;
+
+        //Is the indicator changed???
+        if(changeIndicatorFlag){
+            group_indicator.style.display = "none";
+            highlightTag(moveToElm);
+        }
+        else{
+            // // console.log("group_indicator = ", group_indicator);
+            highlightTag("");
+            var moveToTag = moveToElm;
+            var moveMarginPos = moveToTag.getBoundingClientRect().top + (Math.abs((moveToTag.getBoundingClientRect().height / 2) - (borderSize_group_indicator / 2)))
+            //console Checks for logic
+            // // console.log(group_indicator.borderWidth);
+            // // console.log(moveToTag.getBoundingClientRect().height / 2);
+            // // console.log(Math.abs((moveToTag.getBoundingClientRect().height / 2) - (borderSize_group_indicator / 2)));
+            // // console.log(moveMarginPos);
+            //Move indicator the amount
+            group_indicator.style.display = "block";
+            group_indicator.style.marginTop = moveMarginPos+"px";
+        }
+    }
+    function scrollPosOfElement(elm){
+        var posValue = 0;
+        if(elm == "" || elm == undefined || elm == null){
+            posValue = -1;
+            return posValue;
+        }
+        else{
+            var style = elm.currentStyle || window.getComputedStyle(elm);
+            posValue = elm.offsetTop - (parseInt(style.marginTop)/2);
+            // // console.log("ScrollPosOfElement = ", posValue);
+            return posValue;
+        }
+    }
+    function findClosest(posArr){
+        const arr = posArr;
+        const goal = window.scrollY;
+        const closest = arr.reduce((prev, curr) => {
+          return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+        });
+        // // console.log(closest);
+        return closest;   
+    }
+    function scrollChange(directionScroll){
+        var labelPosList = [];
+        for(let i=0; i < allGroupLabel.length; i++){
+            labelPosList.push(scrollPosOfElement(allGroupLabel[i]));
+        }
+        // // console.log("All Pos: ", labelPosList);
+        // // console.log(currentGroupLabel);
+        var reducedPosList = [];
+        var closestLabelPos = 0;
+        var currentLabelPos = scrollPosOfElement(currentGroupLabel);
+        if(directionScroll == "down"){
+            // // console.log("Going DOWN");
+            var nextIndex = labelPosList.indexOf(currentLabelPos) + 1;
+            if(nextIndex < labelPosList.length - 1){
+                reducedPosList = labelPosList.slice(nextIndex);
+                closestLabelPos = findClosest(reducedPosList);
+                // // console.log(reducedPosList);
+                if(window.scrollY >= closestLabelPos){
+                    // // console.log("Hit");
+                    var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)];
+                    currentGroupLabel = labelHit;
+                    setCurrentGroupLabel(labelHit);
+
+                    //move indicator
+                    if(currentGroupLabel != "" && currentGroupLabel != null && currentGroupLabel != undefined){
+                        var moveToElm;
+                        for(let t=0; t < group_tags.length; t++){
+                            if(group_tags[t].innerHTML == currentGroupLabel.innerHTML){
+                                // moveTagYPos = group_tags[t].offsetTop;
+                                moveToElm = group_tags[t];
+                                // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                                // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                            }
+                        }
+                        moveIndicator(moveToElm);
+                    }
                 }
             }
         }
-        function altScrollDirectionCheck(){
-          console.log("CHECK IF ALTERNATING");
-          console.log(directionScroll);
-          console.log(previousDirectionScroll);
-          console.log(directionScroll != previousDirectionScroll && previousDirectionScroll != "" && previousDirectionScroll != undefined && previousDirectionScroll != null);
-            if(directionScroll != previousDirectionScroll && previousDirectionScroll != "" && previousDirectionScroll != undefined && previousDirectionScroll != null){
-                if(!endScrollFlag){
-                    return true;
+        else{
+            // // console.log("Going UP");
+            var nextIndex = labelPosList.indexOf(currentLabelPos);
+            // // console.log(nextIndex);
+            if(nextIndex > 0){
+                reducedPosList = labelPosList.slice(0, labelPosList.indexOf(currentLabelPos));
+                closestLabelPos = findClosest(reducedPosList);
+                // // console.log(reducedPosList);
+                if(window.scrollY <= closestLabelPos){
+                    // // console.log("Boom");
+                    var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)];
+                    currentGroupLabel = labelHit;
+                    setCurrentGroupLabel(labelHit);
+
+                    //move indicator
+                    if(currentGroupLabel != "" && currentGroupLabel != null && currentGroupLabel != undefined){
+                        var moveToElm;
+                        for(let t=0; t < group_tags.length; t++){
+                            if(group_tags[t].innerHTML == currentGroupLabel.innerHTML){
+                                // moveTagYPos = group_tags[t].offsetTop;
+                                moveToElm = group_tags[t];
+                                // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                                // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                            }
+                        }
+                        moveIndicator(moveToElm);
+                    }
                 }
-                else{
-                    endScrollFlag = false;
-                    return false;
-                }
-            }
-            else{
-                return false;
             }
         }
-        function scrollToGroups(scrollDirection) {
-            //Detecting Scroll Direction: false == down ; true == up
-            console.log("################ SCROLL TO GROUPS FUNCTION STARTS HERE ######################");
-            directionScroll = scrollDirection;
-            console.log(directionScroll);
-            //Indicator Move Way #2:
-            if(directionScroll == "down"){
-                //Special Case #1 Check:
-                console.log("Down We Go");
-                var alternatingScrollFlag = altScrollDirectionCheck();
-                if(alternatingScrollFlag){
-                  console.log("SPECIAL CASE #1");
-                    setNextGroupLabel(nextScrollGroupLabel, directionScroll);
-                }
-                var nextGroupPos = 0;
-                if(stopIndicatorMoveFlag){
-                    if(keepGroupHeight == 0){
-                        stopIndicatorMoveFlag = false;
-                        nextGroupPos = 0;
-                    }
-                    else{
-                        nextGroupPos = keepGroupHeight;
-                    }
-                }
-                else{
-                    console.log("HAHAHAHAHAHAHA::: ", nextScrollGroupLabel)
-                    nextGroupPos = scrollPosOfElement(nextScrollGroupLabel);    
-                }
-                if(window.scrollY > nextGroupPos || (window.innerHeight + window.scrollY) >= document.body.offsetHeight){
-                  console.log("HIT!!!!!!!");
-                    stopIndicatorMoveFlag = false;
-                    //scroll indicator to tag scrolled to
-                    var moveTagYPos = 0; 
-                    group_tags.forEach((tag) => {
-                        if(tag.innerHTML == nextScrollGroupLabel.innerHTML){
-                            moveTagYPos = tag.offsetTop;
-                        }
-                    });
-                    moveIndicator(moveTagYPos);
-                    setNextGroupLabel(nextScrollGroupLabel, directionScroll);
+
+    }
+
+    function handleScroll() {
+        var currentScrollPos = window.pageYOffset;
+        var scrollWay;
+        if (prevScrollPos > currentScrollPos) {
+          scrollWay = "up";
+        } else if (prevScrollPos < currentScrollPos) {
+          scrollWay = "down";
+        }
+        // // console.log("setting current to previous: ");
+        setPrevScrollPos(currentScrollPos);
+        // // console.log("IN handleScroll | Current Scroll Val = ", currentScrollPos, ", Previous Scroll Val = ", prevScrollPos);
+        scrollChange(scrollWay);
+    }
+
+    useEffect(function mount() {
+        // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+        function onScroll() {
+          handleScroll();
+        }
+    
+        window.addEventListener("scroll", onScroll);
+    
+        return function unMount() {
+          window.removeEventListener("scroll", onScroll);
+        };
+    });
+
+    useEffect(function mount() {
+        // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+        function onChangeScreenSize() {
+          changeIndicator();
+        }
+    
+        window.addEventListener("resize", onChangeScreenSize);
+    
+        return function unMount() {
+          window.removeEventListener("resize", onChangeScreenSize);
+        };
+    });
+
+    function changeIndicator() {
+        var screenSizeW = window.innerWidth;
+        // // console.log(screenSizeW);
+        if(screenSizeW <= changeScreenWidth){
+            // // console.log("Screen changed");
+            changeIndicatorFlag = true;
+            setChangeIndicatorFlag(true);
+
+        }
+        else{
+            // // console.log("Screen full");
+            changeIndicatorFlag = false;
+            setChangeIndicatorFlag(false);
+        }
+
+        //move indicator
+        if(currentGroupLabel != "" && currentGroupLabel != null && currentGroupLabel != undefined){
+            var moveToElm;
+            for(let t=0; t < group_tags.length; t++){
+                if(group_tags[t].innerHTML == currentGroupLabel.innerHTML){
+                    // moveTagYPos = group_tags[t].offsetTop;
+                    moveToElm = group_tags[t];
+                    // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                    // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
                 }
             }
-            else{
-                console.log("Up We Go");
-                //////////////////////// Direction = "down" ////////////////////////////
-                //Special Case #1 Check:
-                var alternatingScrollFlag = altScrollDirectionCheck();
-                if(alternatingScrollFlag){
-                    setNextGroupLabel(nextScrollGroupLabel, directionScroll);
-                }
-                var nextGroupPos = 0;
-                if(stopIndicatorMoveFlag){
-                    if(keepGroupHeight == fullHeight){
-                        stopIndicatorMoveFlag = false;
-                        nextGroupPos = fullHeight;
-                    }
-                    else{
-                        nextGroupPos = 0;
-                        keepGroupHeight = 0;
-                    }
-                }
-                else{
-                    nextGroupPos = scrollPosOfElement(nextScrollGroupLabel);    
-                }
-                if(window.scrollY < nextGroupPos){
-                    stopIndicatorMoveFlag = false;
-                    //scroll indicator to tag scrolled to
-                    var moveTagYPos = 0; 
-                    group_tags.forEach((tag) => {
-                        if(tag.innerHTML == nextScrollGroupLabel.innerHTML){
-                            moveTagYPos = tag.offsetTop;
-                        }
-                    });
-                    moveIndicator(moveTagYPos);
-                    setNextGroupLabel(nextScrollGroupLabel, directionScroll);
-                }
-            }
-            //update trackers
-            console.log("UPDATING::::", directionScroll, previousDirectionScroll);
-            previousDirectionScroll = directionScroll;
-      }
-    
-      function useScrollDirection() {
-        var scrollWay: string;
-        const [scrollDir, setScrollDir] = useState<string | null>(null);
-        const [prevScrollPos, setPrevScrollPos] = useState(0);
-      
-        useEffect(() => {
-          function handleScroll() {
-            const currentScrollPos = window.pageYOffset;
-      
-            if (prevScrollPos > currentScrollPos) {
-              setScrollDir("up");
-              scrollWay = "up";
-            } else if (prevScrollPos < currentScrollPos) {
-              setScrollDir("down");
-              scrollWay = "down";
-            }
-      
-            setPrevScrollPos(currentScrollPos);
-          }
-      
-          window.addEventListener("scroll", () => {
-            handleScroll();
-            console.log("Calling ScrollToGroups");
-            scrollToGroups(scrollWay);
-          });
-      
-          return () => window.removeEventListener("scroll", () => {});
-        }, [prevScrollPos, scrollDir]);
-      
-        return scrollDir;
-      }
-    
-    //   //End Of Js Code
-    
-      const scrollDir = useScrollDirection();
-      // console.log(scrollDir);
-    
-    
+            // // console.log(changeIndicatorFlag);
+            moveIndicator(moveToElm);   
+        }
+    }
+
+    function highlightTag(elm){
+        var tagElm = elm;
+        // console.log("HIGHLIGHT TAAAAAAAAAAG");
+        // console.log(tagElm.style);
+        if(tagElm != ""){
+            // console.log("Highlighting");
+            tagText = tagElm.innerHTML;
+            setTagText(tagElm.innerHTML);
+        }
+        else{
+            // console.log("De-Highlighting");
+            tagText = "";
+            setTagText("");
+        }
+    }
+    /// END OF JS CODE
 
   return (
     <>
@@ -698,22 +961,30 @@ export default function Class() {
             }}>
             
             <div id="tag_wrapper" className="flex flex-row">
-                <div id="group_indicator" ref={indicatorRef} className={`z-10 fixed border-[calc(25px_*_0.6)] left-0 top-0 w-0 h-0 ml-[7.5px] border-r-transparent border-y-transparent border-solid border-blue-500 ${visibleIndicator ? "block" : "hidden"}`}/>
-                <FilterGroups tags={dummyFilterTagsData} onTagClick={groupTagsClick} ref={filterGroupsRef} />
+                {/* <div><GoTriangleRight className='w-[45px] h-[45px] z-10 fixed left-0 top-0 ml-[7.5px]'/></div> */}
+                <div id="group_indicator" ref={indicatorRef} className={`z-10 fixed border-[calc(25px_*_0.6)] left-0 top-0 w-0 h-0 ml-[7.5px] border-r-transparent border-y-transparent border-solid border-black ${visibleIndicator ? "block" : "hidden"}`}/>
+                <FilterGroups tags={dummyFilterTagsDataOg} onTagClick={groupTagsClick} tagText={tagText} ref={filterGroupsRef} />
             </div>
             
             <div id="groups_wrapper" className={`ml-[7.5%] mr-[5%] mt-0 mb-[30px]`}>
                 <h1 id="header" className = {`my-3 text-[2em] font-extrabold  text-center ml-[calc(calc(-1*10%)-10%)]`}>Find Your Classmates</h1>
                 <div id="nav_options" className={`text-[15px] flex flex-row-reverse mr-[10%] items-center gap-x-2.5`}>
                     <div id="filter_wrapper">
-                        <img
+                        {/* <img
                             src="images/filterSortIconx64.png"
                             alt="filterSortIcon"
                             id="filterSortIcon"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 toggleFilter(e.target);
-                              }}/>
+                              }}/> */}
+                        <FaSortAmountDown 
+                            id="filterSortIcon"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleFilter(e.target);
+                                }}
+                                className="w-[30px] h-[30px]"/>
                         <div id="filter_options_wrapper" className={`absolute text-xl right-[10%] bg-[rgba(255,255,255,0.85)] rounded-[10%] border-2 border-solid border-[black] ` + filterShowCss}>
                             <div id="years" className='text-center px-[25px] py-[5px] hover:bg-[lightblue] hover:rounded-[17%_17%_0_0]'>Past Years</div>
                             <div id="alphabetical" className='text-center px-[25px] py-[5px] hover:bg-[lightblue]'>Alphabetical</div>
