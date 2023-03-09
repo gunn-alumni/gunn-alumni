@@ -3,12 +3,16 @@ import { useState, useEffect } from "react";
 type FormInputProps = {
     title: string;
     type: string;
+    placeholder?: string;
+    pattern?: string;
     tailwindCSS: string;
 };
 
 const FormInput = ({
     title,
     type,
+    placeholder,
+    pattern,
     tailwindCSS,
 }: FormInputProps) => {
     const [value, setValue] = useState({text: '',});
@@ -24,7 +28,7 @@ const FormInput = ({
             <label className="text-lg font-medium">
                 {title}
             </label>
-            <input type={type} value={value.text} onChange={handleInputChange} required className={tailwindCSS}></input>
+            <input type={type} value={value.text} placeholder={placeholder} pattern={pattern} onChange={handleInputChange} required className={tailwindCSS}></input>
         </div>
     );
 };
