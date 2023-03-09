@@ -1,6 +1,6 @@
 import Head from "next/head";
 import ImgButton from "@/components/donate/ImageButton/ImgButton";
-import FormInput from "@/components/donate/ImageButton/Forms/FormInput";
+import FormInput from "@/components/donate/Forms/FormInput";
 import { StandardButton } from "@/components/shared/Button";
 
 /* TODO:
@@ -13,24 +13,48 @@ import { StandardButton } from "@/components/shared/Button";
  *  - polish up & mobile compatibility
  */
 
-const formCSS = "border-2 border-gray-300 rounded-md px-1 py-1";
+const formCSS = "border-2 border-gray-300 bg-gray-100 rounded-md px-1 py-1";
 
 const formSettings = [
-  {
-    title: "Name",
-    type: "text",
-    tailwindCSS: formCSS,
-  },
-  {
-    title: "Email",
-    type: "text",
-    tailwindCSS: formCSS,
-  },
-  {
-    title: "Phone Number",
-    type: "text",
-    tailwindCSS: formCSS,
-  },
+    {
+        title: "Name",
+        type: "text",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "Email",
+        type: "email",
+        placeholder: "name@email.com",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "Phone Number",
+        type: "tel",
+        placeholder: "555-555-5555",
+        pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "Address",
+        type: "text",
+        placeholder: "Enter your address",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "Address Line 2",
+        type: "text",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "Country", //replace with FormSelect later
+        type: "text",
+        tailwindCSS: formCSS,
+    },
+    {
+        title: "City",
+        type: "text",
+        tailwindCSS: formCSS,
+    },
 ];
 
 const donationOptionSettings = [
@@ -66,7 +90,7 @@ export default function Donate() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col box-border grow gap-y-2 mt-16 rounded-xl shadow-xl px-4 md:px-16 py-8 w-full lg:w-3/4">
+        <div className="flex flex-col box-border grow gap-y-2 mt-4 rounded-xl shadow-xl px-4 md:px-8 py-8 w-full lg:px-16">
           <form className="flex w-full">
             <div className="w-full box-border flex flex-col gap-y-4 items-center">
               <div className="flex w-full justify-center items-center space-x-8 flex-col">
@@ -83,15 +107,29 @@ export default function Donate() {
                   </div>
                 </div>
               </div>
-              <h1 className="font-bold text-xl">Your Information</h1>
+              <h1 className="font-bold text-xl mt-4">Your Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
-                {formSettings.map((data, i) => (
+                {formSettings.slice(0,3).map((data, i) => (
                   <FormInput
                     key={i}
                     title={data.title}
                     type={data.type}
+                    placeholder={data.placeholder}
+                    pattern={data.pattern}
                     tailwindCSS={data.tailwindCSS}
                   />
+                ))}
+              </div>
+              <h1 className="font-bold text-xl mt-4">Billing Information</h1>
+              <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
+                {formSettings.slice(3).map((data, i) => (
+                    <FormInput
+                        key={i}
+                        title={data.title}
+                        type={data.type}
+                        placeholder={data.placeholder}
+                        tailwindCSS={data.tailwindCSS}
+                    />
                 ))}
               </div>
               <div className="flex justify-center w-24">
