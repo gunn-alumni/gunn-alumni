@@ -35,7 +35,8 @@ const PasswordCheck = () => {
           htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          Password (hint: it's something about chicken and beef)
+          Password (hint: something about chicken and beef, but it is not
+          chickenbeef)
         </label>
         <input
           type="text"
