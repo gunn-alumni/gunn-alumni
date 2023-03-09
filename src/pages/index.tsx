@@ -97,7 +97,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col justify-center items-center space-y-8">
           <div className="text-3xl font-bold">Give back to your community!</div>
-          <StandardButton color="primary" className="py-5 px-16 text-xl">
+          <StandardButton color="bg-primary" className="py-4 px-16 text-xl">
             Donate Now
           </StandardButton>
         </div>

@@ -13,7 +13,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="flex justify-center flex-1 items-center space-x-8 text-sm m-2">
+      <div className="flex justify-center flex-wrap flex-1 items-center space-x-4 text-sm m-2">
         <Link className="hover:underline" href="/about">
           About
         </Link>
@@ -30,7 +30,6 @@ const Navbar = () => {
           Login
         </Link>
       </div>
-      <div className="flex items-center"></div>
     </div>
   );
 };
