@@ -24,7 +24,7 @@ const FilterGroups = (
     <h3
       key={tagName}
       id="group_tags"
-      className={tagText == tagName ? "bg-[black]" : "bg-transparent"}
+      className={`px-[5px] ${tagText == tagName ? "bg-[white]" : "bg-transparent"}`}
     >
       {tagName}
     </h3>
@@ -38,10 +38,9 @@ const FilterGroups = (
         onTagClick(e.target);
       }}
       ref={ref}
-      className={`bg-gray-300 text-black text-center text-2xl font-bold w-36 space-y-8 pt-4 overflow-y-scroll overflow-x-hidden ${
-        totalTags > 15 ? "gap-[10px]" : "justify-evenly"
-      }`}
-    >
+      className={`bg-[#a61619] text-center text-black text-[25px] text-2xl font-bold fixed w-[8.5%] max-w-[10%] h-full flex flex-col items-center left-0 top-0 pt-[88px] pb-[68px] overflow-auto max-h-full ${
+        totalTags > 20 ? "gap-[10px]" : "justify-evenly"}`
+      }>
       {allTags}
     </div>
   );

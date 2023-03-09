@@ -8,7 +8,7 @@ type UserCardProps = {
 
 const UserCard = ({ uniId, userPfp, userName }: UserCardProps) => {
   return (
-    <div id={uniId} className="w-fit flex flex-col p-1 border border-gray-300">
+    <div id={uniId} className="w-fit flex flex-col p-1 border border-[2.5px] border-gray-300">
       <Image src={userPfp} width={100} height={100} alt="default_user_pfp" />
       <div
         id="short_desc"
