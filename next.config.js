@@ -24,15 +24,13 @@ function getBasePath() {
   return basePath;
 }
 
-module.exports = withCSS(
-  withImages({
-    assetPrefix: getBasePath(),
+module.exports = withImages({
+  assetPrefix: getBasePath(),
 
-    publicRuntimeConfig: {
-      basePath: getBasePath(),
-    },
-    typescript: {
-      ignoreBuildErrors: true,
-    },
-  })
-);
+  publicRuntimeConfig: {
+    basePath: getBasePath(),
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+});
