@@ -18,14 +18,15 @@ function getBasePath() {
     }
   }
 
-  console.log("getBasePath() : isProd = " + isProd);
-  console.log("getBasePath() : basePath = " + basePath);
-
   return basePath;
 }
 
 module.exports = withImages({
   assetPrefix: getBasePath(),
+
+  images: {
+    disableStaticImages: true,
+  },
 
   publicRuntimeConfig: {
     basePath: getBasePath(),
