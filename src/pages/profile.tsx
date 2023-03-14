@@ -34,6 +34,8 @@ export default function Home() {
             src={dylan}
             alt="Profile Image"
             className="rounded-full mb-4"
+            width={200}
+            height={200}
           />
           </div>
           <div class='font-bold place-content-center text-center mb-4'>
