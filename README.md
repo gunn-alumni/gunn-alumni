@@ -24,3 +24,4 @@ Then run the site on localhost:3000
 ```bash
 pnpm run dev
 ```
+pr test deploy
