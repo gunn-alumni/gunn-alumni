@@ -1,11 +1,12 @@
-import Image, { StaticImageData } from "@/components/shared/Image";
+import Image from "@/components/shared/Image";
+import { StaticImageData } from "next/image";
 import { StandardButton, StyledButton } from "@/components/shared/Button";
 
 type NewsLandingCardProps = {
   title: string;
   description: string;
   articleURL: string; // TODO: for the Read More button,
-  image: StaticImageData;
+  image: string;
 };
 
 const NewsLandingCard = ({

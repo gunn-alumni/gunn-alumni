@@ -1,7 +1,5 @@
 const isProd = process.env.NODE_ENV === "production";
 
-const withImages = require("next-images");
-
 /*
  * Gets the BASE_PATH from the command used to start this app.
  * If BASE_PATH is specified but it does not start with a "/"
@@ -21,17 +19,12 @@ function getBasePath() {
   return basePath;
 }
 
-module.exports = withImages({
+module.exports = {
   assetPrefix: getBasePath(),
-
-  images: {
-    disableStaticImages: true,
-  },
-
   publicRuntimeConfig: {
     basePath: getBasePath(),
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-});
+};
