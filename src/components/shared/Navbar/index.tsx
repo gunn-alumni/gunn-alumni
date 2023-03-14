@@ -5,15 +5,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="z-10 flex justify-center flex-wrap p-4 bg-primary md:px-64 text-white font-sans font-bold">
-      <div className="md:flex">
-        <Link className="flex items-center space-x-2 px-5" href="/">
+    <div className="flex justify-around flex-wrap bg-primary text-white font-sans font-bold p-3">
+      <div className="">
+        <Link className="flex items-center space-x-2" href="/">
           <Image src={titanIcon} alt="icon" width={30} height={30} />
           <div>Gunn High School | Alumni</div>
         </Link>
       </div>
 
-      <div className="flex justify-center flex-wrap flex-1 items-center space-x-4 text-sm m-2">
+      <div className="flex justify-center flex-wrap items-center text-sm space-x-3 px-3">
         <Link className="hover:underline" href="/team">
           Team
         </Link>
@@ -25,9 +25,6 @@ const Navbar = () => {
         </Link>
         <Link className="hover:underline" href="/donate">
           Donate
-        </Link>
-        <Link className="hover:underline" href="/login">
-          Login
         </Link>
       </div>
     </div>
