@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/shared/Image";
 import titanIcon from "@/../public/images/titanIcon.png";
 import Link from "next/link";
 

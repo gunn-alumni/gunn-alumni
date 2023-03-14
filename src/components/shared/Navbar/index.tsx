@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/shared/Image";
 import Link from "next/link";
 import titanIcon from "@/../public/images/titanIcon.png";
 import { GiHamburgerMenu } from "react-icons/gi";

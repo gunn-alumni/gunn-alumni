@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "@/components/shared/Image";
 import { StandardButton, StyledButton } from "@/components/shared/Button";
 
 type NewsLandingCardProps = {
