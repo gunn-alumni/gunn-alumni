@@ -1,7 +1,7 @@
 import Head from "next/head";
 import ImgButton from "@/components/donate/ImageButton/ImgButton";
-import FormInput from "@/components/donate/Forms/FormInput";
-import { StandardButton } from "@/components/shared/Button";
+import { FormInput, FormSelect } from "@/components/donate/Forms";
+import { StandardButton, ButtonToggle, ButtonGroup } from "@/components/shared/Button";
 
 /* TODO:
  * Page Structure:
@@ -72,6 +72,54 @@ const donationOptionSettings = [
   },
 ];
 
+const selectSettings = [
+    {
+        text: "Option 1",
+    },
+    {
+        text: "Option 2",
+    },
+    {
+        text: "Option 3",
+    },
+];
+
+const donationDuration_ButtonGroup = [
+    {
+        value: "Monthly",
+        classNameInactive: "bg-transparent text-black opacity-60",
+        className: "px-4 py-2",
+    },
+    {
+        value: "Yearly",
+        classNameInactive: "bg-transparent text-black opacity-60",
+        className: "px-4 py-2",
+    },
+    {
+        value: "Once",
+        classNameInactive: "bg-transparent text-black opacity-60",
+        className: "px-4 py-2",
+    },
+];
+
+const donationOption_ButtonGroup = [
+    {
+        value: <ImgButton text={donationOptionSettings[0].text} imageURL={donationOptionSettings[0].imageURL} />,
+        classNameActive: "opacity-100",
+        classNameInactive: "opacity-50",
+    },
+    {
+        value: <ImgButton text={donationOptionSettings[1].text} imageURL={donationOptionSettings[1].imageURL} />,
+        classNameActive: "opacity-100",
+        classNameInactive: "opacity-50",
+    },
+    {
+        value: <ImgButton text={donationOptionSettings[2].text} imageURL={donationOptionSettings[2].imageURL} />,
+        classNameActive: "opacity-100",
+        classNameInactive: "opacity-50",
+    },
+];
+
 export default function Donate() {
   return (
     <>
@@ -85,26 +133,19 @@ export default function Donate() {
         <div className="w-full box-border rounded-xl">
           <h1 className="font-bold text-xl">Donation Options</h1>
           <div className="w-full box-border flex items-stretch gap-2 mt-2 flex-col lg:flex-row">
-            {donationOptionSettings.map((data, i) => (
+            <ButtonGroup buttons={donationOption_ButtonGroup} />
+            {/*donationOptionSettings.map((data, i) => (
               <ImgButton key={i} text={data.text} imageURL={data.imageURL} />
-            ))}
+            ))*/}
           </div>
         </div>
         <div className="flex flex-col box-border grow gap-y-2 mt-4 rounded-xl shadow-xl px-4 md:px-8 py-8 w-full lg:px-16">
           <form className="flex w-full">
             <div className="w-full box-border flex flex-col gap-y-4 items-center">
-              <div className="flex w-full justify-center items-center space-x-8 flex-col">
+              <div className="flex w-full justify-center items-center flex-col">
                 <div className="text-xl">I want to donate: </div>
-                <div className="flex mt-4">
-                  <div className="py-2 px-8 rounded-full bg-gray-200">
-                    <div className="font-semibold">Monthly</div>
-                  </div>
-                  <div className="py-2 px-8 rounded-full">
-                    <div className="font-semibold">Yearly</div>
-                  </div>
-                  <div className="py-2 px-8 rounded-full">
-                    <div className="font-semibold">Once</div>
-                  </div>
+                <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
+                    <ButtonGroup buttons={donationDuration_ButtonGroup}/>
                 </div>
               </div>
               <h1 className="font-bold text-xl mt-4">Your Information</h1>
@@ -131,6 +172,10 @@ export default function Donate() {
                         tailwindCSS={data.tailwindCSS}
                     />
                 ))}
+                <FormSelect
+                    title="Country"
+                    arrayString={selectSettings}
+                />
               </div>
               <div className="flex justify-center w-24">
                 <StandardButton color="bg-primary" className="">
