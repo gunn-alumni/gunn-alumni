@@ -1,13 +1,17 @@
-import Image from "next/image";
+import Image from "next/Image";
 import Link from "next/link";
-import titanIcon from "@/../public/images/titanIcon.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
     <div className="z-10 flex justify-center items-center flex-col lg:flex-row p-4 bg-primary text-white font-sans font-bold">
       <Link className="flex items-center space-x-2" href="/">
-        <Image src={titanIcon} alt="icon" width={30} height={30} />
+        <Image
+          src={"/images/titanIcon.png"}
+          alt="icon"
+          width={30}
+          height={30}
+        />
         <div>Gunn High School | Alumni</div>
       </Link>
 
