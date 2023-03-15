@@ -1,0 +1,15 @@
+name: Auto Comment
+on: [pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pullRequestOpened: |
+            👋 @{{ author }}
+            Thanks for you contributions! You can assign someone to review your code.
+
+            For reviewers, check out the preview deployment here:
+            https://alumni.gunnhigh.school/pr/${{ id }}
