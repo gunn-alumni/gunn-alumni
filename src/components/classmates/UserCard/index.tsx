@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "@/components/shared/Image";
+import Image, { StaticImageData } from "next/image";
 
 type UserCardProps = {
   uniId: string;

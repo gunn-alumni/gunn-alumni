@@ -1,4 +1,4 @@
-import Image from "@/components/shared/Image";
+import Image from "next/Image";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 
