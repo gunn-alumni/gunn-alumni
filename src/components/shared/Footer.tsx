@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/Image";
 import Link from "next/link";
 
 const Footer = () => {

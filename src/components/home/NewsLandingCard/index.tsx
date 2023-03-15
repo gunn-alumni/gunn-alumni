@@ -5,7 +5,7 @@ type NewsLandingCardProps = {
   title: string;
   description: string;
   articleURL: string; // TODO: for the Read More button,
-  image: StaticImageData;
+  image: string;
 };
 
 const NewsLandingCard = ({
