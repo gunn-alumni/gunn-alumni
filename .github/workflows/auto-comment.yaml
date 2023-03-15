@@ -18,4 +18,4 @@ jobs:
             👋 @{{ author }}
             Thanks for you contributions! You can assign someone to review your code.
             For reviewers, check out the preview deployment here:
-            https://alumni.gunnhigh.school/pr/@{{ id }}
+            https://alumni.gunnhigh.school/pr/{{ id }}
