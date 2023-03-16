@@ -17,7 +17,7 @@ const Navbar = () => {
 
       <div className="flex justify-center flex-1 items-center space-x-4 text-sm m-2">
         <Link className="hover:underline" href="/team">
-          Team
+          DYlan
         </Link>
         <Link className="hover:underline" href="/classmates">
           Classmates
