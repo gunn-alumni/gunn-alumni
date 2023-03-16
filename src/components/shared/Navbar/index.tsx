@@ -12,7 +12,7 @@ const Navbar = () => {
           width={30}
           height={30}
         />
-        <div>Gunn High School | Alumni</div>
+        <div>This is a PR Test!!!</div>
       </Link>
 
       <div className="flex justify-center flex-1 items-center space-x-4 text-sm m-2">
