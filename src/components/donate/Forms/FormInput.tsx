@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { Attributes, HTMLAttributes, InputHTMLAttributes, useState } from "react";
 
 type FormInputProps = {
     title: string;
     type: string;
     placeholder?: string;
     pattern?: string;
-    tailwindCSS?: string;
+    isRequired?: boolean;
+    className?: string;
 };
 
 const FormInput = ({
@@ -13,22 +14,26 @@ const FormInput = ({
     type,
     placeholder,
     pattern,
-    tailwindCSS,
+    isRequired = true,
+    className = "border-2 border-gray-300 bg-gray-100 rounded-md px-1 py-1",
 }: FormInputProps) => {
-    const [value, setValue] = useState({text: '',});
-
-    const handleInputChange  = (event: { persist: () => void; target: { value: any; }; }) => {
-        setValue((value) => ({
-            text: event.target.value,
-        }));
-    };
-
+    const [value, setValue] = useState('');
+    if (isRequired) {
+        return (
+            <div className="w-full flex flex-col">
+                <label className="text-lg font-medium">
+                    {title}
+                </label>
+                <input type={type} value={value} placeholder={placeholder} pattern={pattern} onChange={(e) => setValue(e.target.value)} required className={className}></input>
+            </div>
+        );
+    }
     return (
         <div className="w-full flex flex-col">
             <label className="text-lg font-medium">
                 {title}
             </label>
-            <input type={type} value={value.text} placeholder={placeholder} pattern={pattern} onChange={handleInputChange} required className={tailwindCSS}></input>
+            <input type={type} value={value} placeholder={placeholder} pattern={pattern} onChange={(e) => setValue(e.target.value)} className={className}></input>
         </div>
     );
 };
