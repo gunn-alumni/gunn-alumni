@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import titanIcon from "@/../public/images/titanIcon.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import dylan from "@/../public/images/dylan.png";
 
