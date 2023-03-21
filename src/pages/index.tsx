@@ -58,7 +58,7 @@ export default function Home() {
             title="Gunn Grad Dylan cures cancer with HTML"
             description="After several years of intense research, recent Gunn graduate Dylan Lu figures out the ultimate cure to cancer: HTML. No one knows how he did it. 💀"
             articleURL=""
-            image={dylan}
+            image={"/images/dylan.png"}
           />
         </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
