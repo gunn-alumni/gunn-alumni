@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Script from "next/script";
 
 //WORK IN PROGRESS:
-// - add search functionality to select box (use Select2 or Selectize?)
+// - kinda ugly right now, make it not ugly
 
 type FormSelectProps = {
     title: string;

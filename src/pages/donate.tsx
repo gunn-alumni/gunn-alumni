@@ -14,7 +14,7 @@ import { StandardButton, ButtonToggle, ButtonGroup } from "@/components/shared/B
  *                                             Might need to change HTML structure of component.
  */
 
-const countries = [
+const countries = [ //move this to the backend maybe?
   {name: "Afghanistan",value: "AF"},
   {name: "Åland Islands",value: "AX"},
   {name: "Albania",value: "AL"},
