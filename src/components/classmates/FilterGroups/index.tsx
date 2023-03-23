@@ -43,7 +43,7 @@ const FilterGroups = (
         onTagClick(e.target);
       }}
       ref={ref}
-      className={`z-[1] flex-wrap text-center text-black sm:text-2xl font-bold w-full md:w-[130px] sm:w-[80px] sm:h-screen flex sm:grid items-center left-0 py-[10px] sm:overflow-y-auto ${
+      className={`z-[1] ${(id != "group_tags")? "gap-2.5 px-2.5 py-5" : ""} flex-wrap text-center text-black sm:text-2xl font-bold w-full md:w-[130px] sm:w-[80px] sm:h-screen flex sm:grid items-center left-0 py-[10px] sm:overflow-y-auto ${
         totalTags > 20 ? "gap-[10px]" : "justify-evenly"}`
       }>
       {allTags}
