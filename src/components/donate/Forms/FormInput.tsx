@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type FormInputProps = {
     title: string;
     type: string;
     placeholder?: string;
     pattern?: string;
-    tailwindCSS: string;
+    tailwindCSS?: string;
 };
 
 const FormInput = ({

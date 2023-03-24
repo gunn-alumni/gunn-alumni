@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import Script from "next/script";
+import { useState } from "react";
 
 //WORK IN PROGRESS:
 // - add search functionality to select box (use Select2 or Selectize?)
@@ -8,7 +7,7 @@ type FormSelectProps = {
     title: string;
     placeholder?: string;
     arrayString: Array<{text: string}>;
-    tailwindCSS: string;
+    tailwindCSS?: string;
 };
 
 const FormSelect = ({
