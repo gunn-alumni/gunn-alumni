@@ -5,23 +5,22 @@ import Head from "next/head";
 import EventCard from "@/components/home/EventCard.tsx";
 import NewsCard from "@/components/home/NewsCard";
 import NewsLandingCard from "@/components/home/NewsLandingCard";
-import dylan from "@/../public/images/dylan.png";
 import { StandardButton } from "@/components/shared/Button";
 
 const dummyNewsData = [
   {
-    title: "Gunn Bat Cave Destroyed",
+    title: "Gunn sports new Marquee",
     date: new Date("Feburary 15, 2023"),
     description:
-      "The Bat cave was destroyed! Oh no! That's so sad I'm gonna cry",
-    imageURL: "",
+      "Years in the making, Gunn High unveils new marquee.  The PTSA and district funded the project.",
+    imageURL: '/images/sample_news_photo1.png',
   },
   {
-    title: "Dylan is actually really cool",
-    date: new Date("Feburary 15, 2023"),
+    title: "Gunn High ranked #1 in California",
+    date: new Date("September 30, 2022"),
     description:
-      "Could this actaully be possible? Despite popular opinion, Dylan is ACTUALLY realy cool.",
-    imageURL: "",
+      "Henry M. Gunn High School in Palo Alto was named the No. 1 public school in California. ",
+    imageURL: '/images/sample_news_photo2.png',
   },
 ];
 
@@ -33,12 +32,12 @@ const dummyProgramData = [
   },
   {
     title: "Basketball Game",
-    date: new Date("Feburary 18, 2023"),
+    date: new Date("June 18, 2023"),
     url: "",
   },
   {
-    title: "Homecoming",
-    date: new Date("Feburary 18, 2023"),
+    title: "High School Musical performance",
+    date: new Date("March 24, 2023"),
     url: "",
   },
 ];
@@ -55,10 +54,10 @@ export default function Home() {
       <div className="px-8 py-10 sm:px-16 lg:px-28">
         <div>
           <NewsLandingCard
-            title="Gunn Grad Dylan cures cancer with HTML"
-            description="After several years of intense research, recent Gunn graduate Dylan Lu figures out the ultimate cure to cancer: HTML. No one knows how he did it. 💀"
+            title="Esther Wojcicki on how she raised three world-beating children"
+            description="Star speaker visits Gunn to talk about her 3 Gunn alumni at this past TEDx"
             articleURL=""
-            image={"/images/dylan.png"}
+            image={"/images/news_card.jpeg"}
           />
         </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">

@@ -2,7 +2,7 @@ type NewsCardProps = {
   title: string;
   description: string;
   date: Date;
-  imageURL?: string; // TODO Implement with server
+  imageURL: string; // TODO Implement with server
 };
 
 const NewsCard = ({ title, description, date, imageURL }: NewsCardProps) => {
@@ -13,7 +13,8 @@ const NewsCard = ({ title, description, date, imageURL }: NewsCardProps) => {
         <div className="text-black text-xl font-bold">{title} </div>
         <div className="break-normal hidden md:block">{description}</div>
       </div>
-      <div className="h-64 bg-zinc-500 md:order-first md:w-64 md:mr-8" />
+      
+      <img src={imageURL} alt={title} className="h-64 bg-zinc-500 md:order-first md:w-64 md:mr-8" />
       <div className="block mt-4 md:hidden">{description}</div>
     </div>
   );
