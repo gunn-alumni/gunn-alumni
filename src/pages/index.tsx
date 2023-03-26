@@ -1,5 +1,6 @@
 // React Components
 import Head from "next/head";
+import Link from "next/link";
 
 // Custom Components
 import EventCard from "@/components/home/EventCard.tsx";
@@ -97,9 +98,11 @@ export default function Home() {
         </div>
         <div className="flex flex-col justify-center items-center space-y-8">
           <div className="text-3xl font-bold">Give back to your community!</div>
-          <StandardButton color="bg-primary" className="py-4 px-16 text-xl">
-            Donate Now
-          </StandardButton>
+          <Link href="/donate">
+            <StandardButton color="bg-primary" className="py-4 px-16 text-xl">
+              Donate Now
+            </StandardButton>
+          </Link>
         </div>
       </div>
     </>
