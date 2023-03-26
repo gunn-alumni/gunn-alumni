@@ -10,6 +10,7 @@ specifiers:
   dotenv: ^16.0.3
   eslint: 8.34.0
   eslint-config-next: 13.1.6
+  fuse.js: ^6.6.2
   next: 13.1.6
   next-images: ^1.8.4
   postcss: ^8.4.21
@@ -28,6 +29,7 @@ dependencies:
   dotenv: 16.0.3
   eslint: 8.34.0
   eslint-config-next: 13.1.6_7kw3g6rralp5ps6mg3uyzz6azm
+  fuse.js: 6.6.2
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   next-images: 1.8.4
   react: 18.2.0
@@ -1259,6 +1261,11 @@ packages:
 
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+    dev: false
+
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
     dev: false
 
   /get-intrinsic/1.2.0:
