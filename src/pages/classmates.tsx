@@ -53,17 +53,17 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
                 uniId: "user4",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Julia Kang"
             },
             {
@@ -73,12 +73,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -93,17 +93,17 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
                 uniId: "user4",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Ruparel"
             }
         ]},
@@ -159,7 +159,7 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
@@ -179,12 +179,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -199,17 +199,17 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
                 uniId: "user4",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Ruparel"
             },
             {
@@ -219,12 +219,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -242,12 +242,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -262,17 +262,17 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
                 uniId: "user4",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Ruparel"
             }
         ]},
@@ -285,12 +285,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -308,7 +308,7 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
@@ -331,12 +331,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -354,12 +354,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -377,12 +377,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -400,12 +400,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -423,12 +423,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -446,12 +446,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -469,12 +469,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -492,12 +492,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -515,12 +515,12 @@ export default function Classmates() {
             },
             {
                 uniId: "user2",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: defaultPfp,
+                userPfp: "/images/userIconx96.png",
                 userName: "Michael Wu"
             },
             {
@@ -547,7 +547,7 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             }
         ]},
         {
@@ -560,12 +560,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             }
         ]},
         {
@@ -578,12 +578,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -601,12 +601,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             },
             {
                 uniId: "user4",
