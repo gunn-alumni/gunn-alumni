@@ -12,7 +12,7 @@ function handleClick() {
 
 const Navbar = () => {
   return (
-    <div className="flex justify-around flex-wrap bg-primary text-white font-sans font-bold p-3">
+    <div className="flex justify-around flex-wrap bg-primary text-white font-sans font-bold p-3 z-[1]">
       <div className="">
         <Link className="flex items-center space-x-2" href="/">
           <Image src={titanIcon} alt="icon" width={30} height={30} />
