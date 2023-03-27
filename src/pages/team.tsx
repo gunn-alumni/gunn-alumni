@@ -98,8 +98,9 @@ export default function Team() {
                 
                 <div className=" flex flex-col mb-20">
                     <h1 className="text-xl font-bold p-2">Contact Us:</h1>
-                    <p>Link to form. All feedback is greatly appreciated!</p>
+                    <p>All feedback is greatly appreciated!</p>
                     <iframe className="h-96 rounded-3xl m-4 shadow-lg" src="https://forms.gle/o9bmzkr5rjCiduLs5" title="Contact Form"></iframe>
+                    <Link href="https://forms.gle/o9bmzkr5rjCiduLs5" className="text-primary hover:text-black underline">https://forms.gle/o9bmzkr5rjCiduLs5</Link>
                 </div>
             </div>
             
