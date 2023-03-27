@@ -1,4 +1,4 @@
-const Travel = () => {
+const News = () => {
   return (
     <div className="w-full h-full flex justify-center items-center">
       Work in progress...
@@ -6,4 +6,4 @@ const Travel = () => {
   );
 };
 
-export default Travel;
+export default News;

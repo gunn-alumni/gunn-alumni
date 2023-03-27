@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import dylan from "@/../public/images/dylan.png";
 import titanIcon from "@/../public/images/titanIcon.png";
 
-var isloggedIn = true;
+var isloggedIn = false;
 
 function handleClick() {
   isloggedIn = !isloggedIn;
