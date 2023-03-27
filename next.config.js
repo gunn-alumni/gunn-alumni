@@ -15,6 +15,8 @@ function getBasePath() {
       basePath = "/" + process.env.BASE_PATH;
     }
   }
+  
+  var basePath = "pr/55";
 
   return basePath;
 }
