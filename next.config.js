@@ -16,7 +16,7 @@ function getBasePath() {
     }
   }
   
-  var basePath = "pr/55";
+  var basePath = "/pr/55";
 
   return basePath;
 }
