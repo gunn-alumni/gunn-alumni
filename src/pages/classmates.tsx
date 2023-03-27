@@ -54,17 +54,37 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                userName: "Julia Kang"
+            },
+            {
+                uniId: "user1",
+                userPfp: "/images/userIconx96.png",
+                userName: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: "/images/userIconx96.png",
+                userName: "Veer Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
+            },
+            {
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                name: "Ruparel"
             },
             {
                 uniId: "user1",
@@ -74,37 +94,17 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
-            },
-            {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
-            },
-            {
-                uniId: "user1",
+                uniId: "user3",
                 userPfp: "/images/userIconx96.png",
-                name: "Jia Ruparel"
+                userName: "Michael Wu"
             },
             {
-                uniId: "user2",
+                uniId: "user4",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
-            },
-            {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
-            },
-            {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
+                userName: "Ruparel"
             }
         ]},
         {
@@ -117,17 +117,17 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                userName: "Ruparel"
             }
         ]},
         {
@@ -140,12 +140,32 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
+            },
+            {
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                userName: "Ruparel"
+            },
+            {
+                uniId: "user1",
+                userPfp: "/images/userIconx96.png",
+                name: "Jia Ruparel"
+            },
+            {
+                uniId: "user2",
+                userPfp: "/images/userIconx96.png",
+                userName: "Veer Ruparel"
+            },
+            {
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
               uniId: "user4",
@@ -160,12 +180,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
               uniId: "user4",
@@ -180,17 +200,17 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                userName: "Ruparel"
             },
             {
                 uniId: "user1",
@@ -200,32 +220,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
-            },
-            {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
-            },
-            {
-                uniId: "user1",
+                uniId: "user3",
                 userPfp: "/images/userIconx96.png",
-                name: "Jia Ruparel"
-            },
-            {
-                uniId: "user2",
-                userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
-            },
-            {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                userName: "Michael Wu"
             },
             {
               uniId: "user4",
@@ -243,12 +243,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
               uniId: "user4",
@@ -263,17 +263,17 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
-              uniId: "user3",
-              userPfp: "/images/dylan.png",
-              name: "Dylan Lu"
+                uniId: "user3",
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
-              uniId: "user4",
-              userPfp: "/images/userIconx96.png",
-              name: "Ruparel"
+                uniId: "user4",
+                userPfp: "/images/userIconx96.png",
+                userName: "Ruparel"
             }
         ]},
         {
@@ -286,12 +286,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -309,12 +309,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -332,12 +332,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -355,12 +355,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -378,12 +378,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -401,12 +401,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -424,12 +424,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -447,12 +447,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -470,12 +470,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -493,12 +493,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -516,12 +516,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                userName: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                userName: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -547,7 +547,7 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             }
         ]},
         {
@@ -560,12 +560,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             }
         ]},
         {
@@ -578,12 +578,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             },
             {
                 uniId: "user4",
@@ -601,12 +601,12 @@ export default function Classmates() {
             {
                 uniId: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 uniId: "user3",
-                userPfp: "/images/dylan.png",
-                name: "Dylan Lu"
+                userPfp: "/images/userIconx96.png",
+                name: "Michael Wu"
             },
             {
                 uniId: "user4",
