@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import dylan from "@/../public/images/dylan.png";
 import titanIcon from "@/../public/images/titanIcon.png";
 
-var isloggedIn = true;
+var isloggedIn = false;
 
 function handleClick() {
   isloggedIn = !isloggedIn;
@@ -28,6 +28,9 @@ const Navbar = () => {
         <Link className="hover:underline" href="/classmates">
           Classmates
         </Link>
+        <Link className="hover:underline" href="/news">
+          News
+        </Link>
         <Link className="hover:underline" href="/donate">
           Donate
         </Link>
@@ -44,8 +47,6 @@ const Navbar = () => {
             <Image src={dylan} className=" w-9 h-9 rounded-full" alt="icon"/>
           </Link>
         
-          
-
         </div>
         :
         <div className="flex justify-center flex-wrap items-center space-x-3">
