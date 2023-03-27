@@ -636,7 +636,7 @@ export default function Classmates() {
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             }
         ]},
         {
@@ -649,7 +649,7 @@ export default function Classmates() {
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 user_id: "user3",
@@ -667,7 +667,7 @@ export default function Classmates() {
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 user_id: "user3",
@@ -690,7 +690,7 @@ export default function Classmates() {
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel"
+                name: "Veer Ruparel"
             },
             {
                 user_id: "user3",

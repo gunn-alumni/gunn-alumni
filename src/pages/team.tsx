@@ -17,22 +17,22 @@ export default function Team() {
                 <div className="border-b-2 border-dotted">
                     <h1 className="text-2xl font-bold"> About the Team </h1>
                     <div className="p-5">
-                    <p>
-                        We are a group of  students in Mr. Paley’s 4th period CS Capstone class who are building a website to connect Gunn alumni. We hope to give our graduates an accessible way to: 
-                    </p>
-                    <ul className="list-disc px-10 py-3">
-                        <li>Connect with and celebrate each other, current students and teachers </li>
-                        <li>Support their school and community through donations, events, etc.</li>
-                        <li> and for administrators to get feedback from alumni for students to communicate with recent graduates</li>
-                    </ul>
+                        <p>
+                            We are a group of  students in Mr. Paley’s 4th period CS Capstone class who are building a website to connect Gunn alumni. We hope to give our graduates an accessible way to:
+                        </p>
+                        <ul className="list-disc px-10 py-3">
+                            <li>Connect with and celebrate each other, current students and teachers </li>
+                            <li>Support their school and community through donations, events, etc.</li>
+                            <li> and for administrators to get feedback from alumni for students to communicate with recent graduates</li>
+                        </ul>
 
-                    <p>To learn more about us, see our&#160;
-                        <Link className="underline text-primary" href="https://blog.gunnhigh.school/">blog</Link>.
-                    </p>
-                    
+                        <p>To learn more about us, see our&#160;
+                            <Link className="underline text-primary" href="https://blog.gunnhigh.school/">blog</Link>.
+                        </p>
+
 
                     </div>
-                    
+
                 </div>
 
                 <div className="text-center p-20">[Insert Group Image Here]</div>
@@ -50,7 +50,7 @@ export default function Team() {
                     </div>
 
                     <p>Sarah Dou</p>
-                    
+
 
                     {/* Connections Team */}
                     <div>
@@ -61,7 +61,7 @@ export default function Team() {
 
                     {/* Front End Team */}
                     <div className="">
-                        
+
                         <p>Patrick Chi</p>
                         <p>Emir Durakovic</p>
                         <p>Albert Lee</p>
@@ -78,14 +78,15 @@ export default function Team() {
                         <p>Zephan Sanghani</p>
                     </div>
                 </div>
-                
+
                 <div className=" flex flex-col mb-20">
                     <h1 className="text-xl font-bold p-2">Contact Us:</h1>
                     <p>All feedback is greatly appreciated!</p>
                     <iframe className="h-96 rounded-3xl m-4 shadow-lg" src="https://forms.gle/o9bmzkr5rjCiduLs5" title="Contact Form"></iframe>
+                    <Link href="https://forms.gle/o9bmzkr5rjCiduLs5">https://forms.gle/o9bmzkr5rjCiduLs5</Link>
                 </div>
             </div>
-            
+
         </>
     )
 }

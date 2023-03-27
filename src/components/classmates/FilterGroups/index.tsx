@@ -23,8 +23,8 @@ const FilterGroups = (
   const numTags = tags;
   const navBarSize = 136;
   const footerSize = 68;
-  const sidebarHeight2 = "h-[calc(100%_-_"+(navBarSize+footerSize)+"px)]";
-  const sidebarHeight = navBarSize+footerSize;
+  // const sidebarHeight2 = "h-[calc(100%_-_"+(navBarSize+footerSize)+"px)]";
+  // const sidebarHeight = navBarSize+footerSize;
   const allTags = numTags.map((tagName) => (
     <h3
       key={tagName}

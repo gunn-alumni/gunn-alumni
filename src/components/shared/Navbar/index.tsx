@@ -28,9 +28,6 @@ const Navbar = () => {
         <Link className="hover:underline" href="/classmates">
           Classmates
         </Link>
-        <Link className="hover:underline" href="/travel">
-          Travel
-        </Link>
         <Link className="hover:underline" href="/donate">
           Donate
         </Link>
