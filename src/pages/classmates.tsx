@@ -1551,6 +1551,7 @@ export default function Classmates() {
         footerHeight = window.document.body.childNodes[0].childNodes[0].childNodes[3].offsetHeight;
         setFooterHeight(window.document.body.childNodes[0].childNodes[0].childNodes[3].offsetHeight);
         var pageMarker = pageUpDownBtnRef.current;
+        if(pageMarker == null) return;
         pageMarker.style.marginBottom = (footerHeight+10)+"px";
         //console.log("Full Height From ChangeIndicator Func = ", fullHeight, footerHeight);
 
