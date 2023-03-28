@@ -16,16 +16,12 @@ function getBasePath() {
     }
   }
   
-  var basePath = "/pr/55";
-
   return basePath;
 }
 
 module.exports = {
   assetPrefix: getBasePath(),
-  publicRuntimeConfig: {
-    basePath: getBasePath(),
-  },
+  basePath: getBasePath(),
   typescript: {
     ignoreBuildErrors: true,
   },
