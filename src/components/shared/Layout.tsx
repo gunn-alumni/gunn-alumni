@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
     <div className="flex flex-col justify-between min-h-screen">
       <PasswordCheck />
       <Navbar />
-      <main>{children}</main>
+      {children}
       <Footer />
     </div>
   );
