@@ -2,61 +2,101 @@ import { useState } from "react";
 import Image from "next/image";
 import titanIcon from "@/../public/images/titanIcon.png";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
   return (
-    <div
-      className={`w-full h-full bg-gray-100 flex-grow flex flex-col gap-12 items-center justify-center`}
-    >
-      <div
-        className={`w-[50ch] h-[80%] bg-gray-50 p-8 rounded-2xl  flex flex-col gap-4 shadow-lg`}
-      >
-        <h1 className={`font-bold text-2xl`}>Login To Your Account</h1>
-        <input
-          className={`w-full h-12 focus:!outline-none outline outline-gray-400/10 focus:ring-rose-500 focus:ring transition-all rounded-xl px-4 py-2 font-medium`}
-          value={email}
-          // add a % sign to the end of the number
-          onChange={(e) => setEmail(e.currentTarget.value)}
-        />
-        <input
-          className={`w-full h-12 focus:!outline-none outline outline-gray-400/10 focus:ring-rose-500 focus:ring transition-all rounded-xl px-4 py-2 font-medium`}
-          value={password}
-          type={"password"}
-          onChange={(e) => setPassword(e.currentTarget.value)}
-        />
-        <button
-          className={`w-full h-12 bg-rose-500 text-white rounded-xl`}
-          onClick={() => {
-            fetch(`http://localhost:4000/auth`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email,
-                password,
-              }),
-            }).then(async (res) => {
-              if (res.ok) {
-                const token = await res.text();
-                localStorage.setItem("token", token);
-                router.push("/");
-              }
-            });
-          }}
-        >
-          Login
-        </button>
+    <section className="">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+        <div className="flex items-center mb-6 text-gray-900 rounded-lg">
+          <div className="bg-primary mr-2 py-2 px-4 rounded-lg">
+            <Image src={titanIcon} alt="logo" width={30} height={30} />
+          </div>
+          <div className="text-xl font-semibold">Gunn High School | Alumni</div>
+        </div>
+        <div className="w-full bg-white rounded-lg shadow sm:max-w-md">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+              Sign in to your account
+            </h1>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Your email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  placeholder="name@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      aria-describedby="remember"
+                      type="checkbox"
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="remember" className="text-gray-500">
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+                <Link
+                  href="#"
+                  className="text-sm font-medium text-primary-600 hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+              <button className="w-full text-white bg-primary hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Sign in
+              </button>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                {"Don't have an account yet?"}
+                <Link
+                  href="/signup"
+                  className="ml-2 font-medium text-gray-600 hover:underline"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
