@@ -20,7 +20,7 @@ const PasswordCheck = () => {
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value);
   };
-
+  return null;
   return (
     <div
       className={`${
