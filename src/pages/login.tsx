@@ -124,7 +124,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 export default LoginPage;
