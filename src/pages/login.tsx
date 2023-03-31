@@ -2,13 +2,38 @@ import { useState } from "react";
 import Image from "next/image";
 import titanIcon from "@/../public/images/titanIcon.png";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState("");
+  const router = useRouter();
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    fetch(`http://localhost:4000/auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then(async (res) => {
+        if (res.ok) {
+          const token = await res.text();
+          localStorage.setItem("token", token);
+          router.push("/");
+        } else {
+          setError((await res.json()).message);
+        }
+      })
+      .catch((err) =>
+        setError("Something bad happened. Please try again later")
+      );
   };
 
   return (
@@ -80,9 +105,12 @@ const LoginPage = () => {
                   Forgot password?
                 </Link>
               </div>
-              <button className="w-full text-white bg-primary hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                Sign in
-              </button>
+              <input
+                className="w-full text-white bg-primary hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                type="submit"
+                value="Sign In"
+              />
+              {error && <div className={`text-red-500`}>Error: {error}</div>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {"Don't have an account yet?"}
                 <Link
@@ -99,5 +127,4 @@ const LoginPage = () => {
     </section>
   );
 };
-
 export default LoginPage;
