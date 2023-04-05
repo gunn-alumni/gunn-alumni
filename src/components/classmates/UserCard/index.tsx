@@ -2,14 +2,16 @@ import Image, { StaticImageData } from "next/image";
 
 type UserCardProps = {
   uniId: string;
+  classTitle: string;
   userPfp: StaticImageData;
   userName: string;
 };
 
-const UserCard = ({ uniId, userPfp, userName }: UserCardProps) => {
+const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
   return (
     <div
       id={uniId}
+      title={classTitle}
       className="w-fit flex flex-col p-1 border border-[2.5px] border-gray-300"
     >
       <Image src={userPfp} width={100} height={100} alt="default_user_pfp" />
