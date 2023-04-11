@@ -27,7 +27,7 @@ const Slider = <T extends number | readonly number[]>(
                 return (
                     <div
                         {...props}
-                        className={`rounded-full bg-primary ${
+                        className={`rounded-full ${
                             (_props.orientation === "vertical") ? "w-1/4 left-1/2 -translate-x-1/2" : "h-1/4 top-1/2 -translate-y-1/2"} ${
                             (isMulti ? isFirst || isLast : isLast) ? "bg-gray-200" : "bg-primary"
                             }`}
