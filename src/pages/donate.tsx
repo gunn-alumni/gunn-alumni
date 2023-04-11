@@ -314,16 +314,16 @@ const formSelectSettings = [
 
 const donationOptionSettings = [
   {
-    text: "Donation Option 1",
-    imageURL: "bg-[url('/images/dylan.png')]",
+    text: "Gunn Alumni Wesbite",
+    imageURL: "bg-[url('/images/GunnAlumniSite_logo.png')]",
   },
   {
-    text: "Donation Option 2",
-    imageURL: "bg-[url('/images/dylan.png')]",
+    text: "Gunn Foundation",
+    imageURL: "bg-[url('/images/GunnFoundation_logo.png')]",
   },
   {
-    text: "Donation Option 3",
-    imageURL: "bg-[url('/images/dylan.png')]",
+    text: "Gunn PTSA",
+    imageURL: "bg-[url('/images/GunnPTSA_logo.png')]",
   },
 ];
 
@@ -373,7 +373,7 @@ export default function Donate() {
         <link rel="icon" href="/images/dylan.png" />
       </Head>
       <div className="box-border px-4 py-4 md:px-24 md:py-10 lg:px-48 lg:py-10 flex flex-col gap-y-4 justify-center items-center">
-        <div className="w-full box-border rounded-xl">
+        <div className="w-full box-border rounded-xl"> 
           <h1 className="font-bold text-xl">Donation Options</h1>
           <div className="w-full box-border flex items-stretch gap-2 mt-2 flex-col lg:flex-row">
             <ButtonGroup buttons={donationOption_ButtonGroup} />
