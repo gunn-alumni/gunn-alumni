@@ -1,6 +1,3 @@
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 //searching algo import
 import Fuse from 'fuse.js';
 
@@ -26,7 +23,7 @@ export default function Classmates() {
     const [visibleIndicator, setVisibleIndicator] = useState(false);
     const indicatorRef = useRef(null);
     const filterGroupsRef = useRef(null);
-    const filterGroupsMobileRef = useRef(null); //check later if required or not 
+    const filterGroupsMobileRef = useRef(null); //check later if required or not
     const groupWrapperRef = useRef(null);
     const groupRefs = useRef([]);
     groupRefs.current = [];
@@ -38,9 +35,9 @@ export default function Classmates() {
     var [userCardData, setUserCardData] = useState([]);
     var [staticUserCardData, setStaticUserCardData] = useState([]);
     var [filterTagsData, setFilterTagsData] = useState([]);
-    ////Create Elements Using Data 
+    ////Create Elements Using Data
     var [groupsElementsState, setGroupsElementsState] = useState([]);
-    
+
 
     //////////////////////////COMPONENTS INITIAL DATA
     //Hard-Coded Data
@@ -704,7 +701,7 @@ export default function Classmates() {
             }
         ]}
     ];
-    
+
     //data management stuff
     function changeDataStructure(newData, fetchedFlag){
         var userCardDataHelper = [];
@@ -770,7 +767,7 @@ export default function Classmates() {
         setFilterTagsData(filterTagsDataHelper);
         ////console.log("Dummy Filter Tag Data = ", filterTagsData);
     }
-    
+
     //New code with fetching
     function createUsersData(usersData){
         var groupsElementsHelper  = [];
@@ -793,8 +790,8 @@ export default function Classmates() {
                 </>
             )
         });
-        
-        
+
+
         groupsElementsState = groupsElementsHelper;
         setGroupsElementsState(groupsElementsHelper);
 
@@ -806,7 +803,7 @@ export default function Classmates() {
     }
 
     //searching using fuse.js initialize and functions
-    const searchSettings = 
+    const searchSettings =
     {
         keys : ["grad_year","name"],
         includeMatches: true,
@@ -830,7 +827,7 @@ export default function Classmates() {
 
     //after searching a button is shown to get back the sidebar
     var [displayBtnSidebar, setDisplayBtnSidebar] = useState("sm:hidden");
-    var [displayContentWrapper, setDisplayContentWrapper] = useState("sm:flex-row"); 
+    var [displayContentWrapper, setDisplayContentWrapper] = useState("sm:flex-row");
 
     function extractUsers(myData){
         //console.log("Hello: ", myData);
@@ -908,7 +905,7 @@ export default function Classmates() {
                 </div>
             </>
         )
-        
+
         groupsElementsState = groupsElementsHelper;
         setGroupsElementsState(groupsElementsHelper);
         //console.log("GroupElementsHelper = ",groupsElementsHelper);
@@ -916,8 +913,8 @@ export default function Classmates() {
     }
 
 
-    ////////////////////////////////////////////////////// Filter Options Sorting Functions 
-    
+    ////////////////////////////////////////////////////// Filter Options Sorting Functions
+
     /////Helpful Functions
     function removeDuplicates(arr) {
         return arr.filter((value, index, self) => {
@@ -937,10 +934,10 @@ export default function Classmates() {
         createTagsData(userCardData);
 
         setTimeout(() => {
-            //re-declaring variables 
+            //re-declaring variables
             reDeclareVariables();
 
-            //hiding indicator 
+            //hiding indicator
             var group_indicator = indicatorRef.current;
             group_indicator.style.display = "none";
 
@@ -978,7 +975,7 @@ export default function Classmates() {
             var tempData = {};
             var matchingValIndex = oldTagsData.indexOf(sortedTagsData[t]);
             var tempTag = sortedTagsData[t];
-            // ////console.log(data[matchingValIndex]);    
+            // ////console.log(data[matchingValIndex]);
             // ////console.log(sortedTagsData[t]);
             tempData[sortedTagsData[t]] = data[matchingValIndex][tempTag];
             // ////console.log("Checking: ", tempData);
@@ -1000,7 +997,7 @@ export default function Classmates() {
           const pivot = arr[0];
           const left = [];
           const right = [];
-      
+
           for (let i = 1; i < arr.length; i++) {
             if (arr[i].localeCompare(pivot) >= 0) {
               left.push(arr[i]);
@@ -1008,11 +1005,11 @@ export default function Classmates() {
               right.push(arr[i]);
             }
           }
-      
+
           return [...quicksort_descending(left), pivot, ...quicksort_descending(right)];
         }
     }
-    
+
 
     function sortUsersAlphabetical(data, filterBy){
         ////console.log("Let the ALPHABETICAL Sorting Begin....");
@@ -1057,7 +1054,7 @@ export default function Classmates() {
                 ////console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
                 //need to get the user that has the same last name as name, not more not less
                 if((user.name).indexOf(name) > -1){
-                    tempVal.push(user); 
+                    tempVal.push(user);
                 }
             });
             ////console.log("Set Is made: ");
@@ -1082,7 +1079,7 @@ export default function Classmates() {
         //console checks
         ////console.log("Sorting Alphabetical Stufffff!!!!: ");
         ////console.log(sortedData);
-        
+
         //reload necessary contents of the page
         reloadContent(sortedData);
     }
@@ -1090,11 +1087,11 @@ export default function Classmates() {
         if (arr.length <= 1) {
           return arr;
         }
-      
+
         const pivot = arr[0];
         const left = [];
         const right = [];
-      
+
         for (let i = 1; i < arr.length; i++) {
           if (arr[i].localeCompare(pivot) < 0) {
             left.push(arr[i]);
@@ -1102,7 +1099,7 @@ export default function Classmates() {
             right.push(arr[i]);
           }
         }
-      
+
         return quickSort_alphabetical(left).concat(pivot, quickSort_alphabetical(right));
     }
 
@@ -1131,27 +1128,27 @@ export default function Classmates() {
         //After Searhing Sidebar Button Toggle
         if(elm.id == "btn_sidebar"){
             //console.log("ALERT: Sidebar Showing Button Clicked!");
-            
+
             //change the layout of content wrapper from flex to grid
             setDisplayContentWrapper("sm:flex-row");
 
             setMainSidebarDisplay("sm:block");
             setDisplayBtnSidebar("sm:hidden");
-            
-            //check search flag 
+
+            //check search flag
             if(searchUsersFlag){
                 setSearchUsersFlag(false);
                 //call creating tags data & usersData Elements
                 createUsersData(userCardData);
                 createTagsData(userCardData);
                 setTimeout(() => {
-                    //re-declaring variables 
+                    //re-declaring variables
                     reDeclareVariables();
-        
-                    //hiding indicator 
+
+                    //hiding indicator
                     var group_indicator = indicatorRef.current;
                     group_indicator.style.display = "none";
-        
+
                     //hiding highlighter
                     highlightTag("");
                 }, 300);
@@ -1178,7 +1175,7 @@ export default function Classmates() {
             showMobileSideBar();
         }
 
-        //When PageUpDownBtn is clicked it clicks it on the "path" tag not its 
+        //When PageUpDownBtn is clicked it clicks it on the "path" tag not its
         if(elm.id == "pageUpDownBtn"){
             // //console.log("Moving Page!!");
             pageMarkerScroll(elm);
@@ -1215,34 +1212,34 @@ export default function Classmates() {
         //         }
         //     }
         //     // // ////console.log(changeIndicatorFlag);
-        //     moveIndicator(moveToElm);   
+        //     moveIndicator(moveToElm);
         // }
 
-    }   
-    
+    }
+
     function filterOptionClicked(elm){
         //console.log("ALERT: FILTER OPTION SELECTED = ", elm);
-        
+
         //change the layout of content wrapper from flex to grid
         setDisplayContentWrapper("sm:flex-row");
 
         setMainSidebarDisplay("sm:block");
         setDisplayBtnSidebar("sm:hidden");
-        
-        //check search flag 
+
+        //check search flag
         if(searchUsersFlag){
             setSearchUsersFlag(false);
             //call creating tags data & usersData Elements
             createUsersData(userCardData);
             createTagsData(userCardData);
             setTimeout(() => {
-                //re-declaring variables 
+                //re-declaring variables
                 reDeclareVariables();
-    
-                //hiding indicator 
+
+                //hiding indicator
                 var group_indicator = indicatorRef.current;
                 group_indicator.style.display = "none";
-    
+
                 //hiding highlighter
                 highlightTag("");
             }, 300);
@@ -1296,8 +1293,8 @@ export default function Classmates() {
                 // **alt way
                 group_label_clicked = group_labels[i];
                 break;
-            }     
-        } 
+            }
+        }
         //Special Case #1: Set new currentGroupLabel
         // // ////console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
         currentGroupLabel = group_label_clicked;
@@ -1328,7 +1325,7 @@ export default function Classmates() {
     var [changeIndicatorFlag, setChangeIndicatorFlag] = useState(false);
     const changeScreenWidth = 1286;
     var [tagText, setTagText] = useState("");
-    
+
     //////////////////////////Better JS LOGIC
     //Window On Load Stuff
     useEffect(() => {
@@ -1348,7 +1345,7 @@ export default function Classmates() {
         setCurrentGroupLabel(null);
 
         changeIndicator();
-        
+
         group_tags = filterGroupsRef.current.children;
         setGroup_tags(filterGroupsRef.current.children);
         // //console.log(window.document.body.childNodes[0].childNodes[0].childNodes[3].offsetHeight);
@@ -1359,12 +1356,12 @@ export default function Classmates() {
         //console.log("FullLLLLLL-Height = ", fullHeight, footerHeight);
         // allGroupContent = groupWrapperRef.current.children;
         var allGroupContentHelper = groupWrapperRef.current.children;
-        allGroupContent = allGroupContentHelper; 
+        allGroupContent = allGroupContentHelper;
         setAllGroupContent(allGroupContentHelper);
         ////console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
         var allGroupLabelHelper = [];
         for(let i=0; i < allGroupContent.length; i++){
-            ////console.log(allGroupContent[i].id); 
+            ////console.log(allGroupContent[i].id);
             if(allGroupContent[i].id == "group_label"){
                 allGroupLabelHelper.push(allGroupContent[i]);
             }
@@ -1425,7 +1422,7 @@ export default function Classmates() {
           return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
         });
         // ////console.log(closest);
-        return closest;   
+        return closest;
     }
     function scrollChange(directionScroll){
         var labelPosList = [];
@@ -1523,9 +1520,9 @@ export default function Classmates() {
         function onScroll() {
           handleScroll();
         }
-    
+
         window.addEventListener("scroll", onScroll);
-    
+
         return function unMount() {
           window.removeEventListener("scroll", onScroll);
         };
@@ -1536,9 +1533,9 @@ export default function Classmates() {
         function onChangeScreenSize() {
           changeIndicator();
         }
-    
+
         window.addEventListener("resize", onChangeScreenSize);
-    
+
         return function unMount() {
           window.removeEventListener("resize", onChangeScreenSize);
         };
@@ -1562,7 +1559,7 @@ export default function Classmates() {
             changeIndicatorFlag = true;
             setChangeIndicatorFlag(true);
 
-            // //Update Group Tags Reference 
+            // //Update Group Tags Reference
             // group_tags = filterGroupsMobileRef.current.children;
             // setGroup_tags(filterGroupsMobileRef.current.children);
             // ////console.log("Updated Tags: ",group_tags);
@@ -1573,7 +1570,7 @@ export default function Classmates() {
             changeIndicatorFlag = false;
             setChangeIndicatorFlag(false);
 
-            //Update Group Tags Reference 
+            //Update Group Tags Reference
             group_tags = filterGroupsRef.current.children;
             setGroup_tags(filterGroupsRef.current.children);
             ////console.log("Updated Tags: ",group_tags);
@@ -1596,7 +1593,7 @@ export default function Classmates() {
             setDisplayMobileSidebar("hidden");
             displayMobileBtnSidebar = "hidden";
             setDisplayMobileBtnSidebar("hidden");
-        }  
+        }
 
         //move indicator
         if(currentGroupLabel != "" && currentGroupLabel != null && currentGroupLabel != undefined){
@@ -1611,7 +1608,7 @@ export default function Classmates() {
                 }
             }
             // // ////console.log(changeIndicatorFlag);
-            moveIndicator(moveToElm);   
+            moveIndicator(moveToElm);
         }
     }
 
@@ -1661,17 +1658,17 @@ export default function Classmates() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="images/titanIcon_1.png" />
         </Head>
-        
-        <div id="content_wrapper" 
-            className={`grid sm:flex ${displayContentWrapper}`} 
+
+        <div id="content_wrapper"
+            className={`grid sm:flex ${displayContentWrapper}`}
             onClick={(e) => {
                 e.stopPropagation();
                 toggleFilter(e.target);
             }}>
-            <div id='pageUpDownBtnWrapper' 
-                 ref={pageUpDownBtnRef} 
+            <div id='pageUpDownBtnWrapper'
+                 ref={pageUpDownBtnRef}
                  className={`z-[100] fixed text-3xl mb-[78px] ml-0 mr-[10px] mt-0 right-0 bottom-0`}>
-                <BsArrowDownCircleFill id='pageUpDownBtn' className={pageMarkerBtnDir} 
+                <BsArrowDownCircleFill id='pageUpDownBtn' className={pageMarkerBtnDir}
                     onClick={(e) => {
                         e.stopPropagation();
                         // //console.log("clicked: ", e.target.tagName);
@@ -1683,7 +1680,7 @@ export default function Classmates() {
                             toggleFilter(e.target);
                         }
                      }}
-                /> 
+                />
             </div>
             <div id='siderbar_wrapper'>
                 <button id='btn_sidebar' className={`z-[100] ${displayBtnSidebar} hidden relative text-white bg-black hover:bg-gray-700 m-[5px] p-[10px] w-fit h-fit`}>☰ Show All</button>
@@ -1695,13 +1692,13 @@ export default function Classmates() {
                 <div id='mobile_sidebar_content' className={`animate-[bounce_1s_ease-in-out_1.5] ${mobileSidebarFlag? displayMobileSidebar : "hidden"} sticky top-0 bg-[rgba(186,22,25,1)] shadow-[0_4px_10px_rgba(0,0,0,0.75)] flex flex-col`}>
                     <button id='close_mobile_btn_sidebar' className='font-[1000] w-fit ml-auto mr-[5px] mt-[5px] p-[5px]'>【X】</button>
                     <FilterGroups id={"group_mobile_tags"} tags={filterTagsData} onTagClick={groupTagsClick} tagText={tagText} ref={filterGroupsMobileRef} />
-                </div>    
+                </div>
             </div>
             <div id="groups_wrapper" className={`sm:ml-[100px] sm:mr-[130px] mt-0 mb-[10%]`}>
                 <h1 id="header" className = {`relative sm:absolute w-full left-0 underline mt-6 mb-10 text-[2em] font-extrabold text-center`}>Find Your Classmates</h1>
                 <div id="nav_options" className={`relative sm:absolute w-[100%] sm:mt-[110px] text-[15px] flex flex-row-reverse min-[350px]:right-[7.5%] items-center min-[350px]:gap-x-4 max-[350px]:justify-between max-[350px]:px-[5px]`}>
                     <div id="filter_wrapper">
-                        <FaSortAmountDown 
+                        <FaSortAmountDown
                             id="filterSortIcon"
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -1715,7 +1712,7 @@ export default function Classmates() {
                                 }
                             }}
                             className="w-[30px] h-[30px]"/>
-                        <div id="filter_options_wrapper" 
+                        <div id="filter_options_wrapper"
                              onClick={(e) => {
                                 filterOptionClicked(e.target);
                              }}
