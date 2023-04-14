@@ -1,3 +1,6 @@
+//calling profile page import
+import { useRouter } from 'next/router';
+
 //searching algo import
 import Fuse from 'fuse.js';
 
@@ -16,10 +19,11 @@ import { BsArrowDownCircleFill } from 'react-icons/bs'
 // Custom Components
 import FilterGroups from "@/components/classmates/FilterGroups";
 import UserCard from '@/components/classmates/UserCard';
+import { stat } from 'fs';
 
 export default function Classmates() {
     //////////////////////////////////////////////////////////////////////////////Start of Js Code
-    //React Hooks:
+    //React Hooks Declarations:
     const [visibleIndicator, setVisibleIndicator] = useState(false);
     const indicatorRef = useRef(null);
     const filterGroupsRef = useRef(null);
@@ -30,6 +34,8 @@ export default function Classmates() {
     const tagRefs = useRef([]);
     tagRefs.current = [];
     const pageUpDownBtnRef = useRef(null);
+
+    const router = useRouter();
 
     ///////////////////////////////////data initializers
     var [userCardData, setUserCardData] = useState([]);
@@ -53,7 +59,7 @@ export default function Classmates() {
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel",
+                name: "Albert Lee",
                 grad_year : "2024"
             },
             {
@@ -65,55 +71,55 @@ export default function Classmates() {
             {
               user_id: "user4",
               userPfp: "/images/userIconx96.png",
-              name: "Ruparel",
+              name: "Julia Kang",
               grad_year : "2024"
             },
             {
                 user_id: "user1",
                 userPfp: "/images/userIconx96.png",
-                name: "Jia Ruparel",
+                name: "David Li",
                 grad_year : "2024"
             },
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel",
+                name: "Nakisha Gib",
                 grad_year : "2024"
             },
             {
               user_id: "user3",
               userPfp: "/images/dylan.png",
-              name: "Dylan Lu",
+              name: "Ruth Olivera",
               grad_year : "2024"
             },
             {
               user_id: "user4",
               userPfp: "/images/userIconx96.png",
-              name: "Ruparel",
+              name: "Leon Kevork",
               grad_year : "2024"
             },
             {
                 user_id: "user1",
                 userPfp: "/images/userIconx96.png",
-                name: "Jia Ruparel",
+                name: "Matthew Grupenhoff",
                 grad_year : "2024"
             },
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel",
+                name: "Ezekiel Michael",
                 grad_year : "2024"
             },
             {
               user_id: "user3",
               userPfp: "/images/dylan.png",
-              name: "Dylan Lu",
+              name: "Bianca Richard",
               grad_year : "2024"
             },
             {
               user_id: "user4",
               userPfp: "/images/userIconx96.png",
-              name: "Ruparel",
+              name: "Krishan B. Grant",
               grad_year : "2024"
             }
         ]},
@@ -122,13 +128,13 @@ export default function Classmates() {
             {
                 user_id: "user1",
                 userPfp: "/images/userIconx96.png",
-                name: "Jia Ruparel",
+                name: "Veer Ruparel",
                 grad_year : "2023"
             },
             {
                 user_id: "user2",
                 userPfp: "/images/userIconx96.png",
-                name: "Veereeeeeeeeeeeeeeeeeee Ruparel",
+                name: "Sammy Lesner",
                 grad_year : "2023"
             },
             {
@@ -705,6 +711,7 @@ export default function Classmates() {
     //data management stuff
     function changeDataStructure(newData, fetchedFlag){
         var userCardDataHelper = [];
+        console.log(newData);
 
         if(fetchedFlag){
             var datakeys = Object.keys(newData);
@@ -720,12 +727,20 @@ export default function Classmates() {
         else{
             userCardDataHelper = newData;
         }
-        // ////console.log("HELPER DATA = ", userCardDataHelper);
+        console.log("HELPER DATA = ", userCardDataHelper);
+
+        //add grad_year property to each user
+        userCardDataHelper.forEach(obj => {
+            var keys = Object.keys(obj);
+            obj[keys[0]].forEach(userObj => {
+                userObj["grad_year"] = keys[0];
+            });
+        });
 
         //Setting the staticUserCardData Once and for all
         staticUserCardData = userCardDataHelper;
         setStaticUserCardData(userCardDataHelper);
-        //console.log("StaticuserCardData (which will act like a const) = ", staticUserCardData);
+        console.log("StaticuserCardData (which will act like a const) = ", staticUserCardData);
 
         //for making searching easier extract all users
         extractUsers(userCardDataHelper);
@@ -782,6 +797,7 @@ export default function Classmates() {
                             <UserCard
                                 key={i}
                                 uniId={(Object.keys(data).indexOf("user_id") < 0)? ("user"+i) : data.user_id}
+                                classTitle={"user_card"}
                                 userPfp={(Object.keys(data).indexOf("userPfp") < 0)? "/images/userIconx96.png" : data.userPfp}
                                 userName={(Object.keys(data).indexOf("name") < 0)? "nameless_user" : data.name}
                             />
@@ -830,7 +846,7 @@ export default function Classmates() {
     var [displayContentWrapper, setDisplayContentWrapper] = useState("sm:flex-row");
 
     function extractUsers(myData){
-        //console.log("Hello: ", myData);
+        console.log("Hello: ", myData);
         var justUsersHelper = [];
         myData.forEach(outerObj => {
             var userObj = outerObj[Object.keys(outerObj)[0]];
@@ -847,7 +863,7 @@ export default function Classmates() {
         const fuse = new Fuse(justUsers, searchSettings);
         searchFuse = fuse;
         setSearchFuse(fuse);
-        //console.log("YAAAY = ", searchFuse);
+        console.log("YAAAY = ", searchFuse);
     }
 
     //searching functions :)
@@ -882,7 +898,7 @@ export default function Classmates() {
             setQuery(inputElm.value);
             results = searchUsers(query);
             setResults(searchUsers(query));
-            //console.log("RES = ",results);
+            console.log("RES = ",results);
             showSearchResults(results);
         }
     }
@@ -898,6 +914,7 @@ export default function Classmates() {
                         <UserCard
                             key={index}
                             uniId={(Object.keys(fuseItem.item).indexOf("user_id") < 0)? ("user"+index) : fuseItem.item.user_id}
+                            classTitle={"user_card"}
                             userPfp={(Object.keys(fuseItem.item).indexOf("userPfp") < 0)? "/images/userIconx96.png" : fuseItem.item.userPfp}
                             userName={(Object.keys(fuseItem.item).indexOf("name") < 0)? "nameless_user" : fuseItem.item.name}
                         />
@@ -1110,7 +1127,7 @@ export default function Classmates() {
     const [filterShowCss, setFilterShowCss] = useState("hidden");
 
     const toggleFilter = (elm: EventTarget) => {
-        // //console.log("LOOKIE: ", elm);
+        console.log("LOOKIE: ", elm);
 
         if(elm.id == "filterSortIcon"){
             // // ////console.log("YAAAAY");
@@ -1646,6 +1663,36 @@ export default function Classmates() {
         }
     }
 
+    ///When clicking on a user from classmates page call in a backend request
+    function checkUserClicked(clickedElm){
+        console.log("I was Clicked: ", clickedElm);
+        if(clickedElm.id == "group_content"){
+            return;
+        }
+        else if(clickedElm.title == "user_card"){
+            callUserProfile(clickedElm);
+        }
+        else{
+            console.log("else...");
+            var correctParent = clickedElm;
+            console.log(correctParent.title, clickedElm.tagName);
+            while(correctParent.title != "user_card"){
+                correctParent = correctParent.parentElement;
+                console.log("Correct Parent = ", correctParent);
+            }
+            callUserProfile(correctParent);
+        }
+    }
+    function callUserProfile(user){
+        console.log("Got the right parent = ", user);
+
+        router.push({
+            pathname: '/profile',
+            query: { message: user.id },
+        }, '/profile');
+    }
+
+
     //////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////// END OF JS CODE
     /////////////////////////////////////////////////////////////////
@@ -1730,7 +1777,11 @@ export default function Classmates() {
                     className='min-[350px]:mx-2.5 mx-0 my-0 p-[5px]'
                     onKeyDown={handleKeyPress}/>
                 </div>
-                <div id='group_content' className='w-fit mx-auto sm:mx-0 sm:w-auto sm:mt-[200px]' ref={groupWrapperRef}>
+                <div id='group_content' className='w-fit mx-auto sm:mx-0 sm:w-auto sm:mt-[200px]' ref={groupWrapperRef} 
+                     onClick={(e) => {
+                        e.stopPropagation();
+                        checkUserClicked(e.target);
+                     }}>
                     {groupsElementsState}
                 </div>
             </div>
