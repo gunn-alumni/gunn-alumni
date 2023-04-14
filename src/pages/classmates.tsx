@@ -748,7 +748,7 @@ export default function Classmates() {
                 changeDataStructure(data, true);
             }
         })
-        .catch(error => {
+        .catch(_error => {
             // //console.log(error);
             changeDataStructure(dummyUserCardData, false);
         })
@@ -1045,7 +1045,7 @@ export default function Classmates() {
 
         var sortedData = [];
 
-        noDuplisSortedNamesData.forEach((name, index) => {
+        noDuplisSortedNamesData.forEach((name, _index) => {
             ////console.log("Checking: ", name, index);
             var tempData = {};
             var tempKey = name.charAt(0);
@@ -1186,7 +1186,7 @@ export default function Classmates() {
     //scrolling to the top or the bottom of the page
     var [pageMarkerStatus, setPageMarkerStatus] = useState("pg_down");
     var [pageMarkerBtnDir, setPageMarkerBtnDir] = useState("scale-y-100");
-    function pageMarkerScroll(elm){
+    function pageMarkerScroll(_elm){
         if(pageMarkerStatus == "pg_down"){
             ////console.log("FullHeight Scrolling!!! ==== ", fullHeight);
             window.scrollTo(0, fullHeight);
@@ -1335,7 +1335,7 @@ export default function Classmates() {
         //call data setup function
         storeAlumsData();
 
-    }, []);
+    });
 
     //this function is used for dynamic changes to the page (re-render)
     function reDeclareVariables(){
