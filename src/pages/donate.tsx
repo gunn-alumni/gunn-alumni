@@ -2,6 +2,7 @@ import Head from "next/head";
 import ImgButton from "@/components/donate/ImageButton/ImgButton";
 import { FormInput, FormSelect } from "@/components/donate/Forms";
 import { StandardButton, ButtonToggle, ButtonGroup } from "@/components/shared/Button";
+import Slider from "@/components/shared/Slider";
 
 /* TODO:
  * Page Structure:
@@ -386,6 +387,7 @@ export default function Donate() {
                 <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
                     <ButtonGroup buttons={donationDuration_ButtonGroup}/>
                 </div>
+                <Slider className="w-full h-10" defaultValue={50}/>
               </div>
               <h1 className="font-bold text-xl mt-4">Your Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
