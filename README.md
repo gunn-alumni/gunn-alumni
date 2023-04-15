@@ -14,19 +14,6 @@ corepack enable
 
 [vscode eslint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-add this to your `settings.json`:
-```
-    "editor.formatOnSave": true,
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "eslint.format.enable": true,
-    "eslint.onIgnoredFiles": "warn",
-    "[typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    }
-```
-
 ## Setup Instructions
 Clone the repo and install dependencies
 ```bash
