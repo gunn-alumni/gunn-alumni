@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import PasswordCheck from "./PasswordCheck";
+import Navbar from './Navbar'
+import Footer from './Footer'
+import PasswordCheck from './PasswordCheck'
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   return (
@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
       <main>{children}</main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

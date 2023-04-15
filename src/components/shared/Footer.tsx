@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -30,7 +29,7 @@ const Footer = () => {
         </li>
       </ul>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

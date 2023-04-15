@@ -1,161 +1,147 @@
 // React Components
-import { profile } from "console";
-import Head from "next/head";
-import Image, { StaticImageData } from "next/image";
+import Head from 'next/head'
+import Image from 'next/image'
 
-import { useRouter } from 'next/router';
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-//react icons: social media 
-import { BsYoutube } from "react-icons/bs"
-import { BsDiscord } from "react-icons/bs"
-import { FaFacebook } from "react-icons/fa"
-import { FaInstagram } from "react-icons/fa"
-import { BsLinkedin } from "react-icons/bs"
-import { BsSnapchat } from "react-icons/bs"
-import { TiSocialTwitter } from "react-icons/ti"
-import { FaTiktok } from "react-icons/fa"
-import Link from "next/link";
+// react icons: social media
+import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs'
+import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { TiSocialTwitter } from 'react-icons/ti'
+import Link from 'next/link'
 
-//defaults
-
+// defaults
 
 const dummyProfileData = {
-  userId: "0000",
-  userPfp: "/images/dylan.png",
-  name: "Dylan Lu",
-  bio: "I’m currently studying computer engineering at Stanford. Contact me if you wanna work at my startup. I am also fine making a small donation of one million dollars as an investor for any student project by asking my uncle Elon for some Buckaroos!!",
+  userId: '0000',
+  userPfp: '/images/dylan.png',
+  name: 'Dylan Lu',
+  bio: 'I’m currently studying computer engineering at Stanford. Contact me if you wanna work at my startup. I am also fine making a small donation of one million dollars as an investor for any student project by asking my uncle Elon for some Buckaroos!!',
   contact: {
-    location: "Palo Alto, CA",
-    phone: "650-555-5555",
-    email: "lol@lol.com",
+    location: 'Palo Alto, CA',
+    phone: '650-555-5555',
+    email: 'lol@lol.com',
     socialMedia: {
-      "facebook": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "instagram": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "linkedin": "https://www.linkedin.com/in/dylanelu",
-      "twitter": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "youtube": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "discord": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "snapchat": "https://www.youtube.com/watch?v=QKr_0DMYV5g",
-      "tiktok": "https://www.youtube.com/watch?v=QKr_0DMYV5g"
+      facebook: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      instagram: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      linkedin: 'https://www.linkedin.com/in/dylanelu',
+      twitter: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      youtube: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      discord: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      snapchat: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      tiktok: 'https://www.youtube.com/watch?v=QKr_0DMYV5g'
     }
   }
-};
+}
 
-//These two arrays are corresponding with each other
-const socialMediaNamesList = ["youtube","discord", "facebook", "instagram", "linkedin", "snapchat", "twitter", "tiktok"];
-const socialMediaIconsList = [BsYoutube, BsDiscord, FaFacebook, FaInstagram, BsLinkedin, BsSnapchat, TiSocialTwitter, FaTiktok];
+// These two arrays are corresponding with each other
+const socialMediaNamesList = ['youtube', 'discord', 'facebook', 'instagram', 'linkedin', 'snapchat', 'twitter', 'tiktok']
+const socialMediaIconsList = [BsYoutube, BsDiscord, FaFacebook, FaInstagram, BsLinkedin, BsSnapchat, TiSocialTwitter, FaTiktok]
 
 const ProfilePage = () => {
-  
-  const router = useRouter();
-  const queryMessage = router?.query;
-  
+  const router = useRouter()
+  const queryMessage = router?.query
+
   useEffect(() => {
-    console.log("Welcome to profile: ",queryMessage);
-    getUserProfile(queryMessage.message);
-  }, []);
+    console.log('Welcome to profile: ', queryMessage)
+    getUserProfile(queryMessage.message)
+  }, [])
 
-  function getUserProfile(userId) {
-
-    //Fetch the data
+  function getUserProfile (userId) {
+    // Fetch the data
     fetch(`http://localhost:4000/user?userId=${userId}`, {
-        method : "GET"
+      method: 'GET'
     })
-    .then((res) => res.json())
-    .then((data) => {
-        if(data){
-            console.log("Fetched the Data: ",data);
-            profileData = data;
-            setProfileData(data);
-            makeProfile(profileData);
+      .then(async (res) => await res.json())
+      .then((data) => {
+        if (data) {
+          console.log('Fetched the Data: ', data)
+          profileData = data
+          setProfileData(data)
+          makeProfile(profileData)
         }
-    })
-    .catch(error => {
-        console.log("ERRORRRRRR: ",error);
-        profileData = dummyProfileData;
-        setProfileData(dummyProfileData);
-        //console.log("YIU(IUJHIHHBHUIUHBHUBHIBF: ", profileData.userPfp);
-        makeProfile(profileData);
-    })
+      })
+      .catch(error => {
+        console.log('ERRORRRRRR: ', error)
+        profileData = dummyProfileData
+        setProfileData(dummyProfileData)
+        // console.log("YIU(IUJHIHHBHUIUHBHUBHIBF: ", profileData.userPfp);
+        makeProfile(profileData)
+      })
   }
 
-  //Set the profile data stuff
-  
-  //All Profile Data Initializers
-  var [profileData, setProfileData] = useState();
-  var [profileName, setProfileName] = useState();
-  var [profileImage, setProfileImage] = useState();
-  var [profileMediaIcons, setProfileMediaIcons] = useState([]);
-  var [profileBio, setProfileBio] = useState([]);
-  var [profileContact, setProfileContact] = useState([]);
+  // Set the profile data stuff
 
+  // All Profile Data Initializers
+  var [profileData, setProfileData] = useState()
+  let [profileName, setProfileName] = useState()
+  let [profileImage, setProfileImage] = useState()
+  let [profileMediaIcons, setProfileMediaIcons] = useState([])
+  let [profileBio, setProfileBio] = useState([])
+  let [profileContact, setProfileContact] = useState([])
 
-  //The functions 
-  function makeProfile(userData){
-    profileName = userData.name;
-    setProfileName(userData.name);
-    if("userPfp" in userData){
-      if(userData.userPfp){
-        profileImage = userData.userPfp;
-        setProfileImage(userData.userPfp);
+  // The functions
+  function makeProfile (userData) {
+    profileName = userData.name
+    setProfileName(userData.name)
+    if ('userPfp' in userData) {
+      if (userData.userPfp) {
+        profileImage = userData.userPfp
+        setProfileImage(userData.userPfp)
+      }
+    } else {
+      profileImage = '/images/userIconx96.png'
+      setProfileImage('/images/userIconx96.png')
+    }
+
+    // Make Bio Stuff
+    if ('bio' in userData) {
+      if (userData.bio && userData.bio != '') {
+        const profileBioHelper = addBio(userData.bio)
+        profileBio = profileBioHelper
+        setProfileBio(profileBioHelper)
+        // console.log(profileBio);
       }
     }
-    else{
-      profileImage = "/images/userIconx96.png";
-      setProfileImage("/images/userIconx96.png");
-    }
 
-    //Make Bio Stuff
-    if("bio" in userData){
-      if(userData.bio && userData.bio != ""){
-        var profileBioHelper = addBio(userData.bio);
-        profileBio = profileBioHelper;
-        setProfileBio(profileBioHelper);
-        //console.log(profileBio);
-      }
-    }
-
-    //Make Contact Stuff
-    var contactHelper  = [];
-    //console.log("Creating Elements: ", userData);
-    var contactInfoKeys = "contact" in userData ? Object.keys(userData.contact) : []; 
+    // Make Contact Stuff
+    const contactHelper = []
+    // console.log("Creating Elements: ", userData);
+    const contactInfoKeys = 'contact' in userData ? Object.keys(userData.contact) : []
     contactInfoKeys.forEach(key => {
-      var valueForKey = userData.contact[key];
-      var lowerCaseKey = key.toLowerCase();
-      var titleKey = lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
-      //console test
-      //console.log(lowerCaseKey);
-      //console.log(valueForKey);
+      const valueForKey = userData.contact[key]
+      const lowerCaseKey = key.toLowerCase()
+      const titleKey = lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1)
+      // console test
+      // console.log(lowerCaseKey);
+      // console.log(valueForKey);
 
-      if(key == "socialMedia"){
-        //stub
-        addSocialMedia(valueForKey);
-      }
-      else{
+      if (key == 'socialMedia') {
+        // stub
+        addSocialMedia(valueForKey)
+      } else {
         contactHelper.push(
           <>
-            <div title="contact_wrapper" id={lowerCaseKey+"_wrapper"} className="mb-6">
-              <div title="contact_title" id={lowerCaseKey+"_title"} className="font-bold">{titleKey}</div>
-              <div title="contact_content" id={lowerCaseKey+"_content"}>{valueForKey}</div>
+            <div title="contact_wrapper" id={lowerCaseKey + '_wrapper'} className="mb-6">
+              <div title="contact_title" id={lowerCaseKey + '_title'} className="font-bold">{titleKey}</div>
+              <div title="contact_content" id={lowerCaseKey + '_content'}>{valueForKey}</div>
             </div>
           </>
         )
       }
-    });
-    
-    profileContact = contactHelper;
-    setProfileContact(contactHelper);
+    })
 
+    profileContact = contactHelper
+    setProfileContact(contactHelper)
 
-    //console testing
-    //console.log("ContactHelper = ",contactHelper);
-    //console.log("ProfileContact = ", profileContact);
-
+    // console testing
+    // console.log("ContactHelper = ",contactHelper);
+    // console.log("ProfileContact = ", profileContact);
   }
 
-  function addBio(userBio){
-    return(
+  function addBio (userBio) {
+    return (
       <>
         <div id="bio_wrapper" className="mb-6">
           <div id="bio_title" className="font-bold">About Me</div>
@@ -167,43 +153,39 @@ const ProfilePage = () => {
     )
   }
 
-  function addSocialMedia(socialData){
-    //stub
-    var mediaIconsHelper = [];
-    var socialMediaKeys = Object.keys(socialData);
-    var blueBgNum = 500;
+  function addSocialMedia (socialData) {
+    // stub
+    const mediaIconsHelper = []
+    const socialMediaKeys = Object.keys(socialData)
+    const blueBgNum = 500
     socialMediaKeys.forEach(social => {
-      var shadeBlueBg = "bg-blue-"+blueBgNum;
-      //console.log(social);
-      var indexSocial = socialMediaNamesList.indexOf(social);
-      var MediaIcon = socialMediaIconsList[indexSocial];
-      //console.log("YOOOOO: ", indexSocial);
+      const shadeBlueBg = 'bg-blue-' + blueBgNum
+      // console.log(social);
+      const indexSocial = socialMediaNamesList.indexOf(social)
+      const MediaIcon = socialMediaIconsList[indexSocial]
+      // console.log("YOOOOO: ", indexSocial);
 
       mediaIconsHelper.push(
         <>
           <button className={`${shadeBlueBg} p-1 font-semibold text-white rounded`}>
             <Link href={socialData[social]} >
-              <MediaIcon id={social+"_icon"} className="w-8 h-8 fill-current"/>
+              <MediaIcon id={social + '_icon'} className="w-8 h-8 fill-current"/>
             </Link>
           </button>
         </>
       )
       // blueBgNum += 100;
-    });
+    })
 
+    profileMediaIcons = mediaIconsHelper
+    setProfileMediaIcons(mediaIconsHelper)
 
-    profileMediaIcons = mediaIconsHelper;
-    setProfileMediaIcons(mediaIconsHelper);
-
-
-    //console testing
-    //console.log("mediaIconsHelper = ",mediaIconsHelper);
-    //console.log("ProfileMediaIcons = ", profileMediaIcons);
+    // console testing
+    // console.log("mediaIconsHelper = ",mediaIconsHelper);
+    // console.log("ProfileMediaIcons = ", profileMediaIcons);
   }
 
-
-
-  /////////////////End of functions
+  /// //////////////End of functions
 
   return (
     <>
@@ -220,7 +202,7 @@ const ProfilePage = () => {
             <Image
               src={profileImage}
               alt="Profile Image"
-              className="rounded-full mb-4 mx-auto" 
+              className="rounded-full mb-4 mx-auto"
               width={200}
               height={200}
             />
@@ -265,8 +247,6 @@ const ProfilePage = () => {
               </svg>
             </button> */}
 
-
-
           </div>
         </div>
 
@@ -282,7 +262,7 @@ const ProfilePage = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

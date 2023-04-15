@@ -1,11 +1,11 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from 'next/image'
 
-type UserCardProps = {
-  uniId: string;
-  classTitle: string;
-  userPfp: StaticImageData;
-  userName: string;
-};
+interface UserCardProps {
+  uniId: string
+  classTitle: string
+  userPfp: StaticImageData
+  userName: string
+}
 
 const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
   return (
@@ -22,7 +22,7 @@ const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
         <h4 className="text-center px-1 py-1 truncate">{userName}</h4>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserCard;
+export default UserCard
