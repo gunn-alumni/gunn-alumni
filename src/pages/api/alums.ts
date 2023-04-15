@@ -13,7 +13,7 @@ type Data = Record<number, Alum[]>
 export default function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
-) {
+): void {
   const beginYear = req.query.beginYear ?? Number.MIN_SAFE_INTEGER
   const endYear = req.query.endYear ?? Number.MAX_SAFE_INTEGER
 
