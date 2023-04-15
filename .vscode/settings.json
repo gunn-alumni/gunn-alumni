@@ -1,0 +1,10 @@
+{
+  "eslint.format.enable": true,
+  "eslint.onIgnoredFiles": "warn",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
+}
