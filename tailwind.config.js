@@ -10,6 +10,5 @@ module.exports = {
         primary: "#A61616",
       },
     },
-  },
-  plugins: [require("@tailwindcss/line-clamp")],
+  }
 };

@@ -6,7 +6,7 @@ import capstone from "@/../public/images/capstone.jpg";
 
 
 /* TODO:
-* 
+*
 */
 
 export default function Team() {
@@ -40,13 +40,13 @@ export default function Team() {
                 </div>
 
                 <div className="flex justify-center px-32">
-                <Image src={capstone} className="shadow-lg rounded-md"/>
-                </div>        
+                <Image src={capstone} alt="photo of clowns" className="shadow-lg rounded-md" />
+                </div>
 
 
                 {/* Team Names */}
 
-            
+
                 <div className="flex flex-row  justify-around gap-10 pb-10">
 
                     {/* main leads */}
@@ -56,13 +56,13 @@ export default function Team() {
                         <p>Julia Kang</p>
                         <br></br>
                         <p>+ Sammy Lesner</p>
-                    </div>    
+                    </div>
 
                     {/* connections */}
                     <div className="py-3 w-56 bg-gray-100 shadow-lg text-center border-dashed border-2">
                         <p className="font-bold">Connections</p>
                         <p>Ethan Zhang</p>
-                        
+
                         <br></br>
                         <p>Ian Chen</p>
                         <p>Vincent Huai</p>
@@ -72,7 +72,7 @@ export default function Team() {
                     {/* Frontend */}
 
                     <div className="py-3 text-center bg-gray-100 w-56 shadow-lg border-dashed border-2">
-                        <p className="font-bold">Frontend</p>    
+                        <p className="font-bold">Frontend</p>
                         <p>Basil Lera</p>
                         <p>Lily Bedicheck</p>
                         <br></br>

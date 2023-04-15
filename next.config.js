@@ -20,7 +20,6 @@ function getBasePath() {
 }
 
 module.exports = {
-  assetPrefix: getBasePath(),
   publicRuntimeConfig: {
     basePath: getBasePath(),
   },

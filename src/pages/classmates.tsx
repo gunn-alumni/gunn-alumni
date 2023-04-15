@@ -945,34 +945,6 @@ export default function Classmates() {
       //console.log("Entered, Now Go");
       handleSearch(e.target);
     }
-<<<<<<< HEAD
-  }
-
-  function handleSearch(inputElm) {
-    //console.log("Elm = ", inputElm);
-    tempElementHolder = inputElm;
-    setTempElementHolder(inputElm);
-    //console.log("Val = ",inputElm.value);
-    if (
-      inputElm.value != "" &&
-      inputElm.value != null &&
-      inputElm.value != undefined
-    ) {
-      setMainSidebarDisplay("sm:hidden");
-      setDisplayBtnSidebar("sm:block");
-
-      //change the layout of content wrapper from flex to grid
-      setDisplayContentWrapper("sm:flex-col");
-
-      //do the searching magic
-      setSearchUsersFlag(true);
-      query = inputElm.value;
-      setQuery(inputElm.value);
-      results = searchUsers(query);
-      setResults(searchUsers(query));
-      console.log("RES = ", results);
-      showSearchResults(results);
-=======
 
     //New code with fetching
     function createUsersData(usersData){
@@ -1348,6 +1320,8 @@ export default function Classmates() {
 =======
     ////////////////////////////////////////////////////// Filter Options Sorting Functions
 
+    ////////////////////////////////////////////////////// Filter Options Sorting Functions
+
     /////Helpful Functions
     function removeDuplicates(arr) {
         return arr.filter((value, index, self) => {
@@ -1373,14 +1347,6 @@ export default function Classmates() {
         createUsersData(userCardData);
         createTagsData(userCardData);
         setTimeout(() => {
-<<<<<<< HEAD
-          //re-declaring variables
-          reDeclareVariables();
-
-          //hiding indicator
-          var group_indicator = indicatorRef.current;
-          group_indicator.style.display = "none";
-=======
             //re-declaring variables
             reDeclareVariables();
 
@@ -2031,7 +1997,6 @@ export default function Classmates() {
         });
         // ////console.log(closest);
         return closest;
->>>>>>> dev
     }
     allGroupLabel = allGroupLabelHelper;
     setAllGroupLabel(allGroupLabelHelper);
@@ -2488,7 +2453,6 @@ export default function Classmates() {
 
         <div id="content_wrapper"
             className={`grid sm:flex ${displayContentWrapper}`}
->>>>>>> dev
             onClick={(e) => {
               e.stopPropagation();
               // //console.log("clicked: ", e.target.tagName);
