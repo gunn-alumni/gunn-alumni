@@ -74,7 +74,7 @@ export default function Team() {
                     <div className="py-3 text-center bg-gray-100 w-56 shadow-lg border-dashed border-2">
                         <p className="font-bold">Frontend</p>
                         <p>Basil Lera</p>
-                        <p>Lily Bedicheck</p>
+                        <p>Lily Bedichek</p>
                         <br></br>
                         <p>Patrick Chi</p>
                         <p>Albert Lee</p>
