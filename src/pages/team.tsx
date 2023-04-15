@@ -22,7 +22,7 @@ export default function Team() {
                     <h1 className="text-2xl font-bold"> About the Team </h1>
                     <div className="p-5">
                         <p>
-                            We are a group of  students in Mr. Paley’s 4th period CS Capstone class who are building a website to connect Gunn alumni. We hope to give our graduates an accessible way to:
+                            We are a group of  students in Mr. Paley&apos;s 4th period CS Capstone class who are building a website to connect Gunn alumni. We hope to give our graduates an accessible way to:
                         </p>
                         <ul className="list-disc px-10 py-3">
                             <li>Connect with and celebrate each other, current students and teachers </li>
