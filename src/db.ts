@@ -1,5 +1,5 @@
-import connect from '@databases/sqlite-sync';
+import connect from '@databases/sqlite-sync'
 
-const db = connect(process.env.DB_PATH);
+const db = connect(process.env.DB_PATH)
 
-export default db;
+export default db

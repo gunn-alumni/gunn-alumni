@@ -2,13 +2,13 @@
 module.exports = {
   content: [
     // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
       colors: {
-        primary: "#A61616",
-      },
-    },
+        primary: '#A61616'
+      }
+    }
   }
-};
+}

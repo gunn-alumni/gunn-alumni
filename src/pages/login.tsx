@@ -1,40 +1,39 @@
-import { useState } from "react";
-import Image from "next/image";
-import titanIcon from "@/../public/images/titanIcon.png";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useState } from 'react'
+import Image from 'next/image'
+import titanIcon from '@/../public/images/titanIcon.png'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const router = useRouter()
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    fetch(`http://localhost:4000/auth`, {
-      method: "POST",
+    fetch('http://localhost:4000/auth', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         email,
-        password,
-      }),
+        password
+      })
     })
       .then(async (res) => {
         if (res.ok) {
-          const token = await res.text();
-          localStorage.setItem("token", token);
-          router.push("/");
+          const token = await res.text()
+          localStorage.setItem('token', token)
+          router.push('/')
         } else {
-          setError((await res.json()).message);
+          setError((await res.json()).message)
         }
       })
-      .catch((err) =>
-        setError("Something bad happened. Please try again later")
-      );
-  };
+      .catch((err) => { setError('Something bad happened. Please try again later') }
+      )
+  }
 
   return (
     <section className="">
@@ -64,7 +63,7 @@ const LoginPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { setEmail(e.target.value) }}
                 />
               </div>
               <div>
@@ -80,7 +79,7 @@ const LoginPage = () => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => { setPassword(e.target.value) }}
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -110,7 +109,7 @@ const LoginPage = () => {
                 type="submit"
                 value="Sign In"
               />
-              {error && <div className={`text-red-500`}>Error: {error}</div>}
+              {error && <div className={'text-red-500'}>Error: {error}</div>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {"Don't have an account yet?"}
                 <Link
@@ -125,6 +124,6 @@ const LoginPage = () => {
         </div>
       </div>
     </section>
-  );
-};
-export default LoginPage;
+  )
+}
+export default LoginPage

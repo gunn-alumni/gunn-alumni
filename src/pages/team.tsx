@@ -1,16 +1,15 @@
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
+import Head from 'next/head'
+import Link from 'next/link'
+import Image from 'next/image'
 
-import capstone from "@/../public/images/capstone.jpg";
-
+import capstone from '@/../public/images/capstone.jpg'
 
 /* TODO:
 *
 */
 
-export default function Team() {
-    return (
+export default function Team () {
+  return (
         <>
             <Head>
                 <title>Gunn Alumni | Team</title>
@@ -34,7 +33,6 @@ export default function Team() {
                             <Link className="underline text-primary" href="https://blog.gunnhigh.school/">blog</Link>.
                         </p>
 
-
                     </div>
 
                 </div>
@@ -43,9 +41,7 @@ export default function Team() {
                 <Image src={capstone} alt="photo of clowns" className="shadow-lg rounded-md" />
                 </div>
 
-
                 {/* Team Names */}
-
 
                 <div className="flex flex-row  justify-around gap-10 pb-10">
 
@@ -105,5 +101,5 @@ export default function Team() {
             </div>
 
         </>
-    )
+  )
 }
