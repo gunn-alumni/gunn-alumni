@@ -16,18 +16,21 @@ import { type NextApiRequest, type NextApiResponse } from 'next'
 import { sql } from '@databases/sqlite-sync'
 
 import db from '@/db'
-import { isEmail as validEmail, validPassword, hash } from '@/auth_utils'
+import { isEmail as validEmail, validPassword, hash, MIN_PASSWORD_LENGTH } from '@/auth_utils'
 
 export default function handler (
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
   if (!validEmail(req.body.email)) {
-    res.status(400).json({ error: 'invalid email' })
+    res.status(400).json({ error: 'Invalid email' })
     return
   }
   if (!validPassword(req.body.password)) {
-    res.status(400).json({ error: 'invalid password' })
+    res.status(400).json({
+      error: 'Password must be at least ' + MIN_PASSWORD_LENGTH.toString() +
+        ' characters long'
+    })
     return
   }
 
