@@ -5,11 +5,11 @@ import titanIcon from '@/../public/images/titanIcon.png'
 
 let isloggedIn = false
 
-function handleClick () {
+function handleClick (): void {
   isloggedIn = !isloggedIn
 }
 
-const Navbar = () => {
+const Navbar = (): JSX.Element => {
   return (
     <div className="flex justify-around flex-wrap bg-primary text-white font-sans font-bold p-3 z-[1]">
       <div className="">
@@ -47,8 +47,8 @@ const Navbar = () => {
 
         </div>
           : <div className="flex justify-center flex-wrap items-center space-x-3">
-          <Link className="hover:underline" href="/signup"> Sign up </Link>
-          <Link className="hover:underline" href="/login" onClick={handleClick}> Login</Link>
+          <Link className="hover:underline" href="/signup">Sign up</Link>
+          <Link className="hover:underline" href="/api/auth/signin" onClick={handleClick}>Sign In</Link>
         </div>
         }
 

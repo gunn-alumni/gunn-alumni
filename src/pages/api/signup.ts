@@ -12,36 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { sql } from '@databases/sqlite-sync'
 import { type NextApiRequest, type NextApiResponse } from 'next'
+import { sql } from '@databases/sqlite-sync'
 
 import db from '@/db'
-
-interface Alum {
-  name: string
-  user_id?: number
-}
-
-type Result = Record<number, Alum[]>
+import { isEmail as validEmail, validPassword, hash } from '@/auth_utils'
 
 export default function handler (
   req: NextApiRequest,
-  res: NextApiResponse<Result>
+  res: NextApiResponse<Record<string, unknown>>
 ): void {
-  const beginYear = req.query.beginYear ?? Number.MIN_SAFE_INTEGER
-  const endYear = req.query.endYear ?? Number.MAX_SAFE_INTEGER
+  if (!validEmail(req.body.email)) {
+    res.status(400).json({ error: 'invalid email' })
+    return
+  }
+  if (!validPassword(req.body.password)) {
+    res.status(400).json({ error: 'invalid password' })
+    return
+  }
 
-  const result: Result = {}
+  if (db.query(sql`
+    SELECT email FROM users WHERE email=${req.body.email}
+  `).length !== 0) {
+    console.warn('attempted to create existing user')
+
+    res.json({})
+    return
+  }
+
   db.query(sql`
-    SELECT name, grad_year, user_id FROM people
-    WHERE grad_year BETWEEN ${beginYear} AND ${endYear}
-    ORDER BY name
-  `).forEach((alum) => {
-    result[alum.grad_year] ||= []
-    result[alum.grad_year].push({
-      name: alum.name,
-      user_id: alum.user_id ?? undefined
-    })
-  })
-  res.json(result)
+    INSERT INTO users (id, email, password, bio) VALUES
+      ((SELECT MAX(id) FROM users) + 1, ${req.body.email}, ${hash(req.body)}, '')
+  `)
+
+  res.json({})
 }

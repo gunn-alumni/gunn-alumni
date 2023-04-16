@@ -4,12 +4,12 @@ import titanIcon from '@/../public/images/titanIcon.png'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
     fetch('http://localhost:4000/auth', {
@@ -21,18 +21,17 @@ const LoginPage = () => {
         email,
         password
       })
+    }).then(async (res: Response) => {
+      if (res.ok) {
+        const token = await res.text()
+        localStorage.setItem('token', token)
+        await router.push('/')
+      } else {
+        setError((await res.json()).message)
+      }
+    }).catch((_err) => {
+      setError('Something bad happened. Please try again later')
     })
-      .then(async (res) => {
-        if (res.ok) {
-          const token = await res.text()
-          localStorage.setItem('token', token)
-          router.push('/')
-        } else {
-          setError((await res.json()).message)
-        }
-      })
-      .catch((err) => { setError('Something bad happened. Please try again later') }
-      )
   }
 
   return (
@@ -109,7 +108,7 @@ const LoginPage = () => {
                 type="submit"
                 value="Sign In"
               />
-              {error && <div className={'text-red-500'}>Error: {error}</div>}
+              {(error !== '') && <div className={'text-red-500'}>Error: {error}</div>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {"Don't have an account yet?"}
                 <Link
