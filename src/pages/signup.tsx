@@ -12,7 +12,7 @@ const SignupPage = (): JSX.Element => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    fetch('/api/register', {
+    fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
