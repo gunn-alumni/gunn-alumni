@@ -1,12 +1,10 @@
 import Layout from '@/components/shared/Layout'
 import '@/styles/globals.css'
-import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import Script from 'next/script'
 
-export default function App ({ Component, pageProps }: AppProps) {
+export default function App ({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <SessionProvider session={pageProps.session}>
       <Layout>
         <>
           <Component {...pageProps} />
@@ -21,6 +19,5 @@ export default function App ({ Component, pageProps }: AppProps) {
           </noscript>
         </>
       </Layout>
-    </SessionProvider>
   )
 }

@@ -1,19 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import titanIcon from '@/../public/images/titanIcon.png'
 import Link from 'next/link'
-import { signIn, type SignInResponse } from 'next-auth/react'
+import { signIn, useSession, type SignInResponse } from 'next-auth/react'
+import Router from 'next/router'
 
 const LoginPage = (): JSX.Element => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState<string | undefined>('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | undefined>('')
+  const { data } = useSession()
+
+  useEffect(() => {
+    console.log(data?.user)
+  }, [data])
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    signIn('credentials', { email, password, redirect: false }).then((value: SignInResponse | undefined) => {
-      console.log(value)
-    })
+    signIn('credentials', { email, password, callbackUrl: 'http://localhost:3000/protected', redirect: false })
+      .then((value: SignInResponse | undefined) => {
+        if (value !== undefined) {
+          console.log(value)
+          if (value.ok) {
+            Router.push('/protected').catch((err) => { console.error(err) })
+          } else {
+            setError(value.error)
+          }
+        } else throw new Error('Response value is undefined')
+      })
       .catch((_err) => {
         setError('Something bad happened. Please try again later')
       })
