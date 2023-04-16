@@ -5,15 +5,23 @@ import Link from 'next/link'
 import { signIn, type SignInResponse } from 'next-auth/react'
 
 const LoginPage = (): JSX.Element => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState<string | undefined>('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | undefined>('')
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    signIn('credentials', { email, password, redirect: false }).then((value: SignInResponse | undefined) => {
-      console.log(value)
-    })
+    signIn('credentials', { email, password, callbackUrl: 'http://localhost:3000/protected', redirect: false })
+      .then((value: SignInResponse | undefined) => {
+        if (value !== undefined) {
+          console.log(value)
+          if (value.ok) {
+            // test
+          } else {
+            setError(value.error)
+          }
+        } else throw new Error('Response value is undefined')
+      })
       .catch((_err) => {
         setError('Something bad happened. Please try again later')
       })
