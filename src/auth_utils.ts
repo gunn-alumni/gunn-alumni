@@ -21,13 +21,15 @@ export const isEmail = (email: string): boolean => {
       .test(email)
 }
 
+export const MIN_PASSWORD_LENGTH = 8
+
 export const validPassword = (pw: string): boolean => {
-  return pw.length >= 8 && pw.length < 256
+  return pw.length >= MIN_PASSWORD_LENGTH && pw.length < 256
 }
 
 export const hash = (creds: Record<'email' | 'password', string>): Buffer => crypto.scryptSync(
   creds.password,
-  `gunn-alumni/backend/${creds.email}`,
+  `gunn_alumni_site/${creds.email}`,
   128,
   { p: 5 }
 )
