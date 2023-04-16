@@ -22,16 +22,13 @@ import db from '@/db'
 import { isEmail, validPassword, hash } from '@/auth_utils'
 
 export default NextAuth({
-  session: {
-    strategy: 'jwt'
-  },
   providers: [
     CredentialsProvider({
       credentials: {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
-      async authorize (creds, req) {
+      async authorize (creds, _req) {
         if (creds === undefined) {
           throw Error('rip bozo')
         }
