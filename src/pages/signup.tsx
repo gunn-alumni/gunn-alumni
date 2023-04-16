@@ -3,13 +3,34 @@ import Image from 'next/image'
 import titanIcon from '@/../public/images/titanIcon.png'
 import Link from 'next/link'
 
-const SignupPage = () => {
+const SignupPage = (): JSX.Element => {
   const [name, setName] = useState('')
   const [year, setYear] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {}
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    }).then(async (res: Response) => {
+      if (res.ok) {
+        alert('user successfully added if they do not exist')
+      } else {
+        alert((await res.json()).error)
+      }
+    }).catch((_err) => {
+      alert('FIXME NOTIFY OF ERROR PROPERLY')
+    })
+  }
 
   return (
     <section className="">
