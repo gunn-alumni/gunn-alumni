@@ -14,7 +14,6 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.eol": "\n",
-  "thunder-client.saveToWorkspace": true,
   "eslint.format.enable": true,
   "eslint.onIgnoredFiles": "warn",
   "eslint.problems.shortenToSingleLine": true,
