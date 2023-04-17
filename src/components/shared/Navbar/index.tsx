@@ -43,7 +43,7 @@ const Navbar = (): JSX.Element => {
          </div>
             )
           : <div className="flex justify-center flex-wrap items-center space-x-3">
-          <Link className="hover:underline" href="/auth/signup">Sign up</Link>
+          <Link className="hover:underline" href="/signup">Sign up</Link>
           <Link className="hover:underline" href="/api/auth/signin">Sign In</Link>
         </div>
         }
