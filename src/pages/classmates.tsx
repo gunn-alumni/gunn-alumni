@@ -679,7 +679,7 @@ export default function Classmates () {
     // ////console.log("Data Calling Data!!");
 
     // Fetch the data
-    fetch('http://localhost:4000/alums', {
+    fetch('/api/alums', {
       method: 'GET'
     })
       .then(async (res) => await res.json())
@@ -862,11 +862,9 @@ export default function Classmates () {
   }
 
   function reloadContent (sortedData) {
-    /// /console.log("reloading...");
     // update the usercardData and its elements
     userCardData = sortedData
     setUserCardData(sortedData)
-    // ////console.log("Changing userCardData = ", userCardData);
 
     // call creating tags data & usersData Elements
     createUsersData(userCardData)
@@ -887,12 +885,7 @@ export default function Classmates () {
 
   /// //////Ascending Order By Year
   function sortUsersByAscendingYear (data) {
-    /// /console.log("Let The ASCENDING Sorting Begin....");
     const sortedData = data
-
-    // console checks
-    /// /console.log("Sorting Ascending Stufffff!!!!: ");
-    /// /console.log(sortedData);
 
     // reload necessary contents of the page
     reloadContent(sortedData)
@@ -900,7 +893,6 @@ export default function Classmates () {
 
   /// //////Descending Order By Year
   function sortUsersByDescendingYear (data) {
-    /// /console.log("Let The DESCENDING Sorting Begin....");
     const oldTagsData = []
     for (let i = 0; i < data.length; i++) {
       oldTagsData.push(Object.keys(data[i])[0])
@@ -913,16 +905,9 @@ export default function Classmates () {
       const tempData = {}
       const matchingValIndex = oldTagsData.indexOf(sortedTagsData[t])
       const tempTag = sortedTagsData[t]
-      // ////console.log(data[matchingValIndex]);
-      // ////console.log(sortedTagsData[t]);
       tempData[sortedTagsData[t]] = data[matchingValIndex][tempTag]
-      // ////console.log("Checking: ", tempData);
       sortedData.push(tempData)
     }
-
-    // console checks
-    // ////console.log("Sorting Descending Stufffff!!!!: ", sortedTagsData);
-    // ////console.log(sortedData);
 
     // reload necessary contents of the page
     reloadContent(sortedData)
@@ -949,18 +934,15 @@ export default function Classmates () {
   }
 
   function sortUsersAlphabetical (data, filterBy) {
-    /// /console.log("Let the ALPHABETICAL Sorting Begin....");
     const allUsersData = []
     const usersNameData = []
     data.forEach((item) => {
-      /// /console.log(item);
       const keyName = Object.keys(item)[0]
       item[keyName].forEach((userInfo) => {
         allUsersData.push(userInfo)
         usersNameData.push(userInfo.name)
       })
     })
-    /// /console.log("ALL USERS GOT IT | ", allUsersData, usersNameData);
 
     const namesData = []
     for (let n = 0; n < usersNameData.length; n++) {

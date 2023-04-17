@@ -46,15 +46,7 @@ export default NextAuth({
       }
     })
   ],
-  session: {
-    strategy: 'jwt'
-
-  },
-  secret: '2O_-CFgyvfnBsVCy96cp617x2-k1nFRfuFXuyf4LIIS1KeBSEEbVKm0v5Qokl8izz3AoXbmIjuNCiG8hzf-MCw', // TODO: make this actually secret (don't use this in production)
   pages: {
     signIn: '/auth/login'
-    // signOut: '/auth/signout',
-    // error: '/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // (used for check email message)
   }
 })
