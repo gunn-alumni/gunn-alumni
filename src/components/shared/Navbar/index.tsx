@@ -35,7 +35,7 @@ const Navbar = (): JSX.Element => {
         {(status === 'authenticated')
           ? (
           <div className="flex justify-center flex-row items-center space-x-3">
-            <Link className="hover:underline" href="/" onClick={async () => { await signOut() }} >Logout</Link>
+            <Link className="hover:underline" href="/" onClick={() => { void signOut() }}>Logout</Link>
 
             <Link className="flex space-x-3 flex-row items-center hover:underline" href="/profile">
               <Image src={dylan} className=" w-9 h-9 rounded-full" alt="icon"/>
@@ -43,8 +43,8 @@ const Navbar = (): JSX.Element => {
          </div>
             )
           : <div className="flex justify-center flex-wrap items-center space-x-3">
-          <Link className="hover:underline" href="/auth/signup">Sign up</Link>
-          <Link className="hover:underline" href="/api/auth/signin">Sign In</Link>
+          <Link className="hover:underline" href="/signup">Sign up</Link>
+          <Link className="hover:underline" href="/auth/signin">Sign In</Link>
         </div>
         }
 
