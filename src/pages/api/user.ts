@@ -19,7 +19,7 @@ import db from '@/db'
 
 export default function handler (
   req: NextApiRequest,
-  res: NextApiResponse<void>
+  res: NextApiResponse<Record<string, unknown>>
 ): void {
   res.json({
     ...db.query(sql`
