@@ -679,7 +679,7 @@ export default function Classmates () {
     // ////console.log("Data Calling Data!!");
 
     // Fetch the data
-    fetch('http://localhost:4000/alums', {
+    fetch('/api/alums', {
       method: 'GET'
     })
       .then(async (res) => await res.json())

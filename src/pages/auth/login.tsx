@@ -18,7 +18,7 @@ const LoginPage = (): JSX.Element => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    signIn('credentials', { email, password, callbackUrl: 'http://localhost:3000/protected', redirect: false })
+    signIn('credentials', { email, password, callbackUrl: '/protected', redirect: false })
       .then((value: SignInResponse | undefined) => {
         if (value !== undefined) {
           console.log(value)
