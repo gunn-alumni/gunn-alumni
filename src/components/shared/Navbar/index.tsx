@@ -35,7 +35,7 @@ const Navbar = (): JSX.Element => {
         {(status === 'authenticated')
           ? (
           <div className="flex justify-center flex-row items-center space-x-3">
-            <Link className="hover:underline" href="/" onClick={() => { void signOut() }} >Logout</Link>
+            <Link className="hover:underline" href="/" onClick={() => { void signOut() }}>Logout</Link>
 
             <Link className="flex space-x-3 flex-row items-center hover:underline" href="/profile">
               <Image src={dylan} className=" w-9 h-9 rounded-full" alt="icon"/>
