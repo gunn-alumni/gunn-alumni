@@ -35,5 +35,5 @@ export default function handler (
     }
   })
 
-  res.status(500).json({ error: 'not implemented' })
+  res.status(500).json({ message: 'not implemented' })
 }

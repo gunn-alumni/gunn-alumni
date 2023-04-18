@@ -20,14 +20,15 @@ const LoginPage = (): JSX.Element => {
 
     signIn('credentials', { email, password, callbackUrl: '/protected', redirect: false })
       .then((value: SignInResponse | undefined) => {
-        if (value !== undefined) {
-          console.log(value)
-          if (value.ok) {
-            Router.push('/protected').catch((err) => { console.error(err) })
-          } else {
-            setError(value.error)
-          }
-        } else throw new Error('Response value is undefined')
+        if (value === undefined) {
+          throw new Error('Response value is undefined')
+        }
+        console.log(value)
+        if (value.ok) {
+          Router.push('/protected').catch((err) => { console.error(err) })
+        } else {
+          setError(value.error)
+        }
       })
       .catch((_err) => {
         setError('Something bad happened. Please try again later')

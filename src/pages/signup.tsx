@@ -25,7 +25,7 @@ const SignupPage = (): JSX.Element => {
       if (res.ok) {
         alert('user successfully added if they do not exist')
       } else {
-        alert((await res.json()).error)
+        alert((await res.json()).message)
       }
     }).catch((_err) => {
       alert('FIXME NOTIFY OF ERROR PROPERLY')

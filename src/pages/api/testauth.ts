@@ -21,7 +21,7 @@ export default async function handler (
 ): Promise<void> {
   const token = await getToken({ req })
   if (token == null) {
-    res.status(403).json({ error: 'unauthorized' })
+    res.status(403).json({ message: 'unauthorized' })
     return
   }
   res.json({ message: 'success' })
