@@ -43,6 +43,7 @@ export default NextAuth({
           return null
         }
         return users[0]
+        // the sub field of the resulting jwt contains the user id
       }
     })
   ],

@@ -20,14 +20,15 @@ const LoginPage = (): JSX.Element => {
 
     signIn('credentials', { email, password, callbackUrl: '/protected', redirect: false })
       .then((value: SignInResponse | undefined) => {
-        if (value !== undefined) {
-          console.log(value)
-          if (value.ok) {
-            Router.push('/protected').catch((err) => { console.error(err) })
-          } else {
-            setError(value.error)
-          }
-        } else throw new Error('Response value is undefined')
+        if (value === undefined) {
+          throw new Error('Response value is undefined')
+        }
+        console.log(value)
+        if (value.ok) {
+          Router.push('/protected').catch((err) => { console.error(err) })
+        } else {
+          setError(value.error)
+        }
       })
       .catch((_err) => {
         setError('Something bad happened. Please try again later')
@@ -82,20 +83,6 @@ const LoginPage = (): JSX.Element => {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label htmlFor="remember" className="text-gray-500">
-                      Remember me
-                    </label>
-                  </div>
-                </div>
                 <Link
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline"

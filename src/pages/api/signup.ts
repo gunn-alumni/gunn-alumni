@@ -23,12 +23,12 @@ export default function handler (
   res: NextApiResponse<Record<string, unknown>>
 ): void {
   if (!validEmail(req.body.email)) {
-    res.status(400).json({ error: 'Invalid email' })
+    res.status(400).json({ message: 'Invalid email' })
     return
   }
   if (!validPassword(req.body.password)) {
     res.status(400).json({
-      error: 'Password must be at least ' + MIN_PASSWORD_LENGTH.toString() +
+      message: 'Password must be at least ' + MIN_PASSWORD_LENGTH.toString() +
         ' characters long'
     })
     return

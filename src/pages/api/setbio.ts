@@ -12,28 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Readable } from 'stream'
 import { type NextApiRequest, type NextApiResponse } from 'next'
+import { getToken } from 'next-auth/jwt'
+import { sql } from '@databases/sqlite-sync'
 
-import transporter from '@/transporter'
+import db from '@/db'
 
-export default function handler (
+export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
-): void {
-  // todo: make this work
-  transporter.sendMail({
-    from: 'fakeauth@gunnalum.site',
-    to: req.body.email,
-    subject: 'WEBSITE NAME Password Reset',
-    text: 'test email text.'
-  }, (_err, info) => {
-    if (info.message instanceof Readable) {
-      info.message.pipe(process.stdout)
-    } else {
-      console.error('nodemailer is misconfigured')
-    }
-  })
-
-  res.status(500).json({ message: 'not implemented' })
+): Promise<void> {
+  const token = await getToken({ req })
+  if (token == null) {
+    res.status(403).json({ message: 'unauthorized' })
+    return
+  }
+  if (req.body.bio == null) {
+    res.status(400).json({ message: 'missing bio content' })
+  }
+  db.query(sql`
+    UPDATE users
+    SET bio = ${req.body.bio}
+    WHERE id = ${token.sub}
+  `)
+  res.json({ message: 'success' })
 }
