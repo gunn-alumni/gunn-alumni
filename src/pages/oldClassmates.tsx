@@ -1,17 +1,12 @@
 import Head from 'next/head'
 import { useRef, useState } from 'react'
 
-// User Proile Images Import
-import defaultPfp from '@/../public/images/userIconx96.png'
-import dylan from '@/../public/images/dylan.png'
-
 // Custom Components
 import FilterGroups from '@/components/classmates/FilterGroups'
-import UserCard from '@/components/classmates/UserCard'
 import { AiFillFilter } from 'react-icons/ai'
 
 export default function OldClassmates () {
-  /// ///////////////////////////////////////////////////////////////////////////Start of Js Code
+  /// Start of Js Code
   // React Hooks:
   const [visibleIndicator, setVisibleIndicator] = useState(false)
   const indicatorRef = useRef(null)
@@ -22,7 +17,7 @@ export default function OldClassmates () {
   const tagRefs = useRef([])
   tagRefs.current = []
 
-  /// ///////////////////////COMPONENTS INITIAL DATA
+  /// COMPONENTS INITIAL DATA
   const dummyFilterTagsData = [
     '2024',
     '2023',
@@ -45,277 +40,11 @@ export default function OldClassmates () {
     '2006',
     '2005'
   ]
-  const dummyUserCardData2 = [
-    {
-      2024: [
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Albert Lee'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Alan Jiang'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Riya Singh'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'David Li'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Ethan Zhang'
-        }
-      ]
-    },
-    {
-      2023: [
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Ian'
-        }
-      ]
-    },
-    {
-      2022: [
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'John Li'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        }
-      ]
-    },
-    {
-      2021: [
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        },
-        {
-          uniId: 'user1',
-          userPfp: defaultPfp,
-          userName: 'Jia Ruparel'
-        },
-        {
-          uniId: 'user2',
-          userPfp: defaultPfp,
-          userName: 'Veereeeeeeeeeeeeeeeeeee Ruparel'
-        },
-        {
-          uniId: 'user3',
-          userPfp: dylan,
-          userName: 'Dylan Lu'
-        },
-        {
-          uniId: 'user4',
-          userPfp: defaultPfp,
-          userName: 'Mr. Paley'
-        }
-      ]
-    }
-  ]
 
   // Way #1:
   const groupsElements: JSX.Element[] = []
-  dummyUserCardData2.forEach((item, index) => {
-    const groupTagName = Object.keys(item)[0]
-    groupsElements.push(
-      <>
-        <h2
-          className={`my-[0.83em] font-bold mt-[${
-            index < 1 ? '50px' : '75px'
-          }]`}
-          id={'group_label'}
-        >
-          {groupTagName}
-        </h2>
-        <div
-          id={groupTagName}
-          className="flex flex-row gap-x-[50px] gap-y-[25px] flex-wrap overflow-x-hidden break-all"
-        >
-          {item[groupTagName].map((data, i) => (
-            <UserCard
-              key={i}
-              uniId={data.uniId}
-              userPfp={data.userPfp}
-              userName={data.userName}
-            />
-          ))}
-        </div>
-      </>
-    )
-  })
 
-  /// ///////////////////////////////////////////////////////All Variables
+  /// All Variables
   // Css Variables
   const filterBox_width = '10%'
   const tag_to_indicator_size_ratio = '0.6'
@@ -329,7 +58,7 @@ export default function OldClassmates () {
   const toggleFilter = (isIcon = false) => {
     if (isIcon) {
       console.log('YAAAAY')
-      if (filterShowCss == 'hidden') {
+      if (filterShowCss === 'hidden') {
         setFilterShowCss('block')
       } else {
         setFilterShowCss('hidden')

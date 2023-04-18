@@ -17,7 +17,6 @@ import FilterGroups from '@/components/classmates/FilterGroups'
 import UserCard from '@/components/classmates/UserCard'
 
 export default function Classmates () {
-  /// ///////////////////////////////////////////////////////////////////////////Start of Js Code
   // React Hooks Declarations:
   const indicatorRef = useRef(null)
   const filterGroupsRef = useRef(null)
@@ -31,607 +30,12 @@ export default function Classmates () {
 
   const router = useRouter()
 
-  /// ////////////////////////////////data initializers
+  // data initializers
   let [userCardData, setUserCardData] = useState([])
   let [staticUserCardData, setStaticUserCardData] = useState([])
   let [filterTagsData, setFilterTagsData] = useState([])
-  /// /Create Elements Using Data
+  // /Create Elements Using Data
   let [groupsElementsState, setGroupsElementsState] = useState([])
-
-  /// ///////////////////////COMPONENTS INITIAL DATA
-  // Hard-Coded Data
-  const dummyUserCardDataOld = [
-    {
-      2024: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Albert Lee',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Julia Kang',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'David Li',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Nakisha Gib',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Ruth Olivera',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Leon Kevork',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Matthew Grupenhoff',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ezekiel Michael',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Bianca Richard',
-          grad_year: '2024'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Krishan B. Grant',
-          grad_year: '2024'
-        }
-      ]
-    },
-    {
-      2023: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veer Ruparel',
-          grad_year: '2023'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Sammy Lesner',
-          grad_year: '2023'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2023'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2023'
-        }
-      ]
-    },
-    {
-      2022: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2022'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2022'
-        }
-      ]
-    },
-    {
-      2021: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2021'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2021'
-        }
-      ]
-    },
-    {
-      2020: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2020'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2020'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2020'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2020'
-        }
-      ]
-    },
-    {
-      2019: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2019'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2019'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2019'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2019'
-        }
-      ]
-    },
-    {
-      2018: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2018'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2018'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2018'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2018'
-        }
-      ]
-    },
-    {
-      2017: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2017'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2017'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2017'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2017'
-        }
-      ]
-    },
-    {
-      2016: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2016'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2016'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2016'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2016'
-        }
-      ]
-    },
-    {
-      2015: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2015'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2015'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2015'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2015'
-        }
-      ]
-    },
-    {
-      2014: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2014'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2014'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2014'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2014'
-        }
-      ]
-    },
-    {
-      2013: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2013'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2013'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2013'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2013'
-        }
-      ]
-    },
-    {
-      2012: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2012'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2012'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2012'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2012'
-        }
-      ]
-    },
-    {
-      2011: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2011'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2011'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2011'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2011'
-        }
-      ]
-    },
-    {
-      2010: [
-        {
-          user_id: 'user1',
-          userPfp: '/images/userIconx96.png',
-          name: 'Jia Ruparel',
-          grad_year: '2010'
-        },
-        {
-          user_id: 'user2',
-          userPfp: '/images/userIconx96.png',
-          name: 'Veereeeeeeeeeeeeeeeeeee Ruparel',
-          grad_year: '2010'
-        },
-        {
-          user_id: 'user3',
-          userPfp: '/images/dylan.png',
-          name: 'Dylan Lu',
-          grad_year: '2010'
-        },
-        {
-          user_id: 'user4',
-          userPfp: '/images/userIconx96.png',
-          name: 'Ruparel',
-          grad_year: '2010'
-        }
-      ]
-    }
-  ]
-
-  const dummyUserCardData = dummyUserCardDataOld.reverse()
 
   // Old Data Structures
 
@@ -643,11 +47,11 @@ export default function Classmates () {
     if (fetchedFlag) {
       const datakeys = Object.keys(newData)
       for (let i = 0; i < datakeys.length; i++) {
-        // ////console.log(datakeys[i]);
+        // console.log(datakeys[i]);
         const tempKey = datakeys[i]
         const tempData = {}
         tempData[tempKey] = newData[tempKey]
-        // ////console.log(tempData);
+        // console.log(tempData);
         userCardDataHelper.push(tempData)
       }
     } else {
@@ -676,7 +80,7 @@ export default function Classmates () {
   }
 
   function storeAlumsData () {
-    // ////console.log("Data Calling Data!!");
+    // console.log("Data Calling Data!!");
 
     // Fetch the data
     fetch('/api/alums', {
@@ -689,13 +93,12 @@ export default function Classmates () {
           changeDataStructure(data, true)
         }
       })
-      .catch(_error => {
-        // //console.log(error);
-        changeDataStructure(dummyUserCardData, false)
+      .catch(error => {
+        console.error(error)
       })
   }
 
-  /// /Tags Data Create With Fetching
+  // /Tags Data Create With Fetching
   function createTagsData (inputData) {
     const filterTagsDataHelper = []
     for (let i = 0; i < inputData.length; i++) {
@@ -706,7 +109,7 @@ export default function Classmates () {
     }
     filterTagsData = filterTagsDataHelper
     setFilterTagsData(filterTagsDataHelper)
-    /// /console.log("Dummy Filter Tag Data = ", filterTagsData);
+    // /console.log("Dummy Filter Tag Data = ", filterTagsData);
   }
 
   // New code with fetching
@@ -737,9 +140,9 @@ export default function Classmates () {
     setGroupsElementsState(groupsElementsHelper)
 
     // console testing
-    // ////console.log("GroupElements = ",groupsElements);
+    // console.log("GroupElements = ",groupsElements);
     // console.log("GroupElementsHelper = ",groupsElementsHelper);
-    /// /console.log("GroupElementsState = ",groupsElementsState);
+    // /console.log("GroupElementsState = ",groupsElementsState);
   }
 
   // searching using fuse.js initialize and functions
@@ -852,9 +255,9 @@ export default function Classmates () {
     // console.log("GroupElementsHelper = ",groupsElementsHelper);
   }
 
-  /// /////////////////////////////////////////////////// Filter Options Sorting Functions
+  // // Filter Options Sorting Functions
 
-  /// //Helpful Functions
+  // //Helpful Functions
   function removeDuplicates (arr) {
     return arr.filter((value, index, self) => {
       return self.indexOf(value) === index
@@ -883,7 +286,7 @@ export default function Classmates () {
     }, 300)
   }
 
-  /// //////Ascending Order By Year
+  // //Ascending Order By Year
   function sortUsersByAscendingYear (data) {
     const sortedData = data
 
@@ -891,7 +294,7 @@ export default function Classmates () {
     reloadContent(sortedData)
   }
 
-  /// //////Descending Order By Year
+  // //Descending Order By Year
   function sortUsersByDescendingYear (data) {
     const oldTagsData = []
     for (let i = 0; i < data.length; i++) {
@@ -958,42 +361,42 @@ export default function Classmates () {
 
     const sortedNamesData = quickSort_alphabetical(namesData)
     const noDuplisSortedNamesData = removeDuplicates(sortedNamesData)
-    /// /console.log("Sorted Alphabetical Names Only: ", sortedNamesData);
-    /// /console.log("Sorted Alphabetical Names Only Without Duplicates: ", noDuplisSortedNamesData);
+    // /console.log("Sorted Alphabetical Names Only: ", sortedNamesData);
+    // /console.log("Sorted Alphabetical Names Only Without Duplicates: ", noDuplisSortedNamesData);
 
     const sortedData = []
 
     noDuplisSortedNamesData.forEach((name, _index) => {
-      /// /console.log("Checking: ", name, index);
+      // /console.log("Checking: ", name, index);
       const tempData = {}
       const tempKey = name.charAt(0)
       const tempVal = []
       allUsersData.forEach((user) => {
-        /// /console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
+        // /console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
         // need to get the user that has the same last name as name, not more not less
         if ((user.name).indexOf(name) > -1) {
           tempVal.push(user)
         }
       })
-      /// /console.log("Set Is made: ");
-      /// /console.log("Key = ", tempKey, " : Value = ", tempVal);
+      // /console.log("Set Is made: ");
+      // /console.log("Key = ", tempKey, " : Value = ", tempVal);
 
       // check if key exists for different names starting with the same letter
       if (sortedData.hasOwnProperty(tempKey)) {
-        /// /console.log("Already Exists key, so add to the value");
+        // /console.log("Already Exists key, so add to the value");
         const combinedUsers = tempData[tempKey].concat(tempVal)
-        /// /console.log("Combined: ", combinedUsers);
+        // /console.log("Combined: ", combinedUsers);
         tempData[tempKey] = combinedUsers
       } else {
-        /// /console.log("Not There, so make a new key");
+        // /console.log("Not There, so make a new key");
         tempData[tempKey] = tempVal
       }
       sortedData.push(tempData)
     })
 
     // console checks
-    /// /console.log("Sorting Alphabetical Stufffff!!!!: ");
-    /// /console.log(sortedData);
+    // /console.log("Sorting Alphabetical Stufffff!!!!: ");
+    // /console.log(sortedData);
 
     // reload necessary contents of the page
     reloadContent(sortedData)
@@ -1018,7 +421,7 @@ export default function Classmates () {
     return quickSort_alphabetical(left).concat(pivot, quickSort_alphabetical(right))
   }
 
-  /// ////////////////////////////////////////////////////////////////////////////////////Js Functions
+  // Js Functions
   // Toggle Filter by either clicking on image or document
   const [filterShowCss, setFilterShowCss] = useState('hidden')
 
@@ -1026,7 +429,7 @@ export default function Classmates () {
     console.log('LOOKIE: ', elm)
 
     if (elm.id == 'filterSortIcon') {
-      // // ////console.log("YAAAAY");
+      // // console.log("YAAAAY");
       if (filterShowCss == 'hidden') {
         setFilterShowCss('block')
       } else {
@@ -1098,7 +501,7 @@ export default function Classmates () {
   const [pageMarkerBtnDir, setPageMarkerBtnDir] = useState('scale-y-100')
   function pageMarkerScroll (_elm) {
     if (pageMarkerStatus == 'pg_down') {
-      /// /console.log("FullHeight Scrolling!!! ==== ", fullHeight);
+      // /console.log("FullHeight Scrolling!!! ==== ", fullHeight);
       window.scrollTo(0, fullHeight)
       setPageMarkerBtnDir('-scale-y-100')
       setPageMarkerStatus('pg_up')
@@ -1115,12 +518,12 @@ export default function Classmates () {
     //         if(group_tags[t].innerHTML == currentGroupLabel.innerHTML){
     //             // moveTagYPos = group_tags[t].offsetTop;
     //             moveToElm = group_tags[t];
-    //             // ////console.log("Move to elm = ", moveToElm);
-    //             // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-    //             // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
+    //             // console.log("Move to elm = ", moveToElm);
+    //             // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+    //             // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
     //         }
     //     }
-    //     // // ////console.log(changeIndicatorFlag);
+    //     // // console.log(changeIndicatorFlag);
     //     moveIndicator(moveToElm);
     // }
   }
@@ -1171,17 +574,17 @@ export default function Classmates () {
     }
   }
 
-  /// ////////////////////////////// Tag Clicked Logic ////////////////////////////////////////
+  // // Tag Clicked Logic
   const groupTagsClick = (elm) => {
-    // // ////console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
-    // // ////console.log(elm, elm.innerHTML);
+    // // console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
+    // // console.log(elm, elm.innerHTML);
     if (elm.id == 'group_tags') {
-      // // ////console.log("YOU SHALL PASSSSSS");
+      // // console.log("YOU SHALL PASSSSSS");
       showGroup(elm)
     }
 
     if (elm.id == 'group_mobile_tags') {
-      // // ////console.log("YOU SHALL PASSSSSS");
+      // // console.log("YOU SHALL PASSSSSS");
       showGroup(elm)
     }
   }
@@ -1201,7 +604,7 @@ export default function Classmates () {
       }
     }
     // Special Case #1: Set new currentGroupLabel
-    // // ////console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
+    // // console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
     currentGroupLabel = group_label_clicked
     setCurrentGroupLabel(group_label_clicked)
     // Way #1:
@@ -1214,7 +617,7 @@ export default function Classmates () {
     moveIndicator(moveToElm)
   }
 
-  /// ///////////////////////////////////// Scroll Logic //////////////////////////////////////////////////////
+  // / Scroll Logic //
   // Global Variables
   const [prevScrollPos, setPrevScrollPos] = useState(0)
   const indicatorBorderSize = 28.8
@@ -1231,11 +634,11 @@ export default function Classmates () {
   const changeScreenWidth = 1286
   let [tagText, setTagText] = useState('')
 
-  /// ///////////////////////Better JS LOGIC
+  // //Better JS LOGIC
   // Window On Load Stuff
   useEffect(() => {
     // This code will run only once when the component mounts
-    /// /console.log("Component mounted");
+    // /console.log("Component mounted");
 
     // call data setup function
     storeAlumsData()
@@ -1244,7 +647,7 @@ export default function Classmates () {
   // this function is used for dynamic changes to the page (re-render)
   function reDeclareVariables () {
     // console.log("RE declaring...");
-    // // ////console.log(changeScreenWidth);
+    // // console.log(changeScreenWidth);
     currentGroupLabel = null
     setCurrentGroupLabel(null)
 
@@ -1262,10 +665,10 @@ export default function Classmates () {
     const allGroupContentHelper = groupWrapperRef.current.children
     allGroupContent = allGroupContentHelper
     setAllGroupContent(allGroupContentHelper)
-    /// /console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
+    // /console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
     const allGroupLabelHelper = []
     for (let i = 0; i < allGroupContent.length; i++) {
-      /// /console.log(allGroupContent[i].id);
+      // /console.log(allGroupContent[i].id);
       if (allGroupContent[i].id == 'group_label') {
         allGroupLabelHelper.push(allGroupContent[i])
       }
@@ -1277,8 +680,8 @@ export default function Classmates () {
     // setCurrentGroupLabel(allGroupLabel[0]);
 
     // console checks
-    /// /console.log(allGroupLabel);
-    /// /console.log("group_tags: ", group_tags);
+    // /console.log(allGroupLabel);
+    // /console.log("group_tags: ", group_tags);
   }
 
   function moveIndicator (moveToElm) {
@@ -1289,16 +692,16 @@ export default function Classmates () {
 
     // Is the indicator changed???
     if (changeIndicatorFlag) {
-      /// /console.log("Highlighter Time!!");
+      // /console.log("Highlighter Time!!");
       group_indicator.style.display = 'none'
       highlightTag(moveToElm)
     } else {
-      /// /console.log("group_indicator = ", group_indicator);
+      // /console.log("group_indicator = ", group_indicator);
       highlightTag('')
       const moveToTag = moveToElm
-      /// /console.log(moveToTag);
+      // /console.log(moveToTag);
       const moveMarginPos = moveToTag.getBoundingClientRect().top + (Math.abs((moveToTag.getBoundingClientRect().height / 2) - (borderSize_group_indicator / 2)))
-      /// /console.log("Moving Indicator to: ",moveMarginPos);
+      // /console.log("Moving Indicator to: ",moveMarginPos);
       // Move indicator the amount
       group_indicator.style.display = 'block'
       group_indicator.style.marginTop = moveMarginPos + 'px'
@@ -1312,7 +715,7 @@ export default function Classmates () {
     } else {
       const style = elm.currentStyle || window.getComputedStyle(elm)
       posValue = elm.offsetTop - (parseInt(style.marginTop) / 2)
-      /// /console.log("ScrollPosOfElement = ", posValue);
+      // /console.log("ScrollPosOfElement = ", posValue);
       return posValue
     }
   }
@@ -1322,7 +725,7 @@ export default function Classmates () {
     const closest = arr.reduce((prev, curr) => {
       return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)
     })
-    // ////console.log(closest);
+    // console.log(closest);
     return closest
   }
   function scrollChange (directionScroll) {
@@ -1330,26 +733,26 @@ export default function Classmates () {
     for (let i = 0; i < allGroupLabel.length; i++) {
       labelPosList.push(scrollPosOfElement(allGroupLabel[i]))
     }
-    /// /console.log("All Pos: ", labelPosList);
-    /// /console.log(currentGroupLabel);
+    // /console.log("All Pos: ", labelPosList);
+    // /console.log(currentGroupLabel);
     let reducedPosList = []
     let closestLabelPos = 0
     const currentLabelPos = scrollPosOfElement(currentGroupLabel)
-    /// /console.log("POS OF CURRENT LABEL: ", currentLabelPos);
+    // /console.log("POS OF CURRENT LABEL: ", currentLabelPos);
     if (directionScroll == 'down') {
-      /// /console.log("Going DOWN");
+      // /console.log("Going DOWN");
       var nextIndex = labelPosList.indexOf(currentLabelPos) + 1
-      /// /console.log("HUH? ", nextIndex);
+      // /console.log("HUH? ", nextIndex);
       if (nextIndex < labelPosList.length - 1) {
         reducedPosList = labelPosList.slice(nextIndex)
         closestLabelPos = findClosest(reducedPosList)
-        /// /console.log(reducedPosList, closestLabelPos);
+        // /console.log(reducedPosList, closestLabelPos);
         if (window.scrollY >= closestLabelPos) {
-          /// /console.log("Hit");
+          // /console.log("Hit");
           var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)]
           currentGroupLabel = labelHit
           setCurrentGroupLabel(labelHit)
-          /// /console.log("Label Hit, so changing current: ", currentGroupLabel);
+          // /console.log("Label Hit, so changing current: ", currentGroupLabel);
 
           // move indicator
           if (currentGroupLabel != '' && currentGroupLabel != null && currentGroupLabel != undefined) {
@@ -1358,9 +761,9 @@ export default function Classmates () {
               if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
                 // moveTagYPos = group_tags[t].offsetTop;
                 moveToElm = group_tags[t]
-                /// /console.log("Move to elm = ", moveToElm);
-                // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-                // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                // /console.log("Move to elm = ", moveToElm);
+                // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                // console.log("Checking Other Properties: ", group_tags[t].marginTop);
               }
             }
             moveIndicator(moveToElm)
@@ -1368,15 +771,15 @@ export default function Classmates () {
         }
       }
     } else {
-      /// /console.log("Going UP");
+      // /console.log("Going UP");
       var nextIndex = labelPosList.indexOf(currentLabelPos)
-      // // ////console.log(nextIndex);
+      // // console.log(nextIndex);
       if (nextIndex > 0) {
         reducedPosList = labelPosList.slice(0, labelPosList.indexOf(currentLabelPos))
         closestLabelPos = findClosest(reducedPosList)
-        // // ////console.log(reducedPosList);
+        // // console.log(reducedPosList);
         if (window.scrollY <= closestLabelPos) {
-          // // ////console.log("Boom");
+          // // console.log("Boom");
           var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)]
           currentGroupLabel = labelHit
           setCurrentGroupLabel(labelHit)
@@ -1388,9 +791,9 @@ export default function Classmates () {
               if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
                 // moveTagYPos = group_tags[t].offsetTop;
                 moveToElm = group_tags[t]
-                // ////console.log("Move to elm = ", moveToElm);
-                // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-                // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                // console.log("Move to elm = ", moveToElm);
+                // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
               }
             }
             moveIndicator(moveToElm)
@@ -1408,14 +811,14 @@ export default function Classmates () {
     } else if (prevScrollPos < currentScrollPos) {
       scrollWay = 'down'
     }
-    // // ////console.log("setting current to previous: ");
+    // // console.log("setting current to previous: ");
     setPrevScrollPos(currentScrollPos)
-    // // ////console.log("IN handleScroll | Current Scroll Val = ", currentScrollPos, ", Previous Scroll Val = ", prevScrollPos);
+    // // console.log("IN handleScroll | Current Scroll Val = ", currentScrollPos, ", Previous Scroll Val = ", prevScrollPos);
     scrollChange(scrollWay)
   }
 
   useEffect(function mount () {
-    // // ////console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+    // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
     function onScroll () {
       handleScroll()
     }
@@ -1428,7 +831,7 @@ export default function Classmates () {
   })
 
   useEffect(function mount () {
-    // // ////console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+    // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
     function onChangeScreenSize () {
       changeIndicator()
     }
@@ -1452,25 +855,25 @@ export default function Classmates () {
     // console.log("Full Height From ChangeIndicator Func = ", fullHeight, footerHeight);
 
     const screenSizeW = window.innerWidth
-    // // ////console.log(screenSizeW);
+    // // console.log(screenSizeW);
     if (screenSizeW <= changeScreenWidth) {
-      /// /console.log("Screen changed");
+      // /console.log("Screen changed");
       changeIndicatorFlag = true
       setChangeIndicatorFlag(true)
 
       // //Update Group Tags Reference
       // group_tags = filterGroupsMobileRef.current.children;
       // setGroup_tags(filterGroupsMobileRef.current.children);
-      // ////console.log("Updated Tags: ",group_tags);
+      // console.log("Updated Tags: ",group_tags);
     } else {
-      /// /console.log("Screen full");
+      // /console.log("Screen full");
       changeIndicatorFlag = false
       setChangeIndicatorFlag(false)
 
       // Update Group Tags Reference
       group_tags = filterGroupsRef.current.children
       setGroup_tags(filterGroupsRef.current.children)
-      /// /console.log("Updated Tags: ",group_tags);
+      // /console.log("Updated Tags: ",group_tags);
     }
 
     // check for changing sidebar for mobile
@@ -1497,38 +900,38 @@ export default function Classmates () {
         if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
           // moveTagYPos = group_tags[t].offsetTop;
           moveToElm = group_tags[t]
-          // ////console.log("Move to elm = ", moveToElm);
-          // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-          // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
+          // console.log("Move to elm = ", moveToElm);
+          // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+          // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
         }
       }
-      // // ////console.log(changeIndicatorFlag);
+      // // console.log(changeIndicatorFlag);
       moveIndicator(moveToElm)
     }
   }
 
   function highlightTag (elm) {
     const tagElm = elm
-    // ////console.log("HIGHLIGHT TAAAAAAAAAAG");
-    // ////console.log(tagElm.style);
+    // console.log("HIGHLIGHT TAAAAAAAAAAG");
+    // console.log(tagElm.style);
     if (tagElm != '') {
-      // ////console.log("Highlighting");
+      // console.log("Highlighting");
       tagText = tagElm.innerHTML
       setTagText(tagElm.innerHTML)
     } else {
-      // ////console.log("De-Highlighting");
+      // console.log("De-Highlighting");
       tagText = ''
       setTagText('')
     }
   }
 
-  /// /////////////MOBILE FUNCTIONS HERE
+  // /MOBILE FUNCTIONS HERE
   // button click to show sidebar
   var [displayMobileSidebar, setDisplayMobileSidebar] = useState('hidden')
   var [mobileSidebarFlag, setMobileSidebarFlag] = useState(false)
   var [displayMobileBtnSidebar, setDisplayMobileBtnSidebar] = useState('hidden')
   function showMobileSideBar () {
-    /// /console.log("SHOW SIDEBAR IS CALLED!!!");
+    // /console.log("SHOW SIDEBAR IS CALLED!!!");
     if (displayMobileSidebar == 'block') {
       displayMobileSidebar = 'hidden'
       setDisplayMobileSidebar('hidden')
@@ -1538,7 +941,7 @@ export default function Classmates () {
     }
   }
 
-  /// When clicking on a user from classmates page call in a backend request
+  // When clicking on a user from classmates page call in a backend request
   function checkUserClicked (clickedElm) {
     console.log('I was Clicked: ', clickedElm)
     if (clickedElm.id == 'group_content') {
@@ -1564,10 +967,6 @@ export default function Classmates () {
       query: { message: user.id }
     }, '/profile')
   }
-
-  /// ///////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////////////////////////// END OF JS CODE
-  /// //////////////////////////////////////////////////////////////
 
   return (
     <>
