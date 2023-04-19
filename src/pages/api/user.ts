@@ -23,7 +23,7 @@ export default function handler (
 ): void {
   // will not return data is user is not a person
   res.json(db.query(sql`
-    SELECT people.name, people.grad_year, users.bio
+    SELECT people.name, people.gradYear, users.bio
     FROM people, users
     WHERE people.user_id = ${req.query.id} AND users.id = ${req.query.id}
   `)[0])

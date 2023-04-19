@@ -19,7 +19,7 @@ const db = connect('store.db3')
 
 for (const person of JSON.parse(fs.readFileSync('./db/fakepeople.json'))) {
   db.query(sql`
-    INSERT INTO people (name, grad_year) VALUES
-      (${person.name}, ${person.grad_year})
+    INSERT INTO people (name, gradYear) VALUES
+      (${person.name}, ${person.gradYear})
   `)
 }

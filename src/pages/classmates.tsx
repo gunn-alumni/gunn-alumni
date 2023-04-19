@@ -59,11 +59,11 @@ export default function Classmates () {
     }
     console.log('HELPER DATA = ', userCardDataHelper)
 
-    // add grad_year property to each user
+    // add gradYear property to each user
     userCardDataHelper.forEach(obj => {
       const keys = Object.keys(obj)
       obj[keys[0]].forEach(userObj => {
-        userObj.grad_year = keys[0]
+        userObj.gradYear = keys[0]
       })
     })
 
@@ -148,7 +148,7 @@ export default function Classmates () {
   // searching using fuse.js initialize and functions
   const searchSettings =
     {
-      keys: ['grad_year', 'name'],
+      keys: ['gradYear', 'name'],
       includeMatches: true,
       threshold: 0.2,
       tokenize: true,

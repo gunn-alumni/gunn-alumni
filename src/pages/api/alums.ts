@@ -33,12 +33,12 @@ export default function handler (
 
   const result: Result = {}
   db.query(sql`
-    SELECT name, grad_year, user_id FROM people
-    WHERE grad_year BETWEEN ${beginYear} AND ${endYear}
+    SELECT name, gradYear, user_id FROM people
+    WHERE gradYear BETWEEN ${beginYear} AND ${endYear}
     ORDER BY name
   `).forEach((alum) => {
-    result[alum.grad_year] ||= []
-    result[alum.grad_year].push({
+    result[alum.gradYear] ||= []
+    result[alum.gradYear].push({
       name: alum.name,
       user_id: alum.user_id ?? undefined
     })
