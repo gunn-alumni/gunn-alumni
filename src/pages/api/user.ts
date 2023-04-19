@@ -21,12 +21,10 @@ export default function handler (
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
-  res.json({
-    ...db.query(sql`
-      SELECT name, grad_year FROM people WHERE user_id = ${req.query.id}
-    `)[0],
-    ...db.query(sql`
-      SELECT bio FROM users WHERE id = ${req.query.id}
-    `)[0]
-  })
+  // will not return data is user is not a person
+  res.json(db.query(sql`
+    SELECT people.name, people.gradYear, users.bio
+    FROM people, users
+    WHERE people.userID = ${req.query.id} AND users.id = ${req.query.id}
+  `)[0])
 }

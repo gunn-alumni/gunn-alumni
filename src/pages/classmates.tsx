@@ -59,11 +59,11 @@ export default function Classmates () {
     }
     console.log('HELPER DATA = ', userCardDataHelper)
 
-    // add grad_year property to each user
+    // add gradYear property to each user
     userCardDataHelper.forEach(obj => {
       const keys = Object.keys(obj)
       obj[keys[0]].forEach(userObj => {
-        userObj.grad_year = keys[0]
+        userObj.gradYear = keys[0]
       })
     })
 
@@ -125,7 +125,7 @@ export default function Classmates () {
                         {item[groupTagName].map((data, i) => (
                             <UserCard
                                 key={i}
-                                uniId={(!Object.keys(data).includes('user_id')) ? ('user' + i) : data.user_id}
+                                uniId={(!Object.keys(data).includes('userID')) ? ('user' + i) : data.userID}
                                 classTitle={'user_card'}
                                 userPfp={(!Object.keys(data).includes('userPfp')) ? '/images/userIconx96.png' : data.userPfp}
                                 userName={(!Object.keys(data).includes('name')) ? 'nameless_user' : data.name}
@@ -148,7 +148,7 @@ export default function Classmates () {
   // searching using fuse.js initialize and functions
   const searchSettings =
     {
-      keys: ['grad_year', 'name'],
+      keys: ['gradYear', 'name'],
       includeMatches: true,
       threshold: 0.2,
       tokenize: true,
@@ -240,7 +240,7 @@ export default function Classmates () {
                     {showRes.map((fuseItem, index) => (
                         <UserCard
                             key={index}
-                            uniId={(!Object.keys(fuseItem.item).includes('user_id')) ? ('user' + index) : fuseItem.item.user_id}
+                            uniId={(!Object.keys(fuseItem.item).includes('userID')) ? ('user' + index) : fuseItem.item.userID}
                             classTitle={'user_card'}
                             userPfp={(!Object.keys(fuseItem.item).includes('userPfp')) ? '/images/userIconx96.png' : fuseItem.item.userPfp}
                             userName={(!Object.keys(fuseItem.item).includes('name')) ? 'nameless_user' : fuseItem.item.name}
