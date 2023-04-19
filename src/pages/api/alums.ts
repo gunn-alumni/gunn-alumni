@@ -19,7 +19,7 @@ import db from '@/db'
 
 interface Alum {
   name: string
-  user_id?: number
+  userID?: number
 }
 
 type Result = Record<number, Alum[]>
@@ -33,14 +33,14 @@ export default function handler (
 
   const result: Result = {}
   db.query(sql`
-    SELECT name, gradYear, user_id FROM people
+    SELECT name, gradYear, userID FROM people
     WHERE gradYear BETWEEN ${beginYear} AND ${endYear}
     ORDER BY name
   `).forEach((alum) => {
     result[alum.gradYear] ||= []
     result[alum.gradYear].push({
       name: alum.name,
-      user_id: alum.user_id ?? undefined
+      userID: alum.userID ?? undefined
     })
   })
   res.json(result)

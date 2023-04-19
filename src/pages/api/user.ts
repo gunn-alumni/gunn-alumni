@@ -25,6 +25,6 @@ export default function handler (
   res.json(db.query(sql`
     SELECT people.name, people.gradYear, users.bio
     FROM people, users
-    WHERE people.user_id = ${req.query.id} AND users.id = ${req.query.id}
+    WHERE people.userID = ${req.query.id} AND users.id = ${req.query.id}
   `)[0])
 }

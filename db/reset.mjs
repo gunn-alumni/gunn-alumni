@@ -32,6 +32,6 @@ connect('store.db3').query(sql`
   CREATE TABLE people (
     name TEXT NOT NULL,
     gradYear INT,
-    user_id INT UNIQUE
+    userID INT UNIQUE
   ) STRICT
 `)
