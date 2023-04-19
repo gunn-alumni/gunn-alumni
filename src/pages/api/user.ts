@@ -21,7 +21,7 @@ export default function handler (
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
-  // will not return data is user is not a person
+  // will not return data if user is not a person
   res.json(db.query(sql`
     SELECT people.name, people.gradYear, users.bio
     FROM people, users
