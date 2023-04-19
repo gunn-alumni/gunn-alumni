@@ -21,7 +21,7 @@ export const isEmail = (email: string): boolean => {
       .test(email)
 }
 
-export const MIN_PASSWORD_LENGTH = 8
+export const MIN_PASSWORD_LENGTH = 6
 
 export const validPassword = (pw: string): boolean => {
   return pw.length >= MIN_PASSWORD_LENGTH && pw.length < 256
