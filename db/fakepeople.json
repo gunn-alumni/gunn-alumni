@@ -1,5 +1,32 @@
 [
   {
+    "name": "Bobby Boomer",
+    "grad_year": 2000
+  },
+  {
+    "name": "David Li",
+    "grad_year": 2024
+  },
+  {
+    "name": "Veeee Eeeer",
+    "grad_year": 2024
+  },
+  {
+    "name": "Zobby Zoomer",
+    "grad_year": 2040
+  },
+  {
+    "name": "Gunn Alumni Dylan",
+    "grad_year": 1984
+  },
+  {
+    "name": "Shitty Staff"
+  },
+  {
+    "name": "Example User",
+    "grad_year": 1999
+  },
+  {
     "pfp": "/images/userIconx96.png",
     "name": "Jia Ruparel",
     "grad_year": 2024
