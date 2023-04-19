@@ -17,7 +17,7 @@ import connect, { sql } from '@databases/sqlite-sync'
 
 const db = connect('store.db3')
 
-for (const person of JSON.parse(fs.readFileSync('./db/fakepeople.json'))) {
+for (const person of JSON.parse(fs.readFileSync('./scripts/fakepeople.json'))) {
   db.query(sql`
     INSERT INTO people (name, gradYear) VALUES
       (${person.name}, ${person.gradYear})
