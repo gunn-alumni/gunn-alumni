@@ -1,15 +1,29 @@
-import { useState } from "react";
-import Image from "next/image";
-import titanIcon from "@/../public/images/titanIcon.png";
-import Link from "next/link";
+import { useState } from 'react'
+import Image from 'next/image'
+import titanIcon from '@/../public/images/titanIcon.png'
+import Link from 'next/link'
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 
-const SignupPage = () => {
-  const [name, setName] = useState("");
-  const [year, setYear] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {};
+const SignupPage = (): JSX.Element => {
+  const [name, setName] = useState('')
+  const [year, setYear] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const supabase = useSupabaseClient()
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    })
+
+    console.log(data)
+    console.log(error)
+  }
 
   return (
     <section className="">
@@ -37,7 +51,7 @@ const SignupPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="First Last"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => { setName(e.target.value) }}
                 />
               </div>
               <div>
@@ -52,7 +66,7 @@ const SignupPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { setEmail(e.target.value) }}
                 />
               </div>
               <div>
@@ -66,7 +80,7 @@ const SignupPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="XXXX"
                   value={year}
-                  onChange={(e) => setYear(e.target.value)}
+                  onChange={(e) => { setYear(e.target.value) }}
                 />
               </div>
               <div>
@@ -81,7 +95,7 @@ const SignupPage = () => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => { setPassword(e.target.value) }}
                 />
               </div>
               <button
@@ -91,7 +105,7 @@ const SignupPage = () => {
                 Sign up
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                {"Already have an account? "}
+                {'Already have an account? '}
                 <Link
                   href="login"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
@@ -104,7 +118,7 @@ const SignupPage = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SignupPage;
+export default SignupPage

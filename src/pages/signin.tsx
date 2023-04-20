@@ -1,41 +1,22 @@
-import { useState } from "react";
-import Image from "next/image";
-import titanIcon from "@/../public/images/titanIcon.png";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import titanIcon from '@/../public/images/titanIcon.png'
+import Link from 'next/link'
+import Router from 'next/router'
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const LoginPage = (): JSX.Element => {
+  const [email, setEmail] = useState<string | undefined>('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState<string | undefined>('')
+  const session = useSession()
+  const supabase = useSupabaseClient()
 
-    fetch(`http://localhost:4000/auth`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then(async (res) => {
-        if (res.ok) {
-          const token = await res.text();
-          localStorage.setItem("token", token);
-          router.push("/");
-        } else {
-          setError((await res.json()).message);
-        }
-      })
-      .catch((err) =>
-        setError("Something bad happened. Please try again later")
-      );
-  };
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    e.preventDefault()
 
+
+  }
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
@@ -64,7 +45,7 @@ const LoginPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { setEmail(e.target.value) }}
                 />
               </div>
               <div>
@@ -80,24 +61,10 @@ const LoginPage = () => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => { setPassword(e.target.value) }}
                 />
               </div>
               <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label htmlFor="remember" className="text-gray-500">
-                      Remember me
-                    </label>
-                  </div>
-                </div>
                 <Link
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline"
@@ -110,7 +77,7 @@ const LoginPage = () => {
                 type="submit"
                 value="Sign In"
               />
-              {error && <div className={`text-red-500`}>Error: {error}</div>}
+              {(error !== '') && <div className={'text-red-500'}>Error: {error}</div>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {"Don't have an account yet?"}
                 <Link
@@ -125,6 +92,6 @@ const LoginPage = () => {
         </div>
       </div>
     </section>
-  );
-};
-export default LoginPage;
+  )
+}
+export default LoginPage
