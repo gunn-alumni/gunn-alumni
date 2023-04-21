@@ -6,16 +6,26 @@ import Router from 'next/router'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 const LoginPage = (): JSX.Element => {
-  const [email, setEmail] = useState<string | undefined>('')
+  const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | undefined>('')
+  const [error, setError] = useState<string>('')
   const session = useSession()
   const supabase = useSupabaseClient()
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-
+    supabase.auth.signInWithPassword({
+      email,
+      password
+    }).then((res) => {
+      if (res.error !== null) {
+        setError(res.error.message)
+      } else {
+        Router.push('/').catch(err => { console.log(err) })
+      }
+    })
+      .catch((err) => { console.log(err) })
   }
   return (
     <section className="">
@@ -43,7 +53,7 @@ const LoginPage = (): JSX.Element => {
                   type="email"
                   name="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="name@gmail.com"
+                  placeholder="example@gmail.com"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value) }}
                 />
@@ -75,7 +85,7 @@ const LoginPage = (): JSX.Element => {
               <input
                 className="w-full text-white bg-primary hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="submit"
-                value="Sign In"
+                value="Login"
               />
               {(error !== '') && <div className={'text-red-500'}>Error: {error}</div>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
