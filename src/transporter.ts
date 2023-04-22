@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export { default } from 'next-auth/middleware'
+import nodemailer from 'nodemailer'
 
-export const config = { matcher: '/secure/:path*' }
+const transporter = nodemailer.createTransport({
+  streamTransport: true
+})
+
+export default transporter
