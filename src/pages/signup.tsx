@@ -2,8 +2,6 @@ import { useState } from 'react'
 import Image from 'next/image'
 import titanIcon from '@/../public/images/titanIcon.png'
 import Link from 'next/link'
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-
 
 const SignupPage = (): JSX.Element => {
   const [name, setName] = useState('')
@@ -11,18 +9,27 @@ const SignupPage = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const supabase = useSupabaseClient()
-
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    }).then(async (res: Response) => {
+      if (res.ok) {
+        alert('user successfully added if they do not exist')
+      } else {
+        alert((await res.json()).message)
+      }
+    }).catch((_err) => {
+      alert('FIXME NOTIFY OF ERROR PROPERLY')
     })
-
-    console.log(data)
-    console.log(error)
   }
 
   return (
