@@ -10,6 +10,7 @@ import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs'
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
 import { TiSocialTwitter } from 'react-icons/ti'
 import Link from 'next/link'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 // defaults
 

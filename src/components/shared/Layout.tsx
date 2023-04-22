@@ -1,19 +1,25 @@
 import Navbar from './Navbar'
 import Footer from './Footer'
 import PasswordCheck from './PasswordCheck'
-import { type Session } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
+import { useEffect, useState } from "react";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 
-const Layout = ({ children, session }: { children: JSX.Element, session: Session }): JSX.Element => {
+const Layout = ({ children, pageProps }: { children: JSX.Element, pageProps: any} ): JSX.Element => {
+
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+
   return (
-    <SessionProvider session={session}>
+    <SessionContextProvider
+    supabaseClient={supabase}
+    initialSession={pageProps.initialSession}>
       <div className="flex flex-col justify-between min-h-screen">
         <PasswordCheck />
         <Navbar />
         <main>{children}</main>
         <Footer />
       </div>
-    </SessionProvider>
+    </SessionContextProvider>
   )
 }
 
