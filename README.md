@@ -13,7 +13,7 @@ corepack enable
 
 [vscode eslint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-[sqlite3 editor](https://marketplace.visualstudio.com/items?itemName=yy0931.vscode-sqlite3-editor) if you want to view and modify the database in vscode. this extension requires python to be installed.
+an sqlite3 editor if you want to view and modify the database
 
 ## Setup Instructions
 Clone the repo and install dependencies
