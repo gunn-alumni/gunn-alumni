@@ -1,10 +1,10 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
 interface NewsCardProps {
-  title: string
-  description: string
-  date: Date
-  imageURL: string // TODO Implement with server
+  title: string;
+  description: string;
+  date: Date;
+  imageURL: string; // TODO Implement with server
 }
 
 const NewsCard = ({ title, description, date, imageURL }: NewsCardProps) => {
@@ -16,10 +16,16 @@ const NewsCard = ({ title, description, date, imageURL }: NewsCardProps) => {
         <div className="break-normal hidden md:block">{description}</div>
       </div>
 
-      <Image src={imageURL} alt={title} width={256} height={256} className="h-64 bg-zinc-500 md:order-first md:w-64 md:mr-8" />
+      <Image
+        src={imageURL}
+        alt={title}
+        width={256}
+        height={256}
+        className="h-64 bg-zinc-500 md:order-first md:w-64 md:mr-8"
+      />
       <div className="block mt-4 md:hidden">{description}</div>
     </div>
-  )
-}
+  );
+};
 
-export default NewsCard
+export default NewsCard;

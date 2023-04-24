@@ -12,41 +12,52 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { type NextApiRequest, type NextApiResponse } from 'next'
-import { sql } from '@databases/sqlite-sync'
+import { type NextApiRequest, type NextApiResponse } from 'next';
+import { sql } from '@databases/sqlite-sync';
 
-import db from '@/db'
-import { isEmail as validEmail, validPassword, hash, MIN_PASSWORD_LENGTH } from '@/auth_utils'
+import db from '@/db';
+import {
+  isEmail as validEmail,
+  validPassword,
+  hash,
+  MIN_PASSWORD_LENGTH
+} from '@/auth_utils';
 
-export default function handler (
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
   if (!validEmail(req.body.email)) {
-    res.status(400).json({ message: 'Invalid email' })
-    return
+    res.status(400).json({ message: 'Invalid email' });
+    return;
   }
   if (!validPassword(req.body.password)) {
     res.status(400).json({
-      message: 'Password must be at least ' + MIN_PASSWORD_LENGTH.toString() +
+      message:
+        'Password must be at least ' +
+        MIN_PASSWORD_LENGTH.toString() +
         ' characters long'
-    })
-    return
+    });
+    return;
   }
 
-  if (db.query(sql`
+  if (
+    db.query(sql`
     SELECT email FROM users WHERE email=${req.body.email}
-  `).length !== 0) {
-    console.warn('attempted to create existing user')
+  `).length !== 0
+  ) {
+    console.warn('attempted to create existing user');
 
-    res.json({})
-    return
+    res.json({});
+    return;
   }
 
   db.query(sql`
     INSERT INTO users (id, email, password, bio) VALUES
-      ((SELECT MAX(id) FROM users) + 1, ${req.body.email}, ${hash(req.body)}, '')
-  `)
+      ((SELECT MAX(id) FROM users) + 1, ${req.body.email}, ${hash(
+    req.body
+  )}, '')
+  `);
 
-  res.json({})
+  res.json({});
 }

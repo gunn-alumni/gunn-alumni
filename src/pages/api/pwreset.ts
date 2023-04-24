@@ -12,28 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Readable } from 'stream'
-import { type NextApiRequest, type NextApiResponse } from 'next'
+import { Readable } from 'stream';
+import { type NextApiRequest, type NextApiResponse } from 'next';
 
-import transporter from '@/transporter'
+import transporter from '@/transporter';
 
-export default function handler (
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
   // todo: make this work
-  transporter.sendMail({
-    from: 'fakeauth@gunnalum.site',
-    to: req.body.email,
-    subject: 'WEBSITE NAME Password Reset',
-    text: 'test email text.'
-  }, (_err, info) => {
-    if (info.message instanceof Readable) {
-      info.message.pipe(process.stdout)
-    } else {
-      console.error('nodemailer is misconfigured')
+  transporter.sendMail(
+    {
+      from: 'fakeauth@gunnalum.site',
+      to: req.body.email,
+      subject: 'WEBSITE NAME Password Reset',
+      text: 'test email text.'
+    },
+    (_err, info) => {
+      if (info.message instanceof Readable) {
+        info.message.pipe(process.stdout);
+      } else {
+        console.error('nodemailer is misconfigured');
+      }
     }
-  })
+  );
 
-  res.status(500).json({ message: 'not implemented' })
+  res.status(500).json({ message: 'not implemented' });
 }

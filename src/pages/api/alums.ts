@@ -12,36 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { sql } from '@databases/sqlite-sync'
-import { type NextApiRequest, type NextApiResponse } from 'next'
+import { sql } from '@databases/sqlite-sync';
+import { type NextApiRequest, type NextApiResponse } from 'next';
 
-import db from '@/db'
+import db from '@/db';
 
 interface Alum {
-  name: string
-  userID?: number
+  name: string;
+  userID?: number;
 }
 
-type Result = Record<number, Alum[]>
+type Result = Record<number, Alum[]>;
 
-export default function handler (
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result>
 ): void {
-  const beginYear = req.query.beginYear ?? Number.MIN_SAFE_INTEGER
-  const endYear = req.query.endYear ?? Number.MAX_SAFE_INTEGER
+  const beginYear = req.query.beginYear ?? Number.MIN_SAFE_INTEGER;
+  const endYear = req.query.endYear ?? Number.MAX_SAFE_INTEGER;
 
-  const result: Result = {}
-  db.query(sql`
+  const result: Result = {};
+  db.query(
+    sql`
     SELECT name, gradYear, userID FROM people
     WHERE gradYear BETWEEN ${beginYear} AND ${endYear}
     ORDER BY name
-  `).forEach((alum) => {
-    result[alum.gradYear] ||= []
+  `
+  ).forEach((alum) => {
+    result[alum.gradYear] ||= [];
     result[alum.gradYear].push({
       name: alum.name,
       userID: alum.userID ?? undefined
-    })
-  })
-  res.json(result)
+    });
+  });
+  res.json(result);
 }

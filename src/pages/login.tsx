@@ -1,32 +1,38 @@
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import titanIcon from '@/../public/images/titanIcon.png'
-import Link from 'next/link'
-import Router from 'next/router'
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import titanIcon from '@/../public/images/titanIcon.png';
+import Link from 'next/link';
+import Router from 'next/router';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const LoginPage = (): JSX.Element => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string>('')
-  const session = useSession()
-  const supabase = useSupabaseClient()
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string>('');
+  const session = useSession();
+  const supabase = useSupabaseClient();
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
-    e.preventDefault()
+    e.preventDefault();
 
-    supabase.auth.signInWithPassword({
-      email,
-      password
-    }).then((res) => {
-      if (res.error !== null) {
-        setError(res.error.message)
-      } else {
-        Router.push('/').catch(err => { console.log(err) })
-      }
-    })
-      .catch((err) => { console.log(err) })
-  }
+    supabase.auth
+      .signInWithPassword({
+        email,
+        password
+      })
+      .then((res) => {
+        if (res.error !== null) {
+          setError(res.error.message);
+        } else {
+          Router.push('/').catch((err) => {
+            console.log(err);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
@@ -55,7 +61,9 @@ const LoginPage = (): JSX.Element => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="example@gmail.com"
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value) }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
               </div>
               <div>
@@ -71,7 +79,9 @@ const LoginPage = (): JSX.Element => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   value={password}
-                  onChange={(e) => { setPassword(e.target.value) }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -87,7 +97,9 @@ const LoginPage = (): JSX.Element => {
                 type="submit"
                 value="Login"
               />
-              {(error !== '') && <div className={'text-red-500'}>Error: {error}</div>}
+              {error !== '' && (
+                <div className={'text-red-500'}>Error: {error}</div>
+              )}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {"Don't have an account yet?"}
                 <Link
@@ -102,6 +114,6 @@ const LoginPage = (): JSX.Element => {
         </div>
       </div>
     </section>
-  )
-}
-export default LoginPage
+  );
+};
+export default LoginPage;

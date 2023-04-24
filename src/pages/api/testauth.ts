@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { type NextApiRequest, type NextApiResponse } from 'next'
-import { getToken } from 'next-auth/jwt'
+import { type NextApiRequest, type NextApiResponse } from 'next';
+import { getToken } from 'next-auth/jwt';
 
-export default async function handler (
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): Promise<void> {
-  const token = await getToken({ req })
+  const token = await getToken({ req });
   if (token == null) {
-    res.status(403).json({ message: 'unauthorized' })
-    return
+    res.status(403).json({ message: 'unauthorized' });
+    return;
   }
-  res.json({ message: 'success' })
+  res.json({ message: 'success' });
 }

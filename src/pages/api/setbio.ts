@@ -12,28 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { type NextApiRequest, type NextApiResponse } from 'next'
-import { getToken } from 'next-auth/jwt'
-import { sql } from '@databases/sqlite-sync'
+import { type NextApiRequest, type NextApiResponse } from 'next';
+import { getToken } from 'next-auth/jwt';
+import { sql } from '@databases/sqlite-sync';
 
-import db from '@/db'
+import db from '@/db';
 
-export default async function handler (
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): Promise<void> {
-  const token = await getToken({ req })
+  const token = await getToken({ req });
   if (token == null) {
-    res.status(403).json({ message: 'unauthorized' })
-    return
+    res.status(403).json({ message: 'unauthorized' });
+    return;
   }
   if (req.body.bio == null) {
-    res.status(400).json({ message: 'missing bio content' })
+    res.status(400).json({ message: 'missing bio content' });
   }
   db.query(sql`
     UPDATE users
     SET bio = ${req.body.bio}
     WHERE id = ${token.sub}
-  `)
-  res.json({ message: 'success' })
+  `);
+  res.json({ message: 'success' });
 }

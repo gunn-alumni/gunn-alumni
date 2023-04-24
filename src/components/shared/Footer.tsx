@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -13,7 +13,10 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link href="https://blog.gunnhigh.school/" className="mr-4 hover:underline md:mr-6">
+          <Link
+            href="https://blog.gunnhigh.school/"
+            className="mr-4 hover:underline md:mr-6"
+          >
             Blog
           </Link>
         </li>
@@ -23,13 +26,16 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link href="https://forms.gle/o9bmzkr5rjCiduLs5" className="hover:underline">
+          <Link
+            href="https://forms.gle/o9bmzkr5rjCiduLs5"
+            className="hover:underline"
+          >
             Contact
           </Link>
         </li>
       </ul>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,29 +1,34 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import titanIcon from '@/../public/images/titanIcon.png'
-import Link from 'next/link'
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-
+import { useState } from 'react';
+import Image from 'next/image';
+import titanIcon from '@/../public/images/titanIcon.png';
+import Link from 'next/link';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const SignupPage = (): JSX.Element => {
-  const [name, setName] = useState('')
-  const [year, setYear] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState('');
+  const [year, setYear] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmName, setConfirmName] = useState(false);
 
-  const supabase = useSupabaseClient()
+  const supabase = useSupabaseClient();
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault()
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    })
-
-    console.log(data)
-    console.log(error)
-  }
+    supabase.auth
+      .signUp({
+        email,
+        password
+      })
+      .then(({ data, error }) => {
+        console.log(data);
+        console.log(error);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <section className="">
@@ -51,59 +56,65 @@ const SignupPage = (): JSX.Element => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="First Last"
                   value={name}
-                  onChange={(e) => { setName(e.target.value) }}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                 />
               </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+              {!confirmName && (
+                <button
+                  className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  onClick={() => {
+                    setConfirmName(true);
+                  }}
                 >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="name@gmail.com"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value) }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="year"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Graduation Year
-                </label>
-                <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="XXXX"
-                  value={year}
-                  onChange={(e) => { setYear(e.target.value) }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  value={password}
-                  onChange={(e) => { setPassword(e.target.value) }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign up
-              </button>
+                  Continue
+                </button>
+              )}
+              {confirmName && (
+                <>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Your email
+                    </label>
+                    <input
+                      type="email"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      placeholder="name@gmail.com"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    Sign up
+                  </button>
+                </>
+              )}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 {'Already have an account? '}
                 <Link
@@ -118,7 +129,7 @@ const SignupPage = (): JSX.Element => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;

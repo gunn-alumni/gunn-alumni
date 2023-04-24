@@ -1,7 +1,7 @@
 interface EventCardProps {
-  title: string
-  date: Date
-  url: string
+  title: string;
+  date: Date;
+  url: string;
 }
 
 const EventCard = ({ title, date, url }: EventCardProps) => {
@@ -17,7 +17,7 @@ const EventCard = ({ title, date, url }: EventCardProps) => {
         <div className="text-4xl font-semibold">{title}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EventCard
+export default EventCard;
