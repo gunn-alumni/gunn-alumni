@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import { StandardButton } from '@/components/shared/Button'
+import Image from 'next/image';
+import { StandardButton } from '@/components/shared/Button';
 
 interface NewsLandingCardProps {
-  title: string
-  description: string
-  articleURL: string // TODO: for the Read More button,
-  image: string
+  title: string;
+  description: string;
+  articleURL: string; // TODO: for the Read More button,
+  image: string;
 }
 
 const NewsLandingCard = ({
@@ -40,7 +40,7 @@ const NewsLandingCard = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewsLandingCard
+export default NewsLandingCard;
