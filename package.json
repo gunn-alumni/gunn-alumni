@@ -15,14 +15,7 @@
     "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/auth-ui-react": "^0.3.5",
     "@supabase/supabase-js": "^2.21.0",
-    "@types/node": "18.13.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "@typescript-eslint/parser": "5.0.0",
     "autoprefixer": "^10.4.13",
-    "dotenv": "^16.0.3",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
     "fuse.js": "^6.6.2",
     "next": "13.3.0",
     "nodemailer": "^6.9.1",
@@ -32,6 +25,7 @@
     "react-slider": "^2.0.4"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "5.0.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/node": "18.15.11",
     "@types/nodemailer": "^6.4.7",
@@ -53,27 +47,5 @@
     "prettier": "^2.8.8",
     "tailwindcss": "^3.2.7",
     "typescript": "^5.0.4"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
-    },
-    "extends": [
-      "plugin:react/recommended",
-      "standard-with-typescript",
-      "next/core-web-vitals"
-    ],
-    "overrides": [],
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module",
-      "project": true
-    },
-    "plugins": [
-      "react"
-    ],
-    "rules": {}
   }
 }

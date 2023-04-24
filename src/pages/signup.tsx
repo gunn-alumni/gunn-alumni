@@ -3,20 +3,26 @@ import Image from 'next/image';
 import titanIcon from '@/../public/images/titanIcon.png';
 import Link from 'next/link';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Router from 'next/router';
 
 const SignupPage = (): JSX.Element => {
   const [name, setName] = useState<string>('');
-  const [year, setYear] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
   const [confirmName, setConfirmName] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   const supabase = useSupabaseClient();
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
+    if (password !== password2) {
+      setError('Passwords do not match');
+      return;
+    }
 
     supabase.auth
       .signUp({
@@ -24,8 +30,10 @@ const SignupPage = (): JSX.Element => {
         password
       })
       .then(({ data, error }) => {
-        console.log(data);
-        console.log(error);
+        if (error) setError(error.message);
+        else {
+          setSuccess(true);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -51,85 +59,91 @@ const SignupPage = (): JSX.Element => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Create your account
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="Full Name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  onFocus={() => setError('')}
-                />
-              </div>
-              {!confirmName && (
-                <button
-                  className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  onClick={handleNameConfirm}
-                >
-                  Continue
-                </button>
-              )}
-              {confirmName && (
-                <>
-                  <div>
-                    <input
-                      type="email"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                      onFocus={() => setError('')}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      onFocus={() => setError('')}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="password"
-                      placeholder="Confirm Password"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      onFocus={() => setError('')}
-                    />
-                  </div>
+            {!success ? (
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    onFocus={() => setError('')}
+                  />
+                </div>
+                {!confirmName && (
                   <button
-                    type="submit"
                     className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    onClick={handleNameConfirm}
                   >
-                    Sign up
+                    Continue
                   </button>
-                </>
-              )}
-              {error !== '' && (
-                <div className={'text-red-500'}>Error: {error}</div>
-              )}
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                {'Already have an account? '}
-                <Link
-                  href="login"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Log in
-                </Link>
-              </p>
-            </form>
+                )}
+                {confirmName && (
+                  <>
+                    <div>
+                      <input
+                        type="email"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={password2}
+                        onChange={(e) => {
+                          setPassword2(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Sign up
+                    </button>
+                  </>
+                )}
+                {error !== '' && (
+                  <div className={'text-red-500'}>Error: {error}</div>
+                )}
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  {'Already have an account? '}
+                  <Link
+                    href="login"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Log in
+                  </Link>
+                </p>
+              </form>
+            ) : (
+              <div className="text-xl">
+                Thanks! Check your inbox to confirm your email.
+              </div>
+            )}
           </div>
         </div>
       </div>
