@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { sql } from '@databases/sqlite-sync';
+// import { sql } from '@databases/sqlite-sync';
 import { type NextApiRequest, type NextApiResponse } from 'next';
 
-import db from '@/db';
+// import db from '@/db';
 
 interface Alum {
   name: string;
@@ -31,19 +31,30 @@ export default function handler(
   const beginYear = req.query.beginYear ?? Number.MIN_SAFE_INTEGER;
   const endYear = req.query.endYear ?? Number.MAX_SAFE_INTEGER;
 
-  const result: Result = {};
-  db.query(
-    sql`
-    SELECT name, gradYear, userID FROM people
-    WHERE gradYear BETWEEN ${beginYear} AND ${endYear}
-    ORDER BY name
-  `
-  ).forEach((alum) => {
-    result[alum.gradYear] ||= [];
-    result[alum.gradYear].push({
-      name: alum.name,
-      userID: alum.userID ?? undefined
-    });
-  });
+  const result: Result = {
+    2020: [
+      {
+        name: 'dylan',
+        userID: 123
+      },
+      {
+        name: 'veer',
+        userID: 123
+      }
+    ]
+  };
+  // db.query(
+  //   sql`
+  //   SELECT name, gradYear, userID FROM people
+  //   WHERE gradYear BETWEEN ${beginYear} AND ${endYear}
+  //   ORDER BY name
+  // `
+  // ).forEach((alum) => {
+  //   result[alum.gradYear] ||= [];
+  //   result[alum.gradYear].push({
+  //     name: alum.name,
+  //     userID: alum.userID ?? undefined
+  //   });
+  // });
   res.json(result);
 }
