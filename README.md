@@ -13,7 +13,7 @@ corepack enable
 
 [vscode eslint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-an sqlite3 editor if you want to view and modify the database
+an sqlite editor if you want to view and modify the database
 
 ## Setup Instructions
 Clone the repo and install dependencies
@@ -28,4 +28,4 @@ pnpm run dev
 ```
 
 ## Warnings
-do not put sensitive/important/large data in the db.
+do not put sensitive/important/large data in the db
