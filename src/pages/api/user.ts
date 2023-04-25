@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { type NextApiRequest, type NextApiResponse } from 'next'
-import { sql } from '@databases/sqlite-sync'
+import { type NextApiRequest, type NextApiResponse } from 'next';
+import { sql } from '@databases/sqlite-sync';
 
-import db from '@/db'
-
-export default function handler (
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
 ): void {
   // will not return data if user is not a person
-  res.json(db.query(sql`
-    SELECT people.name, people.gradYear, users.bio
-    FROM people, users
-    WHERE people.userID = ${req.query.id} AND users.id = ${req.query.id}
-  `)[0])
+  // res.json(
+  //   db.query(sql`
+  //   SELECT people.name, people.gradYear, users.bio
+  //   FROM people, users
+  //   WHERE people.userID = ${req.query.id} AND users.id = ${req.query.id}
+  // `)[0]
+  // );
 }

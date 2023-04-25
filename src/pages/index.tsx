@@ -1,12 +1,12 @@
 // React Components
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
 // Custom Components
-import EventCard from '@/components/home/EventCard.tsx'
-import NewsCard from '@/components/home/NewsCard'
-import NewsLandingCard from '@/components/home/NewsLandingCard'
-import { StandardButton } from '@/components/shared/Button'
+import EventCard from '@/components/home/EventCard.tsx';
+import NewsCard from '@/components/home/NewsCard';
+import NewsLandingCard from '@/components/home/NewsLandingCard';
+import { StandardButton } from '@/components/shared/Button';
 
 const dummyNewsData = [
   {
@@ -23,7 +23,7 @@ const dummyNewsData = [
       'Henry M. Gunn High School in Palo Alto was named the No. 1 public school in California. ',
     imageURL: '/images/sample_news_photo2.png'
   }
-]
+];
 
 const dummyProgramData = [
   {
@@ -41,9 +41,9 @@ const dummyProgramData = [
     date: new Date('March 24, 2023'),
     url: ''
   }
-]
+];
 
-export default function Home () {
+export default function Home() {
   return (
     <>
       <Head>
@@ -105,5 +105,5 @@ export default function Home () {
         </div>
       </div>
     </>
-  )
+  );
 }

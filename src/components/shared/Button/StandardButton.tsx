@@ -1,10 +1,10 @@
-import { type ReactElement } from 'react'
+import { type ReactElement } from 'react';
 
 interface StandardButtonProps {
-  children?: ReactElement | string
-  variant?: 'primary' | 'secondary'
-  color: 'bg-primary' | 'bg-black' | 'bg-transparent' | string
-  className?: string
+  children?: ReactElement | string;
+  variant?: 'primary' | 'secondary';
+  color: 'bg-primary' | 'bg-black' | 'bg-transparent' | string;
+  className?: string;
 }
 
 const StandardButton = ({
@@ -13,7 +13,7 @@ const StandardButton = ({
   color,
   className
 }: StandardButtonProps) => {
-  const secondaryStyle = 'outline outline-2 outline-white'
+  const secondaryStyle = 'outline outline-2 outline-white';
   return (
     <button
       className={`rounded-lg text-sm text-white font-bold flex-1 py-2 px-4 ${color} ${
@@ -22,7 +22,7 @@ const StandardButton = ({
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
-export default StandardButton
+export default StandardButton;

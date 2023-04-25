@@ -1,17 +1,30 @@
-// Copyright 2023 David Li
+import { createMiddlewareSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+export async function middleware(req: NextRequest) {
+  // We need to create a response and hand it to the supabase client to be able to modify the response headers.
+  const res = NextResponse.next();
+  // Create authenticated Supabase Client.
+  const supabase = createMiddlewareSupabaseClient({ req, res });
+  // Check if we have a session
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
 
-//     http://www.apache.org/licenses/LICENSE-2.0
+  // Check auth condition
+  if (session?.user.email?.endsWith('@gmail.com')) {
+    // Authentication successful, forward request to protected route.
+    return res;
+  }
 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+  // Auth condition not met, redirect to home page.
+  const redirectUrl = req.nextUrl.clone();
+  redirectUrl.pathname = '/login';
+  redirectUrl.searchParams.set('redirectedFrom', req.nextUrl.pathname);
+  return NextResponse.redirect(redirectUrl);
+}
 
-export { default } from 'next-auth/middleware'
-
-export const config = { matcher: '/secure/:path*' }
+export const config = {
+  matcher: '/user/:path*'
+};

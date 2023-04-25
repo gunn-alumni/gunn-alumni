@@ -1,24 +1,38 @@
-import { type NextPage } from 'next'
-import { useSession } from 'next-auth/react'
-import Router from 'next/router'
-import { useEffect } from 'react'
+import { type NextPage } from 'next';
+import Router from 'next/router';
+import { useEffect } from 'react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 
-const Protected: NextPage = (): JSX.Element => {
-  const { status, data } = useSession()
+const Protected: NextPage = ({ user }: any): JSX.Element => {
+  const session = useSession();
+  const supabase = useSupabaseClient();
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      Router.replace('/auth/signin').catch((err) => { console.error(err) })
+  return <div>{user.name}</div>;
+};
+
+export const getServerSideProps = async (ctx: any) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user
     }
-  }, [status])
+  };
+};
 
-  if (status === 'authenticated') {
-    return <div>
-        This page is only visible to authenticated users. Welcome {JSON.stringify(data.user, null, 2)}
-      </div>
-  }
-
-  return <div>Loading...</div>
-}
-
-export default Protected
+export default Protected;

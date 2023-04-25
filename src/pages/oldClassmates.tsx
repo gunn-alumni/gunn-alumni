@@ -1,21 +1,21 @@
-import Head from 'next/head'
-import { useRef, useState } from 'react'
+import Head from 'next/head';
+import { useRef, useState } from 'react';
 
 // Custom Components
-import FilterGroups from '@/components/classmates/FilterGroups'
-import { AiFillFilter } from 'react-icons/ai'
+import FilterGroups from '@/components/classmates/FilterGroups';
+import { AiFillFilter } from 'react-icons/ai';
 
-export default function OldClassmates () {
+export default function OldClassmates() {
   /// Start of Js Code
   // React Hooks:
-  const [visibleIndicator, setVisibleIndicator] = useState(false)
-  const indicatorRef = useRef(null)
-  const filterGroupsRef = useRef(null)
-  const groupWrapperRef = useRef(null)
-  const groupRefs = useRef([])
-  groupRefs.current = []
-  const tagRefs = useRef([])
-  tagRefs.current = []
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
+  const indicatorRef = useRef(null);
+  const filterGroupsRef = useRef(null);
+  const groupWrapperRef = useRef(null);
+  const groupRefs = useRef([]);
+  groupRefs.current = [];
+  const tagRefs = useRef([]);
+  tagRefs.current = [];
 
   /// COMPONENTS INITIAL DATA
   const dummyFilterTagsData = [
@@ -39,41 +39,41 @@ export default function OldClassmates () {
     '2007',
     '2006',
     '2005'
-  ]
+  ];
 
   // Way #1:
-  const groupsElements: JSX.Element[] = []
+  const groupsElements: JSX.Element[] = [];
 
   /// All Variables
   // Css Variables
-  const filterBox_width = '10%'
-  const tag_to_indicator_size_ratio = '0.6'
-  const tag_fontSize = '25px'
-  const marginL_groups = 30
-  const marginR_groups = marginL_groups / 2
+  const filterBox_width = '10%';
+  const tag_to_indicator_size_ratio = '0.6';
+  const tag_fontSize = '25px';
+  const marginL_groups = 30;
+  const marginR_groups = marginL_groups / 2;
 
   // Toggle Filter by either clicking on image or document
-  const [filterShowCss, setFilterShowCss] = useState('hidden')
+  const [filterShowCss, setFilterShowCss] = useState('hidden');
 
   const toggleFilter = (isIcon = false) => {
     if (isIcon) {
-      console.log('YAAAAY')
+      console.log('YAAAAY');
       if (filterShowCss === 'hidden') {
-        setFilterShowCss('block')
+        setFilterShowCss('block');
       } else {
-        setFilterShowCss('hidden')
+        setFilterShowCss('hidden');
       }
     } else {
-      setFilterShowCss('hidden')
+      setFilterShowCss('hidden');
     }
-  }
+  };
 
   // React Way:
   const groupTagsClick = (elm) => {
-    console.log('No WAYYYY THIS WORKEDDDDD!!!!!')
-    console.log(elm, elm.innerHTML)
+    console.log('No WAYYYY THIS WORKEDDDDD!!!!!');
+    console.log(elm, elm.innerHTML);
     // showGroup(elm);
-  }
+  };
 
   return (
     <>
@@ -88,8 +88,8 @@ export default function OldClassmates () {
         id="content_wrapper"
         className={'relative h-[calc(100vh-138px)] flex top-0 overflow-hidden'}
         onClick={(e) => {
-          e.stopPropagation()
-          toggleFilter()
+          e.stopPropagation();
+          toggleFilter();
         }}
       >
         <div id="tag_wrapper" className="flex flex-row">
@@ -109,7 +109,9 @@ export default function OldClassmates () {
         <div id="groups_wrapper" className={'ml-16 overflow-y-scroll'}>
           <h1
             id="header"
-            className={'my-3 text-[2em] font-extrabold  text-center ml-[calc(calc(-1*10%)-10%)]'}
+            className={
+              'my-3 text-[2em] font-extrabold  text-center ml-[calc(calc(-1*10%)-10%)]'
+            }
           >
             Find Your Classmates
           </h1>
@@ -120,8 +122,8 @@ export default function OldClassmates () {
             <div id="filter_wrapper">
               <button
                 onClick={(e) => {
-                  e.stopPropagation()
-                  toggleFilter(true)
+                  e.stopPropagation();
+                  toggleFilter(true);
                 }}
               >
                 <AiFillFilter size={28} />
@@ -166,5 +168,5 @@ export default function OldClassmates () {
         </div>
       </div>
     </>
-  )
+  );
 }

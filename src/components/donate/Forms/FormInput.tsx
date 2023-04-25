@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 interface FormInputProps {
-  title: string
-  type: string
-  placeholder?: string
-  pattern?: string
-  isRequired?: boolean
-  className?: string
+  title: string;
+  type: string;
+  placeholder?: string;
+  pattern?: string;
+  isRequired?: boolean;
+  className?: string;
 }
 
 const FormInput = ({
@@ -17,25 +17,40 @@ const FormInput = ({
   isRequired = true,
   className = 'border-2 border-gray-300 bg-gray-100 rounded-md px-1 py-1'
 }: FormInputProps) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
   if (isRequired) {
     return (
-            <div className="w-full flex flex-col">
-                <label className="text-lg font-medium">
-                    {title}
-                </label>
-                <input type={type} value={value} placeholder={placeholder} pattern={pattern} onChange={(e) => { setValue(e.target.value) }} required className={className}></input>
-            </div>
-    )
+      <div className="w-full flex flex-col">
+        <label className="text-lg font-medium">{title}</label>
+        <input
+          type={type}
+          value={value}
+          placeholder={placeholder}
+          pattern={pattern}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          required
+          className={className}
+        ></input>
+      </div>
+    );
   }
   return (
-        <div className="w-full flex flex-col">
-            <label className="text-lg font-medium">
-                {title}
-            </label>
-            <input type={type} value={value} placeholder={placeholder} pattern={pattern} onChange={(e) => { setValue(e.target.value) }} className={className}></input>
-        </div>
-  )
-}
+    <div className="w-full flex flex-col">
+      <label className="text-lg font-medium">{title}</label>
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        pattern={pattern}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        className={className}
+      ></input>
+    </div>
+  );
+};
 
-export default FormInput
+export default FormInput;
