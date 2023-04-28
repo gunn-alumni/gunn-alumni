@@ -2,16 +2,30 @@ import Image from 'next/image';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
 import { IconContext } from 'react-icons';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import titanIcon from '@/../public/images/titanIcon.png';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const session = useSession();
   const supabase = useSupabaseClient();
+
+  useEffect(() => {
+    const handleMenuBlur = (e) => {
+      if (!menuRef.current?.contains(e.target)) {
+        setAccountDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleMenuBlur);
+
+    return () => document.removeEventListener('mousedown', handleMenuBlur);
+  }, []);
 
   return (
     <nav
@@ -20,7 +34,7 @@ const Navbar = () => {
       } md:h-auto md:block z-20 w-full bg-primary`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <a href="#" className="flex items-center rounded-lg px-4 py-2">
+        <Link href="/" className="flex items-center rounded-lg px-4 py-2">
           <Image
             src={titanIcon}
             className="h-8 w-7 mr-4"
@@ -29,7 +43,7 @@ const Navbar = () => {
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             Gunn Alumni
           </span>
-        </a>
+        </Link>
         <button
           className="inline-flex items-center p-2 ml-3 text-sm text-white hover:bg-gray-700/30 rounded-lg md:hidden"
           onClick={() => setMenuVisible((b) => !b)}
@@ -67,13 +81,11 @@ const Navbar = () => {
             ) : (
               <>
                 <div className="hidden md:block order-2 ml-64">
-                  <button
-                    onClick={() => setAccountDropdownVisible((v) => !v)}
-                    onBlur={() => setAccountDropdownVisible(false)}
-                  >
+                  <button onClick={() => setAccountDropdownVisible((v) => !v)}>
                     <CgProfile color="white" size={40} />
                   </button>
                   <div
+                    ref={menuRef}
                     className={`${
                       accountDropdownVisible ? 'block' : 'hidden'
                     } z-20 mt-2 -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
@@ -82,39 +94,27 @@ const Navbar = () => {
                       <div className="font-medium ">Name User</div>
                       <div className="truncate">name@gmail.com</div>
                     </div>
-                    <ul className="py-2 text-sm text-gray-700">
-                      <li>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 hover:bg-gray-100 hover:text-white"
-                        >
-                          Dashboard
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 hover:bg-gray-100 hover:text-white"
-                        >
-                          Settings
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 hover:bg-gray-100 hover:text-white"
-                        >
-                          Earnings
-                        </a>
-                      </li>
-                    </ul>
-                    <div className="py-2">
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100  hover:text-white"
+                    <div className="py-2 text-sm text-gray-700">
+                      <Link
+                        href="/user/profile"
+                        className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Sign out
-                      </a>
+                        Profile
+                      </Link>
+                      <Link
+                        href="/user/settings"
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Settings
+                      </Link>
+                    </div>
+                    <div className="py-2">
+                      <button
+                        onClick={() => supabase.auth.signOut()}
+                        className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
                     </div>
                   </div>
                 </div>
