@@ -67,10 +67,17 @@ const Navbar = () => {
             ) : (
               <>
                 <div className="hidden md:block order-2 ml-64">
-                  <button>
+                  <button
+                    onClick={() => setAccountDropdownVisible((v) => !v)}
+                    onBlur={() => setAccountDropdownVisible(false)}
+                  >
                     <CgProfile color="white" size={40} />
                   </button>
-                  <div className="z-20 mt-2 -translate-x-1/2 block absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                  <div
+                    className={`${
+                      accountDropdownVisible ? 'block' : 'hidden'
+                    } z-20 mt-2 -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
+                  >
                     <div className="px-4 py-3 text-sm text-gray-900">
                       <div className="font-medium ">Name User</div>
                       <div className="truncate">name@gmail.com</div>
