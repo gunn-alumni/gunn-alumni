@@ -10,22 +10,41 @@ import Link from 'next/link';
 const Navbar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
+  const [name, setName] = useState('User Name');
   const menuRef = useRef<HTMLDivElement>(null);
 
   const session = useSession();
   const supabase = useSupabaseClient();
 
   useEffect(() => {
-    const handleMenuBlur = (e) => {
+    // Handle closing the dropdown menu
+    const handleMenuClose = (e: any): void => {
       if (!menuRef.current?.contains(e.target)) {
         setAccountDropdownVisible(false);
+      } else {
+        setTimeout(() => setAccountDropdownVisible(false), 500);
       }
     };
 
-    document.addEventListener('mousedown', handleMenuBlur);
+    document.addEventListener('mousedown', handleMenuClose);
 
-    return () => document.removeEventListener('mousedown', handleMenuBlur);
+    return () => document.removeEventListener('mousedown', handleMenuClose);
   }, []);
+
+  useEffect(() => {
+    if (session !== null) {
+      supabase
+        .from('profiles')
+        .select('preferred_name')
+        .eq('id', session.user.id)
+        .then(({ data, error }) => {
+          if (error) console.log(error);
+          else {
+            setName(data[0].preferred_name);
+          }
+        });
+    }
+  }, [session]);
 
   return (
     <nav
@@ -88,22 +107,22 @@ const Navbar = () => {
                     ref={menuRef}
                     className={`${
                       accountDropdownVisible ? 'block' : 'hidden'
-                    } z-20 mt-2 -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
+                    } z-20 mt-2 shadow -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg w-44 px-4 py-2`}
                   >
                     <div className="px-4 py-3 text-sm text-gray-900">
-                      <div className="font-medium ">Name User</div>
-                      <div className="truncate">name@gmail.com</div>
+                      <div className="font-medium">{name}</div>
+                      <div className="font-medium">{session.user.email}</div>
                     </div>
                     <div className="py-2 text-sm text-gray-700">
                       <Link
                         href="/user/profile"
-                        className="block px-4 py-2 hover:bg-gray-100"
+                        className="block px-4 py-2 rounded-lg hover:bg-gray-300"
                       >
                         Profile
                       </Link>
                       <Link
                         href="/user/settings"
-                        className="block px-4 py-2 hover:bg-gray-100"
+                        className="block px-4 py-2 rounded-lg hover:bg-gray-300"
                       >
                         Settings
                       </Link>
@@ -111,7 +130,7 @@ const Navbar = () => {
                     <div className="py-2">
                       <button
                         onClick={() => supabase.auth.signOut()}
-                        className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block w-full px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-300"
                       >
                         Logout
                       </button>
