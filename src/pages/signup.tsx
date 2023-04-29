@@ -37,7 +37,8 @@ const SignupPage = (): JSX.Element => {
         password,
         options: {
           data: {
-            name
+            preferred_name: name,
+            created_at: new Date().toISOString()
           }
         }
       })
