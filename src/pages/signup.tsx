@@ -1,15 +1,62 @@
-import { useState } from "react";
-import Image from "next/image";
-import titanIcon from "@/../public/images/titanIcon.png";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import titanIcon from '@/../public/images/titanIcon.png';
+import Link from 'next/link';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Router from 'next/router';
 
-const SignupPage = () => {
-  const [name, setName] = useState("");
-  const [year, setYear] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignupPage = (): JSX.Element => {
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [password2, setPassword2] = useState<string>('');
+  const [confirmName, setConfirmName] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {};
+  const session = useSession();
+  const supabase = useSupabaseClient();
+
+  useEffect(() => {
+    if (session !== null) {
+      Router.push('/').catch((e) => console.log(e));
+    }
+  }, [session]);
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    if (password !== password2) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    supabase.auth
+      .signUp({
+        email,
+        password,
+        options: {
+          data: {
+            preferred_name: name,
+            created_at: new Date().toISOString()
+          }
+        }
+      })
+      .then(({ data, error }) => {
+        if (error) setError(error.message);
+        else {
+          setSuccess(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleNameConfirm = () => {
+    if (name === '') setError('Please enter a name');
+    else setConfirmName(true);
+  };
 
   return (
     <section className="">
@@ -25,81 +72,91 @@ const SignupPage = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Create your account
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Full Name
-                </label>
-                <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="First Last"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+            {!success ? (
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    onFocus={() => setError('')}
+                  />
+                </div>
+                {!confirmName && (
+                  <button
+                    className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    onClick={handleNameConfirm}
+                  >
+                    Continue
+                  </button>
+                )}
+                {confirmName && (
+                  <>
+                    <div>
+                      <input
+                        type="email"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={password2}
+                        onChange={(e) => {
+                          setPassword2(e.target.value);
+                        }}
+                        onFocus={() => setError('')}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Sign up
+                    </button>
+                  </>
+                )}
+                {error !== '' && (
+                  <div className={'text-red-500'}>Error: {error}</div>
+                )}
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  {'Already have an account? '}
+                  <Link
+                    href="login"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Log in
+                  </Link>
+                </p>
+              </form>
+            ) : (
+              <div className="text-xl">
+                Thanks! Check your inbox to confirm your email.
               </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="name@gmail.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="year"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Graduation Year
-                </label>
-                <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="XXXX"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign up
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                {"Already have an account? "}
-                <Link
-                  href="login"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Log in
-                </Link>
-              </p>
-            </form>
+            )}
           </div>
         </div>
       </div>

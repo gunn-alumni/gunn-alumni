@@ -1,20 +1,20 @@
-import { ChangeEventHandler, FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from 'react';
 
 const PasswordCheck = () => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [okay, setOkay] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("okay")) setOkay(true);
+    if (localStorage.getItem('okay')) setOkay(true);
   }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (password == "beefchicken") {
+    if (password == 'beefchicken') {
       setOkay(true);
-      localStorage.setItem("okay", "true");
-    } else alert("incorrect password");
+      localStorage.setItem('okay', 'true');
+    } else alert('incorrect password');
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -24,7 +24,7 @@ const PasswordCheck = () => {
   return (
     <div
       className={`${
-        okay && "hidden"
+        okay && 'hidden'
       } z-10 w-screen h-screen absolute bg-white flex flex-col justify-center items-center`}
     >
       <form

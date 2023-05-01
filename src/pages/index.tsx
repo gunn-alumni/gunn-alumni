@@ -1,46 +1,46 @@
 // React Components
-import Head from "next/head";
-import Link from "next/link";
+import Head from 'next/head';
+import Link from 'next/link';
 
 // Custom Components
-import EventCard from "@/components/home/EventCard.tsx";
-import NewsCard from "@/components/home/NewsCard";
-import NewsLandingCard from "@/components/home/NewsLandingCard";
-import { StandardButton } from "@/components/shared/Button";
+import EventCard from '@/components/home/EventCard.tsx';
+import NewsCard from '@/components/home/NewsCard';
+import NewsLandingCard from '@/components/home/NewsLandingCard';
+import { StandardButton } from '@/components/shared/Button';
 
 const dummyNewsData = [
   {
-    title: "Gunn sports new Marquee",
-    date: new Date("Feburary 15, 2023"),
+    title: 'Gunn sports new Marquee',
+    date: new Date('Feburary 15, 2023'),
     description:
-      "Years in the making, Gunn High unveils new marquee.  The PTSA and district funded the project.",
-    imageURL: '/images/sample_news_photo1.png',
+      'Years in the making, Gunn High unveils new marquee.  The PTSA and district funded the project.',
+    imageURL: '/images/sample_news_photo1.png'
   },
   {
-    title: "Gunn High ranked #1 in California",
-    date: new Date("September 30, 2022"),
+    title: 'Gunn High ranked #1 in California',
+    date: new Date('September 30, 2022'),
     description:
-      "Henry M. Gunn High School in Palo Alto was named the No. 1 public school in California. ",
-    imageURL: '/images/sample_news_photo2.png',
-  },
+      'Henry M. Gunn High School in Palo Alto was named the No. 1 public school in California. ',
+    imageURL: '/images/sample_news_photo2.png'
+  }
 ];
 
 const dummyProgramData = [
   {
-    title: "Big Reunion",
-    date: new Date("Feburary 15, 2023"),
-    url: "",
+    title: 'Big Reunion',
+    date: new Date('Feburary 15, 2023'),
+    url: ''
   },
   {
-    title: "Basketball Game",
-    date: new Date("June 18, 2023"),
-    url: "",
+    title: 'Basketball Game',
+    date: new Date('June 18, 2023'),
+    url: ''
   },
   {
-    title: "High School Musical performance",
-    date: new Date("March 24, 2023"),
-    url: "",
-  },
+    title: 'High School Musical performance',
+    date: new Date('March 24, 2023'),
+    url: ''
+  }
 ];
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
             title="Esther Wojcicki on how she raised three world-beating children"
             description="Star speaker visits Gunn to talk about her 3 Gunn alumni at this past TEDx"
             articleURL=""
-            image={"/images/news_card.jpeg"}
+            image={'/images/news_card.jpeg'}
           />
         </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
@@ -81,7 +81,7 @@ export default function Home() {
           </div>
           <div className="flex-1 mt-16 xl:mt-0">
             <div className="text-5xl font-bold text-center">
-              {"Programs & Events"}
+              {'Programs & Events'}
             </div>
             <div className="mt-16 space-y-8 flex flex-col items-start">
               {dummyProgramData.map((data, i) => (

@@ -1,18 +1,18 @@
-import Image, { StaticImageData } from "next/image";
-import { StandardButton, StyledButton } from "@/components/shared/Button";
+import Image from 'next/image';
+import { StandardButton } from '@/components/shared/Button';
 
-type NewsLandingCardProps = {
+interface NewsLandingCardProps {
   title: string;
   description: string;
   articleURL: string; // TODO: for the Read More button,
   image: string;
-};
+}
 
 const NewsLandingCard = ({
   title,
   description,
   articleURL,
-  image,
+  image
 }: NewsLandingCardProps) => {
   return (
     <div className="rounded-xl w-full md:flex">
