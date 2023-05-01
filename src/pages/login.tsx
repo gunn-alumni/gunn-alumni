@@ -12,6 +12,12 @@ const LoginPage = (): JSX.Element => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
+  useEffect(() => {
+    if (session !== null) {
+      Router.push('/').catch((e) => console.log(e));
+    }
+  }, [session]);
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
 

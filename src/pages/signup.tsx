@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import titanIcon from '@/../public/images/titanIcon.png';
 import Link from 'next/link';
@@ -14,7 +14,14 @@ const SignupPage = (): JSX.Element => {
   const [confirmName, setConfirmName] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
+  const session = useSession();
   const supabase = useSupabaseClient();
+
+  useEffect(() => {
+    if (session !== null) {
+      Router.push('/').catch((e) => console.log(e));
+    }
+  }, [session]);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -27,7 +34,13 @@ const SignupPage = (): JSX.Element => {
     supabase.auth
       .signUp({
         email,
-        password
+        password,
+        options: {
+          data: {
+            preferred_name: name,
+            created_at: new Date().toISOString()
+          }
+        }
       })
       .then(({ data, error }) => {
         if (error) setError(error.message);
