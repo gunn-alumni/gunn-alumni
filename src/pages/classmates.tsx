@@ -39,7 +39,7 @@ export default function Classmates() {
 
   // Old Data Structures
 
-  // data management stuff
+  //data management stuff
   function changeDataStructure(newData, fetchedFlag) {
     let userCardDataHelper = [];
     console.log(newData);
@@ -47,11 +47,11 @@ export default function Classmates() {
     if (fetchedFlag) {
       const datakeys = Object.keys(newData);
       for (let i = 0; i < datakeys.length; i++) {
-        // console.log(datakeys[i]);
+        // ////console.log(datakeys[i]);
         const tempKey = datakeys[i];
         const tempData = {};
         tempData[tempKey] = newData[tempKey];
-        // console.log(tempData);
+        // ////console.log(tempData);
         userCardDataHelper.push(tempData);
       }
     } else {
@@ -59,15 +59,15 @@ export default function Classmates() {
     }
     console.log('HELPER DATA = ', userCardDataHelper);
 
-    // add gradYear property to each user
+    //add grad_year property to each user
     userCardDataHelper.forEach((obj) => {
-      const keys = Object.keys(obj);
+      var keys = Object.keys(obj);
       obj[keys[0]].forEach((userObj) => {
-        userObj.gradYear = keys[0];
+        userObj['grad_year'] = keys[0];
       });
     });
 
-    // Setting the staticUserCardData Once and for all
+    //Setting the staticUserCardData Once and for all
     staticUserCardData = userCardDataHelper;
     setStaticUserCardData(userCardDataHelper);
     console.log(
@@ -75,50 +75,51 @@ export default function Classmates() {
       staticUserCardData
     );
 
-    // for making searching easier extract all users
+    //for making searching easier extract all users
     extractUsers(userCardDataHelper);
 
-    // initial sorted data when page loads:
+    //initial sorted data when page loads:
     sortUsersByDescendingYear(staticUserCardData);
   }
 
   function storeAlumsData() {
-    // console.log("Data Calling Data!!");
+    // ////console.log("Data Calling Data!!");
 
-    // Fetch the data
+    //Fetch the data
     fetch('/api/alums', {
       method: 'GET'
     })
-      .then(async (res) => await res.json())
+      .then((res) => res.json())
       .then((data) => {
         if (data) {
-          // console.log("Fetched the Data: ",data);
+          //console.log("Fetched the Data: ",data);
           changeDataStructure(data, true);
         }
       })
       .catch((error) => {
-        console.error(error);
+        // //console.log(error);
+        changeDataStructure(dummyUserCardData, false);
       });
   }
 
-  // /Tags Data Create With Fetching
+  ////Tags Data Create With Fetching
   function createTagsData(inputData) {
-    const filterTagsDataHelper = [];
+    var filterTagsDataHelper = [];
     for (let i = 0; i < inputData.length; i++) {
-      const dataDictKeys = Object.keys(inputData[i]);
+      var dataDictKeys = Object.keys(inputData[i]);
       for (let k = 0; k < dataDictKeys.length; k++) {
         filterTagsDataHelper.push(dataDictKeys[k]);
       }
     }
     filterTagsData = filterTagsDataHelper;
     setFilterTagsData(filterTagsDataHelper);
-    // /console.log("Dummy Filter Tag Data = ", filterTagsData);
+    ////console.log("Dummy Filter Tag Data = ", filterTagsData);
   }
 
-  // New code with fetching
+  //New code with fetching
   function createUsersData(usersData) {
-    const groupsElementsHelper = [];
-    // console.log("Creating Elements: ", usersData);
+    var groupsElementsHelper = [];
+    //console.log("Creating Elements: ", usersData);
     usersData.forEach((item, index) => {
       const groupTagName = Object.keys(item)[0];
       groupsElementsHelper.push(
@@ -141,18 +142,18 @@ export default function Classmates() {
               <UserCard
                 key={i}
                 uniId={
-                  !Object.keys(data).includes('userID')
+                  Object.keys(data).indexOf('user_id') < 0
                     ? 'user' + i
-                    : data.userID
+                    : data.user_id
                 }
                 classTitle={'user_card'}
                 userPfp={
-                  !Object.keys(data).includes('userPfp')
+                  Object.keys(data).indexOf('userPfp') < 0
                     ? '/images/userIconx96.png'
                     : data.userPfp
                 }
                 userName={
-                  !Object.keys(data).includes('name')
+                  Object.keys(data).indexOf('name') < 0
                     ? 'nameless_user'
                     : data.name
                 }
@@ -166,15 +167,15 @@ export default function Classmates() {
     groupsElementsState = groupsElementsHelper;
     setGroupsElementsState(groupsElementsHelper);
 
-    // console testing
-    // console.log("GroupElements = ",groupsElements);
-    // console.log("GroupElementsHelper = ",groupsElementsHelper);
-    // /console.log("GroupElementsState = ",groupsElementsState);
+    //console testing
+    // ////console.log("GroupElements = ",groupsElements);
+    //console.log("GroupElementsHelper = ",groupsElementsHelper);
+    ////console.log("GroupElementsState = ",groupsElementsState);
   }
 
-  // searching using fuse.js initialize and functions
+  //searching using fuse.js initialize and functions
   const searchSettings = {
-    keys: ['gradYear', 'name'],
+    keys: ['grad_year', 'name'],
     includeMatches: true,
     threshold: 0.2,
     tokenize: true,
@@ -182,63 +183,63 @@ export default function Classmates() {
     findAllMatches: true,
     ignoreLocation: true
   };
-  let [searchFuse, setSearchFuse] = useState();
-  let [justUsers, setJustUsers] = useState([]);
+  var [searchFuse, setSearchFuse] = useState();
+  var [justUsers, setJustUsers] = useState([]);
 
-  // for searching
-  const [searchUsersFlag, setSearchUsersFlag] = useState(false);
-  let [query, setQuery] = useState('');
-  let [results, setResults] = useState([]);
+  //for searching
+  var [searchUsersFlag, setSearchUsersFlag] = useState(false);
+  var [query, setQuery] = useState('');
+  var [results, setResults] = useState([]);
 
-  // displaying search results
-  let [tempElementHolder, setTempElementHolder] = useState();
+  //displaying search results
+  var [tempElementHolder, setTempElementHolder] = useState();
   const [mainSidebarDisplay, setMainSidebarDisplay] = useState('sm:block');
 
-  // after searching a button is shown to get back the sidebar
-  const [displayBtnSidebar, setDisplayBtnSidebar] = useState('sm:hidden');
-  const [displayContentWrapper, setDisplayContentWrapper] =
+  //after searching a button is shown to get back the sidebar
+  var [displayBtnSidebar, setDisplayBtnSidebar] = useState('sm:hidden');
+  var [displayContentWrapper, setDisplayContentWrapper] =
     useState('sm:flex-row');
 
   function extractUsers(myData) {
     console.log('Hello: ', myData);
-    const justUsersHelper = [];
+    var justUsersHelper = [];
     myData.forEach((outerObj) => {
-      const userObj = outerObj[Object.keys(outerObj)[0]];
+      var userObj = outerObj[Object.keys(outerObj)[0]];
       userObj.forEach((userDataObj) => {
-        // console.log("got it! ", userDataObj);
+        //console.log("got it! ", userDataObj);
         justUsersHelper.push(userDataObj);
       });
     });
     justUsers = justUsersHelper;
     setJustUsers(justUsersHelper);
-    // console.log("Got'em: ", justUsers);
+    //console.log("Got'em: ", justUsers);
 
-    // "fuse" the thing
+    //"fuse" the thing
     const fuse = new Fuse(justUsers, searchSettings);
     searchFuse = fuse;
     setSearchFuse(fuse);
     console.log('YAAAY = ', searchFuse);
   }
 
-  // searching functions :)
+  //searching functions :)
   function searchUsers(query) {
     return searchFuse.search(query);
   }
 
   function handleKeyPress(e) {
-    // console.log("Rush EEE: ", e.key);
+    //console.log("Rush EEE: ", e.key);
     if (e.key === 'Enter') {
       // Call handleSearch() when the Enter key is pressed
-      // console.log("Entered, Now Go");
+      //console.log("Entered, Now Go");
       handleSearch(e.target);
     }
   }
 
   function handleSearch(inputElm) {
-    // console.log("Elm = ", inputElm);
+    //console.log("Elm = ", inputElm);
     tempElementHolder = inputElm;
     setTempElementHolder(inputElm);
-    // console.log("Val = ",inputElm.value);
+    //console.log("Val = ",inputElm.value);
     if (
       inputElm.value != '' &&
       inputElm.value != null &&
@@ -247,10 +248,10 @@ export default function Classmates() {
       setMainSidebarDisplay('sm:hidden');
       setDisplayBtnSidebar('sm:block');
 
-      // change the layout of content wrapper from flex to grid
+      //change the layout of content wrapper from flex to grid
       setDisplayContentWrapper('sm:flex-col');
 
-      // do the searching magic
+      //do the searching magic
       setSearchUsersFlag(true);
       query = inputElm.value;
       setQuery(inputElm.value);
@@ -262,8 +263,8 @@ export default function Classmates() {
   }
 
   function showSearchResults(showRes) {
-    const groupsElementsHelper = [];
-    const label =
+    var groupsElementsHelper = [];
+    var label =
       showRes.length > 0
         ? 'Showing Search Results Below...'
         : 'No Results Were Found...';
@@ -271,7 +272,7 @@ export default function Classmates() {
       <>
         <h2
           key={'showResultsText'}
-          className={'my-[0.83em] font-bold mt-[50px]'}
+          className={`my-[0.83em] font-bold mt-[50px]`}
           id={'group_label'}
         >
           {label}
@@ -285,18 +286,18 @@ export default function Classmates() {
             <UserCard
               key={index}
               uniId={
-                !Object.keys(fuseItem.item).includes('userID')
+                Object.keys(fuseItem.item).indexOf('user_id') < 0
                   ? 'user' + index
-                  : fuseItem.item.userID
+                  : fuseItem.item.user_id
               }
               classTitle={'user_card'}
               userPfp={
-                !Object.keys(fuseItem.item).includes('userPfp')
+                Object.keys(fuseItem.item).indexOf('userPfp') < 0
                   ? '/images/userIconx96.png'
                   : fuseItem.item.userPfp
               }
               userName={
-                !Object.keys(fuseItem.item).includes('name')
+                Object.keys(fuseItem.item).indexOf('name') < 0
                   ? 'nameless_user'
                   : fuseItem.item.name
               }
@@ -308,12 +309,12 @@ export default function Classmates() {
 
     groupsElementsState = groupsElementsHelper;
     setGroupsElementsState(groupsElementsHelper);
-    // console.log("GroupElementsHelper = ",groupsElementsHelper);
+    //console.log("GroupElementsHelper = ",groupsElementsHelper);
   }
 
-  // // Filter Options Sorting Functions
+  ////////////////////////////////////////////////////// Filter Options Sorting Functions
 
-  // //Helpful Functions
+  /////Helpful Functions
   function removeDuplicates(arr) {
     return arr.filter((value, index, self) => {
       return self.indexOf(value) === index;
@@ -321,54 +322,69 @@ export default function Classmates() {
   }
 
   function reloadContent(sortedData) {
-    // update the usercardData and its elements
+    ////console.log("reloading...");
+    //update the usercardData and its elements
     userCardData = sortedData;
     setUserCardData(sortedData);
+    // ////console.log("Changing userCardData = ", userCardData);
 
-    // call creating tags data & usersData Elements
+    //call creating tags data & usersData Elements
     createUsersData(userCardData);
     createTagsData(userCardData);
 
     setTimeout(() => {
-      // re-declaring variables
+      //re-declaring variables
       reDeclareVariables();
 
-      // hiding indicator
-      const group_indicator = indicatorRef.current;
+      //hiding indicator
+      var group_indicator = indicatorRef.current;
       group_indicator.style.display = 'none';
 
-      // hiding highlighter
+      //hiding highlighter
       highlightTag('');
     }, 300);
   }
 
-  // //Ascending Order By Year
+  /////////Ascending Order By Year
   function sortUsersByAscendingYear(data) {
-    const sortedData = data;
+    ////console.log("Let The ASCENDING Sorting Begin....");
+    var sortedData = data;
 
-    // reload necessary contents of the page
+    //console checks
+    ////console.log("Sorting Ascending Stufffff!!!!: ");
+    ////console.log(sortedData);
+
+    //reload necessary contents of the page
     reloadContent(sortedData);
   }
 
-  // //Descending Order By Year
+  /////////Descending Order By Year
   function sortUsersByDescendingYear(data) {
-    const oldTagsData = [];
+    ////console.log("Let The DESCENDING Sorting Begin....");
+    var oldTagsData = [];
     for (let i = 0; i < data.length; i++) {
       oldTagsData.push(Object.keys(data[i])[0]);
     }
-    const sortedData = [];
-    const sortedTagsData = quicksort_descending(oldTagsData);
+    var sortedData = [];
+    var sortedTagsData = quicksort_descending(oldTagsData);
 
-    // rearrange the data structure
+    //rearrange the data structure
     for (let t = 0; t < sortedTagsData.length; t++) {
-      const tempData = {};
-      const matchingValIndex = oldTagsData.indexOf(sortedTagsData[t]);
-      const tempTag = sortedTagsData[t];
+      var tempData = {};
+      var matchingValIndex = oldTagsData.indexOf(sortedTagsData[t]);
+      var tempTag = sortedTagsData[t];
+      // ////console.log(data[matchingValIndex]);
+      // ////console.log(sortedTagsData[t]);
       tempData[sortedTagsData[t]] = data[matchingValIndex][tempTag];
+      // ////console.log("Checking: ", tempData);
       sortedData.push(tempData);
     }
 
-    // reload necessary contents of the page
+    //console checks
+    // ////console.log("Sorting Descending Stufffff!!!!: ", sortedTagsData);
+    // ////console.log(sortedData);
+
+    //reload necessary contents of the page
     reloadContent(sortedData);
   }
 
@@ -397,68 +413,71 @@ export default function Classmates() {
   }
 
   function sortUsersAlphabetical(data, filterBy) {
-    const allUsersData = [];
-    const usersNameData = [];
+    ////console.log("Let the ALPHABETICAL Sorting Begin....");
+    var allUsersData = [];
+    var usersNameData = [];
     data.forEach((item) => {
-      const keyName = Object.keys(item)[0];
+      ////console.log(item);
+      var keyName = Object.keys(item)[0];
       item[keyName].forEach((userInfo) => {
         allUsersData.push(userInfo);
         usersNameData.push(userInfo.name);
       });
     });
+    ////console.log("ALL USERS GOT IT | ", allUsersData, usersNameData);
 
-    const namesData = [];
+    var namesData = [];
     for (let n = 0; n < usersNameData.length; n++) {
-      const splitName = usersNameData[n].split(' ');
+      var splitName = usersNameData[n].split(' ');
       if (filterBy == 'fn') {
-        const firstName = splitName[0];
+        var firstName = splitName[0];
         namesData.push(firstName);
       } else {
-        const lastName = splitName[splitName.length - 1];
+        var lastName = splitName[splitName.length - 1];
         namesData.push(lastName);
       }
     }
 
-    const sortedNamesData = quickSort_alphabetical(namesData);
-    const noDuplisSortedNamesData = removeDuplicates(sortedNamesData);
-    // /console.log("Sorted Alphabetical Names Only: ", sortedNamesData);
-    // /console.log("Sorted Alphabetical Names Only Without Duplicates: ", noDuplisSortedNamesData);
+    var sortedNamesData = quickSort_alphabetical(namesData);
+    var noDuplisSortedNamesData = removeDuplicates(sortedNamesData);
+    ////console.log("Sorted Alphabetical Names Only: ", sortedNamesData);
+    ////console.log("Sorted Alphabetical Names Only Without Duplicates: ", noDuplisSortedNamesData);
 
-    const sortedData = [];
+    var sortedData = [];
 
-    noDuplisSortedNamesData.forEach((name, _index) => {
-      // /console.log("Checking: ", name, index);
-      const tempData = {};
-      const tempKey = name.charAt(0);
-      const tempVal = [];
+    noDuplisSortedNamesData.forEach((name, index) => {
+      ////console.log("Checking: ", name, index);
+      var tempData = {};
+      var tempKey = name.charAt(0);
+      var tempVal = [];
       allUsersData.forEach((user) => {
-        // /console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
-        // need to get the user that has the same last name as name, not more not less
+        ////console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
+        //need to get the user that has the same last name as name, not more not less
         if (user.name.indexOf(name) > -1) {
           tempVal.push(user);
         }
       });
-      // /console.log("Set Is made: ");
-      // /console.log("Key = ", tempKey, " : Value = ", tempVal);
+      ////console.log("Set Is made: ");
+      ////console.log("Key = ", tempKey, " : Value = ", tempVal);
 
-      // check if key exists for different names starting with the same letter
+      //check if key exists for different names starting with the same letter
       if (sortedData.hasOwnProperty(tempKey)) {
-        // /console.log("Already Exists key, so add to the value");
-        const combinedUsers = tempData[tempKey].concat(tempVal);
-        // /console.log("Combined: ", combinedUsers);
+        ////console.log("Already Exists key, so add to the value");
+        var combinedUsers = tempData[tempKey].concat(tempVal);
+        ////console.log("Combined: ", combinedUsers);
         tempData[tempKey] = combinedUsers;
       } else {
-        // /console.log("Not There, so make a new key");
+        ////console.log("Not There, so make a new key");
         tempData[tempKey] = tempVal;
       }
       sortedData.push(tempData);
     });
 
-    // console checks
-    // /console.log("Sorting Alphabetical Stufffff!!!!: ");
-    // /console.log(sortedData);
+    //console checks
+    ////console.log("Sorting Alphabetical Stufffff!!!!: ");
+    ////console.log(sortedData);
 
-    // reload necessary contents of the page
+    //reload necessary contents of the page
     reloadContent(sortedData);
   }
   function quickSort_alphabetical(arr) {
@@ -484,15 +503,15 @@ export default function Classmates() {
     );
   }
 
-  // Js Functions
-  // Toggle Filter by either clicking on image or document
+  ///////////////////////////////////////////////////////////////////////////////////////Js Functions
+  //Toggle Filter by either clicking on image or document
   const [filterShowCss, setFilterShowCss] = useState('hidden');
 
   const toggleFilter = (elm: EventTarget) => {
     console.log('LOOKIE: ', elm);
 
     if (elm.id == 'filterSortIcon') {
-      // // console.log("YAAAAY");
+      // // ////console.log("YAAAAY");
       if (filterShowCss == 'hidden') {
         setFilterShowCss('block');
       } else {
@@ -502,69 +521,69 @@ export default function Classmates() {
       setFilterShowCss('hidden');
     }
 
-    // After Searhing Sidebar Button Toggle
+    //After Searhing Sidebar Button Toggle
     if (elm.id == 'btn_sidebar') {
-      // console.log("ALERT: Sidebar Showing Button Clicked!");
+      //console.log("ALERT: Sidebar Showing Button Clicked!");
 
-      // change the layout of content wrapper from flex to grid
+      //change the layout of content wrapper from flex to grid
       setDisplayContentWrapper('sm:flex-row');
 
       setMainSidebarDisplay('sm:block');
       setDisplayBtnSidebar('sm:hidden');
 
-      // check search flag
+      //check search flag
       if (searchUsersFlag) {
         setSearchUsersFlag(false);
-        // call creating tags data & usersData Elements
+        //call creating tags data & usersData Elements
         createUsersData(userCardData);
         createTagsData(userCardData);
         setTimeout(() => {
-          // re-declaring variables
+          //re-declaring variables
           reDeclareVariables();
 
-          // hiding indicator
-          const group_indicator = indicatorRef.current;
+          //hiding indicator
+          var group_indicator = indicatorRef.current;
           group_indicator.style.display = 'none';
 
-          // hiding highlighter
+          //hiding highlighter
           highlightTag('');
         }, 300);
       }
 
-      // clear search input value
+      //clear search input value
       // //console.log("Yo: ",tempElementHolder);
       if (tempElementHolder) {
         tempElementHolder.value = '';
       }
     }
 
-    // Mobile Sidebar Button Toggle
+    //Mobile Sidebar Button Toggle
     if (elm.id == 'mobile_btn_sidebar') {
       displayMobileBtnSidebar = 'hidden';
       setDisplayMobileBtnSidebar('hidden');
       showMobileSideBar();
     }
 
-    // Mobile Sidebar Close Button Toggle
+    //Mobile Sidebar Close Button Toggle
     if (elm.id == 'close_mobile_btn_sidebar') {
       displayMobileBtnSidebar = 'block';
       setDisplayMobileBtnSidebar('block');
       showMobileSideBar();
     }
 
-    // When PageUpDownBtn is clicked it clicks it on the "path" tag not its
+    //When PageUpDownBtn is clicked it clicks it on the "path" tag not its
     if (elm.id == 'pageUpDownBtn') {
       // //console.log("Moving Page!!");
       pageMarkerScroll(elm);
     }
   };
 
-  // scrolling to the top or the bottom of the page
-  const [pageMarkerStatus, setPageMarkerStatus] = useState('pg_down');
-  const [pageMarkerBtnDir, setPageMarkerBtnDir] = useState('scale-y-100');
-  function pageMarkerScroll(_elm) {
+  //scrolling to the top or the bottom of the page
+  var [pageMarkerStatus, setPageMarkerStatus] = useState('pg_down');
+  var [pageMarkerBtnDir, setPageMarkerBtnDir] = useState('scale-y-100');
+  function pageMarkerScroll(elm) {
     if (pageMarkerStatus == 'pg_down') {
-      // /console.log("FullHeight Scrolling!!! ==== ", fullHeight);
+      ////console.log("FullHeight Scrolling!!! ==== ", fullHeight);
       window.scrollTo(0, fullHeight);
       setPageMarkerBtnDir('-scale-y-100');
       setPageMarkerStatus('pg_up');
@@ -581,51 +600,51 @@ export default function Classmates() {
     //         if(group_tags[t].innerHTML == currentGroupLabel.innerHTML){
     //             // moveTagYPos = group_tags[t].offsetTop;
     //             moveToElm = group_tags[t];
-    //             // console.log("Move to elm = ", moveToElm);
-    //             // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-    //             // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+    //             // ////console.log("Move to elm = ", moveToElm);
+    //             // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+    //             // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
     //         }
     //     }
-    //     // // console.log(changeIndicatorFlag);
+    //     // // ////console.log(changeIndicatorFlag);
     //     moveIndicator(moveToElm);
     // }
   }
 
   function filterOptionClicked(elm) {
-    // console.log("ALERT: FILTER OPTION SELECTED = ", elm);
+    //console.log("ALERT: FILTER OPTION SELECTED = ", elm);
 
-    // change the layout of content wrapper from flex to grid
+    //change the layout of content wrapper from flex to grid
     setDisplayContentWrapper('sm:flex-row');
 
     setMainSidebarDisplay('sm:block');
     setDisplayBtnSidebar('sm:hidden');
 
-    // check search flag
+    //check search flag
     if (searchUsersFlag) {
       setSearchUsersFlag(false);
-      // call creating tags data & usersData Elements
+      //call creating tags data & usersData Elements
       createUsersData(userCardData);
       createTagsData(userCardData);
       setTimeout(() => {
-        // re-declaring variables
+        //re-declaring variables
         reDeclareVariables();
 
-        // hiding indicator
-        const group_indicator = indicatorRef.current;
+        //hiding indicator
+        var group_indicator = indicatorRef.current;
         group_indicator.style.display = 'none';
 
-        // hiding highlighter
+        //hiding highlighter
         highlightTag('');
       }, 300);
     }
 
-    // clear search input value
+    //clear search input value
     // //console.log("Yo: ",tempElementHolder);
     if (tempElementHolder) {
       tempElementHolder.value = '';
     }
 
-    // check for the option clicked:
+    //check for the option clicked:
     if (elm.id == 'years_descending') {
       sortUsersByDescendingYear(staticUserCardData);
     } else if (elm.id == 'years_ascending') {
@@ -637,27 +656,27 @@ export default function Classmates() {
     }
   }
 
-  // // Tag Clicked Logic
+  ///////////////////////////////// Tag Clicked Logic ////////////////////////////////////////
   const groupTagsClick = (elm) => {
-    // // console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
-    // // console.log(elm, elm.innerHTML);
+    // // ////console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
+    // // ////console.log(elm, elm.innerHTML);
     if (elm.id == 'group_tags') {
-      // // console.log("YOU SHALL PASSSSSS");
+      // // ////console.log("YOU SHALL PASSSSSS");
       showGroup(elm);
     }
 
     if (elm.id == 'group_mobile_tags') {
-      // // console.log("YOU SHALL PASSSSSS");
+      // // ////console.log("YOU SHALL PASSSSSS");
       showGroup(elm);
     }
   };
 
   function showGroup(group) {
-    const group_tag_clicked = group;
-    const group_labels = allGroupLabel;
-    // scroll page to label
-    let scrollLabelYPos = 0;
-    let group_label_clicked = null;
+    var group_tag_clicked = group;
+    var group_labels = allGroupLabel;
+    //scroll page to label
+    var scrollLabelYPos = 0;
+    var group_label_clicked = null;
     for (let i = 0; i < group_labels.length; i++) {
       if (group_tag_clicked.innerHTML == group_labels[i].innerHTML) {
         scrollLabelYPos = scrollPosOfElement(group_labels[i]);
@@ -666,51 +685,51 @@ export default function Classmates() {
         break;
       }
     }
-    // Special Case #1: Set new currentGroupLabel
-    // // console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
+    //Special Case #1: Set new currentGroupLabel
+    // // ////console.log("Special Case #2 Check: ", nextScrollGroupLabel, " = ", group_label_clicked);
     currentGroupLabel = group_label_clicked;
     setCurrentGroupLabel(group_label_clicked);
-    // Way #1:
+    //Way #1:
     window.scrollTo(0, scrollLabelYPos);
-    // alt way **
+    //alt way **
     // group_label_clicked.scrollIntoView();
-    // scroll indicator to tag clicked
+    //scroll indicator to tag clicked
     // var moveTagYPos = group_tag_clicked.offsetTop;
-    const moveToElm = group_tag_clicked;
+    var moveToElm = group_tag_clicked;
     moveIndicator(moveToElm);
   }
 
-  // / Scroll Logic //
-  // Global Variables
+  //////////////////////////////////////// Scroll Logic //////////////////////////////////////////////////////
+  //Global Variables
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const indicatorBorderSize = 28.8;
 
-  let [group_tags, setGroup_tags] = useState([]);
+  var [group_tags, setGroup_tags] = useState([]);
   var [fullHeight, setFullHeight] = useState(0);
-  let [footerHeight, setFooterHeight] = useState(0);
-  let [allGroupContent, setAllGroupContent] = useState([]);
+  var [footerHeight, setFooterHeight] = useState(0);
+  var [allGroupContent, setAllGroupContent] = useState([]);
   var [allGroupLabel, setAllGroupLabel] = useState([]);
   var [currentGroupLabel, setCurrentGroupLabel] = useState(null);
 
-  // Change indicator Global Vars
-  let [changeIndicatorFlag, setChangeIndicatorFlag] = useState(false);
+  //Change indicator Global Vars
+  var [changeIndicatorFlag, setChangeIndicatorFlag] = useState(false);
   const changeScreenWidth = 1286;
-  let [tagText, setTagText] = useState('');
+  var [tagText, setTagText] = useState('');
 
-  // //Better JS LOGIC
-  // Window On Load Stuff
+  //////////////////////////Better JS LOGIC
+  //Window On Load Stuff
   useEffect(() => {
     // This code will run only once when the component mounts
-    // /console.log("Component mounted");
+    ////console.log("Component mounted");
 
-    // call data setup function
+    //call data setup function
     storeAlumsData();
-  });
+  }, []);
 
-  // this function is used for dynamic changes to the page (re-render)
+  //this function is used for dynamic changes to the page (re-render)
   function reDeclareVariables() {
-    // console.log("RE declaring...");
-    // // console.log(changeScreenWidth);
+    //console.log("RE declaring...");
+    // // ////console.log(changeScreenWidth);
     currentGroupLabel = null;
     setCurrentGroupLabel(null);
 
@@ -718,25 +737,25 @@ export default function Classmates() {
 
     group_tags = filterGroupsRef.current.children;
     setGroup_tags(filterGroupsRef.current.children);
-    // //console.log(window.document.body.childNodes[0].childNodes[0].childNodes[3].offsetHeight);
+    // //console.log(window.document.body.childNodes[0].childNodes[0].childNodes[2].offsetHeight);
     fullHeight = window.document.body.offsetHeight;
     setFullHeight(window.document.body.offsetHeight);
     footerHeight =
-      window.document.body.childNodes[0].childNodes[0].childNodes[3]
+      window.document.body.childNodes[0].childNodes[0].childNodes[2]
         .offsetHeight;
     setFooterHeight(
-      window.document.body.childNodes[0].childNodes[0].childNodes[3]
+      window.document.body.childNodes[0].childNodes[0].childNodes[2]
         .offsetHeight
     );
-    // console.log("FullLLLLLL-Height = ", fullHeight, footerHeight);
+    //console.log("FullLLLLLL-Height = ", fullHeight, footerHeight);
     // allGroupContent = groupWrapperRef.current.children;
-    const allGroupContentHelper = groupWrapperRef.current.children;
+    var allGroupContentHelper = groupWrapperRef.current.children;
     allGroupContent = allGroupContentHelper;
     setAllGroupContent(allGroupContentHelper);
-    // /console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
-    const allGroupLabelHelper = [];
+    ////console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
+    var allGroupLabelHelper = [];
     for (let i = 0; i < allGroupContent.length; i++) {
-      // /console.log(allGroupContent[i].id);
+      ////console.log(allGroupContent[i].id);
       if (allGroupContent[i].id == 'group_label') {
         allGroupLabelHelper.push(allGroupContent[i]);
       }
@@ -748,47 +767,47 @@ export default function Classmates() {
     // setCurrentGroupLabel(allGroupLabel[0]);
 
     // console checks
-    // /console.log(allGroupLabel);
-    // /console.log("group_tags: ", group_tags);
+    ////console.log(allGroupLabel);
+    ////console.log("group_tags: ", group_tags);
   }
 
   function moveIndicator(moveToElm) {
-    // additional logic to align the middle of indicator and tag
-    // hard coded values!!
-    const borderSize_group_indicator = indicatorBorderSize;
-    const group_indicator = indicatorRef.current;
+    //additional logic to align the middle of indicator and tag
+    //hard coded values!!
+    var borderSize_group_indicator = indicatorBorderSize;
+    var group_indicator = indicatorRef.current;
 
-    // Is the indicator changed???
+    //Is the indicator changed???
     if (changeIndicatorFlag) {
-      // /console.log("Highlighter Time!!");
+      ////console.log("Highlighter Time!!");
       group_indicator.style.display = 'none';
       highlightTag(moveToElm);
     } else {
-      // /console.log("group_indicator = ", group_indicator);
+      ////console.log("group_indicator = ", group_indicator);
       highlightTag('');
-      const moveToTag = moveToElm;
-      // /console.log(moveToTag);
-      const moveMarginPos =
+      var moveToTag = moveToElm;
+      ////console.log(moveToTag);
+      var moveMarginPos =
         moveToTag.getBoundingClientRect().top +
         Math.abs(
           moveToTag.getBoundingClientRect().height / 2 -
             borderSize_group_indicator / 2
         );
-      // /console.log("Moving Indicator to: ",moveMarginPos);
-      // Move indicator the amount
+      ////console.log("Moving Indicator to: ",moveMarginPos);
+      //Move indicator the amount
       group_indicator.style.display = 'block';
       group_indicator.style.marginTop = moveMarginPos + 'px';
     }
   }
   function scrollPosOfElement(elm) {
-    let posValue = 0;
+    var posValue = 0;
     if (elm == '' || elm == undefined || elm == null) {
       posValue = -1;
       return posValue;
     } else {
-      const style = elm.currentStyle || window.getComputedStyle(elm);
+      var style = elm.currentStyle || window.getComputedStyle(elm);
       posValue = elm.offsetTop - parseInt(style.marginTop) / 2;
-      // /console.log("ScrollPosOfElement = ", posValue);
+      ////console.log("ScrollPosOfElement = ", posValue);
       return posValue;
     }
   }
@@ -798,36 +817,36 @@ export default function Classmates() {
     const closest = arr.reduce((prev, curr) => {
       return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
     });
-    // console.log(closest);
+    // ////console.log(closest);
     return closest;
   }
   function scrollChange(directionScroll) {
-    const labelPosList = [];
+    var labelPosList = [];
     for (let i = 0; i < allGroupLabel.length; i++) {
       labelPosList.push(scrollPosOfElement(allGroupLabel[i]));
     }
-    // /console.log("All Pos: ", labelPosList);
-    // /console.log(currentGroupLabel);
-    let reducedPosList = [];
-    let closestLabelPos = 0;
-    const currentLabelPos = scrollPosOfElement(currentGroupLabel);
-    // /console.log("POS OF CURRENT LABEL: ", currentLabelPos);
+    ////console.log("All Pos: ", labelPosList);
+    ////console.log(currentGroupLabel);
+    var reducedPosList = [];
+    var closestLabelPos = 0;
+    var currentLabelPos = scrollPosOfElement(currentGroupLabel);
+    ////console.log("POS OF CURRENT LABEL: ", currentLabelPos);
     if (directionScroll == 'down') {
-      // /console.log("Going DOWN");
+      ////console.log("Going DOWN");
       var nextIndex = labelPosList.indexOf(currentLabelPos) + 1;
-      // /console.log("HUH? ", nextIndex);
+      ////console.log("HUH? ", nextIndex);
       if (nextIndex < labelPosList.length - 1) {
         reducedPosList = labelPosList.slice(nextIndex);
         closestLabelPos = findClosest(reducedPosList);
-        // /console.log(reducedPosList, closestLabelPos);
+        ////console.log(reducedPosList, closestLabelPos);
         if (window.scrollY >= closestLabelPos) {
-          // /console.log("Hit");
+          ////console.log("Hit");
           var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)];
           currentGroupLabel = labelHit;
           setCurrentGroupLabel(labelHit);
-          // /console.log("Label Hit, so changing current: ", currentGroupLabel);
+          ////console.log("Label Hit, so changing current: ", currentGroupLabel);
 
-          // move indicator
+          //move indicator
           if (
             currentGroupLabel != '' &&
             currentGroupLabel != null &&
@@ -838,9 +857,9 @@ export default function Classmates() {
               if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
                 // moveTagYPos = group_tags[t].offsetTop;
                 moveToElm = group_tags[t];
-                // /console.log("Move to elm = ", moveToElm);
-                // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-                // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                ////console.log("Move to elm = ", moveToElm);
+                // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
               }
             }
             moveIndicator(moveToElm);
@@ -848,23 +867,23 @@ export default function Classmates() {
         }
       }
     } else {
-      // /console.log("Going UP");
+      ////console.log("Going UP");
       var nextIndex = labelPosList.indexOf(currentLabelPos);
-      // // console.log(nextIndex);
+      // // ////console.log(nextIndex);
       if (nextIndex > 0) {
         reducedPosList = labelPosList.slice(
           0,
           labelPosList.indexOf(currentLabelPos)
         );
         closestLabelPos = findClosest(reducedPosList);
-        // // console.log(reducedPosList);
+        // // ////console.log(reducedPosList);
         if (window.scrollY <= closestLabelPos) {
-          // // console.log("Boom");
+          // // ////console.log("Boom");
           var labelHit = allGroupLabel[labelPosList.indexOf(closestLabelPos)];
           currentGroupLabel = labelHit;
           setCurrentGroupLabel(labelHit);
 
-          // move indicator
+          //move indicator
           if (
             currentGroupLabel != '' &&
             currentGroupLabel != null &&
@@ -875,9 +894,9 @@ export default function Classmates() {
               if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
                 // moveTagYPos = group_tags[t].offsetTop;
                 moveToElm = group_tags[t];
-                // console.log("Move to elm = ", moveToElm);
-                // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-                // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+                // ////console.log("Move to elm = ", moveToElm);
+                // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+                // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
               }
             }
             moveIndicator(moveToElm);
@@ -888,21 +907,21 @@ export default function Classmates() {
   }
 
   function handleScroll() {
-    const currentScrollPos = window.pageYOffset;
-    let scrollWay;
+    var currentScrollPos = window.pageYOffset;
+    var scrollWay;
     if (prevScrollPos > currentScrollPos) {
       scrollWay = 'up';
     } else if (prevScrollPos < currentScrollPos) {
       scrollWay = 'down';
     }
-    // // console.log("setting current to previous: ");
+    // // ////console.log("setting current to previous: ");
     setPrevScrollPos(currentScrollPos);
-    // // console.log("IN handleScroll | Current Scroll Val = ", currentScrollPos, ", Previous Scroll Val = ", prevScrollPos);
+    // // ////console.log("IN handleScroll | Current Scroll Val = ", currentScrollPos, ", Previous Scroll Val = ", prevScrollPos);
     scrollChange(scrollWay);
   }
 
   useEffect(function mount() {
-    // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+    // // ////console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
     function onScroll() {
       handleScroll();
     }
@@ -915,7 +934,7 @@ export default function Classmates() {
   });
 
   useEffect(function mount() {
-    // // console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
+    // // ////console.log("IN useEffect | Current Scroll Val = BROWWWWWW", ", Previous Scroll Val = ", prevScrollPos);
     function onChangeScreenSize() {
       changeIndicator();
     }
@@ -928,44 +947,48 @@ export default function Classmates() {
   });
 
   function changeIndicator() {
-    // full height and other heights changes on resize
+    //full height and other heights changes on resize
     fullHeight = window.document.body.offsetHeight;
     setFullHeight(window.document.body.offsetHeight);
+    console.log(
+      'CHECK THISSSSSSSS: ',
+      window.document.body.childNodes[0].childNodes[0].childNodes[2]
+    );
     footerHeight =
-      window.document.body.childNodes[0].childNodes[0].childNodes[3]
+      window.document.body.childNodes[0].childNodes[0].childNodes[2]
         .offsetHeight;
     setFooterHeight(
-      window.document.body.childNodes[0].childNodes[0].childNodes[3]
+      window.document.body.childNodes[0].childNodes[0].childNodes[2]
         .offsetHeight
     );
-    const pageMarker = pageUpDownBtnRef.current;
+    var pageMarker = pageUpDownBtnRef.current;
     if (pageMarker == null) return;
     pageMarker.style.marginBottom = footerHeight + 10 + 'px';
-    // console.log("Full Height From ChangeIndicator Func = ", fullHeight, footerHeight);
+    //console.log("Full Height From ChangeIndicator Func = ", fullHeight, footerHeight);
 
-    const screenSizeW = window.innerWidth;
-    // // console.log(screenSizeW);
+    var screenSizeW = window.innerWidth;
+    // // ////console.log(screenSizeW);
     if (screenSizeW <= changeScreenWidth) {
-      // /console.log("Screen changed");
+      ////console.log("Screen changed");
       changeIndicatorFlag = true;
       setChangeIndicatorFlag(true);
 
       // //Update Group Tags Reference
       // group_tags = filterGroupsMobileRef.current.children;
       // setGroup_tags(filterGroupsMobileRef.current.children);
-      // console.log("Updated Tags: ",group_tags);
+      // ////console.log("Updated Tags: ",group_tags);
     } else {
-      // /console.log("Screen full");
+      ////console.log("Screen full");
       changeIndicatorFlag = false;
       setChangeIndicatorFlag(false);
 
-      // Update Group Tags Reference
+      //Update Group Tags Reference
       group_tags = filterGroupsRef.current.children;
       setGroup_tags(filterGroupsRef.current.children);
-      // /console.log("Updated Tags: ",group_tags);
+      ////console.log("Updated Tags: ",group_tags);
     }
 
-    // check for changing sidebar for mobile
+    //check for changing sidebar for mobile
     if (screenSizeW <= 640) {
       mobileSidebarFlag = true;
       setMobileSidebarFlag(true);
@@ -982,50 +1005,50 @@ export default function Classmates() {
       setDisplayMobileBtnSidebar('hidden');
     }
 
-    // move indicator
+    //move indicator
     if (
       currentGroupLabel != '' &&
       currentGroupLabel != null &&
       currentGroupLabel != undefined
     ) {
-      let moveToElm;
+      var moveToElm;
       for (let t = 0; t < group_tags.length; t++) {
         if (group_tags[t].innerHTML == currentGroupLabel.innerHTML) {
           // moveTagYPos = group_tags[t].offsetTop;
           moveToElm = group_tags[t];
-          // console.log("Move to elm = ", moveToElm);
-          // // console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
-          // // console.log("Checking Other Properties: ", group_tags[t].marginTop);
+          // ////console.log("Move to elm = ", moveToElm);
+          // // ////console.log("Checking Other Properties: ", group_tags[t].getBoundingClientRect());
+          // // ////console.log("Checking Other Properties: ", group_tags[t].marginTop);
         }
       }
-      // // console.log(changeIndicatorFlag);
+      // // ////console.log(changeIndicatorFlag);
       moveIndicator(moveToElm);
     }
   }
 
   function highlightTag(elm) {
-    const tagElm = elm;
-    // console.log("HIGHLIGHT TAAAAAAAAAAG");
-    // console.log(tagElm.style);
+    var tagElm = elm;
+    // ////console.log("HIGHLIGHT TAAAAAAAAAAG");
+    // ////console.log(tagElm.style);
     if (tagElm != '') {
-      // console.log("Highlighting");
+      // ////console.log("Highlighting");
       tagText = tagElm.innerHTML;
       setTagText(tagElm.innerHTML);
     } else {
-      // console.log("De-Highlighting");
+      // ////console.log("De-Highlighting");
       tagText = '';
       setTagText('');
     }
   }
 
-  // /MOBILE FUNCTIONS HERE
-  // button click to show sidebar
+  ////////////////MOBILE FUNCTIONS HERE
+  //button click to show sidebar
   var [displayMobileSidebar, setDisplayMobileSidebar] = useState('hidden');
   var [mobileSidebarFlag, setMobileSidebarFlag] = useState(false);
   var [displayMobileBtnSidebar, setDisplayMobileBtnSidebar] =
     useState('hidden');
   function showMobileSideBar() {
-    // /console.log("SHOW SIDEBAR IS CALLED!!!");
+    ////console.log("SHOW SIDEBAR IS CALLED!!!");
     if (displayMobileSidebar == 'block') {
       displayMobileSidebar = 'hidden';
       setDisplayMobileSidebar('hidden');
@@ -1035,15 +1058,16 @@ export default function Classmates() {
     }
   }
 
-  // When clicking on a user from classmates page call in a backend request
+  ///When clicking on a user from classmates page call in a backend request
   function checkUserClicked(clickedElm) {
     console.log('I was Clicked: ', clickedElm);
     if (clickedElm.id == 'group_content') {
+      return;
     } else if (clickedElm.title == 'user_card') {
       callUserProfile(clickedElm);
     } else {
       console.log('else...');
-      let correctParent = clickedElm;
+      var correctParent = clickedElm;
       console.log(correctParent.title, clickedElm.tagName);
       while (correctParent.title != 'user_card') {
         correctParent = correctParent.parentElement;
@@ -1063,6 +1087,10 @@ export default function Classmates() {
       '/profile'
     );
   }
+
+  //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////// END OF JS CODE
+  /////////////////////////////////////////////////////////////////
 
   return (
     <>
@@ -1084,9 +1112,7 @@ export default function Classmates() {
         <div
           id="pageUpDownBtnWrapper"
           ref={pageUpDownBtnRef}
-          className={
-            'z-[100] fixed text-3xl mb-[78px] ml-0 mr-[10px] mt-0 right-0 bottom-0'
-          }
+          className={`z-[100] fixed text-3xl mb-[78px] ml-0 mr-[10px] mt-0 right-0 bottom-0`}
         >
           <BsArrowDownCircleFill
             id="pageUpDownBtn"
@@ -1094,7 +1120,7 @@ export default function Classmates() {
             onClick={(e) => {
               e.stopPropagation();
               // //console.log("clicked: ", e.target.tagName);
-              // when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+              //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
               if (e.target.tagName == 'path') {
                 toggleFilter(e.target.parentElement);
               } else if (e.target.tagName == 'svg') {
@@ -1117,9 +1143,7 @@ export default function Classmates() {
             <div
               id="group_indicator"
               ref={indicatorRef}
-              className={
-                'z-[20] absolute mt-[12px] border-[calc(25px_*_0.6)] left-0 top-0 w-0 h-0 ml-[7.5px] border-r-transparent border-y-transparent border-solid border-black hidden'
-              }
+              className={`z-[20] absolute mt-[12px] border-[calc(25px_*_0.6)] left-0 top-0 w-0 h-0 ml-[7.5px] border-r-transparent border-y-transparent border-solid border-black hidden`}
             />
             <FilterGroups
               id={'group_tags'}
@@ -1158,21 +1182,17 @@ export default function Classmates() {
         </div>
         <div
           id="groups_wrapper"
-          className={'sm:ml-[100px] sm:mr-[130px] mt-0 mb-[10%]'}
+          className={`sm:ml-[100px] sm:mr-[130px] mt-0 mb-[10%]`}
         >
           <h1
             id="header"
-            className={
-              'relative sm:absolute w-full left-0 underline mt-6 mb-10 text-[2em] font-extrabold text-center'
-            }
+            className={`relative sm:absolute w-full left-0 underline mt-6 mb-10 text-[2em] font-extrabold text-center`}
           >
             Find Your Classmates
           </h1>
           <div
             id="nav_options"
-            className={
-              'relative sm:absolute w-[100%] sm:mt-[110px] text-[15px] flex flex-row-reverse min-[350px]:right-[7.5%] items-center min-[350px]:gap-x-4 max-[350px]:justify-between max-[350px]:px-[5px]'
-            }
+            className={`relative sm:absolute w-[100%] sm:mt-[110px] text-[15px] flex flex-row-reverse min-[350px]:right-[7.5%] items-center min-[350px]:gap-x-4 max-[350px]:justify-between max-[350px]:px-[5px]`}
           >
             <div id="filter_wrapper">
               <FaSortAmountDown
@@ -1180,7 +1200,7 @@ export default function Classmates() {
                 onClick={(e) => {
                   e.stopPropagation();
                   // //console.log("clicked: ", e.target.tagName);
-                  // when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+                  //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
                   if (e.target.tagName == 'path') {
                     toggleFilter(e.target.parentElement);
                   } else if (e.target.tagName == 'svg') {
