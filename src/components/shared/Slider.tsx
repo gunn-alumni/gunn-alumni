@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react'
-import ReactSlider, { type ReactSliderProps } from 'react-slider'
+import { ChangeEvent, useState } from 'react';
+import ReactSlider, { type ReactSliderProps } from 'react-slider';
 
 interface SliderProps {
   colorActive?: string
@@ -8,7 +8,7 @@ interface SliderProps {
 }
 
 const Slider = <T extends number | readonly number[] = number>(
-  _props: ReactSliderProps & SliderProps
+  _props: ReactSliderProps & SliderProps //can't use ReactSlider as a controlled component when ReactSliderProps<T>, temp fix
 ) => {
   // Can't mutate _props.colorActive or _props.colorInactive directly, so have to create new variable to hold the info
   const colors = {
@@ -28,7 +28,8 @@ const Slider = <T extends number | readonly number[] = number>(
   const [value, setValue] = useState(_props.defaultValue ? _props.defaultValue : (_props.min ? _props.min : 0));
   return (
     <>
-      <ReactSlider {..._props}
+      <ReactSlider
+        {..._props}
         renderThumb={(props) => {
           return (
             <div
@@ -49,8 +50,14 @@ const Slider = <T extends number | readonly number[] = number>(
             <div
               {...props}
               className={`rounded-full ${
-                (_props.orientation === 'vertical') ? 'w-1/4 left-1/2 -translate-x-1/2' : 'h-1/4 top-1/2 -translate-y-1/2'} ${
-                (isMulti ? isFirst || isLast : isLast) ? `${colors.colorInactive}` : `${colors.colorActive}`}`}
+                _props.orientation === 'vertical'
+                  ? 'w-1/4 left-1/2 -translate-x-1/2'
+                  : 'h-1/4 top-1/2 -translate-y-1/2'
+              } ${
+                (isMulti ? isFirst || isLast : isLast)
+                  ? `${colors.colorInactive}`
+                  : `${colors.colorActive}`
+              }`}
               >
             </div>
           )
@@ -60,7 +67,10 @@ const Slider = <T extends number | readonly number[] = number>(
             <div
               {...props}
               className={`w-1 h-1 rounded-full ${colors.colorActive}
-                ${(_props.orientation === 'vertical') ? 'left-1/2 -translate-x-1/2' : 'top-1/2 -translate-y-1/2'}`}
+                ${_props.orientation === 'vertical'
+                  ? 'left-1/2 -translate-x-1/2'
+                  : 'top-1/2 -translate-y-1/2'
+              }`}
             >
             </div>
           )
@@ -79,4 +89,4 @@ const Slider = <T extends number | readonly number[] = number>(
   )
 }
 
-export default Slider
+export default Slider;

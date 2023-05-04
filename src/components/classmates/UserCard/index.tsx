@@ -1,10 +1,10 @@
-import Image, { type StaticImageData } from 'next/image'
+import Image, { type StaticImageData } from 'next/image';
 
 interface UserCardProps {
-  uniId: string
-  classTitle: string
-  userPfp: StaticImageData
-  userName: string
+  uniId: string;
+  classTitle: string;
+  userPfp: StaticImageData;
+  userName: string;
 }
 
 const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
@@ -12,7 +12,7 @@ const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
     <div
       id={uniId}
       title={classTitle}
-      className="w-fit flex flex-col p-1 border border-[2.5px] border-gray-300"
+      className="w-fit flex flex-col p-[10px] border border-[4px] border-gray-300 hover:border-[rgba(180,0,0,1)] hover:rounded-[25px] hover:border-[4px] hover:cursor-pointer"
     >
       <Image src={userPfp} width={100} height={100} alt="default_user_pfp" />
       <div
@@ -22,7 +22,7 @@ const UserCard = ({ uniId, classTitle, userPfp, userName }: UserCardProps) => {
         <h4 className="text-center px-1 py-1 truncate">{userName}</h4>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserCard
+export default UserCard;

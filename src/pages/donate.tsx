@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import ImgButton from '@/components/donate/ImageButton/ImgButton'
-import { FormInput, FormSelect } from '@/components/donate/Forms'
-import { StandardButton, ButtonGroup } from '@/components/shared/Button'
-import Slider from '@/components/shared/Slider'
+import Head from 'next/head';
+import ImgButton from '@/components/donate/ImageButton/ImgButton';
+import { FormInput, FormSelect } from '@/components/donate/Forms';
+import { StandardButton, ButtonGroup } from '@/components/shared/Button';
+import Slider from '@/components/shared/Slider';
 
 /* TODO:
  * Page Structure:
@@ -15,7 +15,8 @@ import Slider from '@/components/shared/Slider'
  *                                             Might need to change HTML structure of component.
  */
 
-const countries = [ // move this to the backend maybe?
+const countries = [
+  // move this to the backend maybe?
   { name: 'Afghanistan', value: 'AF' },
   { name: 'Åland Islands', value: 'AX' },
   { name: 'Albania', value: 'AL' },
@@ -268,7 +269,7 @@ const countries = [ // move this to the backend maybe?
   { name: 'Yemen', value: 'YE' },
   { name: 'Zambia', value: 'ZM' },
   { name: 'Zimbabwe', value: 'ZW' }
-]
+];
 
 const formInputSettings = [
   {
@@ -302,7 +303,7 @@ const formInputSettings = [
     type: 'text',
     className: 'border-2 bg-gray-100 rounded-md border-gray-300 focus:outline-blue-400 p-1'
   }
-]
+];
 
 const formSelectSettings = [
   {
@@ -311,7 +312,7 @@ const formSelectSettings = [
     options: countries,
     id: 'countrySelect'
   }
-]
+];
 
 const donationOptionSettings = [
   {
@@ -326,7 +327,7 @@ const donationOptionSettings = [
     text: 'Gunn PTSA',
     imageURL: "bg-[url('/images/GunnPTSA_logo.png')]"
   }
-]
+];
 
 const donationDuration_ButtonGroup = [
   {
@@ -344,27 +345,42 @@ const donationDuration_ButtonGroup = [
     classNameInactive: 'bg-transparent text-black opacity-60',
     className: 'px-4 py-2'
   }
-]
+];
 
 const donationOption_ButtonGroup = [
   {
-    value: <ImgButton text={donationOptionSettings[0].text} imageURL={donationOptionSettings[0].imageURL} />,
+    value: (
+      <ImgButton
+        text={donationOptionSettings[0].text}
+        imageURL={donationOptionSettings[0].imageURL}
+      />
+    ),
     classNameActive: 'opacity-100',
     classNameInactive: 'opacity-50'
   },
   {
-    value: <ImgButton text={donationOptionSettings[1].text} imageURL={donationOptionSettings[1].imageURL} />,
+    value: (
+      <ImgButton
+        text={donationOptionSettings[1].text}
+        imageURL={donationOptionSettings[1].imageURL}
+      />
+    ),
     classNameActive: 'opacity-100',
     classNameInactive: 'opacity-50'
   },
   {
-    value: <ImgButton text={donationOptionSettings[2].text} imageURL={donationOptionSettings[2].imageURL} />,
+    value: (
+      <ImgButton
+        text={donationOptionSettings[2].text}
+        imageURL={donationOptionSettings[2].imageURL}
+      />
+    ),
     classNameActive: 'opacity-100',
     classNameInactive: 'opacity-50'
   }
-]
+];
 
-export default function Donate () {
+export default function Donate() {
   return (
     <>
       <Head>
@@ -386,7 +402,7 @@ export default function Donate () {
               <div className="flex w-full justify-center items-center flex-col">
                 <div className="text-xl">I want to donate: </div>
                 <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
-                    <ButtonGroup buttons={donationDuration_ButtonGroup}/>
+                  <ButtonGroup buttons={donationDuration_ButtonGroup} />
                 </div>
                 <Slider className="w-full h-12 mt-2" defaultValue={10} marks={10} step={10} min={0} max={100} inputBox={true}/>
               </div>
@@ -405,13 +421,13 @@ export default function Donate () {
               <h1 className="font-bold text-xl mt-4">Billing Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
                 {formInputSettings.slice(3, 5).map((data, i) => (
-                    <FormInput
-                      key={i}
-                      title={data.title}
-                      type={data.type}
-                      placeholder={data.placeholder}
-                      isRequired={data.isRequired}
-                    />
+                  <FormInput
+                    key={i}
+                    title={data.title}
+                    type={data.type}
+                    placeholder={data.placeholder}
+                    isRequired={data.isRequired}
+                  />
                 ))}
                 {formSelectSettings.map((data, i) => (
                   <FormSelect
@@ -442,5 +458,5 @@ export default function Donate () {
         </div>
       </div>
     </>
-  )
+  );
 }

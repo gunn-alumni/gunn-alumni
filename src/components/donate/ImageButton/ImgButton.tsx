@@ -1,6 +1,6 @@
 interface ImgButtonProps {
-  text: string
-  imageURL: string
+  text: string;
+  imageURL: string;
 }
 
 const ImgButton = ({ text, imageURL }: ImgButtonProps) => {
@@ -15,7 +15,7 @@ const ImgButton = ({ text, imageURL }: ImgButtonProps) => {
         {text}
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default ImgButton
+export default ImgButton;
