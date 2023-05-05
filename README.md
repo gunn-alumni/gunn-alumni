@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/abceee98-596b-45f5-8eaf-e306a5f5ab39/deploy-status)](https://app.netlify.com/sites/gunn-alumni/deploys)
+
 # Gunn Alumni Project
 This is a student-led project to create an alumni site for Gunn High School, something that suprisingly does not exist yet.
 Our site is a Next.js app that uses Typescript, TailwindCSS for frontend, connected to a Supabase project for backend.
