@@ -10,8 +10,6 @@
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts*' --write"
   },
   "dependencies": {
-    "@databases/sqlite-sync": "^1.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
     "@next/font": "13.1.6",
     "@supabase/auth-helpers-nextjs": "^0.6.1",
     "@supabase/auth-helpers-react": "^0.3.1",
