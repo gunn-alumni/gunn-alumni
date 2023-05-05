@@ -404,7 +404,7 @@ export default function Donate() {
                 <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
                   <ButtonGroup buttons={donationDuration_ButtonGroup} />
                 </div>
-                <Slider className="w-full h-12 mt-2" defaultValue={10} marks={10} step={10} min={0} max={100} inputBox={true}/>
+                <Slider className="w-full h-12 mt-2" defaultValue={10} marks={10} step={10} min={0} max={100} isInputVisible={true}/>
               </div>
               <h1 className="font-bold text-xl mt-4">Your Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
