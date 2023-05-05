@@ -300,7 +300,8 @@ const formInputSettings = [
   },
   {
     title: 'City',
-    type: 'text'
+    type: 'text',
+    className: 'border-2 bg-gray-100 rounded-md border-gray-300 focus:outline-blue-400 p-1'
   }
 ];
 
@@ -315,7 +316,7 @@ const formSelectSettings = [
 
 const donationOptionSettings = [
   {
-    text: 'Gunn Alumni Wesbite',
+    text: 'Gunn Alumni Website',
     imageURL: "bg-[url('/images/GunnAlumniSite_logo.png')]"
   },
   {
@@ -391,8 +392,8 @@ export default function Donate() {
       <div className="box-border px-4 py-4 md:px-24 md:py-10 lg:px-48 lg:py-10 flex flex-col gap-y-4 justify-center items-center">
         <div className="w-full box-border rounded-xl">
           <h1 className="font-bold text-xl">Donation Options</h1>
-          <div className="w-full box-border flex items-stretch gap-2 mt-2 flex-col lg:flex-row">
-            <ButtonGroup buttons={donationOption_ButtonGroup} />
+          <div className="w-full box-border grid items-stretch gap-2 mt-2 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1">
+            <ButtonGroup buttons={donationOption_ButtonGroup}/>
           </div>
         </div>
         <div className="flex flex-col box-border grow gap-y-2 mt-4 rounded-xl shadow-xl px-4 md:px-8 py-8 w-full lg:px-16">
@@ -403,7 +404,7 @@ export default function Donate() {
                 <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
                   <ButtonGroup buttons={donationDuration_ButtonGroup} />
                 </div>
-                <Slider className="w-full h-10" defaultValue={50} />
+                <Slider className="w-full h-12 mt-2" defaultValue={10} marks={10} step={10} min={0} max={100} isInputVisible={true}/>
               </div>
               <h1 className="font-bold text-xl mt-4">Your Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">
@@ -443,6 +444,7 @@ export default function Donate() {
                     title={data.title}
                     type={data.type}
                     placeholder={data.placeholder}
+                    className={data.className}
                   />
                 ))}
               </div>
