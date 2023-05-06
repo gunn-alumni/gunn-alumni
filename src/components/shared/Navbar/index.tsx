@@ -44,7 +44,7 @@ const Navbar = () => {
           }
         });
     }
-  }, [session]);
+  }, [session, supabase]);
 
   return (
     <nav
@@ -81,20 +81,20 @@ const Navbar = () => {
             {session === null ? (
               <>
                 <div className="md:order-2 md:ml-64">
-                  <a
-                    className="block px-4 py-2 text-center outline md:outline-none text-white text-xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30 md:bg-transparent"
+                  <Link
                     href={'/login'}
+                    className="block px-4 py-2 text-center outline md:outline-none text-white text-xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30 md:bg-transparent"
                   >
                     Login
-                  </a>
+                  </Link>
                 </div>
                 <div className="md:order-2">
-                  <a
-                    className="block px-4 py-2 text-center text-white text-xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30  bg-black md:hover:outline-white md:hover:outline md:hover:outline-2"
+                  <Link
                     href={'/signup'}
+                    className="block px-4 py-2 text-center text-white text-xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30  bg-black md:hover:outline-white md:hover:outline md:hover:outline-2"
                   >
                     Sign Up
-                  </a>
+                  </Link>
                 </div>
               </>
             ) : (
@@ -148,17 +148,17 @@ const Navbar = () => {
             <hr />
             {[
               { title: 'Team', to: '/team' },
-              { title: 'Classmates', to: '/classmates' },
+              { title: 'Classmates', to: '/classmates2' },
               { title: 'News', to: '/news' },
               { title: 'Donate', to: '/donate' }
             ].map(({ title, to }) => (
-              <a
+              <Link
                 key={title}
                 href={to}
                 className="block px-4 py-2 text-white text-4xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30 md:bg-transparent"
               >
                 {title}
-              </a>
+              </Link>
             ))}
           </ul>
         </div>
