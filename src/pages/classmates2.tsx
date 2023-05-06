@@ -45,15 +45,16 @@ export default function Classmates2() {
       <h1 className="text-4xl text-center py-2 font-bold">Classmates</h1>
       <div>
         {profiles && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 py-4">
+          <div className="flex flex-cols flex-wrap justify-center">
             {profiles.map((profile) => (
-              <UserCard
-                key={profile.id}
-                uniId={profile.id}
-                classTitle={'user_card'}
-                userPfp={profile.pfp || '/images/userIconx96.png'}
-                userName={profile.preferred_name}
-              />
+              <div key={profile.id} className="m-4">
+                <UserCard
+                  uniId={profile.id}
+                  classTitle={'user_card'}
+                  userPfp={profile.pfp || '/images/userIconx96.png'}
+                  userName={profile.preferred_name}
+                />
+              </div>
             ))}
           </div>
         )}
