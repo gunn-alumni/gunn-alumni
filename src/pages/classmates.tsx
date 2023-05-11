@@ -6,7 +6,7 @@ import Fuse from 'fuse.js';
 
 // other imports
 import Head from 'next/head';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, Key, SetStateAction } from 'react';
 
 // React-Icons Import
 import { FaSortAmountDown } from 'react-icons/fa';
@@ -15,6 +15,10 @@ import { BsArrowDownCircleFill } from 'react-icons/bs';
 // Custom Components
 import FilterGroups from '@/components/classmates/FilterGroups';
 import UserCard from '@/components/classmates/UserCard';
+
+interface UserDataType {
+  key: string;
+}
 
 export default function Classmates() {
   // React Hooks Declarations:
@@ -31,17 +35,18 @@ export default function Classmates() {
   const router = useRouter();
 
   // data initializers
-  const [userCardData, setUserCardData] = useState([]);
-  const [staticUserCardData, setStaticUserCardData] = useState([]);
-  const [filterTagsData, setFilterTagsData] = useState([]);
+  let [userCardData, setUserCardData] = useState([]);
+  let [staticUserCardData, setStaticUserCardData] = useState([]);
+  let [filterTagsData, setFilterTagsData] = useState([]);
   // /Create Elements Using Data
-  const [groupsElementsState, setGroupsElementsState] = useState([]);
-
-  // Old Data Structures
+  let [groupsElementsState, setGroupsElementsState] = useState([]);
 
   //data management stuff
-  function changeDataStructure(newData: any[], fetchedFlag: any) {
-    const userCardDataHelper = [];
+  function changeDataStructure(
+    newData: { [key: string]: Array<object> },
+    fetchedFlag: boolean
+  ) {
+    let userCardDataHelper = [];
     console.log(newData);
 
     if (fetchedFlag) {
@@ -49,20 +54,23 @@ export default function Classmates() {
       for (let i = 0; i < datakeys.length; i++) {
         // ////console.log(datakeys[i]);
         const tempKey = datakeys[i];
-        const tempData: any = {};
+        const tempData: { [key: string]: Array<object> } = {};
         tempData[tempKey] = newData[tempKey];
         // ////console.log(tempData);
         userCardDataHelper.push(tempData);
       }
     } else {
-      userCardDataHelper = newData;
+      userCardDataHelper.push(newData);
     }
     console.log('HELPER DATA = ', userCardDataHelper);
 
     //add grad_year property to each user
-    userCardDataHelper.forEach((obj) => {
+    userCardDataHelper.forEach((obj: { [key: string]: object[] }) => {
       var keys = Object.keys(obj);
-      obj[keys[0]].forEach((userObj) => {
+      console.log('keys: ', keys);
+      console.log('TEST:::: ', obj[keys[0]]);
+      console.log('TEST222: ', obj[keys[0]][0]);
+      obj[keys[0]].forEach((userObj: { [key: string]: string }) => {
         userObj['grad_year'] = keys[0];
       });
     });
@@ -92,18 +100,18 @@ export default function Classmates() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          //console.log("Fetched the Data: ",data);
+          console.log('Fetched the Data: ', data);
           changeDataStructure(data, true);
         }
       })
       .catch((error) => {
-        // //console.log(error);
-        changeDataStructure(dummyUserCardData, false);
+        console.log(error);
+        // changeDataStructure(dummyUserCardData, false);
       });
   }
 
   ////Tags Data Create With Fetching
-  function createTagsData(inputData) {
+  function createTagsData(inputData: string | any[]) {
     var filterTagsDataHelper = [];
     for (let i = 0; i < inputData.length; i++) {
       var dataDictKeys = Object.keys(inputData[i]);
@@ -117,52 +125,61 @@ export default function Classmates() {
   }
 
   //New code with fetching
-  function createUsersData(usersData) {
-    var groupsElementsHelper = [];
+  function createUsersData(usersData: any[]) {
+    var groupsElementsHelper:
+      | ((prevState: never[]) => never[])
+      | JSX.Element[] = [];
     //console.log("Creating Elements: ", usersData);
-    usersData.forEach((item, index) => {
-      const groupTagName = Object.keys(item)[0];
-      groupsElementsHelper.push(
-        <>
-          <h2
-            key={index}
-            className={`my-[0.83em] font-bold ${
-              index < 1 ? 'mt-[50px]' : 'mt-[75px]'
-            }`}
-            id={'group_label'}
-          >
-            {groupTagName}
-          </h2>
-          <div
-            key={groupTagName}
-            id={'group_content'}
-            className="grid min-[350px]:grid-cols-2 md:flex md:flex-row gap-x-[75px] gap-y-[25px] flex-wrap overflow-x-hidden break-all"
-          >
-            {item[groupTagName].map((data, i) => (
-              <UserCard
-                key={i}
-                uniId={
-                  Object.keys(data).indexOf('user_id') < 0
-                    ? 'user' + i
-                    : data.user_id
-                }
-                classTitle={'user_card'}
-                userPfp={
-                  Object.keys(data).indexOf('userPfp') < 0
-                    ? '/images/userIconx96.png'
-                    : data.userPfp
-                }
-                userName={
-                  Object.keys(data).indexOf('name') < 0
-                    ? 'nameless_user'
-                    : data.name
-                }
-              />
-            ))}
-          </div>
-        </>
-      );
-    });
+    usersData.forEach(
+      (item: { [x: string]: any[] }, index: Key | null | undefined) => {
+        const groupTagName = Object.keys(item)[0];
+        groupsElementsHelper.push(
+          <>
+            <h2
+              key={index}
+              className={`my-[0.83em] font-bold ${
+                index < 1 ? 'mt-[50px]' : 'mt-[75px]'
+              }`}
+              id={'group_label'}
+            >
+              {groupTagName}
+            </h2>
+            <div
+              key={groupTagName}
+              id={'group_content'}
+              className="grid min-[350px]:grid-cols-2 md:flex md:flex-row gap-x-[75px] gap-y-[25px] flex-wrap overflow-x-hidden break-all"
+            >
+              {item[groupTagName].map(
+                (
+                  data: { user_id?: any; userPfp?: any; name?: any },
+                  i: Key | null | undefined
+                ) => (
+                  <UserCard
+                    key={i}
+                    uniId={
+                      Object.keys(data).indexOf('user_id') < 0
+                        ? 'user' + i
+                        : data.user_id
+                    }
+                    classTitle={'user_card'}
+                    userPfp={
+                      Object.keys(data).indexOf('userPfp') < 0
+                        ? '/images/userIconx96.png'
+                        : data.userPfp
+                    }
+                    userName={
+                      Object.keys(data).indexOf('name') < 0
+                        ? 'nameless_user'
+                        : data.name
+                    }
+                  />
+                )
+              )}
+            </div>
+          </>
+        );
+      }
+    );
 
     groupsElementsState = groupsElementsHelper;
     setGroupsElementsState(groupsElementsHelper);
@@ -200,12 +217,12 @@ export default function Classmates() {
   var [displayContentWrapper, setDisplayContentWrapper] =
     useState('sm:flex-row');
 
-  function extractUsers(myData) {
+  function extractUsers(myData: any[]) {
     console.log('Hello: ', myData);
-    var justUsersHelper = [];
-    myData.forEach((outerObj) => {
+    var justUsersHelper: any[] | ((prevState: never[]) => never[]) = [];
+    myData.forEach((outerObj: { [x: string]: any }) => {
       var userObj = outerObj[Object.keys(outerObj)[0]];
-      userObj.forEach((userDataObj) => {
+      userObj.forEach((userDataObj: any) => {
         //console.log("got it! ", userDataObj);
         justUsersHelper.push(userDataObj);
       });
@@ -222,11 +239,11 @@ export default function Classmates() {
   }
 
   //searching functions :)
-  function searchUsers(query) {
+  function searchUsers(query: string) {
     return searchFuse.search(query);
   }
 
-  function handleKeyPress(e) {
+  function handleKeyPress(e: { key: string; target: any }) {
     //console.log("Rush EEE: ", e.key);
     if (e.key === 'Enter') {
       // Call handleSearch() when the Enter key is pressed
@@ -235,7 +252,7 @@ export default function Classmates() {
     }
   }
 
-  function handleSearch(inputElm) {
+  function handleSearch(inputElm: SetStateAction<undefined>) {
     //console.log("Elm = ", inputElm);
     tempElementHolder = inputElm;
     setTempElementHolder(inputElm);
@@ -262,7 +279,7 @@ export default function Classmates() {
     }
   }
 
-  function showSearchResults(showRes) {
+  function showSearchResults(showRes: any[]) {
     var groupsElementsHelper = [];
     var label =
       showRes.length > 0
@@ -282,27 +299,32 @@ export default function Classmates() {
           id={'group_content'}
           className="grid min-[350px]:grid-cols-2 md:flex md:flex-row gap-x-[75px] gap-y-[25px] flex-wrap overflow-x-hidden break-all"
         >
-          {showRes.map((fuseItem, index) => (
-            <UserCard
-              key={index}
-              uniId={
-                Object.keys(fuseItem.item).indexOf('user_id') < 0
-                  ? 'user' + index
-                  : fuseItem.item.user_id
-              }
-              classTitle={'user_card'}
-              userPfp={
-                Object.keys(fuseItem.item).indexOf('userPfp') < 0
-                  ? '/images/userIconx96.png'
-                  : fuseItem.item.userPfp
-              }
-              userName={
-                Object.keys(fuseItem.item).indexOf('name') < 0
-                  ? 'nameless_user'
-                  : fuseItem.item.name
-              }
-            />
-          ))}
+          {showRes.map(
+            (
+              fuseItem: { item: { user_id?: any; userPfp?: any; name?: any } },
+              index: Key | null | undefined
+            ) => (
+              <UserCard
+                key={index}
+                uniId={
+                  Object.keys(fuseItem.item).indexOf('user_id') < 0
+                    ? 'user' + index
+                    : fuseItem.item.user_id
+                }
+                classTitle={'user_card'}
+                userPfp={
+                  Object.keys(fuseItem.item).indexOf('userPfp') < 0
+                    ? '/images/userIconx96.png'
+                    : fuseItem.item.userPfp
+                }
+                userName={
+                  Object.keys(fuseItem.item).indexOf('name') < 0
+                    ? 'nameless_user'
+                    : fuseItem.item.name
+                }
+              />
+            )
+          )}
         </div>
       </>
     );
@@ -315,13 +337,15 @@ export default function Classmates() {
   ////////////////////////////////////////////////////// Filter Options Sorting Functions
 
   /////Helpful Functions
-  function removeDuplicates(arr) {
-    return arr.filter((value, index, self) => {
+  function removeDuplicates(arr: any[]) {
+    return arr.filter((value: any, index: any, self: string | any[]) => {
       return self.indexOf(value) === index;
     });
   }
 
-  function reloadContent(sortedData) {
+  function reloadContent(
+    sortedData: any[] | ((prevState: never[]) => never[])
+  ) {
     ////console.log("reloading...");
     //update the usercardData and its elements
     userCardData = sortedData;
@@ -346,7 +370,7 @@ export default function Classmates() {
   }
 
   /////////Ascending Order By Year
-  function sortUsersByAscendingYear(data) {
+  function sortUsersByAscendingYear(data: never[]) {
     ////console.log("Let The ASCENDING Sorting Begin....");
     var sortedData = data;
 
@@ -359,7 +383,7 @@ export default function Classmates() {
   }
 
   /////////Descending Order By Year
-  function sortUsersByDescendingYear(data) {
+  function sortUsersByDescendingYear(data: string | any[]) {
     ////console.log("Let The DESCENDING Sorting Begin....");
     var oldTagsData = [];
     for (let i = 0; i < data.length; i++) {
@@ -388,7 +412,7 @@ export default function Classmates() {
     reloadContent(sortedData);
   }
 
-  function quicksort_descending(arr) {
+  function quicksort_descending(arr: string | any[]) {
     if (arr.length <= 1) {
       return arr;
     } else {
@@ -412,14 +436,14 @@ export default function Classmates() {
     }
   }
 
-  function sortUsersAlphabetical(data, filterBy) {
+  function sortUsersAlphabetical(data: any[], filterBy: string) {
     ////console.log("Let the ALPHABETICAL Sorting Begin....");
-    var allUsersData = [];
-    var usersNameData = [];
-    data.forEach((item) => {
+    var allUsersData: any[] = [];
+    var usersNameData: any[] = [];
+    data.forEach((item: { [x: string]: any[] }) => {
       ////console.log(item);
       var keyName = Object.keys(item)[0];
-      item[keyName].forEach((userInfo) => {
+      item[keyName].forEach((userInfo: { name: any }) => {
         allUsersData.push(userInfo);
         usersNameData.push(userInfo.name);
       });
@@ -443,13 +467,13 @@ export default function Classmates() {
     ////console.log("Sorted Alphabetical Names Only: ", sortedNamesData);
     ////console.log("Sorted Alphabetical Names Only Without Duplicates: ", noDuplisSortedNamesData);
 
-    var sortedData = [];
+    var sortedData: {}[] = [];
 
-    noDuplisSortedNamesData.forEach((name, index) => {
+    noDuplisSortedNamesData.forEach((name: string, index: any) => {
       ////console.log("Checking: ", name, index);
       var tempData = {};
       var tempKey = name.charAt(0);
-      var tempVal = [];
+      var tempVal: any[] = [];
       allUsersData.forEach((user) => {
         ////console.log("Condition Says: ", user.name, "  ?has? ", name, (user.name).includes(name));
         //need to get the user that has the same last name as name, not more not less
@@ -480,7 +504,7 @@ export default function Classmates() {
     //reload necessary contents of the page
     reloadContent(sortedData);
   }
-  function quickSort_alphabetical(arr) {
+  function quickSort_alphabetical(arr: string | any[]) {
     if (arr.length <= 1) {
       return arr;
     }
@@ -581,7 +605,7 @@ export default function Classmates() {
   //scrolling to the top or the bottom of the page
   var [pageMarkerStatus, setPageMarkerStatus] = useState('pg_down');
   var [pageMarkerBtnDir, setPageMarkerBtnDir] = useState('scale-y-100');
-  function pageMarkerScroll(elm) {
+  function pageMarkerScroll(elm: EventTarget) {
     if (pageMarkerStatus == 'pg_down') {
       ////console.log("FullHeight Scrolling!!! ==== ", fullHeight);
       window.scrollTo(0, fullHeight);
@@ -610,7 +634,7 @@ export default function Classmates() {
     // }
   }
 
-  function filterOptionClicked(elm) {
+  function filterOptionClicked(elm: EventTarget) {
     //console.log("ALERT: FILTER OPTION SELECTED = ", elm);
 
     //change the layout of content wrapper from flex to grid
@@ -657,7 +681,7 @@ export default function Classmates() {
   }
 
   ///////////////////////////////// Tag Clicked Logic ////////////////////////////////////////
-  const groupTagsClick = (elm) => {
+  const groupTagsClick = (elm: { id: string }) => {
     // // ////console.log("No WAYYYY THIS WORKEDDDDD!!!!!");
     // // ////console.log(elm, elm.innerHTML);
     if (elm.id == 'group_tags') {
@@ -671,7 +695,7 @@ export default function Classmates() {
     }
   };
 
-  function showGroup(group) {
+  function showGroup(group: any) {
     var group_tag_clicked = group;
     var group_labels = allGroupLabel;
     //scroll page to label
@@ -753,7 +777,7 @@ export default function Classmates() {
     allGroupContent = allGroupContentHelper;
     setAllGroupContent(allGroupContentHelper);
     ////console.log("AllGroupContent: ",allGroupContent, allGroupContentHelper);
-    var allGroupLabelHelper = [];
+    var allGroupLabelHelper: SetStateAction<never[]> = [];
     for (let i = 0; i < allGroupContent.length; i++) {
       ////console.log(allGroupContent[i].id);
       if (allGroupContent[i].id == 'group_label') {
@@ -771,7 +795,7 @@ export default function Classmates() {
     ////console.log("group_tags: ", group_tags);
   }
 
-  function moveIndicator(moveToElm) {
+  function moveIndicator(moveToElm: undefined) {
     //additional logic to align the middle of indicator and tag
     //hard coded values!!
     var borderSize_group_indicator = indicatorBorderSize;
@@ -799,7 +823,7 @@ export default function Classmates() {
       group_indicator.style.marginTop = moveMarginPos + 'px';
     }
   }
-  function scrollPosOfElement(elm) {
+  function scrollPosOfElement(elm: string | Element | null | undefined) {
     var posValue = 0;
     if (elm == '' || elm == undefined || elm == null) {
       posValue = -1;
@@ -811,16 +835,16 @@ export default function Classmates() {
       return posValue;
     }
   }
-  function findClosest(posArr) {
+  function findClosest(posArr: number[]) {
     const arr = posArr;
     const goal = window.scrollY;
-    const closest = arr.reduce((prev, curr) => {
+    const closest = arr.reduce((prev: number, curr: number) => {
       return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
     });
     // ////console.log(closest);
     return closest;
   }
-  function scrollChange(directionScroll) {
+  function scrollChange(directionScroll: string | undefined) {
     var labelPosList = [];
     for (let i = 0; i < allGroupLabel.length; i++) {
       labelPosList.push(scrollPosOfElement(allGroupLabel[i]));
@@ -1026,7 +1050,7 @@ export default function Classmates() {
     }
   }
 
-  function highlightTag(elm) {
+  function highlightTag(elm: string) {
     var tagElm = elm;
     // ////console.log("HIGHLIGHT TAAAAAAAAAAG");
     // ////console.log(tagElm.style);
@@ -1059,7 +1083,7 @@ export default function Classmates() {
   }
 
   ///When clicking on a user from classmates page call in a backend request
-  function checkUserClicked(clickedElm) {
+  function checkUserClicked(clickedElm: EventTarget) {
     console.log('I was Clicked: ', clickedElm);
     if (clickedElm.id == 'group_content') {
       return;
@@ -1076,7 +1100,7 @@ export default function Classmates() {
       callUserProfile(correctParent);
     }
   }
-  function callUserProfile(user) {
+  function callUserProfile(user: { id: any }) {
     console.log('Got the right parent = ', user);
 
     router.push(

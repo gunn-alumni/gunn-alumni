@@ -3,16 +3,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import React, { createElement, useEffect, useRef, useState } from 'react';
 
 // react icons: social media
 import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { TiSocialTwitter } from 'react-icons/ti';
 import { FcLock, FcUnlock } from 'react-icons/fc';
-import { TfiPencilAlt } from 'react-icons/tfi';
-import { MdOutlineDownloadDone } from 'react-icons/md';
-import { FaRegEdit } from 'react-icons/fa';
 
 import Link from 'next/link';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
@@ -27,7 +24,8 @@ const oldDummyProfileData = {
   contact: {
     location: 'Palo Alto, CA',
     phone: '650-555-5555',
-    email: 'lol@lol.com',
+    primary_email: 'li3945@pausd.us',
+    secondary_email: 'lol@lol.com',
     socialMedia: {
       facebook: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
       instagram: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
@@ -49,7 +47,8 @@ const dummyProfileData = {
   contact: {
     location: 'City, State',
     phone: '000-000-0000',
-    email: 'lorem.ipsum@gmail.com',
+    primary_email: 'li34521@pausd.us',
+    secondary_email: 'lorem.ipsum@gmail.com',
     socialMedia: {
       facebook: 'https://www.facebook.com/',
       instagram: 'https://www.instagram.com/',
@@ -85,6 +84,10 @@ const socialMediaIconsList = [
   FaTiktok
 ];
 
+//Types Declarations
+type ViewState = 'private' | 'public';
+
+//Functions
 const ProfilePage = () => {
   const router = useRouter();
   const queryMessage = router?.query;
@@ -127,14 +130,49 @@ const ProfilePage = () => {
   let [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
   let [profileBio, setProfileBio] = useState([]);
   let [profileContact, setProfileContact] = useState([]);
+  let [viewType, setViewType] = useState(
+    <FcLock
+      id="loc_lock"
+      className="w-[40px] h-[40px]"
+      onClick={(e) => {
+        e.stopPropagation();
+        //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+        if (e.target.tagName == 'path') {
+          toggleView(e.target.parentElement);
+        } else if (e.target.tagName == 'svg') {
+          toggleView(e.target);
+        }
+      }}
+    />
+  );
+
+  let [viewStates, setViewStates] = useState<ViewState[]>([
+    'private',
+    'private',
+    'private',
+    'private',
+    'private'
+  ]);
+  const viewTypeDivRefs = useRef([]);
+  let [viewTypes, setViewTypes] = useState([]);
+
+  let [vtLock1 , setVtLock1] = useState();
 
   //The Functions
+  const addVTDRefs = (el) => {
+    if (el && !viewTypeDivRefs.current.includes(el)) {
+      viewTypeDivRefs.current.push(el);
+      // console.log('HIIIIIIII: ');
+    }
+    // console.log('Adding Refs: ', textAreaRefs.current);
+  };
+
   const addTARefs = (el) => {
     if (el && !textAreaRefs.current.includes(el)) {
       textAreaRefs.current.push(el);
-      console.log('HIIIIIIII: ');
+      // console.log('HIIIIIIII: ');
     }
-    console.log('Adding Refs: ', textAreaRefs.current);
+    // console.log('Adding Refs: ', textAreaRefs.current);
   };
 
   function textAreaHeightChange(ta) {
@@ -143,6 +181,7 @@ const ProfilePage = () => {
     textArea.style.height = '';
     textArea.style.height = textArea.scrollHeight + 'px';
   }
+
   function makeProfile(userData) {
     profileName = userData.name;
     setProfileName(userData.name);
@@ -171,14 +210,53 @@ const ProfilePage = () => {
     // console.log("Creating Elements: ", userData);
     let contactInfoKeys =
       'contact' in userData ? Object.keys(userData.contact) : [];
-    contactInfoKeys.forEach((key) => {
+
+    //for testing
+    let viewTypesHelper = [];
+
+    contactInfoKeys.forEach((key, index) => {
+      // console.log('Gotta Gooooo: ', index);
       let valueForKey = userData.contact[key];
       let lowerCaseKey = key.toLowerCase();
-      let titleKey =
-        lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
-      // console test
-      // console.log(lowerCaseKey);
-      // console.log(valueForKey);
+      // For two letter titles
+      let twoWordsLCKey = lowerCaseKey.split('_');
+      let titleKey = '';
+      if (twoWordsLCKey.length > 1) {
+        for (let i = 0; i < twoWordsLCKey.length; i++) {
+          titleKey +=
+            twoWordsLCKey[i].charAt(0).toUpperCase() +
+            twoWordsLCKey[i].slice(1);
+          titleKey += ' ';
+        }
+      } else {
+        titleKey = lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
+      }
+
+      // Setting different ids for public/private (view) locks
+      let viewTypeHelper = (
+        <FcLock
+          id={'lock_' + (index + 1)}
+          a-key={index}
+          className="w-[40px] h-[40px]"
+          onClick={(e) => {
+            e.stopPropagation();
+            //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+            if (e.target.tagName == 'path') {
+              toggleView(e.target.parentElement);
+            } else if (e.target.tagName == 'svg') {
+              toggleView(e.target);
+            }
+          }}
+        />
+      );
+
+      viewType = viewTypeHelper;
+      setViewType(viewTypeHelper);
+
+      //for testing
+      viewTypesHelper.push(viewType);
+      // viewTypes = [...viewTypes, viewTypeHelper];
+      // setViewTypes([...viewTypes, viewTypeHelper]);
 
       if (key == 'socialMedia') {
         // stub
@@ -186,49 +264,52 @@ const ProfilePage = () => {
       } else {
         contactHelper.push(
           <>
-            <div
-              title="contact_wrapper"
-              id={lowerCaseKey + '_wrapper'}
-              className="mb-6"
-            >
+            <div title="contact_container" className="flex items-end">
               <div
-                title="contact_title"
-                id={lowerCaseKey + '_title'}
-                className="font-bold underline"
+                title="contact_wrapper"
+                id={lowerCaseKey + '_wrapper'}
+                className="w-full mb-6"
               >
-                {titleKey}
-              </div>
-              <div
-                title="contact_content"
-                id={lowerCaseKey + '_content'}
-                className="w-full"
-              >
-                <textarea
-                  id={'ta_content'}
-                  rows={1}
-                  disabled
-                  className="w-full p-[5px] resize-none bg-white"
-                  ref={addTARefs}
-                  onInput={(e) => {
-                    e.stopPropagation();
-                    textAreaHeightChange(e.target);
-                  }}
+                <div
+                  title="contact_title"
+                  id={lowerCaseKey + '_title'}
+                  className="font-bold underline"
                 >
-                  {valueForKey}
-                </textarea>
+                  {titleKey}
+                </div>
+                <div
+                  title="contact_content"
+                  id={lowerCaseKey + '_content'}
+                  className="w-full"
+                >
+                  <textarea
+                    id={'ta_content'}
+                    rows={1}
+                    disabled
+                    className="w-full p-[5px] resize-none bg-white"
+                    ref={addTARefs}
+                    onInput={(e) => {
+                      e.stopPropagation();
+                      textAreaHeightChange(e.target);
+                    }}
+                  >
+                    {valueForKey}
+                  </textarea>
+                </div>
               </div>
+              {/* add the public/private view type locks */}
+              <VTLocks key={index} index={index} />
             </div>
           </>
         );
       }
     });
+    //For testing
+    viewTypes = viewTypesHelper;
+    setViewTypes(viewTypesHelper);
 
     profileContact = contactHelper;
     setProfileContact(contactHelper);
-
-    // console testing
-    // console.log("ContactHelper = ",contactHelper);
-    // console.log("ProfileContact = ", profileContact);
   }
 
   function addBio(userBio) {
@@ -316,6 +397,111 @@ const ProfilePage = () => {
     setEditProfileMediaIcons(mediaBoxesHelper);
   }
 
+  function VTLocks(props){
+    // console testing
+    return (
+      <>
+      <div
+        id="viewType_wrapper"
+        ref={addVTDRefs}
+        key={props.key}
+        className="mb-6"
+        onClick={(e) =>{
+          console.log("I was clicked: ", e.target);
+          console.log(props.index, viewTypes[props.index]);
+          e.stopPropagation();
+          toggleView(e.target.firstChild);
+        }}
+      >
+        {viewType}
+      </div>
+      </>
+    )
+  }
+
+  function toggleView(el) {
+    console.log('HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOt::: ', el);
+    // console.log('Not changed: ', viewState);
+    // console.log(viewType);
+    console.log(el.getAttribute('a-key'));
+    var lockIndex = el.getAttribute('a-key');
+    console.log('Current: ', viewStates[lockIndex]);
+    // toggleView2(lockIndex);
+
+    const newViewStates = viewStates.map((state, index) => {
+      if (index == lockIndex) {
+        // Change the viewState for the lock clicked
+        var newState = '';
+        if (state == 'private') {
+          newState = 'public';
+          // make unlock element
+          let newViewType = (
+            <FcUnlock
+              id={'unlock_' + (index + 1)}
+              a-key={index}
+              className="w-[40px] h-[40px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+                if (e.target.tagName == 'path') {
+                  toggleView(e.target.parentElement);
+                } else if (e.target.tagName == 'svg') {
+                  toggleView(e.target);
+                }
+              }}
+            />
+          );
+
+          // // testing #2
+          // var parentElms = viewTypeDivRefs.current;
+          // console.log(parentElms);
+          // var parentElm = el.parentElement;
+          // console.log(parentElm.childNodes);
+          // var tempDiv = createElement('div', null, newViewType);
+          // // console.log(tempDiv.childNodes);
+          // parentElm.appendChild(tempDiv);
+
+          //for testing
+          viewTypes[index] = newViewType;
+          console.log('LOOOKKKKKKKKKK:::: ');
+          console.log(viewTypes);
+        } else {
+          newState = 'private';
+          // make lock element
+          let newViewType = (
+            <FcLock
+              id={'lock_' + (index + 1)}
+              a-key={index}
+              className="w-[40px] h-[40px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                //when clicking on react icons the clicked elment can be an SVG tag or PATH tag (child of SVG)
+                if (e.target.tagName == 'path') {
+                  toggleView(e.target.parentElement);
+                } else if (e.target.tagName == 'svg') {
+                  toggleView(e.target);
+                }
+              }}
+            />
+          );
+
+          //for testing
+          viewTypes[index] = newViewType;
+          console.log('LOOOKKKKKKKKKK:::: ');
+          console.log(viewTypes);
+        }
+        return newState;
+      } else {
+        return state;
+      }
+    });
+    viewStates = newViewStates;
+    setViewStates(newViewStates);
+
+    console.log('Updated: ', viewStates[lockIndex]);
+  }
+
+  // Editable Features Stuff
   const editProf = (
     <button
       className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
@@ -334,29 +520,17 @@ const ProfilePage = () => {
   );
 
   let [lockState, setLockState] = useState('locked');
-  // let [lockType, setLockType] = useState(
-  //   <FaRegEdit className="w-[50px] h-[50px]" onClick={toggleLock} />
-  // );
   let [lockType, setLockType] = useState(editProf);
   function toggleLock() {
     if (lockState == 'locked') {
       lockState = 'unlocked';
       setLockState('unlocked');
-      // setLockType(
-      //   <MdOutlineDownloadDone
-      //     className="w-[50px] h-[50px]"
-      //     onClick={toggleLock}
-      //   />
-      // );
       setLockType(saveProf);
 
       turnEditsOn();
     } else {
       lockState = 'locked';
       setLockState('locked');
-      // setLockType(
-      //   <FaRegEdit className="w-[50px] h-[50px]" onClick={toggleLock} />
-      // );
       setLockType(editProf);
 
       turnEditsOff();
@@ -484,10 +658,11 @@ const ProfilePage = () => {
             id="name"
             type="text"
             placeholder="Enter Name Here"
+            disabled
             value={profileName}
             onChange={nameInputChange}
             ref={profileNameRef}
-            className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
+            className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%] bg-white"
           ></input>
 
           <div id="profileSocial_wrapper">
@@ -507,17 +682,15 @@ const ProfilePage = () => {
           className="col-span-2 w-[100%] max-w-[650px]"
         >
           {profileBio}
-          {/* <div id="bio_wrapper" className="mb-6">
-            <div id="bio_title" className="font-bold">About Me</div>
-            <div id="bio_content">
-              {profileBio}
-            </div>
-          </div> */}
           {profileContact}
         </div>
         {/* Edit Profile */}
         <div id="edit_lock_icon" className="self-end">
           {lockType}
+        </div>
+        {/* For Testing (and this works as intended) */}
+        <div id="viewType_wrapper" ref={addVTDRefs} className="mb-6">
+          {viewTypes[4]}
         </div>
       </div>
     </>
