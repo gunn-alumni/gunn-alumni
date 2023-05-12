@@ -115,12 +115,6 @@ const Navbar = () => {
                     </div>
                     <div className="py-2 text-sm text-gray-700">
                       <Link
-                        href="/user/profile"
-                        className="block px-4 py-2 rounded-lg hover:bg-gray-300"
-                      >
-                        Profile
-                      </Link>
-                      <Link
                         href="/user/settings"
                         className="block px-4 py-2 rounded-lg hover:bg-gray-300"
                       >

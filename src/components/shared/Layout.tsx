@@ -20,7 +20,6 @@ const Layout = ({
       initialSession={pageProps.initialSession}
     >
       <div className="flex flex-col justify-between min-h-screen">
-        <PasswordCheck />
         <Navbar />
         <main>{children}</main>
         <Footer />
