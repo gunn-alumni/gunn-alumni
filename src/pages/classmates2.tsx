@@ -21,6 +21,7 @@ export default function Classmates2() {
   const supabase = useSupabaseClient();
 
   useEffect(() => {
+    console.log(supabase);
     const fetchUsers = async () => {
       const { data, error } = await supabase.from('profiles').select();
 
