@@ -1,7 +1,7 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-import UserCard from '@/components/classmates/UserCard';
+// import UserCard from '@/components/classmates/UserCard';
 
 interface Profile {
   index: number;
@@ -49,12 +49,12 @@ export default function Classmates2() {
           <div className="flex flex-cols flex-wrap justify-center">
             {profiles.map((profile) => (
               <div key={profile.id} className="m-4">
-                <UserCard
+                {/* <UserCard
                   uniId={profile.id}
                   classTitle={'user_card'}
                   userPfp={profile.pfp || '/images/userIconx96.png'}
                   userName={profile.preferred_name}
-                />
+                /> */}
               </div>
             ))}
           </div>

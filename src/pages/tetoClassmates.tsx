@@ -13,8 +13,14 @@ export const ClassmatesPage = (props: { users: User[] }) => {
       >
         {/* name, title on left, cool img on right */}
         <div
-          className={`max-w-6xl bg-gray w-full flex flex-col gap-8 pt-16 shrink-0`}
+          className={`max-w-6xl bg-gray w-full flex flex-col gap-6 pt-16 shrink-0`}
         >
+          <h1 className="text-6xl py-2 font-black font-montserrat">
+            Classmates
+          </h1>
+          <h4 className="text-2xl py-2 font-medium font-wsans text-gray-900/50">
+            Class of 2023
+          </h4>
           <div
             className={`grid grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-4 w-full items-stretch will-change-transform`}
           >
