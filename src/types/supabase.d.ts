@@ -5,6 +5,9 @@ export type Json =
   | null
   | { [key: string]: Json }
   | Json[];
+export type User = Database['public']['Tables']['profiles']['Row'] & {
+  graduation_year: string | null;
+}
 
 export interface Database {
   public: {
