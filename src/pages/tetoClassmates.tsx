@@ -22,7 +22,7 @@ export const ClassmatesPage = (props: { users: User[] }) => {
             Class of 2023
           </h4>
           <div
-            className={`grid grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-4 w-full items-stretch will-change-transform`}
+            className={`grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 w-full items-stretch will-change-transform`}
           >
             {users.map((u) => (
               <UserCard user={u} />
