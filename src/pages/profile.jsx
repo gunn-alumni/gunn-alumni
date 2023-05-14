@@ -103,30 +103,28 @@ const ProfilePage = () => {
       .then((data) => {
         if (data) {
           console.log('Fetched the Data: ', data);
-          profileData = data;
           setProfileData(data);
-          makeProfile(profileData);
+          makeProfile(data);
         }
       })
       .catch((error) => {
         console.log('ERRORRRRRR: ', error);
-        profileData = dummyProfileData;
         setProfileData(dummyProfileData);
         // console.log("YIU(IUJHIHHBHUIUHBHUBHIBF: ", profileData.userPfp);
-        makeProfile(profileData);
+        makeProfile(dummyProfileData);
       });
   }
 
   // Set the profile data stuff
 
   // All Profile Data Initializers
-  let [profileData, setProfileData] = useState();
-  let [profileName, setProfileName] = useState();
-  let [profileImage, setProfileImage] = useState();
-  let [profileMediaIcons, setProfileMediaIcons] = useState([]);
-  let [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
-  let [profileBio, setProfileBio] = useState([]);
-  let [profileContact, setProfileContact] = useState([]);
+  const [profileData, setProfileData] = useState();
+  const [profileName, setProfileName] = useState();
+  const [profileImage, setProfileImage] = useState();
+  const [profileMediaIcons, setProfileMediaIcons] = useState([]);
+  const [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
+  const [profileBio, setProfileBio] = useState([]);
+  const [profileContact, setProfileContact] = useState([]);
 
   //The Functions
   const addTARefs = (el) => {
@@ -144,15 +142,12 @@ const ProfilePage = () => {
     textArea.style.height = textArea.scrollHeight + 'px';
   }
   function makeProfile(userData) {
-    profileName = userData.name;
     setProfileName(userData.name);
     if ('userPfp' in userData) {
       if (userData.userPfp) {
-        profileImage = userData.userPfp;
         setProfileImage(userData.userPfp);
       }
     } else {
-      profileImage = '/images/userIconx96.png';
       setProfileImage('/images/userIconx96.png');
     }
 
@@ -160,7 +155,6 @@ const ProfilePage = () => {
     if ('bio' in userData) {
       if (userData.bio && userData.bio != '') {
         const profileBioHelper = addBio(userData.bio);
-        profileBio = profileBioHelper;
         setProfileBio(profileBioHelper);
         // console.log(profileBio);
       }
@@ -222,8 +216,6 @@ const ProfilePage = () => {
         );
       }
     });
-
-    profileContact = contactHelper;
     setProfileContact(contactHelper);
 
     // console testing
@@ -308,11 +300,9 @@ const ProfilePage = () => {
     });
 
     // socialMediaIcons created and changed based on user preference
-    profileMediaIcons = mediaIconsHelper;
     setProfileMediaIcons(mediaIconsHelper);
 
     // socialMediaEditBoxes created and changed based on user preference
-    editProfileMediaIcons = mediaBoxesHelper;
     setEditProfileMediaIcons(mediaBoxesHelper);
   }
 
@@ -340,7 +330,6 @@ const ProfilePage = () => {
   let [lockType, setLockType] = useState(editProf);
   function toggleLock() {
     if (lockState == 'locked') {
-      lockState = 'unlocked';
       setLockState('unlocked');
       // setLockType(
       //   <MdOutlineDownloadDone
@@ -352,7 +341,6 @@ const ProfilePage = () => {
 
       turnEditsOn();
     } else {
-      lockState = 'locked';
       setLockState('locked');
       // setLockType(
       //   <FaRegEdit className="w-[50px] h-[50px]" onClick={toggleLock} />
@@ -375,7 +363,6 @@ const ProfilePage = () => {
 
   // 👇️ called every time input's value changes
   const nameInputChange = (el) => {
-    profileName = el.target.value;
     setProfileName(el.target.value);
   };
 
@@ -395,7 +382,6 @@ const ProfilePage = () => {
     //image editable off
     var pfp = pfpRef.current;
     pfp.style.opacity = '1';
-    pfpChangeBtn = 'hidden';
     setPfpChangeBtn('hidden');
 
     //name change off

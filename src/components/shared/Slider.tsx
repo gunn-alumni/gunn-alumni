@@ -13,9 +13,9 @@ import ReactSlider, { type ReactSliderProps } from 'react-slider';
  */
 
 interface SliderProps {
-  colorActive?: string
-  colorInactive?: string
-  isInputVisible?: boolean
+  colorActive?: string;
+  colorInactive?: string;
+  isInputVisible?: boolean;
 }
 
 const Slider = <T extends number | readonly number[] = number>(
@@ -32,7 +32,7 @@ const Slider = <T extends number | readonly number[] = number>(
   if (_props.colorInactive != null) {
     colors.colorInactive = _props.colorInactive;
   }
-  var inputVisibility = ''
+  let inputVisibility = '';
   if (_props.isInputVisible != true) {
     inputVisibility = 'hidden';
   }
@@ -41,26 +41,28 @@ const Slider = <T extends number | readonly number[] = number>(
     - in which case set initial value to min unless min is null,
     - in which case set initial to 0
   */
-  const [value, setValue] = useState(_props.defaultValue ? _props.defaultValue : (_props.min ? _props.min : 0));
+  const [value, setValue] = useState(
+    _props.defaultValue ? _props.defaultValue : _props.min ? _props.min : 0
+  );
   return (
     <>
       <ReactSlider
         {..._props}
-        renderThumb={(props) => { //style the thumb of the slider
+        renderThumb={(props) => {
+          //style the thumb of the slider
           return (
             <div
               {...props}
-              className={`aspect-square rounded-full text-white text-sm flex items-center justify-center cursor-grab outline-0 ${colors.colorActive} ${
-                _props.orientation === 'vertical'
-                  ? 'w-full'
-                  : 'h-full'
-              }`}
+              className={`aspect-square rounded-full text-white text-sm flex items-center justify-center cursor-grab outline-0 ${
+                colors.colorActive
+              } ${_props.orientation === 'vertical' ? 'w-full' : 'h-full'}`}
             >
               {value}
             </div>
-          )
+          );
         }}
-        renderTrack={(props, state) => { //style the track ("progress bar") of the slider
+        renderTrack={(props, state) => {
+          //style the track ("progress bar") of the slider
           //these four lines handle multiple tracks for a multi-range slider
           const points = Array.isArray(state.value) ? state.value.length : null;
           const isMulti = points && points > 0;
@@ -78,25 +80,25 @@ const Slider = <T extends number | readonly number[] = number>(
                   ? `${colors.colorInactive}`
                   : `${colors.colorActive}`
               }`}
-              >
-            </div>
-          )
+            ></div>
+          );
         }}
-        renderMark={(props) => { //style the marks on the slider
+        renderMark={(props) => {
+          //style the marks on the slider
           return (
             <div
               {...props}
               className={`w-1 h-1 rounded-full ${colors.colorActive}
-                ${_props.orientation === 'vertical'
-                  ? 'left-1/2 -translate-x-1/2'
-                  : 'top-1/2 -translate-y-1/2'
-              }`}
-            >
-            </div>
-          )
+                ${
+                  _props.orientation === 'vertical'
+                    ? 'left-1/2 -translate-x-1/2'
+                    : 'top-1/2 -translate-y-1/2'
+                }`}
+            ></div>
+          );
         }}
         value={value} //set value of ReactSlider to the hook value
-        onChange={value => setValue(value)} //when the thumb is moved, update the hook value to the thumb value
+        onChange={(value) => setValue(value)} //when the thumb is moved, update the hook value to the thumb value
       />
       <div className={`flex flex-row gap-2 ${inputVisibility}`}>
         {/* Input box for user to change value by typing */}
@@ -110,10 +112,12 @@ const Slider = <T extends number | readonly number[] = number>(
            invalid:border-pink-500 invalid:outline-pink-500 invalid:text-pink-600 focus:valid:outline-blue-400
           p-1`}
         ></input>
-        <label className="text-2xl text-gray-500 peer-focus:peer-valid:text-blue-400 peer-invalid:text-pink-500 font-semibold">$</label>
+        <label className="text-2xl text-gray-500 peer-focus:peer-valid:text-blue-400 peer-invalid:text-pink-500 font-semibold">
+          $
+        </label>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Slider;

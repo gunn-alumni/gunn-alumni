@@ -8,7 +8,7 @@ interface FormSelectProps {
   placeholder?: string;
   options: Array<{ name: string; value?: string }>;
   id: string;
-  isRequired?: boolean
+  isRequired?: boolean;
   className?: string;
 }
 
@@ -25,27 +25,29 @@ const FormSelect = ({
     return (
       <>
         <div className="w-full flex flex-col">
-          <label className="text-lg font-medium after:content-['*'] after:text-pink-600 after:ml-0.5">{title}</label>
-            <input
-              list={id}
-              value={value}
-              placeholder={placeholder}
-              onChange={(e) => {
-                setValue(e.target.value);
-              }}
-              required
-              className={className}
-            ></input>
-            <datalist id={id}>
-              {options.map((data, i) => (
-                <option key={i} value={data.value}>
-                  {data.name}
-                </option>
-              ))}
-            </datalist>
-          </div>
-        </>
-    )
+          <label className="text-lg font-medium after:content-['*'] after:text-pink-600 after:ml-0.5">
+            {title}
+          </label>
+          <input
+            list={id}
+            value={value}
+            placeholder={placeholder}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            required
+            className={className}
+          ></input>
+          <datalist id={id}>
+            {options.map((data, i) => (
+              <option key={i} value={data.value}>
+                {data.name}
+              </option>
+            ))}
+          </datalist>
+        </div>
+      </>
+    );
   }
   return (
     <>
@@ -61,15 +63,15 @@ const FormSelect = ({
           className={className}
         ></input>
         <datalist id={id}>
-            {options.map((data, i) => (
-                <option key={i} value={data.value}>
-                  {data.name}
-                </option>
-            ))}
+          {options.map((data, i) => (
+            <option key={i} value={data.value}>
+              {data.name}
+            </option>
+          ))}
         </datalist>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default FormSelect;
