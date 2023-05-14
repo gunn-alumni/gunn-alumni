@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import ImgButton from '@/components/donate/ImageButton/ImgButton';
+import ImgButton from '@/components/donate/ImgButton';
 import { FormInput, FormSelect } from '@/components/donate/Forms';
 import { StandardButton, ButtonGroup } from '@/components/shared/Button';
 import Slider from '@/components/shared/Slider';
@@ -301,7 +301,8 @@ const formInputSettings = [
   {
     title: 'City',
     type: 'text',
-    className: 'border-2 bg-gray-100 rounded-md border-gray-300 focus:outline-blue-400 p-1'
+    className:
+      'border-2 bg-gray-100 rounded-md border-gray-300 focus:outline-blue-400 p-1'
   }
 ];
 
@@ -393,7 +394,7 @@ export default function Donate() {
         <div className="w-full box-border rounded-xl">
           <h1 className="font-bold text-xl">Donation Options</h1>
           <div className="w-full box-border grid items-stretch gap-2 mt-2 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1">
-            <ButtonGroup buttons={donationOption_ButtonGroup}/>
+            <ButtonGroup buttons={donationOption_ButtonGroup} />
           </div>
         </div>
         <div className="flex flex-col box-border grow gap-y-2 mt-4 rounded-xl shadow-xl px-4 md:px-8 py-8 w-full lg:px-16">
@@ -404,7 +405,15 @@ export default function Donate() {
                 <div className="grid grid-cols-3 mt-4 md:w-96 sm:w-64 gap-x-2">
                   <ButtonGroup buttons={donationDuration_ButtonGroup} />
                 </div>
-                <Slider className="w-full h-12 mt-2" defaultValue={10} marks={10} step={10} min={0} max={100} isInputVisible={true}/>
+                <Slider
+                  className="w-full h-12 mt-2"
+                  defaultValue={10}
+                  marks={10}
+                  step={10}
+                  min={0}
+                  max={100}
+                  isInputVisible={true}
+                />
               </div>
               <h1 className="font-bold text-xl mt-4">Your Information</h1>
               <div className="w-full grid grid-cols-1 gap-x-4 gap-y-2">

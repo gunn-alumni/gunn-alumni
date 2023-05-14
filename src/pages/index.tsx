@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 // Custom Components
-import EventCard from '@/components/home/EventCard.tsx';
+import EventCard from '@/components/home/EventCard';
 import NewsCard from '@/components/home/NewsCard';
 import NewsLandingCard from '@/components/home/NewsLandingCard';
 import { StandardButton } from '@/components/shared/Button';
