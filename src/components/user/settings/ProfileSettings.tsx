@@ -1,7 +1,7 @@
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-const AccountSettings = () => {
+const ProfileSettings = () => {
   const [bio, setBio] = useState('');
 
   const supabase = useSupabaseClient();
@@ -39,7 +39,6 @@ const AccountSettings = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-semibold">Account</h1>
       <div>
         <div className="text-2xl">Profile</div>
         <div className="text-gray-600">
@@ -101,4 +100,4 @@ const AccountSettings = () => {
   );
 };
 
-export default AccountSettings;
+export default ProfileSettings;

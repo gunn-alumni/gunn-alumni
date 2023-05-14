@@ -1,4 +1,5 @@
-import AccountSettings from '@/components/user/settings/AccountSettings';
+import AccountSettings from '@/components/user/settings/ProfileSettings';
+import VerifyComponent from '@/components/user/settings/VerifySettings';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Settings = (): JSX.Element => {
@@ -19,7 +20,9 @@ const Settings = (): JSX.Element => {
       </div>
 
       <div className="flex px-8 md:px-48 pt-16 bg-gray-50 flex-col space-y-4 flex-1">
+        <h1 className="text-4xl font-semibold">Account</h1>
         <AccountSettings />
+        <VerifyComponent />
       </div>
     </div>
   );
