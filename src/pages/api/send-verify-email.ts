@@ -19,13 +19,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       Messages: [
         {
           From: {
-            Email: "dev@gunnhigh.school",
+            Email: "verify@alumni.gunnhigh.school",
             Name: "Gunn High Development Team"
           },
           To: [
             {
               Email: req.body.email,
-              Name: "Test email"
+              Name: req.body.name
             }
           ],
           Subject: "Verify Alumni Account",

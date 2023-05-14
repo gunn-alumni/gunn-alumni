@@ -15,7 +15,7 @@ const Verify = (): JSX.Element => {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: 'dl30486@pausd.us' })
+      body: JSON.stringify({ email: 'dl30486@pausd.us', name: 'Dylan Lu' })
     }).then((res) => {
       console.log('Response received');
       console.log(res);
