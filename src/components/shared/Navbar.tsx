@@ -142,7 +142,7 @@ const Navbar = () => {
             <hr />
             {[
               { title: 'Team', to: '/team' },
-              { title: 'Classmates', to: '/classmates2' },
+              { title: 'Classmates', to: '/classmates' },
               { title: 'News', to: '/news' },
               { title: 'Donate', to: '/donate' }
             ].map(({ title, to }) => (

@@ -16,7 +16,7 @@ interface Profile {
   social_media?: string;
 }
 
-export default function Classmates2() {
+export default function Classmates() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const supabase = useSupabaseClient();
 
