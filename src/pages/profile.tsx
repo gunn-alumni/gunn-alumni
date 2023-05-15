@@ -12,6 +12,7 @@ import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { TiSocialTwitter } from 'react-icons/ti';
 
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
 
 // defaults
 
@@ -130,12 +131,6 @@ export default function ProfilePage() {
     console.log('Adding Refs: ', textAreaRefs.current);
   };
 
-  function textAreaHeightChange(ta: HTMLTextAreaElement) {
-    // console.log('Updating Height: ', textArea);
-    ta.style.height = '';
-    ta.style.height = ta.scrollHeight + 'px';
-  }
-
   function makeProfile(userData) {
     setProfileName(userData.name);
     if ('userPfp' in userData) {
@@ -192,19 +187,15 @@ export default function ProfilePage() {
                 id={lowerCaseKey + '_content'}
                 className="w-full"
               >
-                <textarea
-                  id={'ta_content'}
+                <AutoResizingTextArea
+                  id="ta-content"
                   rows={1}
                   disabled
                   className="w-full p-[5px] resize-none bg-white"
-                  ref={addTARefs}
-                  onInput={(e) => {
-                    e.stopPropagation();
-                    textAreaHeightChange(e.target);
-                  }}
+                  // ref={addTARefs}
                 >
                   {valueForKey}
-                </textarea>
+                </AutoResizingTextArea>
               </div>
             </div>
           </>
@@ -225,19 +216,15 @@ export default function ProfilePage() {
           About Me
         </div>
         <div id="bio_content_wrapper" className="w-full">
-          <textarea
+          <AutoResizingTextArea
             id="ta_content"
             rows={5}
             disabled
             className="w-full p-[5px] resize-none bg-white"
-            ref={addTARefs}
-            onInput={(e) => {
-              e.stopPropagation();
-              textAreaHeightChange(e.target);
-            }}
+            // ref={addTARefs}
           >
             {userBio}
-          </textarea>
+          </AutoResizingTextArea>
         </div>
       </div>
     );
@@ -269,9 +256,8 @@ export default function ProfilePage() {
         </>
       );
 
-      let lowerCaseSocial = social.toLowerCase();
-      let mediaText =
-        lowerCaseSocial.charAt(0).toUpperCase() + lowerCaseSocial.slice(1);
+      let lowerCaseSocial= social.toLowerCase();
+      let mediaText = lowerCaseSocial.charAt(0).toUpperCase() + lowerCaseSocial.slice(1);
       mediaBoxesHelper.push(
         <div className="w-full flex">
           <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
@@ -281,8 +267,8 @@ export default function ProfilePage() {
           <input
             type="text"
             placeholder="Enter Link Here"
-            className=" w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
-          ></input>
+            className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+          />
           <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
             X
           </button>
