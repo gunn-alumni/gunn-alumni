@@ -12,32 +12,24 @@ const Verify = (): JSX.Element => {
   const handleEmail = () => {
     if (session === null) return;
 
-    supabase
-      .from('profiles')
-      .select('id,name,email')
-      .eq('id', session.user.id)
-      .then(({ data }) => {
-        if (data === null) {
-          console.log('User data not found');
-          return;
-        }
+    console.log(session.user.id);
 
-        fetch('/api/send-verify-email', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: data[0].email,
-            name: data[0].name,
-            id: data[0].id
-          })
-        }).then((res) => {
-          console.log('Response received');
-          console.log(res);
-        });
-      });
+    fetch('/api/send-verify-email', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: 'dl30486@pausd.us', // PAUSD email, not supabase email
+        first_name: 'Dylan', // PAUSD name, not preferred name
+        last_name: 'Lu',
+        id: session.user.id
+      })
+    }).then((res) => {
+      console.log('Response received');
+      console.log(res);
+    });
   };
 
   return (
