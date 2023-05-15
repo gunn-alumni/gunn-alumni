@@ -156,57 +156,22 @@ export default function ProfilePage() {
     }
   }
 
-  const textAreaRefs = useRef<HTMLTextAreaElement[]>([]);
   const pfpRef = useRef(null);
 
   const [pfpChangeBtn, setPfpChangeBtn] = useState('hidden');
-  const profileNameRef = useRef(null);
 
   function turnEditsOff() {
-    console.log('Edits Off :{: ', textAreaRefs.current);
-    console.log(textAreaRefs.current.length);
-    for (let i = 0; i < textAreaRefs.current.length; i++) {
-      const taElm = textAreaRefs.current[i];
-      taElm.disabled = true;
-      taElm.style.backgroundColor = 'white';
-      taElm.style.resize = 'none';
-      taElm.style.border = 'none';
-    }
-
     //image editable off
     pfpRef.current.style.opacity = '1';
     setPfpChangeBtn('hidden');
-
-    //name change off
-    profileNameRef.current.disabled = true;
-    profileNameRef.current.style.backgroundColor = 'white';
-    profileNameRef.current.style.border = 'none';
   }
 
   function turnEditsOn() {
-    console.log('Edits Off :{: ', textAreaRefs.current);
-    var taElms = textAreaRefs.current;
-    console.log(taElms.length);
-    for (let i = 0; i < taElms.length; i++) {
-      // console.log(taElms[i]);
-      var taElm = taElms[i];
-      taElm.disabled = false;
-      taElm.style.backgroundColor = 'white';
-      taElm.style.resize = 'vertical';
-      taElm.style.border = '2px dashed black';
-    }
-
     //image editable on
     var pfp = pfpRef.current;
     pfp.style.opacity = 0.75;
     pfpChangeBtn = 'block';
     setPfpChangeBtn('block');
-
-    //name change off
-    var name = profileNameRef.current;
-    name.disabled = false;
-    name.style.backgroundColor = 'white';
-    name.style.borderBottom = '3px solid gray';
   }
 
   return (
@@ -249,7 +214,7 @@ export default function ProfilePage() {
           placeholder="Enter Name Here"
           value={profileName}
           onChange={(e) => setProfileName(e.target.value)}
-          ref={profileNameRef}
+          disabled={lockState === 'locked'}
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
 
@@ -263,8 +228,8 @@ export default function ProfilePage() {
                   <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
                     <Link href={value} target="_blank">
                       <MediaIcon
-                          id={key + '_icon'}
-                          className="w-8 h-8 fill-current"
+                        id={key + '_icon'}
+                        className="w-8 h-8 fill-current"
                       />
                     </Link>
                   </button>
@@ -307,7 +272,7 @@ export default function ProfilePage() {
             <AutoResizingTextArea
               id="ta_content"
               rows={5}
-              disabled
+              disabled={lockState === 'locked'}
               className="w-full p-[5px] resize-none bg-white"
             >
               {profileBio}
@@ -337,9 +302,8 @@ export default function ProfilePage() {
                 <AutoResizingTextArea
                   id="ta-content"
                   rows={1}
-                  disabled
+                  disabled={lockState === 'locked'}
                   className="w-full p-[5px] resize-none bg-white"
-                  // ref={addTARefs}
                 >
                   {value}
                 </AutoResizingTextArea>
