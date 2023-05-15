@@ -149,29 +149,9 @@ export default function ProfilePage() {
   function toggleLock() {
     if (lockState == 'locked') {
       setLockState('unlocked');
-      turnEditsOn();
     } else {
       setLockState('locked');
-      turnEditsOff();
     }
-  }
-
-  const pfpRef = useRef(null);
-
-  const [pfpChangeBtn, setPfpChangeBtn] = useState('hidden');
-
-  function turnEditsOff() {
-    //image editable off
-    pfpRef.current.style.opacity = '1';
-    setPfpChangeBtn('hidden');
-  }
-
-  function turnEditsOn() {
-    //image editable on
-    var pfp = pfpRef.current;
-    pfp.style.opacity = 0.75;
-    pfpChangeBtn = 'block';
-    setPfpChangeBtn('block');
   }
 
   return (
@@ -195,17 +175,18 @@ export default function ProfilePage() {
             <Image
               src={profileImage}
               alt="Profile Image"
-              ref={pfpRef}
               className="rounded-full"
               width={200}
               height={200}
             />
-            <button
-              id="pfp_change"
-              className={`absolute w-full h-[50px] bottom-0 text-white bg-black ${pfpChangeBtn}`}
-            >
-              Change Avatar
-            </button>
+            {lockState === 'unlocked' && (
+              <button
+                id="pfp_change"
+                className="absolute w-full h-[50px] bottom-0 text-white bg-black"
+              >
+                Change Avatar
+              </button>
+            )}
           </div>
         </div>
         <input
