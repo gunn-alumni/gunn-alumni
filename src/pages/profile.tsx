@@ -134,58 +134,16 @@ export default function ProfilePage() {
   const [profileImage, setProfileImage] = useState('');
   const [profileBio, setProfileBio] = useState('');
   const [socialMedias, setSocialMedias] = useState(dummyProfileData.contact.socialMedia);
-
-  const [profileContact, setProfileContact] = useState([]);
+  const [contacts, setContacts] = useState<Omit<ProfileData['contact'], 'socialMedia'>>(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
   function setProfileData(userData: ProfileData) {
     setProfileName(userData.name);
     setProfileImage(userData.userPfp || '/images/userIconx96.png');
     setProfileBio(userData.bio);
-    setSocialMedias(userData.contact.socialMedia);
 
-    let contactHelper = [];
-    let contactInfoKeys =
-      'contact' in userData ? Object.keys(userData.contact) : [];
-    contactInfoKeys.forEach((key) => {
-      let valueForKey = userData.contact[key];
-      let lowerCaseKey = key.toLowerCase();
-      let titleKey =
-        lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
-
-      if (key != 'socialMedia') {
-        contactHelper.push(
-          <div
-            title="contact_wrapper"
-            id={lowerCaseKey + '_wrapper'}
-            className="mb-6"
-          >
-            <div
-              title="contact_title"
-              id={lowerCaseKey + '_title'}
-              className="font-bold underline"
-            >
-              {titleKey}
-            </div>
-            <div
-              title="contact_content"
-              id={lowerCaseKey + '_content'}
-              className="w-full"
-            >
-              <AutoResizingTextArea
-                id="ta-content"
-                rows={1}
-                disabled
-                className="w-full p-[5px] resize-none bg-white"
-                // ref={addTARefs}
-              >
-                {valueForKey}
-              </AutoResizingTextArea>
-            </div>
-          </div>
-        );
-      }
-    });
-    setProfileContact(contactHelper);
+    const {socialMedia, ...contacts} = userData.contact;
+    setSocialMedias(socialMedia);
+    setContacts(contacts);
   }
 
   function toggleLock() {
@@ -302,14 +260,14 @@ export default function ProfilePage() {
               {Object.entries(socialMedias).map(([key, value]) => {
                 const MediaIcon = socialMediaIconsList[socialMediaNamesList.indexOf(key)];
                 return (
-                    <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
-                      <Link href={value} target="_blank">
-                        <MediaIcon
-                            id={key + '_icon'}
-                            className="w-8 h-8 fill-current"
-                        />
-                      </Link>
-                    </button>
+                  <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
+                    <Link href={value} target="_blank">
+                      <MediaIcon
+                          id={key + '_icon'}
+                          className="w-8 h-8 fill-current"
+                      />
+                    </Link>
+                  </button>
                 )
               })}
             </div>
@@ -317,20 +275,20 @@ export default function ProfilePage() {
             <div className="grid gap-4 mb-4">
               {/* TODO: see above */}
               {Object.entries(socialMedias).map(([key, value]) => (
-                  <div className="w-full flex" key={key}>
-                    <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-                      {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
-                    </div>
-                    <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
-                    <input
-                        type="text"
-                        placeholder="Enter Link Here"
-                        className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
-                    />
-                    <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-                      X
-                    </button>
+                <div className="w-full flex" key={key}>
+                  <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
+                    {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
                   </div>
+                  <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+                  <input
+                      type="text"
+                      placeholder="Enter Link Here"
+                      className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+                  />
+                  <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
+                    X
+                  </button>
+                </div>
               ))}
             </div>
           )}
@@ -357,7 +315,37 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {profileContact}
+        {Object.entries(contacts).map(([key, value]) => (
+            <div
+              title="contact_wrapper"
+              id={key.toLowerCase() + '_wrapper'}
+              className="mb-6"
+              key={key}
+            >
+              <div
+                title="contact_title"
+                id={key.toLowerCase() + '_title'}
+                className="font-bold underline"
+              >
+                {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
+              </div>
+              <div
+                title="contact_content"
+                id={key.toLowerCase() + '_content'}
+                className="w-full"
+              >
+                <AutoResizingTextArea
+                  id="ta-content"
+                  rows={1}
+                  disabled
+                  className="w-full p-[5px] resize-none bg-white"
+                  // ref={addTARefs}
+                >
+                  {value}
+                </AutoResizingTextArea>
+              </div>
+            </div>
+        ))}
       </div>
 
       {/* Edit Profile */}
