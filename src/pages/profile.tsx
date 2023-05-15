@@ -133,9 +133,8 @@ export default function ProfilePage() {
   const [profileName, setProfileName] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [profileBio, setProfileBio] = useState('');
+  const [socialMedias, setSocialMedias] = useState(dummyProfileData.contact.socialMedia);
 
-  const [profileMediaIcons, setProfileMediaIcons] = useState([]);
-  const [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
   const [profileContact, setProfileContact] = useState([]);
 
   function setProfileData(userData: ProfileData) {
@@ -151,9 +150,9 @@ export default function ProfilePage() {
       setProfileBio(userData.bio);
     }
 
-    // Make Contact Stuff
+    setSocialMedias(userData.contact.socialMedia);
+
     let contactHelper = [];
-    // console.log("Creating Elements: ", userData);
     let contactInfoKeys =
       'contact' in userData ? Object.keys(userData.contact) : [];
     contactInfoKeys.forEach((key) => {
@@ -162,10 +161,7 @@ export default function ProfilePage() {
       let titleKey =
         lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
 
-      if (key == 'socialMedia') {
-        // stub
-        addSocialMedia(valueForKey);
-      } else {
+      if (key != 'socialMedia') {
         contactHelper.push(
           <div
             title="contact_wrapper"
@@ -201,59 +197,6 @@ export default function ProfilePage() {
     setProfileContact(contactHelper);
   }
 
-  function addSocialMedia(socialData) {
-    const mediaIconsHelper = [];
-    const mediaBoxesHelper = [];
-    const socialMediaKeys = Object.keys(socialData);
-    const bgNum = 600;
-    socialMediaKeys.forEach((social) => {
-      // const shadeBg = 'bg-red-' + bgNum;
-      const shadeBg = 'bg-primary';
-      // console.log(social);
-      const indexSocial = socialMediaNamesList.indexOf(social);
-      const MediaIcon = socialMediaIconsList[indexSocial];
-      // console.log("YOOOOO: ", indexSocial);
-
-      mediaIconsHelper.push(
-        <>
-          <button className={`${shadeBg} p-1 font-semibold text-white rounded`}>
-            <Link href={socialData[social]} target="_blank">
-              <MediaIcon
-                id={social + '_icon'}
-                className="w-8 h-8 fill-current"
-              />
-            </Link>
-          </button>
-        </>
-      );
-
-      let lowerCaseSocial= social.toLowerCase();
-      let mediaText = lowerCaseSocial.charAt(0).toUpperCase() + lowerCaseSocial.slice(1);
-      mediaBoxesHelper.push(
-        <div className="w-full flex">
-          <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-            {mediaText}
-          </div>
-          <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
-          <input
-            type="text"
-            placeholder="Enter Link Here"
-            className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
-          />
-          <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-            X
-          </button>
-        </div>
-      );
-    });
-
-    // socialMediaIcons created and changed based on user preference
-    setProfileMediaIcons(mediaIconsHelper);
-
-    // socialMediaEditBoxes created and changed based on user preference
-    setEditProfileMediaIcons(mediaBoxesHelper);
-  }
-
   function toggleLock() {
     if (lockState == 'locked') {
       setLockState('unlocked');
@@ -264,7 +207,6 @@ export default function ProfilePage() {
     }
   }
 
-  // Edits Elements Variables
   const textAreaRefs = useRef<HTMLTextAreaElement[]>([]);
   const pfpRef = useRef(null);
 
@@ -272,8 +214,6 @@ export default function ProfilePage() {
   const profileNameRef = useRef(null);
   const [displayEditMediaIcons, setDisplayEditMediaIcons] = useState('block');
   const [displayEditMediaLink, setDisplayEditMediaLink] = useState('hidden');
-
-  // Edits Functions
 
   function turnEditsOff() {
     console.log('Edits Off :{: ', textAreaRefs.current);
@@ -330,8 +270,6 @@ export default function ProfilePage() {
     setDisplayEditMediaLink('block');
   }
 
-  /// //////////////End of functions
-
   return (
     <div
       id="profile_wrapper"
@@ -380,10 +318,39 @@ export default function ProfilePage() {
           <div
             className={`flex gap-4 mx-auto flex-wrap justify-center mb-4 ${displayEditMediaIcons}`}
           >
-            {profileMediaIcons}
+            {/* TODO: abstract into component? */}
+            {Object.entries(socialMedias).map(([key, value]) => {
+              const MediaIcon = socialMediaIconsList[socialMediaNamesList.indexOf(key)];
+              return (
+                <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
+                  <Link href={value} target="_blank">
+                    <MediaIcon
+                        id={key + '_icon'}
+                        className="w-8 h-8 fill-current"
+                    />
+                  </Link>
+                </button>
+              )
+            })}
           </div>
           <div className={`grid gap-4 mb-4 ${displayEditMediaLink}`}>
-            {editProfileMediaIcons}
+            {/* TODO: see above */}
+            {Object.entries(socialMedias).map(([key, value]) => (
+              <div className="w-full flex" key={key}>
+                <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
+                  {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
+                </div>
+                <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+                <input
+                  type="text"
+                  placeholder="Enter Link Here"
+                  className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+                />
+                <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
+                  X
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -402,7 +369,6 @@ export default function ProfilePage() {
               rows={5}
               disabled
               className="w-full p-[5px] resize-none bg-white"
-              // ref={addTARefs}
             >
               {profileBio}
             </AutoResizingTextArea>
@@ -416,15 +382,15 @@ export default function ProfilePage() {
       <div id="edit_lock_icon" className="self-end">
         {lockState === 'locked' ? (
             <button
-                className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
-                onClick={toggleLock}
+              className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
+              onClick={toggleLock}
             >
               EDIT
             </button>
         ) : (
             <button
-                className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
-                onClick={toggleLock}
+              className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
+              onClick={toggleLock}
             >
               SAVE CHANGES
             </button>
