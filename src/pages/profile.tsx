@@ -81,7 +81,7 @@ const socialMediaIconsList = [
   FaTiktok
 ];
 
-const ProfilePage = () => {
+export default function ProfilePage() {
   const router = useRouter();
   const queryMessage = router?.query;
 
@@ -115,7 +115,7 @@ const ProfilePage = () => {
 
   // All Profile Data Initializers
   const [profileData, setProfileData] = useState();
-  const [profileName, setProfileName] = useState();
+  const [profileName, setProfileName] = useState('');
   const [profileImage, setProfileImage] = useState();
   const [profileMediaIcons, setProfileMediaIcons] = useState([]);
   const [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
@@ -220,28 +220,26 @@ const ProfilePage = () => {
 
   function addBio(userBio) {
     return (
-      <>
-        <div id="bio_wrapper" className="mb-6">
-          <div id="bio_title" className="font-bold underline">
-            About Me
-          </div>
-          <div id="bio_content_wrapper" className="w-full">
-            <textarea
-              id="ta_content"
-              rows={5}
-              disabled
-              className="w-full p-[5px] resize-none bg-white"
-              ref={addTARefs}
-              onInput={(e) => {
-                e.stopPropagation();
-                textAreaHeightChange(e.target);
-              }}
-            >
-              {userBio}
-            </textarea>
-          </div>
+      <div id="bio_wrapper" className="mb-6">
+        <div id="bio_title" className="font-bold underline">
+          About Me
         </div>
-      </>
+        <div id="bio_content_wrapper" className="w-full">
+          <textarea
+            id="ta_content"
+            rows={5}
+            disabled
+            className="w-full p-[5px] resize-none bg-white"
+            ref={addTARefs}
+            onInput={(e) => {
+              e.stopPropagation();
+              textAreaHeightChange(e.target);
+            }}
+          >
+            {userBio}
+          </textarea>
+        </div>
+      </div>
     );
   }
 
@@ -275,22 +273,20 @@ const ProfilePage = () => {
       let mediaText =
         lowerCaseSocial.charAt(0).toUpperCase() + lowerCaseSocial.slice(1);
       mediaBoxesHelper.push(
-        <>
-          <div className="w-full flex">
-            <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-              {mediaText}
-            </div>
-            <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
-            <input
-              type="text"
-              placeholder="Enter Link Here"
-              className=" w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
-            ></input>
-            <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-              X
-            </button>
+        <div className="w-full flex">
+          <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
+            {mediaText}
           </div>
-        </>
+          <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+          <input
+            type="text"
+            placeholder="Enter Link Here"
+            className=" w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+          ></input>
+          <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
+            X
+          </button>
+        </div>
       );
     });
 
@@ -318,11 +314,8 @@ const ProfilePage = () => {
     </button>
   );
 
-  let [lockState, setLockState] = useState('locked');
-  // let [lockType, setLockType] = useState(
-  //   <FaRegEdit className="w-[50px] h-[50px]" onClick={toggleLock} />
-  // );
-  let [lockType, setLockType] = useState(editProf);
+  const [lockState, setLockState] = useState('locked');
+  const [lockType, setLockType] = useState(editProf);
 
   function toggleLock() {
     if (lockState == 'locked') {
@@ -348,7 +341,7 @@ const ProfilePage = () => {
   }
 
   // Edits Elements Variables
-  const textAreaRefs = useRef([]);
+  const textAreaRefs = useRef<HTMLTextAreaElement[]>([]);
   const pfpRef = useRef(null);
 
   const [pfpChangeBtn, setPfpChangeBtn] = useState('hidden');
@@ -358,18 +351,11 @@ const ProfilePage = () => {
 
   // Edits Functions
 
-  // 👇️ called every time input's value changes
-  const nameInputChange = (el) => {
-    setProfileName(el.target.value);
-  };
-
   function turnEditsOff() {
     console.log('Edits Off :{: ', textAreaRefs.current);
-    var taElms = textAreaRefs.current;
-    console.log(taElms.length);
-    for (let i = 0; i < taElms.length; i++) {
-      // console.log(taElms[i]);
-      var taElm = taElms[i];
+    console.log(textAreaRefs.current.length);
+    for (let i = 0; i < textAreaRefs.current.length; i++) {
+      const taElm = textAreaRefs.current[i];
       taElm.disabled = true;
       taElm.style.backgroundColor = 'white';
       taElm.style.resize = 'none';
@@ -377,15 +363,13 @@ const ProfilePage = () => {
     }
 
     //image editable off
-    var pfp = pfpRef.current;
-    pfp.style.opacity = '1';
+    pfpRef.current.style.opacity = '1';
     setPfpChangeBtn('hidden');
 
     //name change off
-    const name = profileNameRef.current;
-    name.disabled = true;
-    name.style.backgroundColor = 'white';
-    name.style.border = 'none';
+    profileNameRef.current.disabled = true;
+    profileNameRef.current.style.backgroundColor = 'white';
+    profileNameRef.current.style.border = 'none';
 
     //social media icons and link change on
     setDisplayEditMediaIcons('block');
@@ -463,7 +447,7 @@ const ProfilePage = () => {
           type="text"
           placeholder="Enter Name Here"
           value={profileName}
-          onChange={nameInputChange}
+          onChange={(e) => setProfileName(e.target.value)}
           ref={profileNameRef}
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
@@ -499,6 +483,4 @@ const ProfilePage = () => {
       </div>
     </div>
   );
-};
-
-export default ProfilePage;
+}
