@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
@@ -43,10 +44,17 @@ export default function Classmates() {
 
   return (
     <>
-      <h1 className="text-4xl text-center py-2 font-bold">Classmates</h1>
+      <Head>
+        <title>Gunn Alumni | Classmates</title>
+        <meta
+          name="description"
+          content="View fellow Gunn classmates of all graduating classes"
+        />
+      </Head>
+      <h1 className="text-4xl text-center py-4 font-bold">Classmates</h1>
       <div>
         {profiles && (
-          <div className="flex flex-cols flex-wrap justify-center">
+          <div className="flex flex-cols flex-wrap justify-center px-4">
             {profiles.map((profile) => (
               <div key={profile.id} className="m-4">
                 <UserCard
