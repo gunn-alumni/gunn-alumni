@@ -7,6 +7,7 @@ import EventCard from '@/components/home/EventCard';
 import NewsCard from '@/components/home/NewsCard';
 import NewsLandingCard from '@/components/home/NewsLandingCard';
 import { StandardButton } from '@/components/shared/Button';
+import Container from '@/components/shared/Container';
 
 const dummyNewsData = [
   {
@@ -54,7 +55,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="px-8 py-12 sm:px-16 lg:px-28 ">
+      <Container className="">
         <section className="text-center py-10 lg:w-full lg:py-36 lg:text-left ">
           <div className="mx-auto w-full max-w-3xl">
             <h1 className="mt-0 mb-8 text-4xl font-bold md:text-5xl">
@@ -67,18 +68,18 @@ export default function Home() {
             </p>
             <Link
               href="/signup"
-              className="-mt-px inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm border-0 bg-primary mb-8 py-4 px-7 text-center font-medium leading-4 text-white no-underline shadow-lg"
+              className="-mt-px inline-flex cursor-pointer justify-center whitespace-nowrap rounded-lg border-0 bg-primary mb-8 py-4 px-7 text-center font-medium leading-4 text-white no-underline shadow-lg hover:bg-primary/80"
             >
               Sign Up Here
             </Link>
           </div>
         </section>
-        <div>
+        <div className="flex items-center justify-center">
           <NewsLandingCard
-            title="Esther Wojcicki on how she raised three world-beating children"
-            description="Star speaker visits Gunn to talk about her 3 Gunn alumni at this past TEDx"
+            title="Gunn Football goes undefeated in 2021 season, wins CCS"
+            description="In an extraordinary display of skill and determination, Gunn Football achieved an undefeated season in 2021, capturing the CCS championship title. Their exceptional performance was further highlighted by shattering the touchdown record, leaving an indelible mark on the history of the sport."
             articleURL=""
-            image={'/images/news_card.jpeg'}
+            image={'/images/football.png'}
           />
         </div>
         <div className="mt-16 xl:flex xl:space-x-16 md:m-24 p-4">
@@ -123,7 +124,7 @@ export default function Home() {
             </StandardButton>
           </Link>
         </div>
-      </div>
+      </Container>
     </>
   );
 }
