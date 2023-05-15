@@ -8,6 +8,7 @@ import NewsCard from '@/components/home/NewsCard';
 import NewsLandingCard from '@/components/home/NewsLandingCard';
 import { StandardButton } from '@/components/shared/Button';
 import Container from '@/components/shared/Container';
+import Cta from '@/components/home/CTA';
 
 const dummyNewsData = [
   {
@@ -59,12 +60,12 @@ export default function Home() {
         <section className="text-center py-10 lg:w-full lg:py-36 lg:text-left ">
           <div className="mx-auto w-full max-w-3xl">
             <h1 className="mt-0 mb-8 text-4xl font-bold md:text-5xl">
-              Welcome to the Gunn Alumni website
+              Welcome to Gunn Alumni
             </h1>
-            <p className="prose prose-xl mb-8 px-16 text-gray-500 md:px-0">
+            <p className="prose prose-xl mb-8 text-gray-500 px-0">
               This is a student-run project still in the process of being
-              developed. More features will come in the future. Find fellow
-              graduates at the Classmates tab. Sign up now to create an account.
+              developed. More features will come in the future. Sign up now to
+              create an account.
             </p>
             <Link
               href="/signup"
@@ -98,7 +99,9 @@ export default function Home() {
                 />
               ))}
             </div>
-            <button className="text-lg font-bold mt-4">See More...</button>
+            <Link href="/news" className="text-lg font-bold">
+              See More...
+            </Link>
           </div>
           <div className="flex-1 mt-16 xl:mt-0">
             <div className="text-5xl font-bold text-center">
@@ -116,14 +119,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center space-y-8">
-          <div className="text-3xl font-bold">Give back to your community!</div>
-          <Link href="/donate">
-            <StandardButton color="bg-primary" className="py-4 px-16 text-xl">
-              Donate Now
-            </StandardButton>
-          </Link>
-        </div>
+        <Cta />
       </Container>
     </>
   );
