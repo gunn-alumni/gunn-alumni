@@ -139,17 +139,8 @@ export default function ProfilePage() {
 
   function setProfileData(userData: ProfileData) {
     setProfileName(userData.name);
-
-    if ('userPfp' in userData && userData.userPfp) {
-      setProfileImage(userData.userPfp);
-    } else {
-      setProfileImage('/images/userIconx96.png');
-    }
-
-    if ('bio' in userData && userData.bio) {
-      setProfileBio(userData.bio);
-    }
-
+    setProfileImage(userData.userPfp || '/images/userIconx96.png');
+    setProfileBio(userData.bio);
     setSocialMedias(userData.contact.socialMedia);
 
     let contactHelper = [];
