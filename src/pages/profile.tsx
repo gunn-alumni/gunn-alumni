@@ -248,7 +248,7 @@ export default function ProfilePage() {
               id="ta_content"
               rows={5}
               disabled={lockState === 'locked'}
-              className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100"
+              className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
           >
             {profileBio}
           </AutoResizingTextArea>
@@ -272,7 +272,7 @@ export default function ProfilePage() {
                   id="ta-content"
                   rows={1}
                   disabled={lockState === 'locked'}
-                  className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100"
+                  className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
               >
                 {value}
               </AutoResizingTextArea>
