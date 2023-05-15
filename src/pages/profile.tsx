@@ -283,45 +283,14 @@ export default function ProfilePage() {
     setEditProfileMediaIcons(mediaBoxesHelper);
   }
 
-  const editProf = (
-    <button
-      className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
-      onClick={toggleLock}
-    >
-      EDIT
-    </button>
-  );
-  const saveProf = (
-    <button
-      className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
-      onClick={toggleLock}
-    >
-      SAVE CHANGES
-    </button>
-  );
-
-  const [lockState, setLockState] = useState('locked');
-  const [lockType, setLockType] = useState(editProf);
+  const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
 
   function toggleLock() {
     if (lockState == 'locked') {
       setLockState('unlocked');
-      // setLockType(
-      //   <MdOutlineDownloadDone
-      //     className="w-[50px] h-[50px]"
-      //     onClick={toggleLock}
-      //   />
-      // );
-      setLockType(saveProf);
-
       turnEditsOn();
     } else {
       setLockState('locked');
-      // setLockType(
-      //   <FaRegEdit className="w-[50px] h-[50px]" onClick={toggleLock} />
-      // );
-      setLockType(editProf);
-
       turnEditsOff();
     }
   }
@@ -463,9 +432,24 @@ export default function ProfilePage() {
         </div> */}
         {profileContact}
       </div>
+
       {/* Edit Profile */}
       <div id="edit_lock_icon" className="self-end">
-        {lockType}
+        {lockState === 'locked' ? (
+            <button
+                className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
+                onClick={toggleLock}
+            >
+              EDIT
+            </button>
+        ) : (
+            <button
+                className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
+                onClick={toggleLock}
+            >
+              SAVE CHANGES
+            </button>
+        )}
       </div>
     </div>
   );
