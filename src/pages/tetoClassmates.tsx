@@ -1,9 +1,10 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-import { SB } from '../utils/dbreader';
-import { UserCard } from '../components/classmates/UserCard/MainUserCard';
-import { User } from '../types/supabase';
+import { SB } from '@/utils/dbreader';
+import { UserCard } from '@/components/classmates/MainUserCard';
+import { User } from '@/types/supabase';
+
 export const ClassmatesPage = (props: { users: User[] }) => {
   const { users } = props;
   return (
@@ -24,8 +25,8 @@ export const ClassmatesPage = (props: { users: User[] }) => {
           <div
             className={`grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 w-full items-stretch will-change-transform`}
           >
-            {users.map((u) => (
-              <UserCard user={u} />
+            {users.map((u, idx) => (
+              <UserCard key={idx} user={u} />
             ))}
           </div>
         </div>
