@@ -2,24 +2,42 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 
 const Verify = (): JSX.Element => {
   const router = useRouter();
+  const session = useSession();
   const supabase = useSupabaseClient();
 
   const handleEmail = () => {
-    fetch('/api/send-verify-email', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email: 'dl30486@pausd.us', name: 'Dylan Lu' })
-    }).then((res) => {
-      console.log('Response received');
-      console.log(res);
-    });
+    if (session === null) return;
+
+    supabase
+      .from('profiles')
+      .select('id,name,email')
+      .eq('id', session.user.id)
+      .then(({ data }) => {
+        if (data === null) {
+          console.log('User data not found');
+          return;
+        }
+
+        fetch('/api/send-verify-email', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: data[0].email,
+            name: data[0].name,
+            id: data[0].id
+          })
+        }).then((res) => {
+          console.log('Response received');
+          console.log(res);
+        });
+      });
   };
 
   return (

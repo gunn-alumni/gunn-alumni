@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
+import { SB } from '@/utils/dbreader';
+import crypto from "crypto"
 
 const mailjet: Client =  Mailjet.apiConnect(
         process.env.MAILJET_API_KEY || "",
@@ -7,12 +9,20 @@ const mailjet: Client =  Mailjet.apiConnect(
 )
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-
-    if(req.method !== 'POST' || !req.body.email) {
+    if(req.method !== 'POST' || !req.body.email || !req.body.name || !req.body.id) {
         res.status(400).json({ message: 'Invalid request' });
         return;
     }
 
+    // Find user in database
+    // - Find user in table by name such that id is null
+    // - If user if found, note the index and continue
+
+    // Generate verification ID through secret key
+    // - Hash the index with a secret key
+    // - Build url with index hash and id to place in database
+
+    // Send mail with verification link
     mailjet
     .post('send', { version: 'v3.1' })
     .request({
