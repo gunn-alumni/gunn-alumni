@@ -112,7 +112,7 @@ export default function ProfilePage() {
   useEffect(() => {
     console.log('Welcome to profile: ', queryMessage);
 
-    // Fetch the user's data
+    // Fetch the user's data on mount
     fetch(`http://localhost:4000/user?userId=${queryMessage.message}`, {
       method: 'GET'
     })
@@ -121,17 +121,15 @@ export default function ProfilePage() {
         if (data) {
           console.log('Fetched the Data: ', data);
           setProfileData(data);
-          makeProfile(data);
         }
       }).catch((error) => {
         console.log('ERRORRRRRR: ', error);
         setProfileData(dummyProfileData);
-        makeProfile(dummyProfileData);
       });
   }, []);
 
-  // All Profile Data Initializers
-  const [profileData, setProfileData] = useState<ProfileData>();
+  const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
+
   const [profileName, setProfileName] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [profileBio, setProfileBio] = useState('');
@@ -140,15 +138,7 @@ export default function ProfilePage() {
   const [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
   const [profileContact, setProfileContact] = useState([]);
 
-  //The Functions
-  const addTARefs = (el) => {
-    if (el && !textAreaRefs.current.includes(el)) {
-      textAreaRefs.current.push(el);
-    }
-    console.log('Adding Refs: ', textAreaRefs.current);
-  };
-
-  function makeProfile(userData) {
+  function setProfileData(userData: ProfileData) {
     setProfileName(userData.name);
 
     if ('userPfp' in userData && userData.userPfp) {
@@ -157,10 +147,8 @@ export default function ProfilePage() {
       setProfileImage('/images/userIconx96.png');
     }
 
-    // Make Bio Stuff
     if ('bio' in userData && userData.bio) {
       setProfileBio(userData.bio);
-      // console.log(profileBio);
     }
 
     // Make Contact Stuff
@@ -173,9 +161,6 @@ export default function ProfilePage() {
       let lowerCaseKey = key.toLowerCase();
       let titleKey =
         lowerCaseKey.charAt(0).toUpperCase() + lowerCaseKey.slice(1);
-      // console test
-      // console.log(lowerCaseKey);
-      // console.log(valueForKey);
 
       if (key == 'socialMedia') {
         // stub
@@ -214,10 +199,6 @@ export default function ProfilePage() {
       }
     });
     setProfileContact(contactHelper);
-
-    // console testing
-    // console.log("ContactHelper = ",contactHelper);
-    // console.log("ProfileContact = ", profileContact);
   }
 
   function addSocialMedia(socialData) {
@@ -272,8 +253,6 @@ export default function ProfilePage() {
     // socialMediaEditBoxes created and changed based on user preference
     setEditProfileMediaIcons(mediaBoxesHelper);
   }
-
-  const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
 
   function toggleLock() {
     if (lockState == 'locked') {
