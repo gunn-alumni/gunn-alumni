@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
 
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -11,10 +12,6 @@ import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { TiSocialTwitter } from 'react-icons/ti';
 
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
-
-// defaults
 
 // TODO: store this type somewhere else!
 type ProfileData = {
@@ -170,21 +167,19 @@ export default function ProfilePage() {
         <div id="pfp_wrapper">
           <div
             id="pfp_content"
-            className="w-fit relative mx-auto mb-4 overflow-hidden rounded-full border-[3px] border-[black]"
+            className="w-max relative mx-auto mb-4 group rounded-full overflow-hidden"
           >
-            <Image
+            <img
               src={profileImage}
               alt="Profile Image"
-              className="rounded-full"
-              width={200}
-              height={200}
+              className="h-[200px] max-w-[200px] object-cover object-center"
             />
             {lockState === 'unlocked' && (
               <button
                 id="pfp_change"
-                className="absolute w-full h-[50px] bottom-0 text-white bg-black"
+                className="hidden group-hover:block absolute inset-0 text-white bg-black/40"
               >
-                Change Avatar
+                Change avatar
               </button>
             )}
           </div>
