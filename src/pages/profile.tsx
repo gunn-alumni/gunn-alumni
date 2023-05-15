@@ -133,10 +133,11 @@ export default function ProfilePage() {
   // All Profile Data Initializers
   const [profileData, setProfileData] = useState<ProfileData>();
   const [profileName, setProfileName] = useState('');
-  const [profileImage, setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState('');
+  const [profileBio, setProfileBio] = useState('');
+
   const [profileMediaIcons, setProfileMediaIcons] = useState([]);
   const [editProfileMediaIcons, setEditProfileMediaIcons] = useState([]);
-  const [profileBio, setProfileBio] = useState([]);
   const [profileContact, setProfileContact] = useState([]);
 
   //The Functions
@@ -149,21 +150,17 @@ export default function ProfilePage() {
 
   function makeProfile(userData) {
     setProfileName(userData.name);
-    if ('userPfp' in userData) {
-      if (userData.userPfp) {
-        setProfileImage(userData.userPfp);
-      }
+
+    if ('userPfp' in userData && userData.userPfp) {
+      setProfileImage(userData.userPfp);
     } else {
       setProfileImage('/images/userIconx96.png');
     }
 
     // Make Bio Stuff
-    if ('bio' in userData) {
-      if (userData.bio && userData.bio != '') {
-        const profileBioHelper = addBio(userData.bio);
-        setProfileBio(profileBioHelper);
-        // console.log(profileBio);
-      }
+    if ('bio' in userData && userData.bio) {
+      setProfileBio(userData.bio);
+      // console.log(profileBio);
     }
 
     // Make Contact Stuff
@@ -185,36 +182,34 @@ export default function ProfilePage() {
         addSocialMedia(valueForKey);
       } else {
         contactHelper.push(
-          <>
+          <div
+            title="contact_wrapper"
+            id={lowerCaseKey + '_wrapper'}
+            className="mb-6"
+          >
             <div
-              title="contact_wrapper"
-              id={lowerCaseKey + '_wrapper'}
-              className="mb-6"
+              title="contact_title"
+              id={lowerCaseKey + '_title'}
+              className="font-bold underline"
             >
-              <div
-                title="contact_title"
-                id={lowerCaseKey + '_title'}
-                className="font-bold underline"
-              >
-                {titleKey}
-              </div>
-              <div
-                title="contact_content"
-                id={lowerCaseKey + '_content'}
-                className="w-full"
-              >
-                <AutoResizingTextArea
-                  id="ta-content"
-                  rows={1}
-                  disabled
-                  className="w-full p-[5px] resize-none bg-white"
-                  // ref={addTARefs}
-                >
-                  {valueForKey}
-                </AutoResizingTextArea>
-              </div>
+              {titleKey}
             </div>
-          </>
+            <div
+              title="contact_content"
+              id={lowerCaseKey + '_content'}
+              className="w-full"
+            >
+              <AutoResizingTextArea
+                id="ta-content"
+                rows={1}
+                disabled
+                className="w-full p-[5px] resize-none bg-white"
+                // ref={addTARefs}
+              >
+                {valueForKey}
+              </AutoResizingTextArea>
+            </div>
+          </div>
         );
       }
     });
@@ -223,27 +218,6 @@ export default function ProfilePage() {
     // console testing
     // console.log("ContactHelper = ",contactHelper);
     // console.log("ProfileContact = ", profileContact);
-  }
-
-  function addBio(userBio) {
-    return (
-      <div id="bio_wrapper" className="mb-6">
-        <div id="bio_title" className="font-bold underline">
-          About Me
-        </div>
-        <div id="bio_content_wrapper" className="w-full">
-          <AutoResizingTextArea
-            id="ta_content"
-            rows={5}
-            disabled
-            className="w-full p-[5px] resize-none bg-white"
-            // ref={addTARefs}
-          >
-            {userBio}
-          </AutoResizingTextArea>
-        </div>
-      </div>
-    );
   }
 
   function addSocialMedia(socialData) {
@@ -439,13 +413,23 @@ export default function ProfilePage() {
         id="profile_components"
         className="col-span-2 w-[100%] max-w-[650px]"
       >
-        {profileBio}
-        {/* <div id="bio_wrapper" className="mb-6">
-          <div id="bio_title" className="font-bold">About Me</div>
-          <div id="bio_content">
-            {profileBio}
+        <div id="bio_wrapper" className="mb-6">
+          <div id="bio_title" className="font-bold underline">
+            About Me
           </div>
-        </div> */}
+          <div id="bio_content_wrapper" className="w-full">
+            <AutoResizingTextArea
+              id="ta_content"
+              rows={5}
+              disabled
+              className="w-full p-[5px] resize-none bg-white"
+              // ref={addTARefs}
+            >
+              {profileBio}
+            </AutoResizingTextArea>
+          </div>
+        </div>
+
         {profileContact}
       </div>
 
