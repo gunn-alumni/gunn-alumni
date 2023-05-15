@@ -246,19 +246,17 @@ export default function ProfilePage() {
         className="col-span-2 w-[100%] max-w-[650px]"
       >
         <div id="bio_wrapper" className="mb-6">
-          <div id="bio_title" className="font-bold underline">
+          <div id="bio_title" className="font-bold mb-1">
             About Me
           </div>
-          <div id="bio_content_wrapper" className="w-full">
-            <AutoResizingTextArea
+          <AutoResizingTextArea
               id="ta_content"
               rows={5}
               disabled={lockState === 'locked'}
-              className="w-full p-[5px] resize-none bg-white"
-            >
-              {profileBio}
-            </AutoResizingTextArea>
-          </div>
+              className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100"
+          >
+            {profileBio}
+          </AutoResizingTextArea>
         </div>
 
         {Object.entries(contacts).map(([key, value]) => (
@@ -271,24 +269,18 @@ export default function ProfilePage() {
               <div
                 title="contact_title"
                 id={key.toLowerCase() + '_title'}
-                className="font-bold underline"
+                className="font-bold mb-1"
               >
                 {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
               </div>
-              <div
-                title="contact_content"
-                id={key.toLowerCase() + '_content'}
-                className="w-full"
-              >
-                <AutoResizingTextArea
+              <AutoResizingTextArea
                   id="ta-content"
                   rows={1}
                   disabled={lockState === 'locked'}
-                  className="w-full p-[5px] resize-none bg-white"
-                >
-                  {value}
-                </AutoResizingTextArea>
-              </div>
+                  className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100"
+              >
+                {value}
+              </AutoResizingTextArea>
             </div>
         ))}
       </div>
