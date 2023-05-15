@@ -16,7 +16,30 @@ import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
 
 // defaults
 
-const oldDummyProfileData = {
+// TODO: store this type somewhere else!
+type ProfileData = {
+  userId: string,
+  userPfp: string,
+  name: string,
+  bio: string,
+  contact: {
+    location: string,
+    phone: string,
+    email: string,
+    socialMedia: {
+      facebook: string,
+      instagram: string,
+      linkedin: string,
+      twitter: string,
+      youtube: string,
+      discord: string,
+      snapchat: string,
+      tiktok: string
+    }
+  }
+}
+
+const oldDummyProfileData: ProfileData = {
   userId: '0000',
   userPfp: '/images/dylan.png',
   name: 'Dylan Lu',
@@ -38,7 +61,7 @@ const oldDummyProfileData = {
   }
 };
 
-const dummyProfileData = {
+const dummyProfileData: ProfileData = {
   userId: '0001',
   userPfp: '/images/dylan.png',
   name: 'Lorem Ipsum',
@@ -88,34 +111,27 @@ export default function ProfilePage() {
 
   useEffect(() => {
     console.log('Welcome to profile: ', queryMessage);
-    getUserProfile(queryMessage.message);
-  }, []);
 
-  function getUserProfile(userId) {
-    // Fetch the data
-    fetch(`http://localhost:4000/user?userId=${userId}`, {
+    // Fetch the user's data
+    fetch(`http://localhost:4000/user?userId=${queryMessage.message}`, {
       method: 'GET'
     })
-      .then(async (res) => await res.json())
+      .then((res) => res.json())
       .then((data) => {
         if (data) {
           console.log('Fetched the Data: ', data);
           setProfileData(data);
           makeProfile(data);
         }
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log('ERRORRRRRR: ', error);
         setProfileData(dummyProfileData);
-        // console.log("YIU(IUJHIHHBHUIUHBHUBHIBF: ", profileData.userPfp);
         makeProfile(dummyProfileData);
       });
-  }
-
-  // Set the profile data stuff
+  }, []);
 
   // All Profile Data Initializers
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState<ProfileData>();
   const [profileName, setProfileName] = useState('');
   const [profileImage, setProfileImage] = useState();
   const [profileMediaIcons, setProfileMediaIcons] = useState([]);
