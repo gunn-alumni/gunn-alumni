@@ -212,8 +212,6 @@ export default function ProfilePage() {
 
   const [pfpChangeBtn, setPfpChangeBtn] = useState('hidden');
   const profileNameRef = useRef(null);
-  const [displayEditMediaIcons, setDisplayEditMediaIcons] = useState('block');
-  const [displayEditMediaLink, setDisplayEditMediaLink] = useState('hidden');
 
   function turnEditsOff() {
     console.log('Edits Off :{: ', textAreaRefs.current);
@@ -234,10 +232,6 @@ export default function ProfilePage() {
     profileNameRef.current.disabled = true;
     profileNameRef.current.style.backgroundColor = 'white';
     profileNameRef.current.style.border = 'none';
-
-    //social media icons and link change on
-    setDisplayEditMediaIcons('block');
-    setDisplayEditMediaLink('hidden');
   }
 
   function turnEditsOn() {
@@ -264,10 +258,6 @@ export default function ProfilePage() {
     name.disabled = false;
     name.style.backgroundColor = 'white';
     name.style.borderBottom = '3px solid gray';
-
-    //social media icons and link change on
-    setDisplayEditMediaIcons('hidden');
-    setDisplayEditMediaLink('block');
   }
 
   return (
@@ -315,43 +305,44 @@ export default function ProfilePage() {
         />
 
         <div id="profileSocial_wrapper">
-          <div
-            className={`flex gap-4 mx-auto flex-wrap justify-center mb-4 ${displayEditMediaIcons}`}
-          >
-            {/* TODO: abstract into component? */}
-            {Object.entries(socialMedias).map(([key, value]) => {
-              const MediaIcon = socialMediaIconsList[socialMediaNamesList.indexOf(key)];
-              return (
-                <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
-                  <Link href={value} target="_blank">
-                    <MediaIcon
-                        id={key + '_icon'}
-                        className="w-8 h-8 fill-current"
+          {lockState === 'locked' ? (
+            <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
+              {/* TODO: abstract into component? */}
+              {Object.entries(socialMedias).map(([key, value]) => {
+                const MediaIcon = socialMediaIconsList[socialMediaNamesList.indexOf(key)];
+                return (
+                    <button className="bg-primary p-1 font-semibold text-white rounded" key={key}>
+                      <Link href={value} target="_blank">
+                        <MediaIcon
+                            id={key + '_icon'}
+                            className="w-8 h-8 fill-current"
+                        />
+                      </Link>
+                    </button>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="grid gap-4 mb-4">
+              {/* TODO: see above */}
+              {Object.entries(socialMedias).map(([key, value]) => (
+                  <div className="w-full flex" key={key}>
+                    <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
+                      {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
+                    </div>
+                    <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+                    <input
+                        type="text"
+                        placeholder="Enter Link Here"
+                        className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
                     />
-                  </Link>
-                </button>
-              )
-            })}
-          </div>
-          <div className={`grid gap-4 mb-4 ${displayEditMediaLink}`}>
-            {/* TODO: see above */}
-            {Object.entries(socialMedias).map(([key, value]) => (
-              <div className="w-full flex" key={key}>
-                <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-                  {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
-                </div>
-                <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
-                <input
-                  type="text"
-                  placeholder="Enter Link Here"
-                  className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
-                />
-                <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
+                    <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
+                      X
+                    </button>
+                  </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -381,19 +372,19 @@ export default function ProfilePage() {
       {/* Edit Profile */}
       <div id="edit_lock_icon" className="self-end">
         {lockState === 'locked' ? (
-            <button
-              className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
-              onClick={toggleLock}
-            >
-              EDIT
-            </button>
+          <button
+            className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
+            onClick={toggleLock}
+          >
+            EDIT
+          </button>
         ) : (
-            <button
-              className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
-              onClick={toggleLock}
-            >
-              SAVE CHANGES
-            </button>
+          <button
+            className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
+            onClick={toggleLock}
+          >
+            SAVE CHANGES
+          </button>
         )}
       </div>
     </div>
