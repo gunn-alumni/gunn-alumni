@@ -1,14 +1,46 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
 import { decrypt } from '@/utils/serverCrypto';
+import { SB_serveronly } from '@/utils/dbserveronly';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    const {encryptedData, iv, id} = req.query;
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { encryptedData, iv, id } = req.query;
 
-    if(!encryptedData || !iv || ! id || typeof encryptedData !== "string" || typeof iv !== "string") {
-        res.status(400).json({ message: 'Invalid request' });
-        return;
+  if (
+    !encryptedData ||
+    !iv ||
+    !id ||
+    typeof encryptedData !== 'string' ||
+    typeof iv !== 'string'
+  ) {
+    res.status(400).json({ message: 'Invalid request' });
+    return;
+  }
+
+  try {
+    const index = parseInt(
+      decrypt({ encryptedData: encryptedData as string, iv: iv as string })
+    );
+    console.log('Updating person of index ' + index + ' to id: ' + id);
+
+    // Update person in database
+    const { data, error } = await SB_serveronly.from('people')
+      .update({ id: id })
+      .eq('index', index);
+
+    if (error) {
+      res
+        .status(400)
+        .json({ message: 'Index not found or people could not be updated' });
     }
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ message: 'Error with parsing index' });
+    return;
+  }
 
-    console.log(decrypt({encryptedData, iv}))
+  res.status(200).json({ message: 'User verified' });
 }

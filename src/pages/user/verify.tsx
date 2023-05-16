@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ const Verify = (): JSX.Element => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const handleEmail = (e) => {
+  const handleEmail: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     if (session === null) return;
