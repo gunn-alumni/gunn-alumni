@@ -9,6 +9,14 @@ module.exports = {
       colors: {
         primary: '#A61616'
       }
-    }
+    },
+    fontFamily: {
+      shippori: ['Shippori Antique B1', 'sans-serif'],
+      ubuntu: ['Ubuntu', 'sans-serif'],
+      // work sans
+      wsans: ['Work Sans', 'sans-serif'],
+      montserrat: ['Montserrat', 'sans-serif']
+    },
+    variants: {}
   }
-}
+};

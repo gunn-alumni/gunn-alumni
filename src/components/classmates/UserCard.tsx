@@ -3,7 +3,7 @@ import Image, { type StaticImageData } from 'next/image';
 interface UserCardProps {
   uniId: string;
   classTitle: string;
-  userPfp: StaticImageData;
+  userPfp: StaticImageData | string;
   userName: string;
 }
 
