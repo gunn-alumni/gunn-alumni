@@ -114,7 +114,7 @@ const Navbar = () => {
                         href="/user/settings"
                       >
                         <div className="font-medium">{name}</div>
-                        <div className="font-medium word-wrap: break-word">{session.user.email}</div>
+                        <div className="font-medium break-words">{session.user.email}</div>
                       </Link>
                     </div>
 
