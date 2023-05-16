@@ -13,12 +13,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (
-    req.method !== 'POST' ||
-    !req.body.first_name ||
-    !req.body.last_name ||
-    !req.body.id
-  ) {
+  console.log(crypto.randomBytes(32).toString('hex'));
+  if (req.method !== 'POST' || !req.body.pausd_email || !req.body.id) {
     res.status(400).json({ message: 'Invalid request' });
     return;
   }
@@ -27,9 +23,8 @@ export default async function handler(
   // - Find user in table by name such that id is null
   // - If user if found, note the index and continue
   const { data: people, error } = await SB_serveronly.from('people')
-    .select('index,pausd_email')
-    .eq('first_name', req.body.first_name)
-    .eq('last_name', req.body.last_name);
+    .select('index,first_name,last_name')
+    .eq('pausd_email', req.body.pausd_email);
   if (error || !people || people.length === 0) {
     console.log('error not found');
     console.log(error);
@@ -58,8 +53,8 @@ export default async function handler(
           },
           To: [
             {
-              Email: people[0].pausd_email,
-              Name: `${req.body.first_name} ${req.body.last_name}`
+              Email: req.body.pausd_email,
+              Name: `${people[0].first_name} ${people[0].last_name}`
             }
           ],
           Subject: 'Verify Alumni Account',

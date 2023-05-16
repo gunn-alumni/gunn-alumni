@@ -10,13 +10,15 @@ const Verify = (): JSX.Element => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [pausdEmail, setPausdEmail] = useState('');
+  const [sent, setSend] = useState(false);
 
   const handleEmail: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     if (session === null) return;
+
+    setSend(true);
 
     fetch('/api/send-verify-email', {
       method: 'POST',
@@ -25,8 +27,7 @@ const Verify = (): JSX.Element => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
+        pausd_email: pausdEmail,
         id: session.user.id
       })
     }).then((res) => {
@@ -41,43 +42,34 @@ const Verify = (): JSX.Element => {
         <div className="text-xl font-semibold">Gunn High School | Alumni</div>
       </div>
       <div className="w-full bg-white rounded-lg shadow sm:max-w-md p-8">
-        <form onSubmit={handleEmail}>
-          <label
-            htmlFor="first"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            First Name
-          </label>
-          <input
-            type="text"
-            name="first"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="Dylan"
-            value={firstName}
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
-          <label
-            htmlFor="first"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            Last Name
-          </label>
-          <input
-            type="text"
-            name="last"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="Lu"
-            value={lastName}
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
-          <button className="bg-red-300 px-4 py-2 rounded-lg mt-4">
-            Click me to send email
-          </button>
-        </form>
+        {sent ? (
+          <div>
+            Please check your email for the verify link. Give it up to 2 mins
+            before trying again
+          </div>
+        ) : (
+          <form onSubmit={handleEmail}>
+            <label
+              htmlFor="first"
+              className="block mb-2 text-sm font-medium text-gray-900"
+            >
+              Email
+            </label>
+            <input
+              type="text"
+              name="last"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="email@pausd.us"
+              value={pausdEmail}
+              onChange={(e) => {
+                setPausdEmail(e.target.value);
+              }}
+            />
+            <button className="bg-primary hover:bg-primary/70 text-white font-bold px-4 py-2 rounded-lg mt-4">
+              Click me to send email
+            </button>
+          </form>
+        )}
       </div>
     </Container>
   );
