@@ -111,7 +111,7 @@ const Navbar = () => {
                   >
                     <div className="px-4 py-3 text-sm text-gray-900">
                       <Link
-                        href="/profile"
+                        href="/user/settings"
                       >
                         <div className="font-medium">{name}</div>
                         <div className="font-medium break-words">{session.user.email}</div>
