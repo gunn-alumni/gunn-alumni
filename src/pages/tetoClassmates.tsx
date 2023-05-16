@@ -1,7 +1,7 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-import { SB } from '@/utils/dbreader';
+import { SB } from '@/utils/dbclient';
 import { UserCard } from '@/components/classmates/MainUserCard';
 import { User } from '@/types/supabase';
 

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
-import supabase from '@/utils/dbreader';
+import { SB_serveronly } from '@/utils/dbserveronly';
+import { decrypt, encrypt } from "@/utils/serverCrypto"
 import crypto from "crypto"
 
 const mailjet: Client =  Mailjet.apiConnect(
@@ -9,20 +10,15 @@ const mailjet: Client =  Mailjet.apiConnect(
 )
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if(req.method !== 'POST' || !req.body.email || !req.body.first_name || !req.body.last_name || !req.body.id) {
+    if(req.method !== 'POST' || !req.body.first_name || !req.body.last_name || !req.body.id) {
         res.status(400).json({ message: 'Invalid request' });
-        return;
-    }
-
-    if(!process.env.VERIFY_SECRET) {
-        res.status(500).json({ message: 'Server error' });
         return;
     }
 
     // Find user in database
     // - Find user in table by name such that id is null
     // - If user if found, note the index and continue
-    const {data: people, error} = await supabase.from("people").select("index").eq("first_name", req.body.first_name).eq("last_name", req.body.last_name)
+    const {data: people, error} = await SB_serveronly.from("people").select("index,pausd_email").eq("first_name", req.body.first_name).eq("last_name", req.body.last_name)
     if(error || !people || people.length === 0) {
         console.log("error not found")
         console.log(error)
@@ -34,13 +30,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Generate verification ID through secret key
     // - Hash the index with a secret key
     // - Build url with index hash and id to place in database
-    const hash = crypto.createHmac('sha256', process.env.VERIFY_SECRET).update(people[0].index.toString()).digest('hex')
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/verify/${hash}?id=${req.body.id}`
-
+    const hash = encrypt(people[0].index.toString())
+    const url = `https://alumni.gunnhigh.school/api/verify?encryptedData=${hash.encryptedData}&id=${req.body.id}&iv=${hash.iv}`
 
     console.log(url)
 
-    res.status(200)
+    res.status(200).json({message: "Done"})
 
     return;
 
