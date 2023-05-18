@@ -12,6 +12,9 @@ import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { TiSocialTwitter } from 'react-icons/ti';
 
+// supabase
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+
 // TODO: store this type somewhere else!
 type ProfileData = {
   userId: string;
@@ -105,6 +108,9 @@ export default function ProfilePage() {
   const router = useRouter();
   const queryMessage = router?.query;
 
+  const supabase = useSupabaseClient();
+  const session = useSession();
+
   useEffect(() => {
     console.log('Welcome to profile: ', queryMessage);
 
@@ -155,6 +161,21 @@ export default function ProfilePage() {
     }
   }
 
+  async function uploadFile(event: React.ChangeEvent<HTMLInputElement>) {
+    if (session === null) return;
+
+    const file = event.target.files![0];
+    console.log(file);
+    const { data, error } = await supabase.storage
+      .from('avatar')
+      // TODO: Generate a unique id for the avatar depending on the user
+      .upload(`${session.user.id}-avatar`, file, {
+        cacheControl: '3600',
+        upsert: true
+      });
+    console.log(data);
+  }
+
   return (
     <div
       id="profile_wrapper"
@@ -179,12 +200,24 @@ export default function ProfilePage() {
               className="h-[200px] max-w-[200px] object-cover object-center"
             />
             {lockState === 'unlocked' && (
-              <button
-                id="pfp_change"
-                className="hidden group-hover:block absolute inset-0 text-white bg-black/40"
-              >
-                Change avatar
-              </button>
+              <>
+                <input
+                  id="pfp_file_upload"
+                  className="hidden"
+                  type="file"
+                  name="pfpFileUpload"
+                  onChange={async (event) => await uploadFile(event)}
+                />
+                <button
+                  id="pfp_change"
+                  className="hidden group-hover:block absolute inset-0 text-white bg-black/40"
+                  onClick={() => {
+                    document.getElementById('pfp_file_upload')?.click();
+                  }}
+                >
+                  Change avatar
+                </button>
+              </>
             )}
           </div>
         </div>
