@@ -161,19 +161,38 @@ export default function ProfilePage() {
     }
   }
 
-  async function uploadFile(event: React.ChangeEvent<HTMLInputElement>) {
+  async function updatePfp(event: React.ChangeEvent<HTMLInputElement>) {
     if (session === null) return;
 
     const file = event.target.files![0];
-    console.log(file);
-    const { data, error } = await supabase.storage
+    const avatarPath = `${session.user.id}-avatar`;
+
+    const { error: uploadError } = await supabase.storage
       .from('avatar')
-      // TODO: Generate a unique id for the avatar depending on the user
-      .upload(`${session.user.id}-avatar`, file, {
+      .upload(avatarPath, file, {
         cacheControl: '3600',
         upsert: true
       });
-    console.log(data);
+    if (uploadError !== null) {
+      console.log(uploadError);
+      alert('Failed to update profile picture.');
+      return;
+    }
+
+    const { data } = await supabase.storage
+      .from('avatar')
+      .getPublicUrl(avatarPath);
+
+    // update table (I'm not sure if this should be put here...)
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .update({ pfp: data.publicUrl })
+      .eq('id', session.user.id);
+    if (updateError != null) {
+      console.log(updateError);
+      alert('Failed to update table with new url');
+      return;
+    }
   }
 
   return (
@@ -206,7 +225,8 @@ export default function ProfilePage() {
                   className="hidden"
                   type="file"
                   name="pfpFileUpload"
-                  onChange={async (event) => await uploadFile(event)}
+                  accept=".png,.jpeg,.jpg"
+                  onChange={async (event) => await updatePfp(event)}
                 />
                 <button
                   id="pfp_change"
