@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
-import { User, People } from '@/types/alumni';
+import { User, People, ClassmatePreview } from '@/types/alumni';
 import { SB_serveronly } from '@/utils/dbserveronly';
 
 import UserCard from '@/components/classmates/UserCard';
 import Container from '@/components/shared/Container';
 import ClassPreview from '@/components/classmates/ClassPreview';
 
-type PeopleDict = Record<string, People[]>;
+type PeopleDict = Record<string, ClassmatePreview[]>;
 
 interface ClassmatesProps {
   peopleMap: PeopleDict;
@@ -16,10 +16,6 @@ interface ClassmatesProps {
 
 export default function Classmates({ peopleMap }: ClassmatesProps) {
   const supabase = useSupabaseClient();
-
-  useEffect(() => {
-    console.log(peopleMap);
-  });
 
   return (
     <>
@@ -37,8 +33,8 @@ export default function Classmates({ peopleMap }: ClassmatesProps) {
         </p>
         {peopleMap && (
           <>
-            <ClassPreview peopleMap={peopleMap['2024']} />
-            <ClassPreview peopleMap={peopleMap['2023']} />
+            <ClassPreview peopleArr={peopleMap['2024']} />
+            <ClassPreview peopleArr={peopleMap['2023']} />
           </>
         )}
       </Container>
@@ -47,7 +43,9 @@ export default function Classmates({ peopleMap }: ClassmatesProps) {
 }
 
 export async function getStaticProps() {
-  const { data } = await SB_serveronly.from('select_preview_people').select();
+  const { data } = await SB_serveronly.from('select_preview_people').select(
+    '*, profiles(pfp)'
+  );
   const peopleMap: PeopleDict = {};
 
   data?.map(async (people) => {

@@ -1,21 +1,26 @@
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import Image, { type StaticImageData } from 'next/image';
 import { useEffect, useState } from 'react';
 import { GoVerified, GoUnverified } from 'react-icons/go';
+import { User, People } from '@/types/alumni';
+
+const defaultProfile =
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/680px-Default_pfp.svg.png?20220226140232';
 
 interface UserCardProps {
   profileID: string | null;
   classTitle: string;
-  userPfp: StaticImageData | string;
   firstName: string;
   lastName: string;
+  pfp: string | null;
 }
 
 const UserCard = ({
   profileID,
   classTitle,
-  userPfp,
   firstName,
-  lastName
+  lastName,
+  pfp
 }: UserCardProps) => {
   const [verified] = useState(profileID !== null);
 
@@ -29,10 +34,10 @@ const UserCard = ({
       <div className="flex-1">
         <div className="relative h-20 w-20">
           <Image
-            src={userPfp}
+            src={pfp !== null ? pfp : defaultProfile}
             className="object-cover rounded-full"
             fill
-            alt="default_user_pfp"
+            alt="profile pic"
           />
         </div>
       </div>
@@ -44,7 +49,7 @@ const UserCard = ({
           {firstName} {lastName.charAt(0)}.
         </h4>
         <div className="flex">
-          {!verified ? (
+          {verified ? (
             <div className="p-1 bg-green-100 text-green-800 rounded-full text-sm ">
               <GoVerified />
             </div>

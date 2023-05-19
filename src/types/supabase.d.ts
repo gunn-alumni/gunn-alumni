@@ -75,16 +75,20 @@ export interface Database {
       }
     }
     Views: {
-      select_preview_people: {
+      alums_preview: {
         Row: {
-          created_at: string | null
           first_name: string | null
           grad_year: number | null
           id: string | null
-          index: number | null
           last_name: string | null
-          pausd_email: string | null
-          row_num: number | null
+        }
+      }
+      select_preview_people: {
+        Row: {
+          first_name: string | null
+          grad_year: number | null
+          id: string | null
+          last_name: string | null
         }
       }
     }
