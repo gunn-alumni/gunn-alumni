@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { User } from '@/types/supabase';
+import { User } from '@/types/alumni';
 import Image from 'next/image';
 
 export const UserCard = (props: { user: User }) => {
