@@ -20,5 +20,8 @@
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": true
+  },
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": 0
   }
 }

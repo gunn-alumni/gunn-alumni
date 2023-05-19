@@ -28,7 +28,7 @@ export default async function handler(
 
     // Update person in database
     const { data, error } = await SB_serveronly.from('people')
-      .update({ id: id })
+      .update({ id: id as string })
       .eq('index', index);
 
     if (error) {

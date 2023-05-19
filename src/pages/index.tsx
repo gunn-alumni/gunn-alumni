@@ -9,6 +9,9 @@ import NewsLandingCard from '@/components/home/NewsLandingCard';
 import { StandardButton } from '@/components/shared/Button';
 import Container from '@/components/shared/Container';
 import Cta from '@/components/home/CTA';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useEffect, useState } from 'react';
+import Welcome from '@/components/home/Welcome';
 
 const dummyNewsData = [
   {
@@ -57,24 +60,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container className="">
-        <section className="text-center py-10 lg:w-full lg:py-36 lg:text-left ">
-          <div className="mx-auto w-full max-w-3xl">
-            <h1 className="mt-0 mb-8 text-4xl font-bold md:text-5xl">
-              Welcome to Gunn Alumni
-            </h1>
-            <p className="prose prose-xl mb-8 text-gray-500 px-0">
-              This is a student-run project still in the process of being
-              developed. More features will come in the future. Sign up now to
-              create an account.
-            </p>
-            <Link
-              href="/signup"
-              className="-mt-px inline-flex cursor-pointer justify-center whitespace-nowrap rounded-lg border-0 bg-primary mb-8 py-4 px-7 text-center font-medium leading-4 text-white no-underline shadow-lg hover:bg-primary/80"
-            >
-              Sign Up Here
-            </Link>
-          </div>
-        </section>
+        <Welcome />
         <div className="flex items-center justify-center">
           <NewsLandingCard
             title="Gunn Football goes undefeated in 2021 season, wins CCS"
