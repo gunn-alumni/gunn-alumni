@@ -25,7 +25,7 @@ export const UserCard = (props: { user: User }) => {
             {user.preferred_name}
           </h4>
           <span className={`text-sm font-wsans font-medium text-gray-900/60`}>
-            Class of {user.graduation_year || 2023}
+            Class of 2023
           </span>
         </div>
       </div>
