@@ -8,8 +8,18 @@ import UserCard from '@/components/classmates/UserCard';
 import Container from '@/components/shared/Container';
 import ClassPreview from '@/components/classmates/ClassPreview';
 
-export default function Classmates({ people }: { people: People[] }) {
+type PeopleDict = Record<string, People[]>;
+
+interface ClassmatesProps {
+  peopleMap: PeopleDict;
+}
+
+export default function Classmates({ peopleMap }: ClassmatesProps) {
   const supabase = useSupabaseClient();
+
+  useEffect(() => {
+    console.log(peopleMap);
+  });
 
   return (
     <>
@@ -25,18 +35,36 @@ export default function Classmates({ people }: { people: People[] }) {
         <p className="text-xl text-gray-400 mt-2">
           A list of all alumni from Gunn
         </p>
-        <ClassPreview people={people} />
-        <ClassPreview people={people} />
+        {peopleMap && (
+          <>
+            <ClassPreview peopleMap={peopleMap['2024']} />
+            <ClassPreview peopleMap={peopleMap['2023']} />
+          </>
+        )}
       </Container>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const people = await SB_serveronly.from('people').select().limit(8);
+  const { data } = await SB_serveronly.from('select_preview_people').select();
+  const peopleMap: PeopleDict = {};
+
+  data?.map(async (people) => {
+    if (people.grad_year !== null) {
+      if (people.grad_year in peopleMap) {
+        //@ts-ignore
+        peopleMap[people.grad_year].push(people);
+      } else {
+        //@ts-ignore
+        peopleMap[people.grad_year] = [people];
+      }
+    }
+  });
+
   return {
     props: {
-      people: people.data
+      peopleMap: peopleMap
     } // will be passed to the page component as props
   };
 }

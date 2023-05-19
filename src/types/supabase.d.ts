@@ -75,7 +75,18 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      select_preview_people: {
+        Row: {
+          created_at: string | null
+          first_name: string | null
+          grad_year: number | null
+          id: string | null
+          index: number | null
+          last_name: string | null
+          pausd_email: string | null
+          row_num: number | null
+        }
+      }
     }
     Functions: {
       [_ in never]: never
