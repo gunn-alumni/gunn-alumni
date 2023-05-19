@@ -3,10 +3,16 @@ import { ClassmatePreview, People } from '@/types/alumni';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-const ClassPreview = ({ peopleArr }: { peopleArr: ClassmatePreview[] }) => {
+const ClassPreview = ({
+  peopleArr,
+  year
+}: {
+  peopleArr: ClassmatePreview[];
+  year: string;
+}) => {
   return (
     <div>
-      <h2 className="text-3xl font-black mt-8">2023</h2>
+      <h2 className="text-3xl font-black mt-8">{year}</h2>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center mt-4">
         {peopleArr.map((person) => (
           <div key={person.index} className="">

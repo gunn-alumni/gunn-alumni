@@ -31,12 +31,10 @@ export default function Classmates({ peopleMap }: ClassmatesProps) {
         <p className="text-xl text-gray-400 mt-2">
           A list of all alumni from Gunn
         </p>
-        {peopleMap && (
-          <>
-            <ClassPreview peopleArr={peopleMap['2024']} />
-            <ClassPreview peopleArr={peopleMap['2023']} />
-          </>
-        )}
+        {peopleMap &&
+          Object.keys(peopleMap).map((year) => (
+            <ClassPreview key={year} peopleArr={peopleMap[year]} year={year} />
+          ))}
       </Container>
     </>
   );

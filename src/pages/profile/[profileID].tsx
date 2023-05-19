@@ -11,9 +11,12 @@ import { useEffect, useRef, useState } from 'react';
 import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { TiSocialTwitter } from 'react-icons/ti';
+import DefaultPFP from 'public/images/default_pfp.png';
 
 // supabase
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import SB_serveronly from '@/utils/dbserveronly';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 // TODO: store this type somewhere else!
 type ProfileData = {
@@ -36,28 +39,6 @@ type ProfileData = {
       tiktok: string;
     };
   };
-};
-
-const oldDummyProfileData: ProfileData = {
-  userId: '0000',
-  userPfp: '/images/dylan.png',
-  name: 'Dylan Lu',
-  bio: 'I’m currently studying computer engineering at Stanford. Contact me if you wanna work at my startup. I am also fine making a small donation of one million dollars as an investor for any student project by asking my uncle Elon for some Buckaroos!!',
-  contact: {
-    location: 'Palo Alto, CA',
-    phone: '650-555-5555',
-    email: 'lol@lol.com',
-    socialMedia: {
-      facebook: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      instagram: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      linkedin: 'https://www.linkedin.com/in/dylanelu',
-      twitter: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      youtube: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      discord: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      snapchat: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      tiktok: 'https://www.youtube.com/watch?v=QKr_0DMYV5g'
-    }
-  }
 };
 
 const dummyProfileData: ProfileData = {
@@ -104,38 +85,20 @@ const socialMediaIconsList = [
   FaTiktok
 ];
 
-export default function ProfilePage() {
+export default function ProfilePage({
+  userBio,
+  userName,
+  userPfp
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
-  const queryMessage = router?.query;
 
   const supabase = useSupabaseClient();
   const session = useSession();
 
-  useEffect(() => {
-    console.log('Welcome to profile: ', queryMessage);
-
-    // Fetch the user's data on mount
-    fetch(`http://localhost:4000/user?userId=${queryMessage.message}`, {
-      method: 'GET'
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          console.log('Fetched the Data: ', data);
-          setProfileData(data);
-        }
-      })
-      .catch((error) => {
-        console.log('ERRORRRRRR: ', error);
-        setProfileData(dummyProfileData);
-      });
-  }, []);
+  const [editName, setEditName] = useState<string>(userName || 'User Name');
 
   const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
 
-  const [profileName, setProfileName] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [profileBio, setProfileBio] = useState('');
   const [socialMedias, setSocialMedias] = useState(
     dummyProfileData.contact.socialMedia
   );
@@ -143,25 +106,15 @@ export default function ProfilePage() {
     Omit<ProfileData['contact'], 'socialMedia'>
   >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
-  function setProfileData(userData: ProfileData) {
-    setProfileName(userData.name);
-    setProfileImage(userData.userPfp || '/images/userIconx96.png');
-    setProfileBio(userData.bio);
-
-    const { socialMedia, ...contacts } = userData.contact;
-    setSocialMedias(socialMedia);
-    setContacts(contacts);
-  }
-
-  function toggleLock() {
+  const toggleLock = () => {
     if (lockState == 'locked') {
       setLockState('unlocked');
     } else {
       setLockState('locked');
     }
-  }
+  };
 
-  async function updatePfp(event: React.ChangeEvent<HTMLInputElement>) {
+  const updatePfp = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (session === null) return;
 
     const file = event.target.files![0];
@@ -193,7 +146,7 @@ export default function ProfilePage() {
       alert('Failed to update table with new url');
       return;
     }
-  }
+  };
 
   return (
     <div
@@ -213,11 +166,14 @@ export default function ProfilePage() {
             id="pfp_content"
             className="w-max relative mx-auto mb-4 group rounded-full overflow-hidden"
           >
-            <img
-              src={profileImage}
-              alt="Profile Image"
-              className="h-[200px] max-w-[200px] object-cover object-center"
-            />
+            <div className="relative w-48 h-48">
+              <Image
+                src={userPfp || DefaultPFP}
+                alt="Profile Image"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
             {lockState === 'unlocked' && (
               <>
                 <input
@@ -245,8 +201,8 @@ export default function ProfilePage() {
           id="name"
           type="text"
           placeholder="Enter Name Here"
-          value={profileName}
-          onChange={(e) => setProfileName(e.target.value)}
+          value={editName}
+          onChange={(e) => setEditName(e.target.value)}
           disabled={lockState === 'locked'}
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
@@ -310,9 +266,8 @@ export default function ProfilePage() {
             rows={5}
             disabled={lockState === 'locked'}
             className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-          >
-            {profileBio}
-          </AutoResizingTextArea>
+            defaultValue={userBio || ''}
+          ></AutoResizingTextArea>
         </div>
 
         {Object.entries(contacts).map(([key, value]) => (
@@ -334,9 +289,8 @@ export default function ProfilePage() {
               rows={1}
               disabled={lockState === 'locked'}
               className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-            >
-              {value}
-            </AutoResizingTextArea>
+              defaultValue={value}
+            ></AutoResizingTextArea>
           </div>
         ))}
       </div>
@@ -362,3 +316,27 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+interface ProfileProps {
+  userBio: string | null;
+  userName: string | null;
+  userPfp: string | null;
+}
+
+export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
+  context
+) => {
+  const id = context.params?.profileID;
+
+  const { data, error } = await SB_serveronly.from('profiles')
+    .select('bio,pfp,current_location,phone_num,social_media,preferred_name')
+    .eq('id', id);
+
+  return {
+    props: {
+      userBio: data === null ? '' : data[0].bio,
+      userName: data === null ? '' : data[0].preferred_name,
+      userPfp: data === null ? '' : data[0].pfp
+    }
+  };
+};

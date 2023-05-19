@@ -3,9 +3,7 @@ import Image, { type StaticImageData } from 'next/image';
 import { useEffect, useState } from 'react';
 import { GoVerified, GoUnverified } from 'react-icons/go';
 import { User, People } from '@/types/alumni';
-
-const defaultProfile =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/680px-Default_pfp.svg.png?20220226140232';
+import DefaultPFP from 'public/images/default_pfp.png';
 
 interface UserCardProps {
   profileID: string | null;
@@ -34,7 +32,7 @@ const UserCard = ({
       <div className="flex-1">
         <div className="relative h-20 w-20">
           <Image
-            src={pfp !== null ? pfp : defaultProfile}
+            src={pfp !== null ? pfp : DefaultPFP}
             className="object-cover rounded-full"
             fill
             alt="profile pic"

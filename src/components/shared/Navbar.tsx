@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
 import { IconContext } from 'react-icons';
@@ -6,11 +6,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import titanIcon from '@/../public/images/titanIcon.png';
 import Link from 'next/link';
+import DefaultPFP from 'public/images/default_pfp.png';
 
 const Navbar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [name, setName] = useState('User Name');
+  const [pfp, setPfp] = useState<StaticImageData | string>(DefaultPFP);
+
   const menuRef = useRef<HTMLDivElement>(null);
 
   const session = useSession();
@@ -35,12 +38,13 @@ const Navbar = () => {
     if (session !== null) {
       supabase
         .from('profiles')
-        .select('preferred_name')
+        .select('preferred_name,pfp')
         .eq('id', session.user.id)
         .then(({ data, error }) => {
           if (error) console.log(error);
           else {
             setName(data[0].preferred_name);
+            setPfp(data[0].pfp);
           }
         });
     }
@@ -100,8 +104,16 @@ const Navbar = () => {
             ) : (
               <>
                 <div className="hidden md:block order-2 ml-64">
-                  <button onClick={() => setAccountDropdownVisible((v) => !v)}>
-                    <CgProfile color="white" size={40} />
+                  <button
+                    onClick={() => setAccountDropdownVisible((v) => !v)}
+                    className="bg-white rounded-full w-10 h-10 relative outline outline-2 outline-gray-200"
+                  >
+                    <Image
+                      src={pfp}
+                      alt="pfp"
+                      fill
+                      className="object-cover rounded-full"
+                    />
                   </button>
                   <div
                     ref={menuRef}
@@ -115,10 +127,10 @@ const Navbar = () => {
                     </div>
                     <div className="py-2 text-sm text-gray-700">
                       <Link
-                        href="/user/settings"
+                        href={`/profile/${session.user.id}`}
                         className="block px-4 py-2 rounded-lg hover:bg-gray-300"
                       >
-                        Settings
+                        Your Profile
                       </Link>
                     </div>
                     <div className="py-2">
