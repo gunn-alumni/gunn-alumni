@@ -1,18 +1,16 @@
 // React Components
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
 
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// react icons: social media
-import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
-import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
-import { TiSocialTwitter } from 'react-icons/ti';
+import { SocialIcon } from 'react-social-icons';
+import { HiOutlineX, HiPlus } from 'react-icons/hi';
+import Script from 'next/script';
 
 // TODO: store this type somewhere else!
+
 type ProfileData = {
   userId: string;
   userPfp: string;
@@ -22,39 +20,8 @@ type ProfileData = {
     location: string;
     phone: string;
     email: string;
-    socialMedia: {
-      facebook: string;
-      instagram: string;
-      linkedin: string;
-      twitter: string;
-      youtube: string;
-      discord: string;
-      snapchat: string;
-      tiktok: string;
-    };
+    socialMedia: string[];
   };
-};
-
-const oldDummyProfileData: ProfileData = {
-  userId: '0000',
-  userPfp: '/images/dylan.png',
-  name: 'Dylan Lu',
-  bio: 'I’m currently studying computer engineering at Stanford. Contact me if you wanna work at my startup. I am also fine making a small donation of one million dollars as an investor for any student project by asking my uncle Elon for some Buckaroos!!',
-  contact: {
-    location: 'Palo Alto, CA',
-    phone: '650-555-5555',
-    email: 'lol@lol.com',
-    socialMedia: {
-      facebook: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      instagram: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      linkedin: 'https://www.linkedin.com/in/dylanelu',
-      twitter: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      youtube: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      discord: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      snapchat: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      tiktok: 'https://www.youtube.com/watch?v=QKr_0DMYV5g'
-    }
-  }
 };
 
 const dummyProfileData: ProfileData = {
@@ -66,49 +33,30 @@ const dummyProfileData: ProfileData = {
     location: 'City, State',
     phone: '000-000-0000',
     email: 'lorem.ipsum@gmail.com',
-    socialMedia: {
-      facebook: 'https://www.facebook.com/',
-      instagram: 'https://www.instagram.com/',
-      linkedin: 'https://www.linkedin.com',
-      twitter: 'https://twitter.com/',
-      youtube: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      discord: 'https://discord.com/',
-      snapchat: 'https://www.snapchat.com/',
-      tiktok: 'https://www.tiktok.com/'
-    }
+    socialMedia: [
+      'https://www.facebook.com/',
+      'https://www.instagram.com/',
+      'https://www.linkedin.com',
+      'https://twitter.com/',
+      'https://www.youtube.com/watch?v=QKr_0DMYV5g',
+      'https://discord.com/',
+      'https://www.snapchat.com/',
+      'https://www.tiktok.com/'
+    ]
   }
 };
-
-// These two arrays are corresponding with each other
-const socialMediaNamesList = [
-  'youtube',
-  'discord',
-  'facebook',
-  'instagram',
-  'linkedin',
-  'snapchat',
-  'twitter',
-  'tiktok'
-];
-const socialMediaIconsList = [
-  BsYoutube,
-  BsDiscord,
-  FaFacebook,
-  FaInstagram,
-  BsLinkedin,
-  BsSnapchat,
-  TiSocialTwitter,
-  FaTiktok
-];
 
 export default function ProfilePage() {
   const router = useRouter();
   const queryMessage = router?.query;
+  <Script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossOrigin="anonymous"
+  ></Script>;
 
   useEffect(() => {
     console.log('Welcome to profile: ', queryMessage);
-
-    // Fetch the user's data on mount
     fetch(`http://localhost:4000/user?userId=${queryMessage.message}`, {
       method: 'GET'
     })
@@ -118,6 +66,7 @@ export default function ProfilePage() {
           console.log('Fetched the Data: ', data);
           setProfileData(data);
         }
+        console.log('Hello');
       })
       .catch((error) => {
         console.log('ERRORRRRRR: ', error);
@@ -130,9 +79,7 @@ export default function ProfilePage() {
   const [profileName, setProfileName] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [profileBio, setProfileBio] = useState('');
-  const [socialMedias, setSocialMedias] = useState(
-    dummyProfileData.contact.socialMedia
-  );
+  const [socialMedias, setSocialMedias] = useState<string[]>([]);
   const [contacts, setContacts] = useState<
     Omit<ProfileData['contact'], 'socialMedia'>
   >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
@@ -155,6 +102,14 @@ export default function ProfilePage() {
     }
   }
 
+  function removeLink() {
+    socialMedias.pop();
+    $('.links').load(location.href + ' .links');
+  }
+
+  function addLink() {
+    socialMedias.push('');
+  }
   return (
     <div
       id="profile_wrapper"
@@ -202,43 +157,39 @@ export default function ProfilePage() {
           {lockState === 'locked' ? (
             <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
               {/* TODO: abstract into component? */}
-              {Object.entries(socialMedias).map(([key, value]) => {
-                const MediaIcon =
-                  socialMediaIconsList[socialMediaNamesList.indexOf(key)];
-                return (
-                  <button
-                    className="bg-primary p-1 font-semibold text-white rounded"
-                    key={key}
-                  >
-                    <Link href={value} target="_blank">
-                      <MediaIcon
-                        id={key + '_icon'}
-                        className="w-8 h-8 fill-current"
-                      />
-                    </Link>
-                  </button>
-                );
-              })}
+              {socialMedias.map((v, i) => (
+                //v is currently gunnalumni/social_media_link
+                <SocialIcon key={i} url={v} />
+              ))}
             </div>
           ) : (
             <div className="grid gap-4 mb-4">
               {/* TODO: see above */}
-              {Object.entries(socialMedias).map(([key, value]) => (
-                <div className="w-full flex" key={key}>
-                  <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-                    {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
-                  </div>
-                  <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+
+              {socialMedias.map((v, i) => (
+                <div className="w-full flex" key={i}>
+                  <div
+                    id="links"
+                    className="bg-black font-bold border-[black] border-y-3"
+                  ></div>
                   <input
                     type="text"
                     placeholder="Enter Link Here"
-                    className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+                    className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[2px] border-y-[2px]"
+                    onChange={(e) => (socialMedias[i] = e.target.value)}
                   />
-                  <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-                    X
-                  </button>
                 </div>
               ))}
+              <div className="items-stretch flex justify-between">
+                <button onClick={removeLink}>
+                  {' '}
+                  <HiOutlineX></HiOutlineX>
+                </button>
+                <button onClick={addLink}>
+                  {' '}
+                  <HiPlus></HiPlus>
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -280,10 +231,9 @@ export default function ProfilePage() {
               id="ta-content"
               rows={1}
               disabled={lockState === 'locked'}
+              placeholder={value}
               className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-            >
-              {value}
-            </AutoResizingTextArea>
+            />
           </div>
         ))}
       </div>
