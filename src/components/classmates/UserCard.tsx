@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { GoVerified, GoUnverified } from 'react-icons/go';
 import { User, People } from '@/types/alumni';
 import DefaultPFP from 'public/images/default_pfp.png';
+import Link from 'next/link';
+import Router from 'next/router';
 
 interface UserCardProps {
   profileID: string | null;
@@ -23,10 +25,12 @@ const UserCard = ({
   const [verified] = useState(profileID !== null);
 
   return (
-    <div
+    <button
+      onClick={() => Router.push(`/profile/${profileID}`)}
+      disabled={!verified}
       title={classTitle}
-      className={`w-full flex flex-col sm:flex-row items-center sm:items-start space-x-2 p-4 border border-gray-30 rounded-lg ${
-        verified ? 'hover:border-primary hover:cursor-pointer' : ''
+      className={`w-full flex flex-col sm:flex-row items-center sm:items-start space-x-2 p-4 border-gray-30 rounded-lg ${
+        verified ? 'hover:border-primary hover:cursor-pointer border' : ''
       }`}
     >
       <div className="flex-1">
@@ -58,7 +62,7 @@ const UserCard = ({
           )}
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

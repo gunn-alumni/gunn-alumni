@@ -3,7 +3,7 @@ import { ClassmatePreview, People } from '@/types/alumni';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-const ClassPreview = ({
+const ClassList = ({
   peopleArr,
   year
 }: {
@@ -27,12 +27,12 @@ const ClassPreview = ({
         ))}
       </div>
       <div className="flex justify-end mt-2">
-        <Link href={`classes/${year}`} className="text-gray-600 font-bold">
-          See More...
+        <Link href={`classmates`} className="text-gray-600 font-bold">
+          See All
         </Link>
       </div>
     </div>
   );
 };
 
-export default ClassPreview;
+export default ClassList;
