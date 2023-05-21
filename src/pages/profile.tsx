@@ -103,12 +103,13 @@ export default function ProfilePage() {
   }
 
   function removeLink() {
-    socialMedias.pop();
-    $('.links').load(location.href + ' .links');
+    const copyArr = [...socialMedias];
+    copyArr.splice(-1);
+    setSocialMedias(copyArr);
   }
 
   function addLink() {
-    socialMedias.push('');
+    setSocialMedias([...socialMedias, '']);
   }
   return (
     <div
