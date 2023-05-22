@@ -81,7 +81,8 @@ const socialMediaIconsList = [
 export default function ProfilePage({
   userBio,
   userName,
-  userPfp
+  userPfp,
+  userId
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
@@ -295,23 +296,25 @@ export default function ProfilePage({
       </div>
 
       {/* Edit Profile */}
-      <div id="edit_lock_icon" className="self-end">
-        {lockState === 'locked' ? (
-          <button
-            className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
-            onClick={toggleLock}
-          >
-            EDIT
-          </button>
-        ) : (
-          <button
-            className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
-            onClick={toggleLock}
-          >
-            SAVE CHANGES
-          </button>
-        )}
-      </div>
+      {userId === session?.user.id && (
+        <div id="edit_lock_icon" className="self-end">
+          {lockState === 'locked' ? (
+            <button
+              className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
+              onClick={toggleLock}
+            >
+              EDIT
+            </button>
+          ) : (
+            <button
+              className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
+              onClick={toggleLock}
+            >
+              SAVE CHANGES
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -320,6 +323,7 @@ interface ProfileProps {
   userBio: string | null;
   userName: string | null;
   userPfp: string | null;
+  userId: string;
 }
 
 export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
@@ -335,7 +339,8 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
     props: {
       userBio: data === null ? '' : data[0].bio,
       userName: data === null ? '' : data[0].preferred_name,
-      userPfp: data === null ? '' : data[0].pfp
+      userPfp: data === null ? '' : data[0].pfp,
+      userId: id
     }
   };
 };
