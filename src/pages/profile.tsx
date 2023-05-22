@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 
 import { SocialIcon } from 'react-social-icons';
 import { HiOutlineX, HiPlus } from 'react-icons/hi';
-import Script from 'next/script';
 
 // TODO: store this type somewhere else!
 
@@ -49,11 +48,6 @@ const dummyProfileData: ProfileData = {
 export default function ProfilePage() {
   const router = useRouter();
   const queryMessage = router?.query;
-  <Script
-    src="https://code.jquery.com/jquery-3.7.0.js"
-    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossOrigin="anonymous"
-  ></Script>;
 
   useEffect(() => {
     console.log('Welcome to profile: ', queryMessage);
@@ -106,6 +100,7 @@ export default function ProfilePage() {
     const copyArr = [...socialMedias];
     copyArr.splice(-1);
     setSocialMedias(copyArr);
+    //somewhat hacky for now
   }
 
   function addLink() {
@@ -159,8 +154,7 @@ export default function ProfilePage() {
             <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
               {/* TODO: abstract into component? */}
               {socialMedias.map((v, i) => (
-                //v is currently gunnalumni/social_media_link
-                <SocialIcon key={i} url={v} />
+                <SocialIcon key={i} url={'https://' + v} />
               ))}
             </div>
           ) : (
