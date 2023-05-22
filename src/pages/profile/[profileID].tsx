@@ -340,7 +340,7 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
       userBio: data === null ? '' : data[0].bio,
       userName: data === null ? '' : data[0].preferred_name,
       userPfp: data === null ? '' : data[0].pfp,
-      userId: id
+      userId: id as string
     }
   };
 };
