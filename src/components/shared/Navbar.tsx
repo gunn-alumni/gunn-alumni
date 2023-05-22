@@ -122,10 +122,6 @@ const Navbar = () => {
                     } z-20 mt-2 shadow -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg w-44 px-4 py-2`}
                   >
                     <div className="px-4 py-3 text-sm text-gray-900">
-                      <div className="font-medium">{name}</div>
-                      <div className="font-medium">{session.user.email}</div>
-                    </div>
-                    <div className="py-2 text-sm text-gray-700">
                       <Link
                         href={`/profile/${session.user.id}`}
                         className="block px-4 py-2 rounded-lg hover:bg-gray-300"
@@ -133,6 +129,7 @@ const Navbar = () => {
                         Your Profile
                       </Link>
                     </div>
+
                     <div className="py-2">
                       <button
                         onClick={() => supabase.auth.signOut()}

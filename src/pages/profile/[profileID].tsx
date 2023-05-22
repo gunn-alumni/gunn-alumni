@@ -1,12 +1,13 @@
 // React Components
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
+import Image from 'next/image';
 
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { SocialIcon } from 'react-social-icons';
+import { HiOutlineX, HiPlus } from 'react-icons/hi';
 // react icons: social media
 import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
@@ -19,6 +20,7 @@ import SB_serveronly from '@/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 // TODO: store this type somewhere else!
+
 type ProfileData = {
   userId: string;
   userPfp: string;
@@ -28,16 +30,7 @@ type ProfileData = {
     location: string;
     phone: string;
     email: string;
-    socialMedia: {
-      facebook: string;
-      instagram: string;
-      linkedin: string;
-      twitter: string;
-      youtube: string;
-      discord: string;
-      snapchat: string;
-      tiktok: string;
-    };
+    socialMedia: string[];
   };
 };
 
@@ -50,16 +43,16 @@ const dummyProfileData: ProfileData = {
     location: 'City, State',
     phone: '000-000-0000',
     email: 'lorem.ipsum@gmail.com',
-    socialMedia: {
-      facebook: 'https://www.facebook.com/',
-      instagram: 'https://www.instagram.com/',
-      linkedin: 'https://www.linkedin.com',
-      twitter: 'https://twitter.com/',
-      youtube: 'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      discord: 'https://discord.com/',
-      snapchat: 'https://www.snapchat.com/',
-      tiktok: 'https://www.tiktok.com/'
-    }
+    socialMedia: [
+      'facebook.com/',
+      'instagram.com/',
+      'linkedin.com',
+      'twitter.com/',
+      'youtube.com/watch?v=QKr_0DMYV5g',
+      'discord.com/',
+      'snapchat.com/',
+      'tiktok.com/'
+    ]
   }
 };
 
@@ -148,6 +141,16 @@ export default function ProfilePage({
     }
   };
 
+  function removeLink() {
+    const copyArr = [...socialMedias];
+    copyArr.splice(-1);
+    setSocialMedias(copyArr);
+    //somewhat hacky for now
+  }
+
+  function addLink() {
+    setSocialMedias([...socialMedias, '']);
+  }
   return (
     <div
       id="profile_wrapper"
@@ -211,43 +214,38 @@ export default function ProfilePage({
           {lockState === 'locked' ? (
             <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
               {/* TODO: abstract into component? */}
-              {Object.entries(socialMedias).map(([key, value]) => {
-                const MediaIcon =
-                  socialMediaIconsList[socialMediaNamesList.indexOf(key)];
-                return (
-                  <button
-                    className="bg-primary p-1 font-semibold text-white rounded"
-                    key={key}
-                  >
-                    <Link href={value} target="_blank">
-                      <MediaIcon
-                        id={key + '_icon'}
-                        className="w-8 h-8 fill-current"
-                      />
-                    </Link>
-                  </button>
-                );
-              })}
+              {socialMedias.map((v, i) => (
+                <SocialIcon key={i} url={'https://' + v} />
+              ))}
             </div>
           ) : (
             <div className="grid gap-4 mb-4">
               {/* TODO: see above */}
-              {Object.entries(socialMedias).map(([key, value]) => (
-                <div className="w-full flex" key={key}>
-                  <div className="bg-slate-400 text-center font-bold w-[200px] p-[5px_10px] border-[black] border-l-[3px] border-y-[3px] rounded-tl-[50px] rounded-bl-[50px]">
-                    {key.charAt(0).toUpperCase() + key.toLowerCase().slice(1)}
-                  </div>
-                  <div className="bg-black font-bold w-[10px] border-[black] border-y-[3px]"></div>
+
+              {socialMedias.map((v, i) => (
+                <div className="w-full flex" key={i}>
+                  <div
+                    id="links"
+                    className="bg-black font-bold border-[black] border-y-3"
+                  ></div>
                   <input
                     type="text"
-                    placeholder="Enter Link Here"
-                    className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[none] border-y-[3px]"
+                    placeholder={socialMedias[i]}
+                    className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[2px] border-y-[2px]"
+                    onChange={(e) => (socialMedias[i] = e.target.value)}
                   />
-                  <button className="bg-slate-400 font-bold w-fit p-[5px_10px] border-[black] border-x-[3px] border-y-[3px] rounded-tr-[50px] rounded-br-[50px]">
-                    X
-                  </button>
                 </div>
               ))}
+              <div className="items-stretch flex justify-between">
+                <button onClick={removeLink}>
+                  {' '}
+                  <HiOutlineX></HiOutlineX>
+                </button>
+                <button onClick={addLink}>
+                  {' '}
+                  <HiPlus></HiPlus>
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -288,6 +286,7 @@ export default function ProfilePage({
               id="ta-content"
               rows={1}
               disabled={lockState === 'locked'}
+              placeholder={value}
               className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
               defaultValue={value}
             ></AutoResizingTextArea>
