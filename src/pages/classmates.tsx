@@ -7,6 +7,7 @@ import { SB_serveronly } from '@/utils/dbserveronly';
 import UserCard from '@/components/classmates/UserCard';
 import Container from '@/components/shared/Container';
 import ClassPreview from '@/components/classmates/ClassPreview';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 type PeopleDict = Record<string, ClassmatePreview[]>;
 
@@ -14,7 +15,9 @@ interface ClassmatesProps {
   peopleMap: PeopleDict;
 }
 
-export default function Classmates({ peopleMap }: ClassmatesProps) {
+export default function Classmates({
+  peopleMap
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const supabase = useSupabaseClient();
 
   return (
@@ -40,7 +43,9 @@ export default function Classmates({ peopleMap }: ClassmatesProps) {
   );
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<ClassmatesProps> = async (
+  context
+) => {
   const { data } = await SB_serveronly.from('select_preview_people').select(
     '*, profiles(pfp)'
   );
@@ -63,4 +68,4 @@ export async function getStaticProps() {
       peopleMap: peopleMap
     } // will be passed to the page component as props
   };
-}
+};

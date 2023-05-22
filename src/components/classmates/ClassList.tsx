@@ -1,19 +1,17 @@
 import UserCard from '@/components/classmates/UserCard';
 import { ClassmatePreview, People } from '@/types/alumni';
 import Link from 'next/link';
-import { Key, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const ClassPreview = ({
+const ClassList = ({
   peopleArr,
-  year,
-  key
+  year
 }: {
   peopleArr: ClassmatePreview[];
   year: string;
-  key: Key | null | undefined;
 }) => {
   return (
-    <div key={key}>
+    <div>
       <h2 className="text-3xl font-black mt-8">{year}</h2>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center mt-4">
         {peopleArr.map((person) => (
@@ -29,12 +27,12 @@ const ClassPreview = ({
         ))}
       </div>
       <div className="flex justify-end mt-2">
-        <Link href={`classes/${year}`} className="text-gray-600 font-bold">
-          See More...
+        <Link href={`classmates`} className="text-gray-600 font-bold">
+          See All
         </Link>
       </div>
     </div>
   );
 };
 
-export default ClassPreview;
+export default ClassList;
