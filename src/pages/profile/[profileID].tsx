@@ -1,12 +1,23 @@
 // React Components
 import Head from 'next/head';
 import AutoResizingTextArea from '@/components/shared/AutoResizingTextArea';
+import Image from 'next/image';
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { SocialIcon } from 'react-social-icons';
 import { HiOutlineX, HiPlus } from 'react-icons/hi';
+// react icons: social media
+import { BsYoutube, BsDiscord, BsLinkedin, BsSnapchat } from 'react-icons/bs';
+import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { TiSocialTwitter } from 'react-icons/ti';
+import DefaultPFP from 'public/images/default_pfp.png';
+
+// supabase
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import SB_serveronly from '@/utils/dbserveronly';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 // TODO: store this type somewhere else!
 
@@ -45,56 +56,90 @@ const dummyProfileData: ProfileData = {
   }
 };
 
-export default function ProfilePage() {
-  const router = useRouter();
-  const queryMessage = router?.query;
+// These two arrays are corresponding with each other
+const socialMediaNamesList = [
+  'youtube',
+  'discord',
+  'facebook',
+  'instagram',
+  'linkedin',
+  'snapchat',
+  'twitter',
+  'tiktok'
+];
+const socialMediaIconsList = [
+  BsYoutube,
+  BsDiscord,
+  FaFacebook,
+  FaInstagram,
+  BsLinkedin,
+  BsSnapchat,
+  TiSocialTwitter,
+  FaTiktok
+];
 
-  useEffect(() => {
-    console.log('Welcome to profile: ', queryMessage);
-    fetch(`http://localhost:4000/user?userId=${queryMessage.message}`, {
-      method: 'GET'
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          console.log('Fetched the Data: ', data);
-          setProfileData(data);
-        }
-        console.log('Hello');
-      })
-      .catch((error) => {
-        console.log('ERRORRRRRR: ', error);
-        setProfileData(dummyProfileData);
-      });
-  }, []);
+export default function ProfilePage({
+  userBio,
+  userName,
+  userPfp
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+
+  const supabase = useSupabaseClient();
+  const session = useSession();
+
+  const [editName, setEditName] = useState<string>(userName || 'User Name');
 
   const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
 
-  const [profileName, setProfileName] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [profileBio, setProfileBio] = useState('');
-  const [socialMedias, setSocialMedias] = useState<string[]>([]);
+  const [socialMedias, setSocialMedias] = useState(
+    dummyProfileData.contact.socialMedia
+  );
   const [contacts, setContacts] = useState<
     Omit<ProfileData['contact'], 'socialMedia'>
   >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
-  function setProfileData(userData: ProfileData) {
-    setProfileName(userData.name);
-    setProfileImage(userData.userPfp || '/images/userIconx96.png');
-    setProfileBio(userData.bio);
-
-    const { socialMedia, ...contacts } = userData.contact;
-    setSocialMedias(socialMedia);
-    setContacts(contacts);
-  }
-
-  function toggleLock() {
+  const toggleLock = () => {
     if (lockState == 'locked') {
       setLockState('unlocked');
     } else {
       setLockState('locked');
     }
-  }
+  };
+
+  const updatePfp = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (session === null) return;
+
+    const file = event.target.files![0];
+    const avatarPath = `${session.user.id}-avatar`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('avatar')
+      .upload(avatarPath, file, {
+        cacheControl: '3600',
+        upsert: true
+      });
+    if (uploadError !== null) {
+      console.log(uploadError);
+      alert('Failed to update profile picture.');
+      return;
+    }
+
+    const { data } = await supabase.storage
+      .from('avatar')
+      .getPublicUrl(avatarPath);
+
+    // update table (I'm not sure if this should be put here...)
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .update({ pfp: data.publicUrl })
+      .eq('id', session.user.id);
+    if (updateError != null) {
+      console.log(updateError);
+      alert('Failed to update table with new url');
+      return;
+    }
+  };
 
   function removeLink() {
     const copyArr = [...socialMedias];
@@ -124,18 +169,34 @@ export default function ProfilePage() {
             id="pfp_content"
             className="w-max relative mx-auto mb-4 group rounded-full overflow-hidden"
           >
-            <img
-              src={profileImage}
-              alt="Profile Image"
-              className="h-[200px] max-w-[200px] object-cover object-center"
-            />
+            <div className="relative w-48 h-48">
+              <Image
+                src={userPfp || DefaultPFP}
+                alt="Profile Image"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
             {lockState === 'unlocked' && (
-              <button
-                id="pfp_change"
-                className="hidden group-hover:block absolute inset-0 text-white bg-black/40"
-              >
-                Change avatar
-              </button>
+              <>
+                <input
+                  id="pfp_file_upload"
+                  className="hidden"
+                  type="file"
+                  name="pfpFileUpload"
+                  accept=".png,.jpeg,.jpg"
+                  onChange={async (event) => await updatePfp(event)}
+                />
+                <button
+                  id="pfp_change"
+                  className="hidden group-hover:block absolute inset-0 text-white bg-black/40"
+                  onClick={() => {
+                    document.getElementById('pfp_file_upload')?.click();
+                  }}
+                >
+                  Change avatar
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -143,8 +204,8 @@ export default function ProfilePage() {
           id="name"
           type="text"
           placeholder="Enter Name Here"
-          value={profileName}
-          onChange={(e) => setProfileName(e.target.value)}
+          value={editName}
+          onChange={(e) => setEditName(e.target.value)}
           disabled={lockState === 'locked'}
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
@@ -203,9 +264,8 @@ export default function ProfilePage() {
             rows={5}
             disabled={lockState === 'locked'}
             className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-          >
-            {profileBio}
-          </AutoResizingTextArea>
+            defaultValue={userBio || ''}
+          ></AutoResizingTextArea>
         </div>
 
         {Object.entries(contacts).map(([key, value]) => (
@@ -228,7 +288,8 @@ export default function ProfilePage() {
               disabled={lockState === 'locked'}
               placeholder={value}
               className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-            />
+              defaultValue={value}
+            ></AutoResizingTextArea>
           </div>
         ))}
       </div>
@@ -254,3 +315,27 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+interface ProfileProps {
+  userBio: string | null;
+  userName: string | null;
+  userPfp: string | null;
+}
+
+export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
+  context
+) => {
+  const id = context.params?.profileID;
+
+  const { data, error } = await SB_serveronly.from('profiles')
+    .select('bio,pfp,current_location,phone_num,social_media,preferred_name')
+    .eq('id', id);
+
+  return {
+    props: {
+      userBio: data === null ? '' : data[0].bio,
+      userName: data === null ? '' : data[0].preferred_name,
+      userPfp: data === null ? '' : data[0].pfp
+    }
+  };
+};
