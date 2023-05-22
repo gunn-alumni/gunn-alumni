@@ -33,14 +33,14 @@ const dummyProfileData: ProfileData = {
     phone: '000-000-0000',
     email: 'lorem.ipsum@gmail.com',
     socialMedia: [
-      'https://www.facebook.com/',
-      'https://www.instagram.com/',
-      'https://www.linkedin.com',
-      'https://twitter.com/',
-      'https://www.youtube.com/watch?v=QKr_0DMYV5g',
-      'https://discord.com/',
-      'https://www.snapchat.com/',
-      'https://www.tiktok.com/'
+      'facebook.com/',
+      'instagram.com/',
+      'linkedin.com',
+      'twitter.com/',
+      'youtube.com/watch?v=QKr_0DMYV5g',
+      'discord.com/',
+      'snapchat.com/',
+      'tiktok.com/'
     ]
   }
 };
