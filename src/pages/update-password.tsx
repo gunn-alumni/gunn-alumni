@@ -32,10 +32,10 @@ export default function NewPassword() {
           const { data, error } = await supabase.auth.updateUser({
             password: newPassword
           });
-        }
 
-        if (data) alert('Password updated successfully!');
-        if (error) alert('There was an error updating your password.');
+          if (data) alert('Password updated successfully!');
+          if (error) alert('There was an error updating your password.');
+        }
       }
     });
   }, []);
