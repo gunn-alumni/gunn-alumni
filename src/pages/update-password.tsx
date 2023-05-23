@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function NewPassword() {
+  const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const supabase = useSupabaseClient();
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('hello');
-    const new_password = 'foo';
     const { data, error } = await supabase.auth.updateUser({
-      password: new_password
+      password: password
     });
+    alert(JSON.stringify(data));
+    alert(JSON.stringify(error));
   };
 
   /**
@@ -19,23 +21,40 @@ export default function NewPassword() {
    * ask the user to reset their password.
    */
 
-  // useEffect(() => {
-  //   supabase.auth.onAuthStateChange(async (event, session) => {
-  //     if (event == 'PASSWORD_RECOVERY') {
-  //       const newPassword = prompt(
-  //         'What would you like your new password to be?'
-  //       );
-  //       if (newPassword) {
-  //         const { data, error } = await supabase.auth.updateUser({
-  //           password: newPassword
-  //         });
-  //       }
+  useEffect(() => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event == 'PASSWORD_RECOVERY') {
+        // setAuthenticated(true);
+        const newPassword = prompt(
+          'What would you like your new password to be?'
+        );
+        if (newPassword) {
+          const { data, error } = await supabase.auth.updateUser({
+            password: newPassword
+          });
+        }
 
-  //       if (data) alert('Password updated successfully!');
-  //       if (error) alert('There was an error updating your password.');
-  //     }
-  //   });
-  // }, []);
+        if (data) alert('Password updated successfully!');
+        if (error) alert('There was an error updating your password.');
+      }
+    });
+  }, []);
+
+  if (authenticated === false) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+          <div className="w-full bg-white rounded-lg shadow sm:max-w-md">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                You must come from a valid email link
+              </h1>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -51,7 +70,7 @@ export default function NewPassword() {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  New Password
+                  New Password: {password}
                 </label>
                 <input
                   type="password"
