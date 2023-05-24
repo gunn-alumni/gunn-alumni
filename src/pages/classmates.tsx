@@ -2,12 +2,13 @@ import Head from 'next/head';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 import { User, People, ClassmatePreview } from '@/types/alumni';
-import { SB_serveronly } from '@/utils/dbserveronly';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 
 import UserCard from '@/components/classmates/UserCard';
 import Container from '@/components/shared/Container';
 import ClassPreview from '@/components/classmates/ClassPreview';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import React from 'react';
 
 type PeopleDict = Record<string, ClassmatePreview[]>;
 
@@ -36,7 +37,9 @@ export default function Classmates({
         </p>
         {peopleMap &&
           Object.keys(peopleMap).map((year) => (
-            <ClassPreview key={year} peopleArr={peopleMap[year]} year={year} />
+            <div key={year}>
+              <ClassPreview peopleArr={peopleMap[year]} year={year} />
+            </div>
           ))}
       </Container>
     </>

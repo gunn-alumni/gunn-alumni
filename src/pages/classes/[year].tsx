@@ -1,7 +1,7 @@
 import ClassList from '@/components/classmates/ClassList';
 import Container from '@/components/shared/Container';
 import { ClassmatePreview } from '@/types/alumni';
-import SB_serveronly from '@/utils/dbserveronly';
+import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 

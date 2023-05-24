@@ -1,7 +1,7 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-import { SB_serveronly } from '@/utils/dbserveronly';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 import { UserCard } from '@/components/classmates/MainUserCard';
 import { User } from '@/types/alumni';
 
