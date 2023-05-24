@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
-import { decrypt } from '@/utils/serverCrypto';
-import { SB_serveronly } from '@/utils/dbserveronly';
+import { decrypt } from '@/lib/utils/serverCrypto';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 
 export default async function handler(
   req: NextApiRequest,

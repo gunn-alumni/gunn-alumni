@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
-import { SB_serveronly } from '@/utils/dbserveronly';
-import { decrypt, encrypt } from '@/utils/serverCrypto';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
+import { decrypt, encrypt } from '@/lib/utils/serverCrypto';
 import crypto from 'crypto';
 
 const mailjet: Client = Mailjet.apiConnect(

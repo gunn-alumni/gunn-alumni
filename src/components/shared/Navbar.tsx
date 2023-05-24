@@ -4,17 +4,24 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 import { useEffect, useRef, useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import useVerified from '@/lib/hooks/useVerified';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [name, setName] = useState('User Name');
   const [pfp, setPfp] = useState<string>('/images/default_pfp.png');
-
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const verified = useVerified();
   const session = useSession();
   const supabase = useSupabaseClient();
+  const router = useRouter();
+
+  useEffect(() => {
+    setMenuVisible(false);
+  }, [router.asPath]);
 
   useEffect(() => {
     // Handle closing the dropdown menu
@@ -112,24 +119,32 @@ const Navbar = () => {
                     <Image
                       src={pfp}
                       alt="pfp"
-                      width="40"
-                      height="40"
-                      className="object-cover"
+                      className="object-cover rounded-full"
+                      fill
                     />
                   </button>
                   <div
                     ref={menuRef}
                     className={`${
                       accountDropdownVisible ? 'block' : 'hidden'
-                    } z-20 mt-2 shadow -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg w-44 px-4 py-2`}
+                    } z-20 mt-2 shadow -translate-x-1/2 absolute bg-white divide-y divide-gray-100 rounded-lg w-52 px-4 py-2`}
                   >
                     <div className="px-4 py-3 text-sm text-gray-900">
-                      <Link
-                        href={`/profile/${session.user.id}`}
-                        className="block px-4 py-2 rounded-lg hover:bg-gray-300"
-                      >
-                        Your Profile
-                      </Link>
+                      {verified ? (
+                        <Link
+                          href={`/profile/${session.user.id}`}
+                          className="block px-4 py-2 rounded-lg hover:bg-gray-300"
+                        >
+                          Your Profile
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/user/verify"
+                          className="block px-4 py-2 rounded-lg hover:bg-gray-300"
+                        >
+                          Verify Yourself
+                        </Link>
+                      )}
                     </div>
 
                     <div className="py-2">
@@ -148,6 +163,23 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
+                <div className="md:hidden">
+                  {verified ? (
+                    <Link
+                      href={`/profile/${session.user.id}`}
+                      className="block px-4 py-2 text-white text-4xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30 md:bg-transparent"
+                    >
+                      Your Profile
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/user/verify"
+                      className="block px-4 py-2 text-white text-4xl font-bold md:text-base md:font-normal rounded-lg hover:bg-gray-700/30 md:bg-transparent"
+                    >
+                      Verify Yourself
+                    </Link>
+                  )}
+                </div>
               </>
             )}
             <hr />

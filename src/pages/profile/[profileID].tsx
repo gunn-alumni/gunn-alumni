@@ -16,7 +16,7 @@ import DefaultPFP from 'public/images/default_pfp.png';
 
 // supabase
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
-import SB_serveronly from '@/utils/dbserveronly';
+import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 // TODO: store this type somewhere else!
@@ -79,10 +79,9 @@ const socialMediaIconsList = [
 ];
 
 export default function ProfilePage({
-  userBio,
   userName,
-  userPfp,
-  userId
+  userId,
+  ...props
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
@@ -100,12 +99,17 @@ export default function ProfilePage({
     Omit<ProfileData['contact'], 'socialMedia'>
   >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
-  const toggleLock = () => {
-    if (lockState == 'locked') {
-      setLockState('unlocked');
-    } else {
-      setLockState('locked');
-    }
+  const [bio, setBio] = useState(props.userBio);
+  const [pfp, setPfp] = useState(props.userPfp);
+
+  const handleEdit = () => {
+    setLockState('unlocked');
+  };
+
+  const handleSave = async () => {
+    // TODO: add for social media icons, links, location, etc
+    await supabase.from('profiles').update({ bio }).eq('id', userId);
+    setLockState('locked');
   };
 
   const updatePfp = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,16 +146,17 @@ export default function ProfilePage({
     }
   };
 
-  function removeLink() {
+  const removeLink = () => {
     const copyArr = [...socialMedias];
     copyArr.splice(-1);
     setSocialMedias(copyArr);
     //somewhat hacky for now
-  }
+  };
 
-  function addLink() {
+  const addLink = () => {
     setSocialMedias([...socialMedias, '']);
-  }
+  };
+
   return (
     <div
       id="profile_wrapper"
@@ -172,7 +177,7 @@ export default function ProfilePage({
           >
             <div className="relative w-48 h-48">
               <Image
-                src={userPfp || DefaultPFP}
+                src={pfp || DefaultPFP}
                 alt="Profile Image"
                 fill
                 className="object-cover object-center"
@@ -265,7 +270,8 @@ export default function ProfilePage({
             rows={5}
             disabled={lockState === 'locked'}
             className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
-            defaultValue={userBio || ''}
+            defaultValue={bio || ''}
+            onChange={(e) => setBio(e.target.value)}
           ></AutoResizingTextArea>
         </div>
 
@@ -301,14 +307,14 @@ export default function ProfilePage({
           {lockState === 'locked' ? (
             <button
               className="w-fit px-[15px] py-[5px] text-white bg-black rounded"
-              onClick={toggleLock}
+              onClick={handleEdit}
             >
               EDIT
             </button>
           ) : (
             <button
               className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
-              onClick={toggleLock}
+              onClick={handleSave}
             >
               SAVE CHANGES
             </button>
