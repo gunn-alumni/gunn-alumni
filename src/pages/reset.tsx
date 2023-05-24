@@ -1,27 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function Reset() {
   const [email, setEmail] = useState<string>('');
-  const supabase = useSupabaseClient();
-  const server = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const reset_url = `${server}/update-password`;
-
   const [title, setTitle] = useState('Reset Password');
+  const supabase = useSupabaseClient();
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('hello');
 
     // send email
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: reset_url
+      redirectTo: `${process.env.NEXT_PUBLIC_SERVER_NAME}/update-password`
     });
-    setTitle('email sent! Please check your inbox');
+    setTitle('Email sent! Please check your inbox');
+
     console.log(data);
     console.log(error);
-
-    console.log('1 done');
   };
 
   return (
@@ -32,7 +27,6 @@ export default function Reset() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               {title}
             </h1>
-            <div>{reset_url}</div>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <input
                 type="email"
