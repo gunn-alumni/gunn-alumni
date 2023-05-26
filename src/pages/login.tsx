@@ -99,7 +99,7 @@ const LoginPage = (): JSX.Element => {
                 </div>
                 <div className="flex items-center justify-between">
                   <Link
-                    href="#"
+                    href="/reset"
                     className="text-sm font-medium text-primary-600 hover:underline"
                   >
                     Forgot password?

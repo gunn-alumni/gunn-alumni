@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
-import { decrypt } from '@/utils/serverCrypto';
-import { SB_serveronly } from '@/utils/dbserveronly';
+import { decrypt } from '@/lib/utils/serverCrypto';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 
 export default async function handler(
   req: NextApiRequest,
@@ -28,7 +28,7 @@ export default async function handler(
 
     // Update person in database
     const { data, error } = await SB_serveronly.from('people')
-      .update({ id: id })
+      .update({ id: id as string })
       .eq('index', index);
 
     if (error) {

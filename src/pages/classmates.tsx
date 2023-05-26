@@ -1,46 +1,25 @@
 import Head from 'next/head';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
+import { User, People, ClassmatePreview } from '@/types/alumni';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 
 import UserCard from '@/components/classmates/UserCard';
+import Container from '@/components/shared/Container';
+import ClassPreview from '@/components/classmates/ClassPreview';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import React from 'react';
 
-interface Profile {
-  index: number;
-  id: string;
-  created_at: string;
-  preferred_name: string;
-  pfp?: string;
-  current_location?: string;
-  phone_num?: number;
-  email_display?: string;
-  bio?: string;
-  social_media?: string;
+type PeopleDict = Record<string, ClassmatePreview[]>;
+
+interface ClassmatesProps {
+  peopleMap: PeopleDict;
 }
 
-export default function Classmates() {
-  const [profiles, setProfiles] = useState<Profile[]>([]);
+export default function Classmates({
+  peopleMap
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const supabase = useSupabaseClient();
-
-  useEffect(() => {
-    console.log(supabase);
-    const fetchUsers = async () => {
-      const { data, error } = await supabase.from('profiles').select();
-
-      console.log(data);
-
-      if (error) {
-        // setProfiles(emptyProfile);
-        console.log(error);
-      }
-
-      if (data) {
-        const formatted = data.map((el) => el as Profile);
-        setProfiles(formatted);
-      }
-    };
-
-    fetchUsers();
-  }, [supabase]);
 
   return (
     <>
@@ -51,23 +30,45 @@ export default function Classmates() {
           content="View fellow Gunn classmates of all graduating classes"
         />
       </Head>
-      <h1 className="text-4xl text-center py-4 font-bold">Classmates</h1>
-      <div>
-        {profiles && (
-          <div className="flex flex-cols flex-wrap justify-center px-4">
-            {profiles.map((profile) => (
-              <div key={profile.id} className="m-4">
-                <UserCard
-                  uniId={profile.id}
-                  classTitle={'user_card'}
-                  userPfp={profile.pfp || '/images/userIconx96.png'}
-                  userName={profile.preferred_name}
-                />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      <Container>
+        <h1 className="text-5xl font-black">Alumni Directory</h1>
+        <p className="text-xl text-gray-400 mt-2">
+          A list of all alumni from Gunn
+        </p>
+        {peopleMap &&
+          Object.keys(peopleMap).map((year) => (
+            <div key={year}>
+              <ClassPreview peopleArr={peopleMap[year]} year={year} />
+            </div>
+          ))}
+      </Container>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<ClassmatesProps> = async (
+  context
+) => {
+  const { data } = await SB_serveronly.from('select_preview_people').select(
+    '*, profiles(pfp)'
+  );
+  const peopleMap: PeopleDict = {};
+
+  data?.map(async (people) => {
+    if (people.grad_year !== null) {
+      if (people.grad_year in peopleMap) {
+        //@ts-ignore
+        peopleMap[people.grad_year].push(people);
+      } else {
+        //@ts-ignore
+        peopleMap[people.grad_year] = [people];
+      }
+    }
+  });
+
+  return {
+    props: {
+      peopleMap: peopleMap
+    } // will be passed to the page component as props
+  };
+};

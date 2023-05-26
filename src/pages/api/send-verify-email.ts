@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
-import { SB_serveronly } from '@/utils/dbserveronly';
-import { decrypt, encrypt } from '@/utils/serverCrypto';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
+import { decrypt, encrypt } from '@/lib/utils/serverCrypto';
 import crypto from 'crypto';
 
 const mailjet: Client = Mailjet.apiConnect(
@@ -13,7 +13,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(crypto.randomBytes(32).toString('hex'));
   if (req.method !== 'POST' || !req.body.pausd_email || !req.body.id) {
     res.status(400).json({ message: 'Invalid request' });
     return;
@@ -25,6 +24,7 @@ export default async function handler(
   const { data: people, error } = await SB_serveronly.from('people')
     .select('index,first_name,last_name')
     .eq('pausd_email', req.body.pausd_email);
+
   if (error || !people || people.length === 0) {
     console.log('error not found');
     console.log(error);
@@ -38,8 +38,6 @@ export default async function handler(
   // - Build url with index hash and id to place in database
   const hash = encrypt(people[0].index.toString());
   const url = `https://alumni.gunnhigh.school/api/verify?encryptedData=${hash.encryptedData}&id=${req.body.id}&iv=${hash.iv}`;
-
-  console.log(url);
 
   // Send mail with verification link
   mailjet

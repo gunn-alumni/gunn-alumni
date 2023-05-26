@@ -1,9 +1,9 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 
-import { SB } from '@/utils/dbclient';
+import { SB_serveronly } from '@/lib/utils/dbserveronly';
 import { UserCard } from '@/components/classmates/MainUserCard';
-import { User } from '@/types/supabase';
+import { User } from '@/types/alumni';
 
 export const ClassmatesPage = (props: { users: User[] }) => {
   const { users } = props;
@@ -36,7 +36,7 @@ export const ClassmatesPage = (props: { users: User[] }) => {
 };
 
 export async function getStaticProps() {
-  const profiles = await SB.from('profiles').select();
+  const profiles = await SB_serveronly.from('profiles').select();
   console.log(profiles);
   return {
     props: {
