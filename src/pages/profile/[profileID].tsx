@@ -269,7 +269,11 @@ export default function ProfilePage({
           ></AutoResizingTextArea>
         </div>
 
-        {Object.entries(contacts).map(([key, value]) => (
+        {Object.entries(contacts)
+        .filter(([key, value]) => 
+          key.toLowerCase() !== "socialmedia"
+        )
+        .map(([key, value]) => (
           <div
             title="contact_wrapper"
             id={key.toLowerCase() + '_wrapper'}
