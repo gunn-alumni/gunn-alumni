@@ -42,6 +42,12 @@ const Verify = (): JSX.Element => {
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
         <div className="text-xl font-semibold">Gunn High School | Alumni</div>
       </div>
+      <div className="text-white bg-red-600 rounded-lg w-64 p-4">
+        Hello, we are currently having issues with sending emails. We will
+        manually verify you after you sign up. Please email us at{' '}
+        <a href="mailto:gunn.alumni@gmail.com">gunn.alumni@gmail.com</a> if
+        there are any issues
+      </div>
       <div className="w-full bg-white rounded-lg shadow sm:max-w-md p-8">
         {verified ? (
           <>
