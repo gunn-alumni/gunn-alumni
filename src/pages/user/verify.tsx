@@ -42,6 +42,7 @@ const Verify = (): JSX.Element => {
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
         <div className="text-xl font-semibold">Gunn High School | Alumni</div>
       </div>
+
       <div className="w-full bg-white rounded-lg shadow sm:max-w-md p-8">
         {verified ? (
           <>
@@ -51,9 +52,10 @@ const Verify = (): JSX.Element => {
           <>
             {sent ? (
               <div>
-                Please allow up to 5 minutes for us to process your
+                {/* Please allow up to 5 minutes for us to process your
                 verification. Check your PAUSD inbox (it might be marked as
-                spam).
+                spam). */}
+                Refresh the page to see if you were verified successfully
               </div>
             ) : (
               <form onSubmit={handleEmail}>
