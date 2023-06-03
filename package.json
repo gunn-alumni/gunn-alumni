@@ -23,7 +23,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-slider": "^2.0.4",
-    "react-social-icons": "^5.15.0"
+    "react-social-icons": "^5.15.0",
+    "styled-jsx": "^5.1.2"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
