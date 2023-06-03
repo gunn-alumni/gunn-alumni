@@ -37,37 +37,43 @@ export default async function handler(
   // - Hash the index with a secret key
   // - Build url with index hash and id to place in database
   const hash = encrypt(people[0].index.toString());
-  const url = `https://alumni.gunnhigh.school/api/verify?encryptedData=${hash.encryptedData}&id=${req.body.id}&iv=${hash.iv}`;
+  const url = `http://alumni.gunnhigh.school/api/verify?encryptedData=${hash.encryptedData}&id=${req.body.id}&iv=${hash.iv}`;
+
+  fetch(url, { method: 'get' })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+
+  res.status(200).json({ message: 'success verify' });
 
   // Send mail with verification link
-  mailjet
-    .post('send', { version: 'v3.1' })
-    .request({
-      Messages: [
-        {
-          From: {
-            Email: 'verify@alumni.gunnhigh.school',
-            Name: 'Gunn High Development Team'
-          },
-          To: [
-            {
-              Email: req.body.pausd_email,
-              Name: `${people[0].first_name} ${people[0].last_name}`
-            }
-          ],
-          Subject: 'Verify Alumni Account',
-          TextPart: `Please click the link to verify your account: ${url}`,
-          HTMLPart: `<h3>Please click the link to verify your account: <a href="${url}">Verify Account</a></h3>`
-        }
-      ]
-    })
-    .then((res) => {
-      console.log('Successfully sent email');
-    })
-    .catch((err) => {
-      console.log(err.statusCode);
-      res.status(500).json({ message: 'Server error' });
-      return;
-    });
-  res.status(200).json({ message: 'Email sent' });
+  // mailjet
+  //   .post('send', { version: 'v3.1' })
+  //   .request({
+  //     Messages: [
+  //       {
+  //         From: {
+  //           Email: 'verify@alumni.gunnhigh.school',
+  //           Name: 'Gunn High Development Team'
+  //         },
+  //         To: [
+  //           {
+  //             Email: req.body.pausd_email,
+  //             Name: `${people[0].first_name} ${people[0].last_name}`
+  //           }
+  //         ],
+  //         Subject: 'Verify Alumni Account',
+  //         TextPart: `Please click the link to verify your account: ${url}`,
+  //         HTMLPart: `<h3>Please click the link to verify your account: <a href="${url}">Verify Account</a></h3>`
+  //       }
+  //     ]
+  //   })
+  //   .then((res) => {
+  //     console.log('Successfully sent email');
+  //   })
+  //   .catch((err) => {
+  //     console.log(err.statusCode);
+  //     res.status(500).json({ message: 'Server error' });
+  //     return;
+  //   });
+  // res.status(200).json({ message: 'Email sent' });
 }
