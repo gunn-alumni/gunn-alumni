@@ -216,17 +216,15 @@ export default function ProfilePage({
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
 
-        <div id="profileSocial_wrapper">
+        {/* <div id="profileSocial_wrapper">
           {lockState === 'locked' ? (
             <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
-              {/* TODO: abstract into component? */}
               {socialMedias.map((v, i) => (
                 <SocialIcon key={i} url={'https://' + v} />
               ))}
             </div>
           ) : (
             <div className="grid gap-4 mb-4">
-              {/* TODO: see above */}
 
               {socialMedias.map((v, i) => (
                 <div className="w-full flex" key={i}>
@@ -254,7 +252,7 @@ export default function ProfilePage({
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div
@@ -275,7 +273,7 @@ export default function ProfilePage({
           ></AutoResizingTextArea>
         </div>
 
-        {Object.entries(contacts).map(([key, value]) => (
+        {/* {Object.entries(contacts).map(([key, value]) => (
           <div
             title="contact_wrapper"
             id={key.toLowerCase() + '_wrapper'}
@@ -298,7 +296,7 @@ export default function ProfilePage({
               defaultValue={value}
             ></AutoResizingTextArea>
           </div>
-        ))}
+        ))} */}
       </div>
 
       {/* Edit Profile */}
@@ -316,7 +314,7 @@ export default function ProfilePage({
               className="w-fit px-[15px] py-[5px] text-white bg-blue-900 rounded"
               onClick={handleSave}
             >
-              SAVE CHANGES
+              SAVE
             </button>
           )}
         </div>
