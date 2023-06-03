@@ -15,13 +15,15 @@ const FormInput = ({
   placeholder,
   pattern,
   isRequired = true,
-  className = 'border-2 border-gray-300 bg-gray-100 rounded-md px-1 py-1'
+  className = `border-2 bg-gray-100 rounded-md border-gray-300 placeholder-shown:invalid:border-gray-300 placeholder-shown:focus:invalid:outline-blue-400
+  placeholder-shown:invalid:text-black invalid:border-pink-500 invalid:outline-pink-500 invalid:text-pink-600 focus:valid:outline-blue-400
+   p-1`
 }: FormInputProps) => {
   const [value, setValue] = useState('');
   if (isRequired) {
     return (
       <div className="w-full flex flex-col">
-        <label className="text-lg font-medium">{title}</label>
+        <label className="text-lg font-medium after:content-['*'] after:text-pink-600 after:ml-0.5">{title}</label>
         <input
           type={type}
           value={value}

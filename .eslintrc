@@ -10,10 +10,6 @@
     "prettier",
     "next/core-web-vitals"
   ],
-  "rules": {
-    "prettier/prettier": 2 // 2 = error
-  },
-
   "env": {
     "browser": true,
     "es2021": true,
@@ -24,5 +20,8 @@
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": true
+  },
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": 0
   }
 }
