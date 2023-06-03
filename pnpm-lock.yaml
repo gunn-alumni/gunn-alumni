@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@babel/runtime': ^7.21.5
   '@next/font': 13.1.6
   '@supabase/auth-helpers-nextjs': ^0.6.1
   '@supabase/auth-helpers-react': ^0.3.1
@@ -37,12 +36,10 @@ specifiers:
   react-icons: ^4.7.1
   react-slider: ^2.0.4
   react-social-icons: ^5.15.0
-  styled-jsx: 5.1.1
   tailwindcss: ^3.2.7
   typescript: ^5.0.4
 
 dependencies:
-  '@babel/runtime': 7.22.3
   '@next/font': 13.1.6
   '@supabase/auth-helpers-nextjs': 0.6.1_kxjue6puk3vnd6f53gvjovthai
   '@supabase/auth-helpers-react': 0.3.1_kxjue6puk3vnd6f53gvjovthai
@@ -57,7 +54,6 @@ dependencies:
   react-icons: 4.9.0_react@18.2.0
   react-slider: 2.0.5_react@18.2.0
   react-social-icons: 5.15.0_react@18.2.0
-  styled-jsx: 5.1.1_react@18.2.0
 
 devDependencies:
   '@tailwindcss/line-clamp': 0.4.4_tailwindcss@3.3.2
@@ -96,6 +92,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
+    dev: true
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.42.0:
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -3015,6 +3012,7 @@ packages:
 
   /regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
+    dev: true
 
   /regexp.prototype.flags/1.5.0:
     resolution: {integrity: sha512-0SutC3pNudRKgquxGoRGIz946MZVHqbNfPjBdxeOhBrdgDKlRoXmYLQN9xRbrR09ZXWeGAdPuif7egofn6v5LA==}
