@@ -18,7 +18,7 @@
     "@supabase/auth-ui-react": "^0.3.5",
     "@supabase/supabase-js": "^2.21.0",
     "fuse.js": "^6.6.2",
-    "next": "13.3.0",
+    "next": "13.4.4",
     "node-mailjet": "^6.0.2",
     "nodemailer": "^6.9.1",
     "react": "18.2.0",
