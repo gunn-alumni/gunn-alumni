@@ -41,7 +41,11 @@ export default async function handler(
 
   fetch(url, { method: 'get' })
     .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: 'Server error' });
+      return;
+    });
 
   res.status(200).json({ message: 'success verify' });
 
