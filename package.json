@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.5",
+    "@netlify/functions": "^1.6.0",
     "@next/font": "13.1.6",
     "@supabase/auth-helpers-nextjs": "^0.6.1",
     "@supabase/auth-helpers-react": "^0.3.1",
