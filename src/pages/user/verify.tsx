@@ -21,7 +21,7 @@ const Verify = (): JSX.Element => {
 
     setSend(true);
 
-    fetch('/api/send-verify-email', {
+    fetch('/.netlify/functions/send-verify-email', {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',

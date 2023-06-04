@@ -1,13 +1,14 @@
+import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Mailjet, { Client } from 'node-mailjet';
 import { decrypt } from '@/lib/utils/serverCrypto';
 import { SB_serveronly } from '@/lib/utils/dbserveronly';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { encryptedData, iv, id } = req.query;
+export const handler: Handler = async (
+  event: HandlerEvent,
+  context: HandlerContext
+) => {
+  const { encryptedData, iv, id } = event.queryStringParameters!;
 
   if (
     !encryptedData ||
@@ -16,8 +17,10 @@ export default async function handler(
     typeof encryptedData !== 'string' ||
     typeof iv !== 'string'
   ) {
-    res.status(400).json({ message: 'Invalid request' });
-    return;
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Invalid request' })
+    };
   }
 
   try {
@@ -32,15 +35,23 @@ export default async function handler(
       .eq('index', index);
 
     if (error) {
-      res
-        .status(400)
-        .json({ message: 'Index not found or people could not be updated' });
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: 'Index not found or people could not be updated'
+        })
+      };
     }
   } catch (e) {
     console.log(e);
-    res.status(400).json({ message: 'Error with parsing index' });
-    return;
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Error with parsing index' })
+    };
   }
 
-  res.status(200).json({ message: 'User verified' });
-}
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'User verified' })
+  };
+};
