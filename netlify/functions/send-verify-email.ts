@@ -46,7 +46,7 @@ export const handler: Handler = async (
   // - Hash the index with a secret key
   // - Build url with index hash and id to place in database
   const hash = encrypt(people[0].index.toString());
-  const url = `https://alumni.gunnhigh.school/.netlify/functions/verify?encryptedData=${hash.encryptedData}&id=${req.body.id}&iv=${hash.iv}`;
+  const url = `https://alumni.gunnhigh.school/.netlify/functions/verify?encryptedData=${hash.encryptedData}&id=${id}&iv=${hash.iv}`;
 
   fetch(url, { method: 'get' })
     .then((res) => console.log(res))
