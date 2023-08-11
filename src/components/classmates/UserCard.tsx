@@ -33,15 +33,13 @@ const UserCard = ({
         verified ? 'hover:border-primary hover:cursor-pointer border' : ''
       }`}
     >
-      <div className="flex-1">
-        <div className="relative h-20 w-20">
-          <Image
-            src={pfp !== null ? pfp : DefaultPFP}
-            className="object-cover rounded-full"
-            fill
-            alt="profile pic"
-          />
-        </div>
+      <div className="relative h-20 w-20">
+        <Image
+          src={pfp !== null ? pfp : DefaultPFP}
+          className="object-cover rounded-full"
+          fill
+          alt="profile pic"
+        />
       </div>
       <div className="flex-grow flex flex-col space-y-1 justify-center items-start truncate">
         <h4 className="hidden sm:block">
