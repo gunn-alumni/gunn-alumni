@@ -1,10 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-
-// Custom Components
-
-import { StandardButton } from '@/components/shared/Button';
 import NewsArticle from '@/components/news/NewsArticle';
 
 const news_article_data = [
@@ -129,7 +123,7 @@ const news_article_data = [
 
 const News = () => {
   return (
-    <div className="md:px-10 md:py-10 lg:px-48 lg:py-10 bg-slate-200">
+    <div className="md:px-10 md:py-10 lg:px-48 lg:py-10">
       {/* Top row of 3 articles */}
       <div className="flex flex-row">
         {news_article_data.slice(0, 3).map((article, index) => (
