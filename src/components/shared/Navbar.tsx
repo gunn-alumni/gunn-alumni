@@ -184,10 +184,10 @@ const Navbar = () => {
             )}
             <hr />
             {[
-              { title: 'Team', to: '/team' },
               { title: 'Classmates', to: '/classmates' },
               { title: 'News', to: '/news' },
-              { title: 'Donate', to: '/donate' }
+              { title: 'Donate', to: '/donate' },
+              { title: 'Team', to: '/team' }
             ].map(({ title, to }) => (
               <Link
                 key={title}
