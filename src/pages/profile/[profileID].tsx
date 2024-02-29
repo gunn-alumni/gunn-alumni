@@ -216,43 +216,44 @@ export default function ProfilePage({
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
 
-        {/* <div id="profileSocial_wrapper">
-          {lockState === 'locked' ? (
-            <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
-              {socialMedias.map((v, i) => (
-                <SocialIcon key={i} url={'https://' + v} />
-              ))}
-            </div>
-          ) : (
-            <div className="grid gap-4 mb-4">
-
-              {socialMedias.map((v, i) => (
-                <div className="w-full flex" key={i}>
-                  <div
-                    id="links"
-                    className="bg-black font-bold border-[black] border-y-3"
-                  ></div>
-                  <input
-                    type="text"
-                    placeholder={socialMedias[i]}
-                    className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[2px] border-y-[2px]"
-                    onChange={(e) => (socialMedias[i] = e.target.value)}
-                  />
-                </div>
-              ))}
-              <div className="items-stretch flex justify-between">
-                <button onClick={removeLink}>
-                  {' '}
-                  <HiOutlineX></HiOutlineX>
-                </button>
-                <button onClick={addLink}>
-                  {' '}
-                  <HiPlus></HiPlus>
-                </button>
+        {
+          <div id="profileSocial_wrapper">
+            {lockState === 'locked' ? (
+              <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
+                {socialMedias.map((v, i) => (
+                  <SocialIcon key={i} url={'https://' + v} />
+                ))}
               </div>
-            </div>
-          )}
-        </div> */}
+            ) : (
+              <div className="grid gap-4 mb-4">
+                {socialMedias.map((v, i) => (
+                  <div className="w-full flex" key={i}>
+                    <div
+                      id="links"
+                      className="bg-black font-bold border-[black] border-y-3"
+                    ></div>
+                    <input
+                      type="text"
+                      placeholder={socialMedias[i]}
+                      className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[2px] border-y-[2px]"
+                      onChange={(e) => (socialMedias[i] = e.target.value)}
+                    />
+                  </div>
+                ))}
+                <div className="items-stretch flex justify-between">
+                  <button onClick={removeLink}>
+                    {' '}
+                    <HiOutlineX></HiOutlineX>
+                  </button>
+                  <button onClick={addLink}>
+                    {' '}
+                    <HiPlus></HiPlus>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        }
       </div>
 
       <div
