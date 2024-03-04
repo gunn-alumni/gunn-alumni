@@ -41,9 +41,11 @@ Then run the site on localhost:3000
 pnpm run dev
 ```
 
-To run Supabase locally,
+To use a local Supabase instance,
 
 ```bash
+supabase login # this will prompt you to log in through the browser
+supabase link --project-ref remafpgrzmuvfqnmgvmn
 supabase start
 ```
 
