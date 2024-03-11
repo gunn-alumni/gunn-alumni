@@ -4,16 +4,27 @@ import StandardButton from '@/components/shared/Button/StandardButton';
 import NotableAlumCard from '@/components/spotlights/NotableAlumCard';
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 
-const dummyTags = ["Education", "Fish", "Agriculture", "Visual & Pref Arts", "Medicine"]
-let teehee = 0
-let dummyData : any[] = []
-for (let i = 0; i < 20; i++) {
+const dummyTags = [
+  'Education',
+  'Fish',
+  'Agriculture',
+  'Visual & Pref Arts',
+  'Medicine'
+];
+let teehee = 0;
+const dummyData: any[] = [];
+for (let i = 0; i < 1; i++) {
   dummyData.push({
-    id: "asdf", class_title: 1809,
+    id: 'elizabeth',
+    class_title: 1809,
     tag: dummyTags[teehee],
-    story_content: "hello eliu fbwer u fhoiuw efhouse ffnoesi nhorfnh enfrhio friofro dfihod fufihu dfhyuu uuuuuu ujn nhn n nnnn kunv ",
-    first_name: "Poshua",
-    last_name: "Jaley"
+    story_content:
+      'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High Schools community.',
+    first_name: 'Elizabeth',
+    last_name: 'Chang',
+    profiles: {
+      pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+    }
   });
   teehee++;
   if (teehee >= dummyTags.length) teehee = 0;
@@ -34,8 +45,8 @@ const Spotlights = () => {
           </h1>
           <p className="prose prose-xl mb-8 text-gray-500 px-0">
             The mission of the University of Gunn is to foster leaders and
-            citizens who challenge the present, enrich the future, and contribute
-            to a better world. Our alumni’s remarkable identities and
+            citizens who challenge the present, enrich the future, and
+            contribute to a better world. Our alumni’s remarkable identities and
             accomplishments are what make them Titans. Victors. The Leaders and
             Best.
           </p>

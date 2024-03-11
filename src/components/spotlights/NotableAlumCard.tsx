@@ -29,12 +29,13 @@ const NotableAlumCard = ({
 }: NotableAlumCardProps) => {
   return (
     <button
-      onClick={() => Router.push(`/profile/${profileID}`)}
+      onClick={() => Router.push(`/spotlights/${profileID}`)}
       title={classTitle}
       className="flex w-full
         flex-col items-center
         sm:flex-row sm:items-start
-        space-x-2 p-4 border-gray-30 rounded-lg hover:border-primary hover:cursor-pointer border">
+        space-x-2 p-4 border-gray-30 rounded-lg hover:border-primary hover:cursor-pointer border"
+    >
       <div className="relative h-24 w-24 flex-shrink-0">
         <Image
           src={pfp !== null ? pfp : DefaultPFP}
@@ -51,11 +52,11 @@ const NotableAlumCard = ({
           {firstName} {lastName.charAt(0)}, {classTitle}
         </h3>
         <div className="text-wrap text-left">
-            <span className="prose prose-xl mb-8 text-gray-500 px-0">{tag}</span>
-            <br/>
-            <span>
-              {storyContent.substring(0, Math.min(100, storyContent.length))}...
-            </span>
+          <span className="prose prose-xl mb-8 text-gray-500 px-0">{tag}</span>
+          <br />
+          <span>
+            {storyContent.substring(0, Math.min(100, storyContent.length))}...
+          </span>
         </div>
       </div>
     </button>
