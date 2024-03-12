@@ -59,7 +59,7 @@ export default function SpotlightData() {
             continues to find invaluable. Her advice to Gunn students is to
             prioritize work-life balance, drawing from her own experiences of
             feeling stressed and the wisdom she gained from others, like Mr.
-            O’Connell, who stressed the importance of finding a personal balance
+            OConnell, who stressed the importance of finding a personal balance
             between effort and personal well-being.
           </p>
         </div>
