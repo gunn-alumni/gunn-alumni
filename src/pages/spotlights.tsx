@@ -4,31 +4,44 @@ import StandardButton from '@/components/shared/Button/StandardButton';
 import NotableAlumCard from '@/components/spotlights/NotableAlumCard';
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 
-const dummyTags = [
-  'Education',
-  'Fish',
-  'Agriculture',
-  'Visual & Pref Arts',
-  'Medicine'
-];
-let teehee = 0;
-const dummyData: any[] = [];
-for (let i = 0; i < 1; i++) {
-  dummyData.push({
-    id: 'elizabeth',
-    class_title: 1809,
-    tag: dummyTags[teehee],
-    story_content:
-      'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High Schools community.',
-    first_name: 'Elizabeth',
-    last_name: 'Chang',
-    profiles: {
-      pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
-    }
-  });
-  teehee++;
-  if (teehee >= dummyTags.length) teehee = 0;
-}
+// const dummyTags = [
+//   'Education',
+//   'Fish',
+//   'Agriculture',
+//   'Visual & Pref Arts',
+//   'Medicine'
+// ];
+// let teehee = 0;
+// const dummyData: any[] = [];
+// for (let i = 0; i < 1; i++) {
+//   dummyData.push({
+//     id: 'elizabeth',
+//     class_title: 1809,
+//     tag: dummyTags[teehee],
+//     story_content:
+//       'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High Schools community.',
+//     first_name: 'Elizabeth',
+//     last_name: 'Chang',
+//     profiles: {
+//       pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+//     }
+//   });
+//   teehee++;
+//   if (teehee >= dummyTags.length) teehee = 0;
+// }
+
+const dummyData = {
+  id: 'elizabeth',
+  class_title: 1809,
+  tag: 'Education',
+  story_content:
+    'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High Schools community.',
+  first_name: 'Elizabeth',
+  last_name: 'Chang',
+  profiles: {
+    pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+  }
+};
 
 const Spotlights = () => {
   return (

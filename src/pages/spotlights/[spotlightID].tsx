@@ -26,7 +26,7 @@ export default function SpotlightData() {
         <div className="w-full flex flex-col items-start text-neutral-500 space-y-2 mt-6 text-justify">
           <p>
             Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in
-            Gunn High School's community. She was a member of seven clubs,
+            Gunn High Schools community. She was a member of seven clubs,
             including serving as the president of the garden club. Additionally,
             Elizabeth was actively engaged in the math club, eventually becoming
             its secretary, and participated in the Junior State of America.
