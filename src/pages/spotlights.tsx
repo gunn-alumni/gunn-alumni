@@ -54,7 +54,6 @@ dummyData.push({
 
 const Spotlights = () => {
   const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
-
   return (
     <>
       <Head>
@@ -92,6 +91,5 @@ const Spotlights = () => {
       </Container>
     </>
   );
-};
-
+}
 export default Spotlights;

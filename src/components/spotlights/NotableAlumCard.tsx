@@ -31,7 +31,6 @@ export const NotableAlumCard = ({
         Router.push(
           `/spotlightPages/spotlightExamples/` + 'spotlightExample' + profileID
         )
-      }
       title={classTitle}
       className="flex w-full
         flex-col items-center
