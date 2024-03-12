@@ -1,8 +1,13 @@
 import Head from 'next/head';
 import Container from '@/components/shared/Container';
 import StandardButton from '@/components/shared/Button/StandardButton';
-import NotableAlumCard from '@/components/spotlights/NotableAlumCard';
+import {
+  NotableAlumCard,
+  NotableAlumCardProps
+} from '@/components/spotlights/NotableAlumCard';
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
+import { SearchInput } from '@/components/spotlights/SearchInput';
+import { useState, useEffect } from 'react';
 
 const dummyTags = [
   'Education',
@@ -11,9 +16,9 @@ const dummyTags = [
   'Visual & Pref Arts',
   'Medicine'
 ];
-let teehee = 0;
+//let teehee = 0;
 const dummyData: any[] = [];
-for (let i = 0; i < 20; i++) {
+/*for (let i = 0; i < 20; i++) {
   dummyData.push({
     id: 'asdf',
     class_title: 1809,
@@ -26,8 +31,30 @@ for (let i = 0; i < 20; i++) {
   teehee++;
   if (teehee >= dummyTags.length) teehee = 0;
 }
+*/
+dummyData.push({
+  id: '1',
+  class_title: 2015,
+  tag: 'Technology',
+  story_content:
+    'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High School community. She was a member of seven clubs, including serving as the president of the garden club. Additionally, Elizabeth was actively engaged in the math club',
+  first_name: 'Elizabeth',
+  last_name: 'Chang-Davidson'
+});
+dummyData.push({
+  id: '2',
+  class_title: 2007,
+  tag: 'Technology',
+  story_content:
+    'Charlie Xu, a member of the Class of 2007, demonstrates his passion for learning daily while contributing to the endeavors of SLAC National Accelerator Laboratory at Stanford. Engaging in the vibrant atmosphere of a top-tier research laboratory, Charlie thrives on the opportunity to acquire new knowledge and collaborate with intelligent colleagues.',
+  first_name: 'Charlie',
+  last_name: 'Xu',
+  pfp: 'https://tinyurl.com/42ekd2mf'
+});
 
 const Spotlights = () => {
+  const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
+
   return (
     <>
       <Head>
@@ -61,7 +88,6 @@ const Spotlights = () => {
             </div>
           </h3>
         </div>
-
         <NotableAlumPreview peopleArr={dummyData}></NotableAlumPreview>
       </Container>
     </>
