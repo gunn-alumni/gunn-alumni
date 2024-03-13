@@ -44,18 +44,14 @@ export const NotableAlumCard = ({
         />
       </div>
       <div className="flex-grow flex flex-col space-y-1 justify-center items-start">
-        <h3 className="hidden sm:block font-bold text-primary text-lg">
-          {firstName} {lastName}, {classTitle}
+        <h3 className="font-bold text-primary text-lg">
+          {firstName} {lastName}
         </h3>
-        <h3 className="block sm:hidden font-bold text-primary text-lg">
-          {firstName} {lastName.charAt(0)}, {classTitle}
-        </h3>
+        <div>{classTitle}</div>
         <div className="text-wrap text-left">
           <span className="prose prose-xl mb-8 text-gray-500 px-0">{tag}</span>
           <br />
-          <span>
-            {storyContent.substring(0, Math.min(100, storyContent.length))}...
-          </span>
+          <span className="line-clamp-3">{storyContent}</span>
         </div>
       </div>
     </button>
