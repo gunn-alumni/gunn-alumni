@@ -83,7 +83,6 @@ const Spotlights = () => {
             global scale. This spotlight section is dedicated to celebrating the
             remarkable accomplishments of Gunn alumni in their respective
             fields.
-
           </p>
           <h3 className="text-xl text-black text-left">
             {' '}

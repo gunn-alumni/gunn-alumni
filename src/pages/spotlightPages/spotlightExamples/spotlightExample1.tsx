@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Container from '@/components/shared/Container';
 export default function spotlightExample1() {
   return (
@@ -11,7 +12,18 @@ export default function spotlightExample1() {
         />
       </Head>
       <Container>
-        <div className="my-20">
+        <div className="my-4">
+          <div className="text-center">
+            <Image
+              src={
+                'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+              }
+              alt="Profile Image"
+              width={150}
+              height={150}
+              className="object-cover object-center rounded-full inline"
+            />
+          </div>
           <h1 className="mb-8 text-4xl font-bold md:text-3xl">
             {' '}
             Elizabeth Chang-Davidson, &apos;15
