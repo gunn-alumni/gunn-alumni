@@ -7,7 +7,6 @@ import Link from 'next/link';
 import Router from 'next/router';
 
 import Tag from '@/components/spotlights/Tag';
-
 export interface NotableAlumCardProps {
   profileID: string | null;
   classTitle: string;
