@@ -6,7 +6,6 @@ import {
   NotableAlumCardProps
 } from '@/components/spotlights/NotableAlumCard';
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
-import { SearchInput } from '@/components/spotlights/SearchInput';
 import { useState, useEffect } from 'react';
 
 const dummyTags = [
@@ -39,9 +38,12 @@ dummyData.push({
   story_content:
     'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High School community. She was a member of seven clubs, including serving as the president of the garden club. Additionally, Elizabeth was actively engaged in the math club',
   first_name: 'Elizabeth',
-  last_name: 'Chang-Davidson'
+  last_name: 'Chang-Davidson',
+  profiles: {
+    pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+  }
 });
-dummyData.push({
+/*dummyData.push({
   id: '2',
   class_title: 2007,
   tag: 'Technology',
@@ -49,9 +51,11 @@ dummyData.push({
     'Charlie Xu, a member of the Class of 2007, demonstrates his passion for learning daily while contributing to the endeavors of SLAC National Accelerator Laboratory at Stanford. Engaging in the vibrant atmosphere of a top-tier research laboratory, Charlie thrives on the opportunity to acquire new knowledge and collaborate with intelligent colleagues.',
   first_name: 'Charlie',
   last_name: 'Xu',
-  pfp: 'https://tinyurl.com/42ekd2mf'
+  profiles: {
+    pfp: 'https://media.licdn.com/dms/image/C5603AQFnP7b-VUe2Ng/profile-displayphoto-shrink_200_200/0/1517749511606?e=2147483647&v=beta&t=dz-IjevQ41voRCxgFSphILJvsEUBDuXE1ymm583lct4'
+  }
 });
-
+*/
 const Spotlights = () => {
   const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
   return (
@@ -67,11 +71,19 @@ const Spotlights = () => {
             Notable Alumni
           </h1>
           <p className="prose prose-xl mb-8 text-gray-500 px-0">
-            The mission of the University of Gunn is to foster leaders and
-            citizens who challenge the present, enrich the future, and
-            contribute to a better world. Our alumni’s remarkable identities and
-            accomplishments are what make them Titans. Victors. The Leaders and
-            Best.
+            Empowered by the exceptional education at Gunn High School, Titans
+            evolve into inspiring leaders, innovative scholars, remarkable
+            artists, and avant-gardes in their industries. With a foundation
+            rooted in kindness and a commitment to positive societal
+            transformation, Gunn alumni stand as everyday heroes, unwavering in
+            their efforts to create a meaningful impact. Unfettered by norms or
+            constrained by backgrounds and cultural differences, Titans boldly
+            push boundaries, expanding horizons for future generations. Their
+            contributions are not only recognized locally but also resonate on a
+            global scale. This spotlight section is dedicated to celebrating the
+            remarkable accomplishments of Gunn alumni in their respective
+            fields.
+
           </p>
           <h3 className="text-xl text-black text-left">
             {' '}
