@@ -8,7 +8,7 @@ import Router from 'next/router';
 
 import Tag from '@/components/spotlights/Tag';
 
-interface NotableAlumCardProps {
+export interface NotableAlumCardProps {
   profileID: string | null;
   classTitle: string;
   tag: string;
@@ -18,7 +18,7 @@ interface NotableAlumCardProps {
   pfp: string | null;
 }
 
-const NotableAlumCard = ({
+export const NotableAlumCard = ({
   profileID,
   tag,
   classTitle,
