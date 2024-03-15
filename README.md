@@ -16,11 +16,7 @@ If you are completely new to this type of project, check out [this document](htt
 - [Git](https://git-scm.com/downloads)
 - [node (v18)](https://nodejs.org/en/download/)
 - pnpm (run command below after installing node):
-
-```bash
-corepack enable
-```
-
+- [vscode eslint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - (optional) [VSCode ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - (optional) An SQLite editor to view and modify the database data.
 - (optional) [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started#installing-the-supabase-cli) to test Supabase schema changes locally.
@@ -32,13 +28,13 @@ Clone the repo and install dependencies
 ```bash
 git clone https://github.com/gunn-alumni/gunn-alumni.git
 cd gunn-alumni
-pnpm i
+npm i
 ```
 
 Then run the site on localhost:3000
 
 ```bash
-pnpm run dev
+npm run dev
 ```
 
 To use a local Supabase instance,
