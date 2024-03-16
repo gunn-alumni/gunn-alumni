@@ -30,11 +30,7 @@ export const NotableAlumCard = ({
 }: NotableAlumCardProps) => {
   return (
     <button
-<<<<<<< HEAD
       onClick={() => Router.push(`/spotlights/${to}`)}
-=======
-      onClick={() => Router.push(`/spotlights/${profileID}`)}
->>>>>>> dev
       title={classTitle}
       className="flex w-full
         flex-col items-center
