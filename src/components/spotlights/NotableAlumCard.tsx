@@ -6,6 +6,7 @@ import DefaultPFP from 'public/images/default_pfp.png';
 import Link from 'next/link';
 import Router from 'next/router';
 
+import Tag from '@/components/spotlights/Tag';
 export interface NotableAlumCardProps {
   profileID: string | null;
   classTitle: string;
@@ -29,7 +30,11 @@ export const NotableAlumCard = ({
 }: NotableAlumCardProps) => {
   return (
     <button
+<<<<<<< HEAD
       onClick={() => Router.push(`/spotlights/${to}`)}
+=======
+      onClick={() => Router.push(`/spotlights/${profileID}`)}
+>>>>>>> dev
       title={classTitle}
       className="flex w-full
         flex-col items-center
