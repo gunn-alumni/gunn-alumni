@@ -10,7 +10,7 @@ import Container from '@/components/shared/Container';
 type SpotlightProps = {
   preferred_name: string;
   content: string;
-  grad_year: string;
+  grad_year: number;
 };
 
 export default function SpotlightData({
@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps<SpotlightProps> = async (
     props: {
       preferred_name: data?.preferred_name || '',
       content: data?.content || '',
-      grad_year: data?.grad_year || ''
+      grad_year: data?.grad_year || 0
     }
   };
 };
