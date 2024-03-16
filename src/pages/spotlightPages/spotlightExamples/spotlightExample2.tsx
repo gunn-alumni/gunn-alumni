@@ -7,14 +7,14 @@ export default function spotlightExample2() {
         <title>Gunn Alumni | Notable</title>
         <meta
           name="description"
-          content="Example Profile Page - Elizabeth Chang-Davidson"
+          content="Example Profile Page - Charlie Xu"
         />
       </Head>
       <Container>
-        <div className="my-20">
+        <div className="my-4">
           <h1 className="mb-8 text-4xl font-bold md:text-3xl">
             {' '}
-            Charlie Xu, &apos;07
+            Charlie Xu, 2007
           </h1>
           <p className="prose prose-xl mb-8 text-gray-500 px-0">
             Charlie Xu, a member of the Class of 2007, demonstrates his passion
