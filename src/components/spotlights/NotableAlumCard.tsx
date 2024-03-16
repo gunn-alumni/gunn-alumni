@@ -14,6 +14,7 @@ export interface NotableAlumCardProps {
   firstName: string;
   lastName: string;
   pfp: string | null;
+  to: string;
 }
 
 export const NotableAlumCard = ({
@@ -23,15 +24,12 @@ export const NotableAlumCard = ({
   storyContent,
   firstName,
   lastName,
-  pfp
+  pfp,
+  to
 }: NotableAlumCardProps) => {
   return (
     <button
-      onClick={() =>
-        Router.push(
-          `/spotlightPages/spotlightExamples/` + 'spotlightExample' + profileID
-        )
-      }
+      onClick={() => Router.push(`/spotlights/${to}`)}
       title={classTitle}
       className="flex w-full
         flex-col items-center

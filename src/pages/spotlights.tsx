@@ -39,7 +39,9 @@ dummyData.push({
   story_content:
     'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High School community. She was a member of seven clubs, including serving as the president of the garden club. Additionally, Elizabeth was actively engaged in the math club',
   first_name: 'Elizabeth',
-  last_name: 'Chang-Davidson'
+  last_name: 'Chang-Davidson',
+  pfp: 'https://tinyurl.com/42ekd2mf',
+  to: '/elizabeth-chang-davidson'
 });
 dummyData.push({
   id: '2',
@@ -49,7 +51,8 @@ dummyData.push({
     'Charlie Xu, a member of the Class of 2007, demonstrates his passion for learning daily while contributing to the endeavors of SLAC National Accelerator Laboratory at Stanford. Engaging in the vibrant atmosphere of a top-tier research laboratory, Charlie thrives on the opportunity to acquire new knowledge and collaborate with intelligent colleagues.',
   first_name: 'Charlie',
   last_name: 'Xu',
-  pfp: 'https://tinyurl.com/42ekd2mf'
+  // pfp: 'https://tinyurl.com/42ekd2mf',
+  to: '/test-user'
 });
 
 const Spotlights = () => {
@@ -91,5 +94,5 @@ const Spotlights = () => {
       </Container>
     </>
   );
-}
+};
 export default Spotlights;
