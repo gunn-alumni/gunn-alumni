@@ -100,6 +100,7 @@ export default function ProfilePage({
   >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
   const [bio, setBio] = useState(props.userBio);
+  const [email, setEmail] = useState(props.userEmail);
   const [pfp, setPfp] = useState(props.userPfp);
 
   const handleEdit = () => {
@@ -109,6 +110,7 @@ export default function ProfilePage({
   const handleSave = async () => {
     // TODO: add for social media icons, links, location, etc
     await supabase.from('profiles').update({ bio }).eq('id', userId);
+    await supabase.from('profiles').update({ email }).eq('id', userId);
     setLockState('locked');
   };
 
@@ -273,6 +275,14 @@ export default function ProfilePage({
             onChange={(e) => setBio(e.target.value)}
           ></AutoResizingTextArea>
         </div>
+        <AutoResizingTextArea
+          id="ta_content"
+          rows={5}
+          disabled={lockState === 'locked'}
+          className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
+          defaultValue={email || ''}
+          onChange={(e) => setEmail(e.target.value)}
+        ></AutoResizingTextArea>
 
         {/* {Object.entries(contacts).map(([key, value]) => (
           <div
@@ -328,6 +338,7 @@ interface ProfileProps {
   userBio: string | null;
   userName: string | null;
   userPfp: string | null;
+  userEmail: string | null;
   userId: string;
 }
 
@@ -337,7 +348,9 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
   const id = context.params?.profileID;
 
   const { data, error } = await SB_serveronly.from('profiles')
-    .select('bio,pfp,current_location,phone_num,social_media,preferred_name')
+    .select(
+      'bio,pfp,current_location,email,phone_num,social_media,preferred_name'
+    )
     .eq('id', id);
 
   return {
@@ -345,6 +358,7 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
       userBio: data === null ? '' : data[0].bio,
       userName: data === null ? '' : data[0].preferred_name,
       userPfp: data === null ? '' : data[0].pfp,
+      userEmail: data === null ? '' : data[0].email,
       userId: id as string
     }
   };
