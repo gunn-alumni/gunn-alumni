@@ -37,6 +37,7 @@ Then run the site on localhost:3000
 npm run dev
 ```
 
+<<<<<<< HEAD
 To use a local Supabase instance, start Docker Desktop and
 
 ```bash
@@ -52,3 +53,14 @@ Refer to the [Supabase CLI docs](https://supabase.com/docs/reference/cli/) for m
 ## Warnings
 
 Do not put sensitive/important/large data in the db.
+=======
+## Generate Database Types
+
+```bash
+npx supabase gen types typescript --project-id "remafpgrzmuvfqnmgvmn" --schema public > src/types/supabase.d.ts
+```
+
+## Warnings
+
+do not put sensitive/important/large data in the db
+>>>>>>> dev

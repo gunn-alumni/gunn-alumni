@@ -39,9 +39,8 @@ dummyData.push({
     'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High School community. She was a member of seven clubs, including serving as the president of the garden club. Additionally, Elizabeth was actively engaged in the math club',
   first_name: 'Elizabeth',
   last_name: 'Chang-Davidson',
-  profiles: {
-    pfp: 'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
-  }
+  pfp: 'https://tinyurl.com/42ekd2mf',
+  to: '/elizabeth-chang-davidson'
 });
 /*dummyData.push({
   id: '2',
@@ -51,9 +50,8 @@ dummyData.push({
     'Charlie Xu, a member of the Class of 2007, demonstrates his passion for learning daily while contributing to the endeavors of SLAC National Accelerator Laboratory at Stanford. Engaging in the vibrant atmosphere of a top-tier research laboratory, Charlie thrives on the opportunity to acquire new knowledge and collaborate with intelligent colleagues.',
   first_name: 'Charlie',
   last_name: 'Xu',
-  profiles: {
-    pfp: 'https://media.licdn.com/dms/image/C5603AQFnP7b-VUe2Ng/profile-displayphoto-shrink_200_200/0/1517749511606?e=2147483647&v=beta&t=dz-IjevQ41voRCxgFSphILJvsEUBDuXE1ymm583lct4'
-  }
+  // pfp: 'https://tinyurl.com/42ekd2mf',
+  to: '/test-user'
 });
 */
 const Spotlights = () => {
@@ -83,7 +81,6 @@ const Spotlights = () => {
             global scale. This spotlight section is dedicated to celebrating the
             remarkable accomplishments of Gunn alumni in their respective
             fields.
-
           </p>
           <h3 className="text-xl text-black text-left">
             {' '}
