@@ -19,7 +19,7 @@ If you are completely new to this type of project, check out [this document](htt
 - [vscode eslint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - (optional) [VSCode ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - (optional) An SQLite editor to view and modify the database data.
-- (optional) [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started#installing-the-supabase-cli) to test Supabase schema changes locally.
+- (optional) [Docker Desktop](https://www.docker.com/get-started/) and [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started#installing-the-supabase-cli) to make and test DB schema changes locally.
 
 ## Environment Setup
 
@@ -37,13 +37,15 @@ Then run the site on localhost:3000
 npm run dev
 ```
 
-To use a local Supabase instance,
+To use a local Supabase instance, start Docker Desktop and
 
 ```bash
 supabase login # this will prompt you to log in through the browser
 supabase link --project-ref remafpgrzmuvfqnmgvmn
 supabase start
 ```
+
+Add `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SECRET_KEY` to your `.env.local` from the result of `supabase start` or `supabase status`.
 
 Refer to the [Supabase CLI docs](https://supabase.com/docs/reference/cli/) for more.
 
