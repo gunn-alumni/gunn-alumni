@@ -50,10 +50,6 @@ Add `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_S
 
 Refer to the [Supabase CLI docs](https://supabase.com/docs/reference/cli/) for more.
 
-## Warnings
-
-Do not put sensitive/important/large data in the db.
-=======
 ## Generate Database Types
 
 ```bash
@@ -62,5 +58,4 @@ npx supabase gen types typescript --project-id "remafpgrzmuvfqnmgvmn" --schema p
 
 ## Warnings
 
-do not put sensitive/important/large data in the db
->>>>>>> dev
+Do not put sensitive/important/large data in the db.
