@@ -7,6 +7,12 @@ import {
 } from '@/components/spotlights/NotableAlumCard';
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 import { useState, useEffect } from 'react';
+import SB_serveronly from '@/lib/utils/dbserveronly';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+
+type SpotlightsProps = {
+  data: any[];
+};
 
 const dummyTags = [
   'Education',
@@ -15,46 +21,10 @@ const dummyTags = [
   'Visual & Pref Arts',
   'Medicine'
 ];
-//let teehee = 0;
-const dummyData: any[] = [];
-/*for (let i = 0; i < 20; i++) {
-  dummyData.push({
-    id: 'asdf',
-    class_title: 1809,
-    tag: dummyTags[teehee],
-    story_content:
-      'hello eliu fbwer u fhoiuw efhouse ffnoesi nhorfnh enfrhio friofro dfihod fufihu dfhyuu uuuuuu ujn nhn n nnnn kunv ',
-    first_name: 'Poshua',
-    last_name: 'Jaley'
-  });
-  teehee++;
-  if (teehee >= dummyTags.length) teehee = 0;
-}
-*/
-dummyData.push({
-  id: '1',
-  class_title: 2015,
-  tag: 'Technology',
-  story_content:
-    'Elizabeth Chang-Davidson, a 2015 graduate, was deeply involved in Gunn High School community. She was a member of seven clubs, including serving as the president of the garden club. Additionally, Elizabeth was actively engaged in the math club',
-  first_name: 'Elizabeth',
-  last_name: 'Chang-Davidson',
-  pfp: 'https://tinyurl.com/42ekd2mf',
-  to: '/elizabeth-chang-davidson'
-});
-/*dummyData.push({
-  id: '2',
-  class_title: 2007,
-  tag: 'Technology',
-  story_content:
-    'Charlie Xu, a member of the Class of 2007, demonstrates his passion for learning daily while contributing to the endeavors of SLAC National Accelerator Laboratory at Stanford. Engaging in the vibrant atmosphere of a top-tier research laboratory, Charlie thrives on the opportunity to acquire new knowledge and collaborate with intelligent colleagues.',
-  first_name: 'Charlie',
-  last_name: 'Xu',
-  // pfp: 'https://tinyurl.com/42ekd2mf',
-  to: '/test-user'
-});
-*/
-const Spotlights = () => {
+
+const Spotlights = ({
+  data
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
   return (
     <>
@@ -84,11 +54,13 @@ const Spotlights = () => {
           </p>
           <h3 className="text-xl text-black text-left">
             {' '}
-            {/*<div className="m-2">
-              Know someone who belongs on this page?
-              <br />
-              Please consider nominating them!
-    </div>*/}
+            {
+              <div className="m-2">
+                Know someone who belongs on this page?
+                <br />
+                Please consider nominating them!
+              </div>
+            }
             <div>
               <StandardButton className="m-1" color={'bg-black'}>
                 Nominate an Alum
@@ -96,9 +68,36 @@ const Spotlights = () => {
             </div>
           </h3>
         </div>
-        <NotableAlumPreview peopleArr={dummyData}></NotableAlumPreview>
+        {data.map((person) => (
+          <NotableAlumCard
+            to={person.url}
+            key={person.id}
+            profileID={person.id}
+            tag={person.tag}
+            classTitle={person.class_title}
+            storyContent={person.story_content}
+            firstName={person.first_name}
+            lastName={person.last_name}
+            pfp={person.profiles ? person.profiles.pfp : null}
+          />
+        ))}
       </Container>
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps<SpotlightsProps> = async (
+  context
+) => {
+  const url = context.params?.spotlightID;
+
+  const { data, error } = await SB_serveronly.from('spotlights').select('*');
+
+  return {
+    props: {
+      data: data || []
+    }
+  };
+};
+
 export default Spotlights;
