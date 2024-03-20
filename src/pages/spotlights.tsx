@@ -5,7 +5,6 @@ import {
   NotableAlumCard,
   NotableAlumCardProps
 } from '@/components/spotlights/NotableAlumCard';
-import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 import { useState, useEffect } from 'react';
 import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -91,13 +90,11 @@ const Spotlights = ({
 export const getServerSideProps: GetServerSideProps<SpotlightsProps> = async (
   context
 ) => {
-  const url = context.params?.spotlightID;
-
   const { data, error } = await SB_serveronly.from('spotlights').select('*');
 
   return {
     props: {
-      data: data
+      data: data!
     }
   };
 };
