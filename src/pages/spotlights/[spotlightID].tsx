@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps<SpotlightProps> = async (
     props: {
       preferred_name: data?.preferred_name || '',
       content: data?.content || '',
-      grad_year: data?.grad_year || ''
+      grad_year: data?.grad_year.toString() || ''
     }
   };
 };
