@@ -8,6 +8,12 @@ import {
 import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 import { SearchInput } from '@/components/spotlights/SearchInput';
 import { useState, useEffect } from 'react';
+import SB_serveronly from '@/lib/utils/dbserveronly';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+
+type SpotlightsProps = {
+  data: any[];
+};
 
 const dummyTags = [
   'Education',
@@ -52,7 +58,9 @@ dummyData.push({
   pfp: 'https://tinyurl.com/42ekd2mf'
 });
 
-const Spotlights = () => {
+const Spotlights = ({
+  data
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
   return (
     <>
@@ -87,9 +95,35 @@ const Spotlights = () => {
             </div>
           </h3>
         </div>
-        <NotableAlumPreview peopleArr={dummyData}></NotableAlumPreview>
+        {data.map((person) => (
+          <NotableAlumCard
+            key={person.id}
+            profileID={person.id}
+            tag={person.tag}
+            classTitle={person.class_title}
+            storyContent={person.story_content}
+            firstName={person.first_name}
+            lastName={person.last_name}
+            pfp={person.profiles ? person.profiles.pfp : null}
+          />
+        ))}
       </Container>
     </>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps<SpotlightsProps> = async (
+  context
+) => {
+  const url = context.params?.spotlightID;
+
+  const { data, error } = await SB_serveronly.from('spotlights').select('*');
+
+  return {
+    props: {
+      data: data || []
+    }
+  };
+};
+
 export default Spotlights;
