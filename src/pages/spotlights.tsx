@@ -9,9 +9,10 @@ import NotableAlumPreview from '@/components/spotlights/NotableAlumPreview';
 import { useState, useEffect } from 'react';
 import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { Database } from '@/types/supabase';
 
 type SpotlightsProps = {
-  data: any[];
+  data: Database['public']['Tables']['spotlights']['Row'][];
 };
 
 const dummyTags = [
@@ -68,19 +69,20 @@ const Spotlights = ({
             </div>
           </h3>
         </div>
-        {data.map((person) => (
-          <NotableAlumCard
-            to={person.url}
-            key={person.id}
-            profileID={person.id}
-            tag={person.tag}
-            classTitle={person.class_title}
-            storyContent={person.story_content}
-            firstName={person.first_name}
-            lastName={person.last_name}
-            pfp={person.profiles ? person.profiles.pfp : null}
-          />
-        ))}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
+          {data.map((person) => (
+            <NotableAlumCard
+              to={person.url || ''}
+              key={person.id}
+              profileID={person.id.toString()}
+              storyContent={person.content}
+              preferredName={person.preferred_name}
+              pfp={
+                'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+              }
+            />
+          ))}
+        </div>
       </Container>
     </>
   );
@@ -95,7 +97,7 @@ export const getServerSideProps: GetServerSideProps<SpotlightsProps> = async (
 
   return {
     props: {
-      data: data || []
+      data: data
     }
   };
 };

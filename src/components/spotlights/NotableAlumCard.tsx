@@ -9,11 +9,10 @@ import Router from 'next/router';
 import Tag from '@/components/spotlights/Tag';
 export interface NotableAlumCardProps {
   profileID: string | null;
-  classTitle: string;
-  tag: string;
+  classTitle?: string;
+  tag?: string;
   storyContent: string;
-  firstName: string;
-  lastName: string;
+  preferredName: string;
   pfp: string | null;
   to: string;
 }
@@ -23,8 +22,7 @@ export const NotableAlumCard = ({
   tag,
   classTitle,
   storyContent,
-  firstName,
-  lastName,
+  preferredName,
   pfp,
   to
 }: NotableAlumCardProps) => {
@@ -46,13 +44,10 @@ export const NotableAlumCard = ({
         />
       </div>
       <div className="flex-grow flex flex-col space-y-1 justify-center items-start">
-        <h3 className="font-bold text-primary text-lg">
-          {firstName} {lastName}
-        </h3>
+        <h3 className="font-bold text-primary text-lg">{preferredName}</h3>
         <div>{classTitle}</div>
         <div className="text-wrap text-left">
           <span className="prose prose-xl mb-8 text-gray-500 px-0">{tag}</span>
-          <br />
           <span className="line-clamp-3">{storyContent}</span>
         </div>
       </div>
