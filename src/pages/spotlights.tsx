@@ -77,7 +77,8 @@ const Spotlights = ({
               storyContent={person.content}
               preferredName={person.preferred_name}
               pfp={
-                'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
+                person.thumbnail ||
+                'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
               }
             />
           ))}

@@ -11,23 +11,23 @@ type SpotlightProps = {
   preferred_name: string;
   content: string;
   grad_year: string;
+  thumbnail: string;
 };
 
 export default function SpotlightData({
   preferred_name,
   content,
-  grad_year
+  grad_year,
+  thumbnail
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className="min-h-screen w-screen flex flex-col justify-start items-center mt-12 mb-24">
-      <div className="max-w-2xl">
+      <div className="max-w-3xl">
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="w-max relative mx-auto group rounded-full overflow-hidden">
             <div className="relative w-48 h-48">
               <Image
-                src={
-                  'https://media.licdn.com/dms/image/D4E03AQF9g4FgyTvQFg/profile-displayphoto-shrink_800_800/0/1696019908234?e=2147483647&v=beta&t=4l3Lm_1_o2HazFWag1fFuu28ewDfOhJSxWKh6Xl9J5I'
-                }
+                src={thumbnail}
                 alt="Profile Image"
                 fill
                 className="object-cover object-center"
@@ -38,7 +38,7 @@ export default function SpotlightData({
             {preferred_name}
           </div>
         </div>
-        <div className="w-full flex flex-col items-start text-neutral-500 space-y-2 mt-6 text-justify whitespace-pre-line">
+        <div className="w-full text-lg flex flex-col items-start text-neutral-500 space-y-2 mt-6 text-justify whitespace-pre-line">
           {content}
         </div>
       </div>
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<SpotlightProps> = async (
   const url = context.params?.spotlightID;
 
   const { data, error } = await SB_serveronly.from('spotlights')
-    .select('content,preferred_name,grad_year')
+    .select('content,preferred_name,grad_year,thumbnail')
     .eq('url', url)
     .single();
 
@@ -60,7 +60,10 @@ export const getServerSideProps: GetServerSideProps<SpotlightProps> = async (
     props: {
       preferred_name: data?.preferred_name || '',
       content: data?.content || '',
-      grad_year: data?.grad_year.toString() || ''
+      grad_year: data?.grad_year.toString() || '',
+      thumbnail:
+        data?.thumbnail ||
+        'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
     }
   };
 };
