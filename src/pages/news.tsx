@@ -1,4 +1,6 @@
 import React from 'react';
+import Head from 'next/head';
+
 import NewsArticle from '@/components/news/NewsArticle';
 
 const news_article_data = [
@@ -123,71 +125,77 @@ const news_article_data = [
 
 const News = () => {
   return (
-    <div className="md:px-10 md:py-10 lg:px-48 lg:py-10">
-      {/* Top row of 3 articles */}
-      <div className="flex flex-row">
-        {news_article_data.slice(0, 3).map((article, index) => (
-          <div className="w-1/3" key={index}>
-            <NewsArticle
-              article_style="Icon"
-              title={article.title}
-              description={article.description}
-              date={article.date}
-              imageURL={article.imageURL}
-              tags={article.tags}
-            />
-          </div>
-        ))}
-      </div>
+    <>
+      <Head>
+        <title>Gunn Alumni | News</title>
+        <meta name="description" content="News Articles About Alumni" />
+      </Head>
+      <div className="md:px-10 md:py-10 lg:px-48 lg:py-10">
+        {/* Top row of 3 articles */}
+        <div className="flex flex-row">
+          {news_article_data.slice(0, 3).map((article, index) => (
+            <div className="w-1/3" key={index}>
+              <NewsArticle
+                article_style="Icon"
+                title={article.title}
+                description={article.description}
+                date={article.date}
+                imageURL={article.imageURL}
+                tags={article.tags}
+              />
+            </div>
+          ))}
+        </div>
 
-      {/* On the left is the main body, on the right is text-only articles */}
-      <div className="flex flex-row py-[1em]">
-        <div className="flex flex-col w-2/3">
-          {/* Column with featured article at the top, then card articles */}
-          <div className="h-3/5">
-            <NewsArticle
-              article_style="Featured"
-              title={news_article_data[0].title}
-              description={news_article_data[0].description}
-              date={news_article_data[0].date}
-              imageURL={news_article_data[0].imageURL}
-              tags={news_article_data[0].tags}
-            />
-          </div>
-          {news_article_data.slice(11, 21).map((article, index) => (
-            <div key={index}>
+        {/* On the left is the main body, on the right is text-only articles */}
+        <div className="flex flex-row py-[1em]">
+          <div className="flex flex-col w-2/3">
+            {/* Column with featured article at the top, then card articles */}
+            <div className="h-3/5">
               <NewsArticle
-                article_style="Card"
-                title={article.title}
-                description={article.description}
-                date={article.date}
-                imageURL={article.imageURL}
-                tags={article.tags}
+                article_style="Featured"
+                title={news_article_data[0].title}
+                description={news_article_data[0].description}
+                date={news_article_data[0].date}
+                imageURL={news_article_data[0].imageURL}
+                tags={news_article_data[0].tags}
               />
             </div>
-          ))}
-        </div>
-        <div className="flex flex-col w-1/3">
-          {/* Column with text articles */}
-          <div className="font-bold lg:text-2xl md:text-2xl sm:text-xl mb-[0.5em]">
-            {' '}
-            Featured Articles{' '}
+            {news_article_data.slice(11, 21).map((article, index) => (
+              <div key={index}>
+                <NewsArticle
+                  article_style="Card"
+                  title={article.title}
+                  description={article.description}
+                  date={article.date}
+                  imageURL={article.imageURL}
+                  tags={article.tags}
+                />
+              </div>
+            ))}
           </div>
-          {news_article_data.slice(4, 11).map((article, index) => (
-            <div className="py-[0.2em]" key={index}>
-              <NewsArticle
-                article_style="Text"
-                title={article.title}
-                description={article.description}
-                date={article.date}
-                imageURL={article.imageURL}
-                tags={article.tags}
-              />
+          <div className="flex flex-col w-1/3">
+            {/* Column with text articles */}
+            <div className="font-bold lg:text-2xl md:text-2xl sm:text-xl mb-[0.5em]">
+              {' '}
+              Featured Articles{' '}
             </div>
-          ))}
+            {news_article_data.slice(4, 11).map((article, index) => (
+              <div className="py-[0.2em]" key={index}>
+                <NewsArticle
+                  article_style="Text"
+                  title={article.title}
+                  description={article.description}
+                  date={article.date}
+                  imageURL={article.imageURL}
+                  tags={article.tags}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

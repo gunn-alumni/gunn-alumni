@@ -34,10 +34,7 @@ const Spotlights = ({
       </Head>
       <Container>
         <div className="my-20">
-          <h1 className="mb-8 text-4xl font-bold md:text-5xl">
-            {' '}
-            Notable Alumni
-          </h1>
+          <h1 className="mb-8 text-5xl font-black">Notable Alumni</h1>
           <p className="prose prose-xl mb-8 text-gray-500 px-0">
             Empowered by the exceptional education at Gunn High School, Titans
             evolve into inspiring leaders, innovative scholars, remarkable

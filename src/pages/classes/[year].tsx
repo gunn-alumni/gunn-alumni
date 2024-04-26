@@ -16,9 +16,11 @@ export default function Classes({
 
   return (
     <Container>
-      <h1 className="text-5xl font-black">2023 Alumni Directory</h1>
+      <h1 className="text-5xl font-black">
+        {router.query.year} Alumni Directory
+      </h1>
       <p className="text-xl text-gray-400 mt-2">
-        All Gunn alumni who graduated in 2023
+        All Gunn alumni who graduated in {router.query.year}
       </p>
       {people && (
         <ClassList
