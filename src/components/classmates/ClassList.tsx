@@ -26,11 +26,6 @@ const ClassList = ({
           </div>
         ))}
       </div>
-      <div className="flex justify-end mt-2">
-        <Link href={`classmates`} className="text-gray-600 font-bold">
-          See All
-        </Link>
-      </div>
     </div>
   );
 };
