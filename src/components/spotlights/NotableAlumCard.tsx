@@ -48,7 +48,7 @@ export const NotableAlumCard = ({
         <div>{classTitle}</div>
         <div className="text-wrap text-left">
           <span className="prose prose-xl mb-8 text-gray-500 px-0">{tag}</span>
-          <span className="line-clamp-3">{storyContent}</span>
+          <span className="line-clamp-3 text-gray-500">{storyContent}</span>
         </div>
       </div>
     </button>
