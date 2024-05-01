@@ -31,8 +31,8 @@ export default function Classmates({
         />
       </Head>
       <Container>
-        <h1 className="text-5xl font-black">Alumni Directory</h1>
-        <p className="text-xl text-gray-400 mt-2">
+        <h1 className="mb-8 text-5xl font-black">Alumni Directory</h1>
+        <p className="prose prose-xl mb-8 text-gray-500 px-0">
           A list of all alumni from Gunn
         </p>
         {peopleMap &&
