@@ -35,7 +35,7 @@ export const SearchInput = ({ defaultValue }: iDefault) => {
   };
 
   return (
-    <div className="search__input border-[2px] border-solid border-slate-500 flex flex-row items-center gap-5 p-1 rounded-[15px]">
+    <div className="search__input border-[2px] border-solid border-slate-500 flex flex-row items-center gap-5 p-1 rounded-[15px] md:mx-20 mx-0">
       <label htmlFor="inputId">searchIcon</label>
 
       <input
