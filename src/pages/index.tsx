@@ -85,9 +85,9 @@ export default function Home() {
                 />
               ))}
             </div>
-            <Link href="/news" className="text-lg font-bold">
+            {/* <Link href="/news" className="text-lg font-bold">
               See More...
-            </Link>
+            </Link> */}
           </div>
           <div className="flex-1 mt-16 xl:mt-0">
             <div className="text-5xl font-bold text-center">

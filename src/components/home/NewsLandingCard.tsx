@@ -34,7 +34,7 @@ const NewsLandingCard = ({
           {description}
         </div>
         <div className="flex-1" />
-        <div className="flex justify-around w-full md:w-1/2 2xl:w-full space-x-4 mt-8 2xl:mt-0">
+        {/* <div className="flex justify-around w-full md:w-1/2 2xl:w-full space-x-4 mt-8 2xl:mt-0">
           <Link
             href="/news"
             className="rounded-lg text-xs md:text-sm text-white font-bold flex-1 text-center py-2 px-4 bg-black"
@@ -47,7 +47,7 @@ const NewsLandingCard = ({
           >
             Explore News
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
