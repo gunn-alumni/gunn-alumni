@@ -186,7 +186,7 @@ const Navbar = () => {
             {[
               { title: 'Classmates', to: '/classmates' },
               { title: 'Spotlights', to: '/spotlights' },
-              { title: 'News', to: '/news' },
+              // { title: 'News', to: '/news' },
               { title: 'Donate', to: '/donate' },
               { title: 'Team', to: '/team' }
             ].map(({ title, to }) => (
