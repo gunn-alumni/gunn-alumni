@@ -103,6 +103,12 @@ export default function ProfilePage({
   const [email, setEmail] = useState(props.userEmail);
   const [pfp, setPfp] = useState(props.userPfp);
 
+  useEffect(() => {
+    if (userId == '@me' && session != null) {
+      router.push('/profile/' + session.user.id);
+    }
+  }, [router, session]);
+
   const handleEdit = () => {
     setLockState('unlocked');
   };
