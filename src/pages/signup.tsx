@@ -40,7 +40,8 @@ const SignupPage = (): JSX.Element => {
           data: {
             preferred_name: name,
             created_at: new Date().toISOString()
-          }
+          },
+          emailRedirectTo: 'https://alumni.gunnhigh.school/profile/@me'
         }
       })
       .then(({ data, error }) => {
