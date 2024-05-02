@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Database } from '@/types/supabase';
+import SearchInput from '@/components/spotlights/SearchInput';
 
 type SpotlightsProps = {
   data: Database['public']['Tables']['spotlights']['Row'][];
@@ -33,7 +34,7 @@ const Spotlights = ({
         <meta name="description" content="Notable Gunn Alumni" />
       </Head>
       <Container>
-        <div className="my-20">
+        <div className="px-10 pt-10">
           <h1 className="mb-8 text-5xl font-black">Notable Alumni</h1>
           <p className="prose prose-xl mb-8 text-gray-500 px-0">
             Empowered by the exceptional education at Gunn High School, Titans
@@ -49,10 +50,10 @@ const Spotlights = ({
             remarkable accomplishments of Gunn alumni in their respective
             fields.
           </p>
-          <h3 className="text-xl text-black text-left">
+          <h3 className="prose prose-xl mb-8 text-black px-0 text-left">
             {' '}
             {
-              <div className="m-2">
+              <div className="mb-2">
                 Know someone who belongs on this page?
                 <br />
                 Please consider nominating them!
@@ -64,8 +65,9 @@ const Spotlights = ({
               </StandardButton>
             </div>
           </h3>
+          <SearchInput defaultValue=""></SearchInput>
         </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4 p-10">
           {data.map((person) => (
             <NotableAlumCard
               to={person.url || ''}
