@@ -279,15 +279,17 @@ export default function ProfilePage({
             className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
             defaultValue={bio || ''}
             onChange={(e) => setBio(e.target.value)}
+            placeholder="Bio.."
           ></AutoResizingTextArea>
         </div>
         <AutoResizingTextArea
           id="ta_content"
-          rows={5}
+          rows={1}
           disabled={lockState === 'locked'}
           className="w-full px-3.5 py-2 resize-none bg-white border rounded-lg disabled:bg-gray-100 focus:outline-none focus-visible:ring-[3px]"
           defaultValue={email || ''}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Personal Email"
         ></AutoResizingTextArea>
 
         {/* {Object.entries(contacts).map(([key, value]) => (
