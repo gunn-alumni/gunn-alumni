@@ -92,16 +92,14 @@ export default function ProfilePage({
 
   const [lockState, setLockState] = useState<'locked' | 'unlocked'>('locked');
 
-  const [socialMedias, setSocialMedias] = useState(
-    dummyProfileData.contact.socialMedia
-  );
-  const [contacts, setContacts] = useState<
-    Omit<ProfileData['contact'], 'socialMedia'>
-  >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
+  // const [contacts, setContacts] = useState<
+  //   Omit<ProfileData['contact'], 'socialMedia'>
+  // >(dummyProfileData.contact); // TODO: hacky typing, but the awkward object structure somewhat forces my hand here
 
   const [bio, setBio] = useState(props.userBio);
   const [email, setEmail] = useState(props.userEmail);
   const [pfp, setPfp] = useState(props.userPfp);
+  const [socialMedias, setSocialMedias] = useState(props.socialMedia);
 
   useEffect(() => {
     if (userId == '@me' && session != null) {
@@ -223,18 +221,17 @@ export default function ProfilePage({
           disabled={lockState === 'locked'}
           className="placeholder:text-stone-600 font-bold place-content-center text-center mb-4 w-[75%] outline-0 border-0 mx-[12.5%]"
         />
-
         {
           <div id="profileSocial_wrapper">
             {lockState === 'locked' ? (
               <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
-                {socialMedias.map((v, i) => (
+                {socialMedias?.map((v, i) => (
                   <SocialIcon key={i} url={'https://' + v} />
                 ))}
               </div>
             ) : (
               <div className="grid gap-4 mb-4">
-                {socialMedias.map((v, i) => (
+                {socialMedias?.map((v, i) => (
                   <div className="w-full flex" key={i}>
                     <div
                       id="links"
@@ -347,6 +344,7 @@ interface ProfileProps {
   userName: string | null;
   userPfp: string | null;
   userEmail: string | null;
+  socialMedia: string[];
   userId: string;
 }
 
@@ -357,7 +355,7 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
 
   const { data, error } = await SB_serveronly.from('profiles')
     .select(
-      'bio,pfp,current_location,email,phone_num,social_media,preferred_name'
+      'bio,pfp,current_location,email,phone_num,social_media,media_links,preferred_name'
     )
     .eq('id', id);
 
@@ -367,7 +365,11 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
       userName: data === null ? '' : data[0].preferred_name,
       userPfp: data === null ? '' : data[0].pfp,
       userEmail: data === null ? '' : data[0].email,
-      userId: id as string
+      userId: id as string,
+      socialMedia:
+        data === null
+          ? dummyProfileData.contact.socialMedia
+          : (data[0].media_links as string[])
     }
   };
 };
