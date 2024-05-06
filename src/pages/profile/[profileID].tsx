@@ -99,7 +99,9 @@ export default function ProfilePage({
   const [bio, setBio] = useState(props.userBio);
   const [email, setEmail] = useState(props.userEmail);
   const [pfp, setPfp] = useState(props.userPfp);
-  const [socialMedias, setSocialMedias] = useState(props.socialMedia);
+  const [socialMedias, setSocialMedias] = useState<string[]>(
+    props.socialMedias
+  );
 
   useEffect(() => {
     if (userId == '@me' && session != null) {
@@ -113,8 +115,14 @@ export default function ProfilePage({
 
   const handleSave = async () => {
     // TODO: add for social media icons, links, location, etc
-    await supabase.from('profiles').update({ bio }).eq('id', userId);
-    await supabase.from('profiles').update({ email }).eq('id', userId);
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ bio, email, social_medias: socialMedias })
+      .eq('id', userId)
+      .select('*');
+
+    console.log(data, error);
+
     setLockState('locked');
   };
 
@@ -160,7 +168,8 @@ export default function ProfilePage({
   };
 
   const addLink = () => {
-    setSocialMedias([...socialMedias, '']);
+    if (socialMedias.length == 0) setSocialMedias(['']);
+    else setSocialMedias([...socialMedias, '']);
   };
 
   return (
@@ -226,7 +235,7 @@ export default function ProfilePage({
             {lockState === 'locked' ? (
               <div className="flex gap-4 mx-auto flex-wrap justify-center mb-4">
                 {socialMedias?.map((v, i) => (
-                  <SocialIcon key={i} url={'https://' + v} />
+                  <SocialIcon key={i} url={v} />
                 ))}
               </div>
             ) : (
@@ -344,7 +353,7 @@ interface ProfileProps {
   userName: string | null;
   userPfp: string | null;
   userEmail: string | null;
-  socialMedia: string[];
+  socialMedias: string[];
   userId: string;
 }
 
@@ -355,21 +364,22 @@ export const getServerSideProps: GetServerSideProps<ProfileProps> = async (
 
   const { data, error } = await SB_serveronly.from('profiles')
     .select(
-      'bio,pfp,current_location,email,phone_num,social_media,media_links,preferred_name'
+      'bio,pfp,current_location,email,phone_num,social_medias,preferred_name'
     )
-    .eq('id', id);
+    .eq('id', id)
+    .single();
 
   return {
     props: {
-      userBio: data === null ? '' : data[0].bio,
-      userName: data === null ? '' : data[0].preferred_name,
-      userPfp: data === null ? '' : data[0].pfp,
-      userEmail: data === null ? '' : data[0].email,
+      userBio: data === null ? '' : data.bio,
+      userName: data === null ? '' : data.preferred_name,
+      userPfp: data === null ? '' : data.pfp,
+      userEmail: data === null ? '' : data.email,
       userId: id as string,
-      socialMedia:
+      socialMedias:
         data === null
           ? dummyProfileData.contact.socialMedia
-          : (data[0].media_links as string[])
+          : data.social_medias!
     }
   };
 };
