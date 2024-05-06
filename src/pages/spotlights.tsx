@@ -10,6 +10,7 @@ import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Database } from '@/types/supabase';
 import SearchInput from '@/components/spotlights/SearchInput';
+import { SearchIcon } from '@/components/shared/Icons/SearchIcon';
 
 type SpotlightsProps = {
   data: Database['public']['Tables']['spotlights']['Row'][];
@@ -27,6 +28,13 @@ const Spotlights = ({
   data
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [profileData, setProfileData] = useState<NotableAlumCardProps[]>([]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredPeople = data.filter((person) =>
+    person.preferred_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <Head>
@@ -60,15 +68,30 @@ const Spotlights = ({
               </div>
             }
             <div>
-              <StandardButton className="m-1" color={'bg-black'}>
-                Nominate an Alum
-              </StandardButton>
+              <button
+                className="m-1 bg-black disabled:bg-neutral-800/70 rounded-md px-4 py-2 text-white"
+                disabled
+              >
+                Nominate an Alum (coming soon)
+              </button>
             </div>
           </h3>
-          <SearchInput defaultValue=""></SearchInput>
+          <div className="border-[2px] border-solid border-slate-500 flex flex-row items-center gap-5 px-4 rounded-[15px] md:mx-20 mx-0">
+            <label>
+              <SearchIcon />
+            </label>
+
+            <input
+              type="text"
+              placeholder="Search an alumn"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-[transparent] outline-none border-none w-full py-3 pl-2 pr-3"
+            />
+          </div>
         </div>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mt-4 p-10">
-          {data.map((person) => (
+          {filteredPeople.map((person) => (
             <NotableAlumCard
               to={person.url || ''}
               key={person.id}
