@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react';
 import SB_serveronly from '@/lib/utils/dbserveronly';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Database } from '@/types/supabase';
-import SearchInput from '@/components/spotlights/SearchInput';
 import { SearchIcon } from '@/components/shared/Icons/SearchIcon';
 
 type SpotlightsProps = {
