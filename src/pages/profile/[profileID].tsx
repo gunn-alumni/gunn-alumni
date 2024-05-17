@@ -248,7 +248,7 @@ export default function ProfilePage({
                     ></div>
                     <input
                       type="text"
-                      placeholder={socialMedias[i]}
+                      placeholder="https://example.com/user"
                       className="w-full placeholder:text-stone-600 px-[5px] outline-0 border-[black] border-x-[2px] border-y-[2px]"
                       onChange={(e) => (socialMedias[i] = e.target.value)}
                     />
