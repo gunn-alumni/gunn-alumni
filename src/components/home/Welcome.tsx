@@ -29,7 +29,7 @@ const Welcome = () => {
     <section className="text-center py-10 lg:w-full lg:py-36 lg:text-left ">
       <div className="mx-auto w-full max-w-3xl">
         <h1 className="mt-0 mb-8 text-4xl font-bold md:text-5xl">
-          {session === null ? 'Welcome to Gunn Alumni' : `Hi ${name}!`}
+          {session === null ? 'Welcome to Gunn Alumni' : `Hi, ${name}!`}
         </h1>
         <p className="prose prose-xl mb-8 text-gray-500 px-0">
           {session === null
