@@ -186,6 +186,7 @@ const Navbar = () => {
             {[
               { title: 'Classmates', to: '/classmates' },
               { title: 'Spotlights', to: '/spotlights' },
+              { title: 'History', to: '/history'},
               // { title: 'News', to: '/news' },
               { title: 'Donate', to: '/donate' },
               { title: 'Team', to: '/team' }
