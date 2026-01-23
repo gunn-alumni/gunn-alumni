@@ -26,6 +26,7 @@ const ClassPreview = ({
           </div>
         ))}
       </div>
+      
       <div className="flex justify-end mt-2">
         <Link href={`classes/${year}`} className="text-gray-600 font-bold">
           See More...

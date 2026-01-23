@@ -22,6 +22,7 @@ const ClassList = ({
               firstName={person.first_name}
               lastName={person.last_name}
               pfp={person.profiles ? person.profiles.pfp : null}
+              
             />
           </div>
         ))}

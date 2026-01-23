@@ -46,6 +46,7 @@ export default function Classmates({
   );
 }
 
+
 export const getServerSideProps: GetServerSideProps<ClassmatesProps> = async (
   context
 ) => {

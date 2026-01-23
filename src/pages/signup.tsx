@@ -9,6 +9,7 @@ import Router from 'next/router';
 const SignupPage = (): JSX.Element => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [pausdEmail, setPausdEmail] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
@@ -35,6 +36,7 @@ const SignupPage = (): JSX.Element => {
     supabase.auth
       .signUp({
         email,
+        pausdEmail,
         password,
         options: {
           data: {
@@ -88,7 +90,7 @@ const SignupPage = (): JSX.Element => {
                   <div>
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      placeholder="Full Name"
+                      placeholder="950ID number"
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
@@ -114,6 +116,18 @@ const SignupPage = (): JSX.Element => {
                           value={email}
                           onChange={(e) => {
                             setEmail(e.target.value);
+                          }}
+                          onFocus={() => setError('')}
+                        />
+                      </div>
+                      <div>
+                        <input
+                          type="email"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                          placeholder="Email (school email: _______@pausd.us)"
+                          value={pausdEmail}
+                          onChange={(e) => {
+                            setPausdEmail(e.target.value);
                           }}
                           onFocus={() => setError('')}
                         />
@@ -165,7 +179,8 @@ const SignupPage = (): JSX.Element => {
                 </form>
               ) : (
                 <div className="text-xl">
-                  Thanks! Check your inbox to confirm your email.
+                  Thanks! Check both your external and school email inbox to
+                  confirm your email.
                 </div>
               )}
             </div>
