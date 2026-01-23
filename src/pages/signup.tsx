@@ -36,12 +36,12 @@ const SignupPage = (): JSX.Element => {
     supabase.auth
       .signUp({
         email,
-        pausdEmail,
         password,
         options: {
           data: {
             preferred_name: name,
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
+            pausdEmail: pausdEmail
           },
           emailRedirectTo: 'https://alumni.gunnhigh.school/profile/@me'
         }
@@ -90,7 +90,7 @@ const SignupPage = (): JSX.Element => {
                   <div>
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      placeholder="950ID number"
+                      placeholder="Full name"
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
